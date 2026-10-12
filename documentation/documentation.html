@@ -1,0 +1,1300 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>GPIEXALT — Dossier de documentation (DOC-GPIEXALT-001, version 7.0)</title>
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap");
+  @page{ size:A4; margin:21mm 16mm 18mm 16mm;
+    @top-left{ content:"GPIEXALT — Dossier de documentation"; font:8pt "Segoe UI",Arial,sans-serif; color:#586080; }
+    @top-right{ content:"DOC-GPIEXALT-001 · v7.0"; font:8pt "Segoe UI",Arial,sans-serif; color:#586080; }
+    @bottom-left{ content:"Classification : Interne"; font:8pt "Segoe UI",Arial,sans-serif; color:#586080; }
+    @bottom-right{ content:"Page " counter(page) " / " counter(pages); font:8pt "Segoe UI",Arial,sans-serif; color:#586080; }
+  }
+  @page :first{ margin:0; @top-left{content:none} @top-right{content:none} @bottom-left{content:none} @bottom-right{content:none} }
+  :root{ --ink:#12162b; --navy:#1e1c8c; --soft:#586080; --line:#dcdeef; --paper:#f3f4fb; --accent:#5853ff; --blue:#2f7dd1; --good:#1b9e6b; --warn:#b67608; --bad:#c43d3d; }
+  *{ box-sizing:border-box; }
+  html{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  body{ font-family:"Segoe UI",Calibri,Arial,sans-serif; color:var(--ink); font-size:9.6pt; line-height:1.45; margin:0; }
+  h1,h2,h3{ font-family:"Poppins","Segoe UI",Calibri,Arial,sans-serif; }
+  h1{ font-size:19pt; margin:0 0 10pt; color:var(--navy); padding-bottom:6pt; border-bottom:2.5px solid var(--accent); break-after:avoid; }
+  h2{ font-size:12.5pt; margin:12pt 0 5pt; color:var(--navy); break-after:avoid; }
+  h3{ font-size:10.5pt; margin:11pt 0 4pt; color:var(--ink); break-after:avoid; }
+  p{ margin:0 0 6pt; }
+  ul,ol{ margin:0 0 7pt; padding-left:17pt; }
+  li{ margin-bottom:2.5pt; }
+  .chap{ break-before:page; }
+  .compact td{ padding:1.5pt 6pt; } .compact h2{ margin:6pt 0 2pt; } .compact table{ margin:3pt 0 6pt; }
+  .lead{ color:var(--soft); font-size:10.5pt; margin-bottom:8pt; }
+  /* Couverture */
+  .cover{ width:210mm; height:297mm; background:var(--navy); color:#fff; padding:30mm 22mm 20mm 22mm; position:relative; break-after:page; page-break-after:always; }
+  .cover .logo{ display:flex; align-items:center; gap:10pt; margin-bottom:62mm; }
+  .cover .logo b{ font-size:22pt; letter-spacing:.01em; }
+  .cover .kicker{ color:#b9b6ff; font-weight:700; letter-spacing:.1em; font-size:10pt; text-transform:uppercase; }
+  .cover h1.title{ font-size:38pt; color:#fff; border:none; margin:6pt 0 4pt; padding:0; line-height:1.1; }
+  .cover .sub{ font-size:15pt; color:#d7d5ff; max-width:140mm; margin-bottom:26mm; }
+  .cover table{ border-collapse:collapse; width:130mm; font-size:10pt; }
+  .cover td{ padding:5pt 0; border-bottom:1px solid #4a47b5; color:#d7d5ff; }
+  .cover tbody tr td{ background:transparent !important; }
+  .cover td:first-child{ width:42mm; color:#a9a6e8; }
+  .cover td b{ color:#fff; font-weight:600; }
+  .cover .foot{ position:absolute; left:22mm; right:22mm; bottom:16mm; color:#a9a6e8; font-size:8.5pt; border-top:1px solid #4a47b5; padding-top:7pt; }
+  /* Tableaux */
+  table{ width:100%; border-collapse:collapse; margin:4pt 0 8pt; font-size:8.7pt; }
+  th{ background:var(--navy); color:#fff; text-align:left; padding:4.5pt 6pt; font-weight:600; font-size:8.8pt; }
+  td{ padding:3.6pt 6pt; border-bottom:1px solid var(--line); vertical-align:top; }
+  tr{ break-inside:avoid; }
+  tbody tr:nth-child(even) td{ background:#fafbfe; }
+  td.k{ font-weight:600; white-space:nowrap; }
+  td.c, th.c{ text-align:center; }
+  .box{ border:1px solid var(--line); border-radius:4pt; padding:6pt 10pt; margin:6pt 0 8pt; break-inside:avoid; background:var(--paper); }
+  .box.warn{ background:#fff6e5; border-color:#f0d9a8; } .box.ok{ background:#e9f8f1; border-color:#b9e3d0; } .box.bad{ background:#fdeeee; border-color:#f0c4c4; }
+  .box b.t{ display:block; margin-bottom:2pt; }
+  .tag{ display:inline-block; border-radius:8pt; padding:0 6pt; font-size:8pt; font-weight:700; }
+  .tag.g{ background:#e0f5ec; color:var(--good); } .tag.w{ background:#fdf0d5; color:var(--warn); } .tag.b{ background:#fbe4e4; color:var(--bad); } .tag.i{ background:#e4eefa; color:var(--blue); } .tag.n{ background:#e9eaf3; color:var(--soft); }
+  .btn{ display:inline-block; border:1px solid #c4c7de; border-radius:4pt; padding:0 5pt; font-size:8.5pt; font-weight:600; background:#fff; white-space:nowrap; }
+  .btn.p{ background:var(--accent); color:#fff; border-color:var(--accent); } .btn.d{ color:var(--bad); border-color:var(--bad); }
+  code{ font-family:Consolas,"Courier New",monospace; background:var(--paper); padding:0 3pt; border-radius:2pt; font-size:8.8pt; }
+  figure{ margin:8pt 0 10pt; break-inside:avoid; }
+  figure img{ width:100%; border:1px solid var(--line); border-radius:3pt; display:block; }
+  figure.narrow img{ width:70%; margin:0 auto; }
+  figcaption{ font-size:8.5pt; color:var(--soft); margin-top:3pt; text-align:center; }
+  .cols{ display:flex; gap:12pt; align-items:flex-start; }
+  .cols > div{ flex:1; }
+  /* Sommaire */
+  .toc{ margin:0; padding:0; list-style:none; }
+  .toc li{ display:flex; align-items:baseline; margin:0; padding:1.2pt 0; border-bottom:1px dotted #c9cce2; }
+  .toc li.l1{ font-weight:700; margin-top:2.5pt; border-bottom:1px solid var(--line); }
+  .toc li.l2{ padding-left:14pt; font-size:9pt; color:#2b3150; }
+  .toc .t{ flex:1; }
+  .toc .n{ width:30pt; text-align:right; color:var(--soft); }
+  .sig td{ height:26pt; }
+  svg{ max-width:100%; height:auto; }
+</style>
+</head>
+<body>
+
+<!-- ================= COUVERTURE ================= -->
+<div class="cover">
+  <div class="logo">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAACDvSURBVHhe7Z0HzHVLVYbp0qQIClKUIggoJSDlSgmgERC4QACjVK80o4n0KlICqKDSRO5FFDBUgYigdAGVIs3ewC4Kig1Fsesyz+/Mn/nXrLVnZp9d5zsreXPOt7529t7vs2f21POJyPmOOmoDuoyIXFVEriMiVxORLxGRCxk/N6myxEy6oojcSkS+TUQeISJPDPpuEbmbiNxQRC5u/N5R/eomIvIYEXmjiPyWiPytiPyLiPyXiPyriPy9iHxCRN4mIk8XkduJyBcZf+cgZYkJdQMReYqIfEhE/lHK8SkReb2IPEBEvtT4e0ftX5cXkUeJyK/pi18ZfyAizxKRrzL+9ihliQn0jYHa/9GfviH+RkSeLyLXNP7+UfvTRUTksSLyGX2hRwYlxfNE5MuM/9WkLHGAricib9af9MD4JxF5WjiB+v8dtQ+dJSIf1xd2ovgLEbm38T+rlSVG6mEi8s/6000YHwvPCfr/HrVd8UxHFfg/9cWcIX7Y+P9VyhIj9CL9aWYKSgMemPX/P2p7eqCIfFJfwJnjp8e0GmWJBp1fRF6lP8XMwXPFQUXeUbPqjiLyfn3RFow3GJ9pUFmiQT+p//tCQTPZNxmf56j1dGMReZO+UCvFc43P5ypLVIon+jWD542bGp/rqGVFh9W5IvIf4br8r7pOa0V1LSFLVOhmBzZxThV/JSLXMj7fUfPrsqF17h/CtcAPlMxbCZrRq/qSskRBFzygE2OOoGPky43PedQ84vp/p4j8SXINuPsv0dLTGi82Pn+mLFHQg/V/2UDQRPrFxmc9alrdXbXnY/xo/q1UfdLgcxV7jLPEgOiM+iP9XzYS7xzTBHZUlW4pIm9PzvW/JwKALZo/RvGBOEsM6Gz91zcWrzE+81Hj9dUi8lPJ8x5mT82Ptmx+gqEXlzCO7bSyxIAYqLb1eKHxuY9qE+Nrni0inw/nlKrEvxnm30JDSE3cwTjG08oSji4dhqvuIZ5sfP6jyrpYGKr+l+E8/ncwfiqMzyvf20s8xzjW08oSjm6j/+rGg7FJ+hiO8sU8jd8M545qDePxkQYAbam5syZ+0Tje08oSjh6u/+oO4l7GcRx1pm4vIu9NztkXEvNrCHi/N/MTzDO5qHHsp5QlHP2Y/qs7CB7amEWkj+Wo/x9Z+7rkIRZzY34PAF5jb+/egmNiqqU+B6eUJRz9jP6rO4nPHYdRnyGM8IIwoYTA2LyP5vcg2Kv5CSC/rnEuTilLOHqH/qs7CiZNXN04ppMkOgqfJCJ/Hc4Jd3WMn8qCgNc9NHeW4muNc3JKWcLRngEgfldELmccV++6gIicIyK/H84DTZoMJEQlABCg7N38k5QAP6v/6g7jAyds5Yk7i8gHw7HTbEm7fjR/DQSUAHs3P8FxXsU4P6eUJRz9uP6rO423hLuiPr6exDBxbljRvBg/VS0Ae2rrH4o/G1pOJUs4epz+qzuOlxvH14OuISLnhTs3gdmZRjoEgAUB6sX8xHuMc3VaWcIR3ck9xWDv4M7EWjssHMUYeAJTsw4T5o+qhYD3e2zrH4ofNM7ZaWUJR0wuiGNDeglmtenj3JMYncvKenGELnd+mn0x/xgAeN1zc6cXdPbpc3daWWJAe28JsoIWEn2ce9A9ReSj4RhopmRmVmp+DUAJAr7u0fz0AjPGSZ+/08oSA2LJwt6CB0WGeetj3aoYk8XYfD43TZqYPlUKQAmC1Pw0d/YY32+cwzOUJQZEZwrzcHsLqg4s3KuPd0v6mjA2PzZNYnbu+vHO70EwBEBUfGjuLTgudwhEVJYo6PH6v3QSfxdMpo93bbGqNg/srJRMYHDeR/OXABiCgPc0d/bQ1m9F1WpxWaIgOpL+VP+nToLjcjtMFhazmFhFOZ5rDAukmF8DUILAAoBXqj+9mp/hL8xh0ec1U5ao0F30f+sofj0s+aGPeUndN1l5A5MyESk1fysAFgT83b3M6BoTrFCnz6upLFEpRhT2GoyPd3sOZxTLyv9C6ISi/hqNH5UC0AqBBqCnji4dTzXOrassUSnWh+mxWTQGu5boY55LNxKR1ybDjjF+VAqAhkADoCGwSgFee+voSuOlxvkdVJZo0KVE5CP6E3QUDCvQxzylWFaQkhTjYkoMTm9uCoCG4JBSgK+3uIDVVMGiDfocF5UlGkU3/O/pT9JRPMM45kPFZnCMzaeThqoIRv5sMH8JgFYIUvP32tZPUG0dtYlKlhghJpvElQR6DFZK0Mc8RlQbHxQ2hOMBFFMyQSU1fw0ELQBE9drWT/zGIQ0XWWKkqMdyp+k17mMcc4vuKiK/FKog1MWj8VPVAtACAd+jrb/XOLjpOkscIAYd9TiehKCOXt20lugWYT41JmTAGcaPGgKgBEENALz23NbPeTi48zJLHCiWIuk1MFPtngQsysq6+ZiQujeGZxhJCkAJgiEAShDwNSVNr+bnnN7aOO/NyhITiOWzew1Me23jmKMYNs7YfJ6JGKWJqTF+qloAxkLAK9XRnju67mGc+1HKEhOJ3QF7DfYkYIxOerwsvMTYfFrEYlv+p8PirEMAtEJQAgBR/em5o+uhht9GK0tMqJ57i9mTIK46TLXvQ6FYxoDc/TF+qhYIhgAYgiC+77mj6/sMnx2kLDGxWLK816AnnF0yeTbgrovxuetHjQWgBMEQAL02QhCzrPydJSbWhUXkXfpIdh6xihNbWzB+lAfAoRCUSgHEM0evwVAR7a1JlCVmEEMmqDLsPWKvLT24LLXBkNuoMRC0ADAEAe977uhigCA3Uu2rSZQlZhIb2W11e6VS0JRIqwrGp+OF1ygLgloAShDUAMAr/Qu9BsPCuYFqP02mLDGj2HKHC7unoH6PqdkVkbv+n1cA0ALBEAAlCPiaz9drcM6vbPhoUmWJmXXzndyx6LnFvH8c7vrR/FEtEAwB0ApBav6eh55Quh3cy1ujLLGA7rThpjoeJDElxk/NH1WCwAKgFYIhABA5Hr577uVdbJGCLLGQ7q+PeuVgkBrmotj9w/CK+aNqAfAgaAFgCALe8yDecy8v+xFrv8ymLLGgHqmPfIXASBgKw9PDy12f9x4ANRBYALRCYAHAK9Wfnnt5H2L4ZFZliYXFwkVrBXVozP3J0EIVqz0RAA+CEgAeBC0AaAj4Ggh6ntHFJCHtj9mVJVbQS/SZmDloOcG8nwjVHcyfArDFUoCve+7oer7hi0WUJVbSEnuQ0VmEOTE+d/3U/B4ArRCUSgENwRAAEQJee+7oYriM9sNiyhIriWVI2M91jqDagNkwPVsFUdfH/FElCFoA8CDwAChBwNc9z+himMxsvbw1yhIrinmdcbPmKYKHRe6gGJ5hytz5eR9VgmCpUkBDEM1PnlXceo1fnbuXt0ZZYmWxmCnGOiRoH6dlB2OzOR53fe7+UbUAeBCUAPAgqAUAkeu5o4vzeSXj+i+uLLEBsaUlPYFjgmmAGPd3krt+rPNrAGogsACogcACoBYCvgfAvQatWdcxrvsqyhIbEfM9W9axYXgFZsT48a6PIgAeBCUAPAhKAHgQlAAgT1t/r728PM+cZVzv1ZQlNqS7VRiBpkHMhvF/O9z1UQQghcACoAYCC4BWCGpKAb7mmaXXji6uJcvD6Ou8qrLExsRCUlYwlgjTYHwWmuKuj4YAqIHAAqAVAgsAD4LU/JQAWx0jNUV8h3F9V1eW2KCekJxEhi5Qh8TktBhx14/mTwHwICgB4EHQAkDrs0AEoefpjFxDfV03oSyxUbHbB88EGJc1/Lnrc/ePsiCwAKiBwAKgFYLaUiC+b3ne2Vs8z7iem1GW2KC+QUReHUzNOpDc9VEJAA+CEgAeBC0AeBBoAMj13NHFogH6em5KWWJDYr1R1nvHcBiRKg93/ghADQQWAK0QzFUKkO95RherZlzIuK6bUpbYgFhtmt29MTDmwvTR/FG1ALRCYAHgQVACwIMgmr/nji4WQWBXUX1tN6cssaIuJyKPFpGPB/NgcKo8mD9KA9AKQQkADwILgBoILAD4fs8dXZw3FkHQ13eTyhIriI0N2ISbwXCYAyPzoIv5PQBqILAAqIHAAsCDoASAhoCvacUq9W/sNTg2Fj/Q13izyhIL65tF5M3BQJiWZTAwfwqAB0EJAA+CEgAeBBYALRCQY5Bbr9MZN9fLW6MssZBYN5+dzzEYpsT4URGAvZQCHgQpAHxNq0+vvbxAzfa5+jpvXlliZrG0+HODOTEchmdYLBoCwIOgBEArBKVSIIWgBECEgBx1/557ec8xrvUulCVmEsuJPzE84GIojM77aP4UAA8CC4AaCFoA8CCwAKiBgPdA0PN0xscb13s3yhIT65JhPXf2x8I8GPqjwfxRJQhKpYAHwdqlQHzf83TGHzKu+a6UJSbS+cMuHj8fzIN5MT7tw6gFAA+CEgAeBCUAPAgsAIYg4OueO7p4htPXfXfKEhPoNiLyymAqzMlm2pg/BaAVAguAGggsAGogsACogSCan1zPHV1vC9u+6mu/O2WJA3T9sIlBNB/Gj4oA1EBgAeBBUALAgyAFIIWgVAqkEFgAIL7Xc0cX15Oqrb7+u1SWGCG6vHnAxbyYjBP04SALghIAHgQWADUQWABoCKxSIIXAAsCCgO/TGdRrcC6uYHhgt8oSjbqhiLwpGAdz/0rQEAA1EFgA1EBgAeBB0AJAzbMA32NSS68B2EM7ZO5SWaJBbByNsTHeBxPzpwB4EJQA8CAoAeBBYAFQA4EFgAUBOQa59drLy5xrlrbXHti9skSlzg7Gw8CYn10SkQWBBUANBBYANRBYAHgQTPEswHva+nvu5WXIivZAF8oSFWLFBgyKcT9QAYAHQQkAD4ISAB4EFgAaAqsUGHoWIEfdv+dFax9oeKAbZYmCWLjqfcGo0fwpAB4EFgA1EFgAtEJQKgU8CCwAUgh4DwQ9T2d8jOGBrpQlBkTn1rnBXO9XACxdCngQWAB4EJQA8CCI5kd72O5pbOy+l7dGWWJA7NyBgaL5ozQANRC0lAIpBCUAPAgsAGogsACIX7MKXa/RRS9vjbKEIzo+3hIMCwApBFYpkEJgAVADgQVADQQWAB4EJQAsCPg+m2T3Gm/tpZe3RlnC0b2DiX7ZAMCDoJdSIIWAn2Hpwl6D63IJ4/p3qyxh6AKhSMSQKQAeBFsoBVIISqWAB4EGgJ/ruaOLY+yql7dGWcIQ+7ViXAwPAFsoBTwILAA8CEoApBDwM0xq6XUuL2Bfy7j23StLGGJNRwzFmH4NgAeBVQqkELSUAikEJQA8CCwAaiCI5md8f6+9vAzZvqlx3U+EsoQhpjBivhQAD4IxpYAHgQVADQQWAB4EJQDIM9Sh1+mMQM2QFn3NT4yyhBJ7d70+GBYATlIpwNfUi3tetPZ+xjU/UcoSSixw9O5gcg2AB8HeSoEUgmh+cpQAPU9nfJRxvU+csoQSw1/jw28EYGulQApBqRRIIbAASNXrdEaqc083rvWJVJZQul4wNGZn5TYNgAfBXksBXsn3PJ3xc2GVDn2tT6SyhJIHgAfBmFIghcACwIOgBIAHgQcA4vtjN+jbQ8Qh25y/yxjX+8QpSyhdMzE7AOytFEghKJUC/CxLF/YatPik/RjvDY0c+pqfKGUJpcuLyNuDsTUAHgRrlQJjnwUQP8eMrl5Dmz/GG41rfqKUJZQYFMUuH5g1AnBoKZBCYAFQA8GUpQA/S0eXZZAeAvMPdeKdZ1z3E6MsYegZwXRMhNEAeBAcWgqkEFgA1EBgAaAh4OeY1DJkkD0HUNeA/Uzjup8IZQlD9wzGSgHwIBhTCqQQWAB4EJQA8CBIzc9Qh557eVvmKT/cuPbdK0sYukowPwY/tBQY+0BsAVADgQUA4ns0e/a6aC13/Rbzx7ivcf27VpZwxHggXQ3yILBKgZaqkAWAB0EJAAsCcpQAvfbyYv6xVTqguYNx/btVlnDEShAYDtN7EGy1FEghiO8/r698J4H5qdLV1Pu9oAf8ZoYHulSWcMSkmJcE83kATFkKpBCUSgEPAg0Ar+R7ns7oNXe2Bv0hJ2J+QJYY0I2DITG6B4FVCrQ8EFsAeBCUANAQ8L2e1+2k+jKF+WMw/3k3uz2OVZYoiHViqEfTi3joA7EFgAeBBUANBNH8/Oxn9BXuKDD/2Hr/UHDedrHf71hliYIuKiKvCCYDAqsUKFWFli4F+HmWLuw1pqr2ePHOPez4PlZZokI0i7LzCwZMIbAAWLsU4Gfp6Oo1Sr28U8WrDR90oSxRKTZDZv0YTFeqCs1dCqQQpADwM3R0LWGQNeKQ5s4x8aOGD3avLNGgrwx3Bp4JMLwHQKkUSCGYqhTg+4zw7LmXd0nzx3iy4YNdK0s0ihXjnpKYzoNgyVKAPM2ex17eeeJhhg92qywxUrcTkdeGFhfMqwFYqhQgB4w9L1q7xp1fx70MD+xSWeIAMbmCsSTsIEi1CFMfWgqkEJRKAfK89rxo7ZytPS3BShnc9LQHdqcsMYGYRMPIQqpDVEUwuobg0FJAQ4D4fs/TGRm+sSW4mVt8I+P670pZYkLxkPzUYGKqRmkJ4EEwphTgPT/T83TGLyRbsNKhx9dbCJaLvLpx7XejLDGDbiAiz0+aJ4cAGFMK8DtciF6DHWjizvPxFX12Iw/6DCun1NfXfRfKEjOKHeRfFp4PeGD1IGgpBfh5zNBrUNdmuiZ3/rgLPSIXgWC59rX3KOM6XNy45ptXlphZbLN0FxF5Q5iPyx1cA1BbCvA7LF3Ya9CHwRAOzB/v+hqCCAI/x+70azaPsoEKo4b1Nd+0ssRCYkzRA0TkHaHDClO3lAL8LEXvFpoE5wiOi2od+5FF83sAIADg+/wOD8prnZeXG9d608oSCyu2GNFCRImAyYcgiOandanXXl6aOj8dhiPHXehrIeCVPL+/1tKOzzGu82aVJVbS1UTkaaFKBAiY3qoKYX6eH3rempTWLKp2cRd6DcEQAKnIsfHFGlM/H2dc400qS6ys64cWozh/Ny0FAIISoOdeXibsMIAv7kJvAVADwaeCYo6/u3SL0TnG9d2cssRGdKtQn+T5gD4E7vxA0POitUzVxPxxF/ohCEoApBCg+DUdhUu1GFGVO9u4tptSltiY7hpajDB/z7szAjbmT3eiHwKgFQIejhE5loCkF3eJFiM67G5pXNfNKEtsUDSd0mfQa/CwGneijOZvLQVSCCwAUggQX/OgzPCKuVuMKHXYaFFf100oS2xQj13gIq0VPKBi/Hj3T0uAKUoBDwBKgQgCD8pzP1fx+ZhJqK/t6soSG9OD9JnsKHgoxeRsxRR3ofcA8CA4pBQAgggCYmjFnC1GPMttbk+CLLEh8QDVa9CHganZjyzuQh8B8CCwANAQWKWA9SyQAoCoDsX3VFnm2hiQ6bOb2pMgS2xEXz/z3WjNoDqHcenJjnX/IQhKpYAHgQVACYIIAq+0Ss3RYrSpPQmyxAZ03Y4XsKJpEEPSvBt3oU8hsADwICgB4EFQAgAx5Jocr7RQTd1idK5x3VdRllhZVwoXt9fAVPR0x13oNQAeBBYANRBYANRAgPGjyPOgTGvVlI0R7Duhr//iyhIrihXIGObQa2CiaP4oCwILAA+CEgAeBCUANAQxx4PylJNxvsfwwaLKEiuJlcfepc9OR0GVjiXZeegtAeBBYAHQCkFLKaAhAOAIA52SUz2j3cfww2LKEivpNfqsdBQ8TGL+dCf6EgQWADUQlACogcADIEIQQUDMQTi0xYgWsdX2JMgSK+gF+ox0FIzNj1uxegCkEJRKgRQCC4AaCEoADEEQAdBiaMUhw9NX25MgSyys79VnoqOgrhx3osT8KQAaAqsUSCGwAKiBwAKgBgIPAAsChm+T5xXgx7YY8beubXhkVmWJBfVQfQY6CuYrYHiqPvHuXwuBBYAHQQkAD4ISAEMQWABE8X0elMe2GHFsVzS8MpuyxEK6mz7yjoLOIwzNnIa4C30KQQkADwILgBoILABqIPAAKEGAyPHgzxij1sW8mBS12J4EWWIBMdZ/qhaErQXFP2bF/LHurwGogcACoAYCC4BWCGpKgRIElAIRBIZWtM7gW2xPgiwxsxgW2+vqbdzpMCH7EsS6vwdBCQAPghIANRCUAPAgaAEgQhBBQLSGtbQY0TKo/TO5ssSMunK4EL0G5sL8cSPuIQBaIWgpBVIILABqILAAaIUgAqDF0IraMUYvNHw0qbLETLp0MEevgVFY9S6aPwXAg6AFgL2XAlE8F8Q8k3FqWoxm3ZMgS8ygC4vIu/VRdRRceMwfd6G3ILAAqIHAAqAGghIANRBYALRCYAEQxdf0KPOgXGoxmm1Pgiwxg16nj6ajoAOI8UtxFQsPAA+CEgCtEOylFNAg8FxIv8lQi9EsexJkiYlFHa7XwPisVYTBMHsEwIPAAqAVghIAHgQWADUQWAC0QlACgFIggsCDsrd8Cw/QtzU8dpCyxISi7tZrvEdELhJ2U39RMCSGS0HQALRCYAFQA4EFgAdBCQAPghYAaiGIICBKVqvFiPwNDa+NVpaYSA/Rn7yjYG4rD/Xp8dK38apgKszolQIpBCUAPAhKAHgQWADUQGAB0ApBLQBaDK3QLUZ8psn2JMgSE+ju6gP3FJhnaHUDVr5mD2UMhFmHAKiBwAKgBgILgFYISqVACYKxpUAUzwXxPUMr0hYjztfljPPfrCxxoG49UIfbe3BBrmccsxZVoweG/dEwDEamRLAgKAHgQVACwIOgBQAPgloAShDUABDF1wy9TluMJtmTIEscIHp5+ZA9Bl35wK2PeUiXFZFHhiZSDISxY2nQUgqkELSUAikEey4FovAWrzwox6E0B+9JkCVGimoBJ7fXuIdxzLX6ijD/FYNjJF49CEoA1EBgAeBBUALAg6AWgBIELQCkEPA9HoiJVxjnvFpZYoR4IOTBsNdg2LY+5jGi+kSLEWbEcBYANRCUAPAgsACogcACoAWCIQBaIQCAqFgaEM82zneVskSjqO/SJNhrzNENz2KxDPTCXJhxCAILgBoILABqILAAGANBSymgIRgCQEOA4orhjzbOdVFZolGvV4bpKeYeiMXK128N5sGoLVWhEgAeBCUAaiCoAaAEwRAAYyBgXBG9yCylqc/zoLJEg35CO6ajeK1xvHMothixRRSmwbgRhCEAaiCwAGiFwAKgFoIhAFohKAFAVYgWIuYl39E4z66yRKWeoB3TUTBwjwF8+pjnFIvGPiKMmMUsGLxUCngQlEqBFIISAB4ENQCUIGgBoAYCRBM8n4NN2vU5NpUlKkRzYK+BAXUv75KiNY0WI4zOhYwgtADgQWABUAOBBUAtBEMAtEJQAoBSgFfiTca5NZUlCmJlXy5Cj4EZmLSjj3kN0afy4mBEDJYCcHwWGIYgNo9WjR7NEgU9Spmml+BkbnEXk9hihLEwogagFYKTUArEVa3pgCwuxZ4lBnSp8IF7C3p5Gcymj3dLYozR28P5x6Q1EFgA1EBgAeBBUANAKwRDALRAQNzbOJdnKEsM6MHKOL0Eg/f0sW5RtBh9exgDg1EwcATBAsCDoASAB4EFQC0ELQCUIKgFgDFDbzbO4xnKEgOiqa63YNi2Ps6tixYjxhgxCw1zYGpAsCCwAGiFoFQKeBAcUgpoCMaUAvQN8P4axjk8rSzhiJ3c9bjsvQfLMurj3JNoMXpmMDoGwuQaAA+CFgA8CEoAlCBoAaAVgrQaNDifOEs4up8yz97jecYx7lWMMaLFCFNiLEzvQXDSSgF6h19pnLPTyhKOMEwv8Wrj+HoQLUYsQICxMKEFQA0EFgAeBCUAShC0ANAKQZxfTGuQu8pclnDEmJUeYrEl91ZUbDHCMBhTQ1ACwIPAAqAGgiEAWiFoAQAxk4zP4PbvZAlHPSxqxSoOiy26urKA/P4i8qFgBAzcAoEFQA0EFgCtEAwB0AoBI0V5GL6BcY5OKUsYumCoU+45uLhswKePrXfRd0OLETPRMAeGBoQSADUQWADUQjAEwKEQpADQK8x6Qzc3zs0pZQlDFw0nZK/BCWLrVX1cJ0lUAWgxwvCYBLOXICgBUAOBB0ArBC0ApBAAAKNEDwIAMUR3j8HcUTbd1sdzUkWLEXv0Yk6MlIKgAaiBoATAEAQtALRCkALAc8DXGefilLKEo/drZ+0gaAI72ziWo0TOCi1GGAmzeaVACoEFQA0EHgCtELQAECHgGYCfvaZxDk4pSzii6XBv0Tw76ATqziLyjmAWDDkEQA0EFgBDELQA0AoBx0T1h17ySxrHfkpZwtHjtbs2HkzY0cdwlK3YYsQ6p9wxMS8lggVBCQAPAg+AQyEYAgAxQ4wmfH3Mp5UlHN1GO2zD0VMv75KKLUY87wECZo6lwZylgIagBYASBMTTjGM9rSzh6BLhg249eu3lXVI0Fz8rGJ+HSIy+pVKgFgCqQMVGkCwxoJdot20sTkIv75Ki6ZhrjiFjZ1otBBYALRAMAVALAfM82HFycH53lhgQTUlbDXp5KcL1Zz7qcHEHZfkbTIW5hiAolQIpBEMATAEB8XDjeM5QliiIlY+3FjywncRe3qVFi9G7wpLlGNICwIPAAqAVghYAaP3BF6zPqo/jDGWJgm5c2MZm6eDAr2N8zqPmEcNiHiAiHwkdTJg2lgZDAHgQtADQAgHxXcbnz5QlKrSVodGM8aBDR3++o+YX1U0WSGDJFkDA1CUILABaISgBgNhH4H21z4NZokIXC+vdrxnM92RpQf3ZjlpWjDGixQjTM+oSo3sA1EIwBMAQBLwHRkqA6hU+skSlrp20s64RTA7Xn+mo9UQ19LxgwtiHYEFQA0AJAg1AFP+XfcWalrLPEg1iKRGqIUsHvdL6sxy1Dd0itBjRf8CMLA3AWAiGSgG+jrvPNy9ykCUaBQR8iKXiscZnOGp7osWINVapklBT8CCoBcCDgFduwvyfc4zPUVSWGCG2CmUcyZzB3eRbjP991HYVW4w+FkxKPT2CcGgpwNfU9XkWZLDb7Y3/X6UsMVIs2vQDzt6uhwZ9D0Cm/+dR+xAjMRljxAJeDE3gzu1BMARAhACQmOzOXZ+e6isY/7NaWeJA3SjUAdMtLcfGh2sXOD1qF6Kz8ulhei0lQuxQS0sADwJMz88zupPawBunWs4yS0yk64d9m9jooSU4YNZxadrk4Khd6YphsSp2eGSQHcZm3A6lAz24CED4mhoF36PUYII/Ta43Mf7maGWJicUWlszIZ11ROtB+LswuY5ASB8QAtpeG/Z1uu/La/Ectr6uKyJ3CmJ0fEZGXhRoEN0E2FHySiHxrmMrJM4X+/YP1f1/lV1qs8322AAAAAElFTkSuQmCC" width="46" height="46" alt="eXalt">
+    <b>GPIEXALT</b>
+  </div>
+  <div class="kicker">Dossier de documentation</div>
+  <h1 class="title">GPIEXALT</h1>
+  <div class="sub">Gestion du parc informatique eXalt : suivi des prêts, restitutions et attestations de matériel — documentation fonctionnelle, technique et d'exploitation</div>
+  <table>
+    <tr><td>Référence</td><td><b>DOC-GPIEXALT-001</b></td></tr>
+    <tr><td>Version du document</td><td><b>7.0</b> — 12/10/2026</td></tr>
+    <tr><td>Version de l'application</td><td><b>167</b></td></tr>
+    <tr><td>Statut</td><td><b>Diffusé pour validation</b></td></tr>
+    <tr><td>Classification</td><td><b>Interne</b></td></tr>
+    <tr><td>Propriétaire</td><td><b>Service informatique (DSI)</b></td></tr>
+  </table>
+  <div class="foot">Ce document décrit l'application GPIEXALT telle que publiée à la date indiquée. Il est mis à jour à chaque évolution (voir § 9).</div>
+</div>
+
+<!-- ================= CONTRÔLE DU DOCUMENT ================= -->
+<div class="chap" style="break-before:auto;">
+  <h1>Contrôle du document</h1>
+  <h2>Informations générales</h2>
+  <table>
+    <tr><td class="k">Titre</td><td>GPIEXALT — Dossier de documentation fonctionnelle, technique et d'exploitation</td></tr>
+    <tr><td class="k">Référence</td><td>DOC-GPIEXALT-001</td></tr>
+    <tr><td class="k">Version / date</td><td>7.0 — 12/10/2026</td></tr>
+    <tr><td class="k">Application concernée</td><td>GPIEXALT, version 167 (application web mono-page, accessible sur PC, tablette et téléphone)</td></tr>
+    <tr><td class="k">Propriétaire du document</td><td>Service informatique (DSI)</td></tr>
+    <tr><td class="k">Classification</td><td>Interne — ne pas diffuser hors de l'organisation</td></tr>
+    <tr><td class="k">Diffusion</td><td>Équipe IT, direction des systèmes d'information ; RSSI et DPO pour les chapitres 7, 8 et 11</td></tr>
+  </table>
+  <h2>Historique des révisions</h2>
+  <table>
+    <tr><th style="width:14%">Version</th><th style="width:16%">Date</th><th>Nature de la révision</th></tr>
+    <tr><td>1.0</td><td>05/10/2026</td><td>Première édition : description fonctionnelle, PDF, signature, archives, sauvegarde.</td></tr>
+    <tr><td>2.0</td><td>05/10/2026</td><td>Édition entreprise : gouvernance, procédures, sécurité, recette, risques, support, annexes.</td></tr>
+    <tr><td>3.0</td><td>06/10/2026</td><td>Application 106 : accueil, période, QR, signature tactile, aperçu, annulation, thèmes.</td></tr>
+    <tr><td>4.0</td><td>07/10/2026</td><td>Application 128 : rôles et accès, recherche rapide, rapports, tris, visite guidée.</td></tr>
+    <tr><td>5.0</td><td>08/10/2026</td><td>Application 147 : import de l'annuaire Microsoft 365 (tous, sélection, groupe), signature obligatoire, envoi de l'attestation signée par email, recherche dans la fiche, erreurs d'enregistrement visibles, diagnostic.</td></tr>
+    <tr><td>6.0</td><td>09/10/2026</td><td>Application 161 : l'application, anciennement « Prisme », s'appelle <b>GPIEXALT</b> (Gestion du parc informatique eXalt) ; thème et logo eXalt ; date de retour prévue facultative et alertes de retard ; actions groupées sur les attestations ; scan rapide ; panneau latéral sur grand écran ; recherche rapide refondue ; bouton Rapport unique avec envoi par email ; destinataire au choix pour l'attestation de restitution ; recherche par prénom et nom dans Rôles et accès.</td></tr>
+    <tr><td>7.0</td><td>12/10/2026</td><td>Application 167 : <b>rapport propre à chaque page</b> (bouton « Rapport » dans Emprunter, Restituer, Attestations, Archives PDF et Matériel perdu, contenu et nom de fichier selon la page) ; fiche d'emprunt réorganisée (bloc « Retour prévu » et bouton Enregistrer regroupés en bas) ; menu latéral sans barre de défilement ; source renommée <code>gpiexalt.html</code>.</td></tr>
+  </table>
+  <h2>Circuit de validation</h2>
+  <table class="sig">
+    <tr><th style="width:20%">Étape</th><th style="width:26%">Nom et fonction</th><th style="width:16%">Date</th><th>Signature</th></tr>
+    <tr><td class="k">Rédaction</td><td>Service informatique</td><td>12/10/2026</td><td></td></tr>
+    <tr><td class="k">Vérification</td><td>À renseigner</td><td></td><td></td></tr>
+    <tr><td class="k">Approbation</td><td>À renseigner (DSI)</td><td></td><td></td></tr>
+  </table>
+  <h2>Documents de référence</h2>
+  <ul>
+    <li>GPIEXALT_Documentation.pptx — présentation de synthèse de l'application (53 diapositives).</li>
+    <li>Politique de sécurité des systèmes d'information et politique de protection des données de l'organisation — <i>à rattacher par le RSSI / le DPO</i>.</li>
+  </ul>
+  <div class="box"><b class="t">Mentions « À renseigner »</b>Les éléments propres à l'organisation (valideurs, contacts de support, durée de conservation, hébergement) sont signalés « À renseigner » ou « À valider » et à compléter avant approbation.</div>
+</div>
+
+<!-- ================= SOMMAIRE ================= -->
+<div class="chap">
+  <h1>Sommaire</h1>
+  <ul class="toc">
+    <li class="l1"><span class="t">1. Introduction</span><span class="n">6</span></li>
+    <li class="l1"><span class="t">2. Présentation de l'application</span><span class="n">8</span></li>
+    <li class="l1"><span class="t">3. Rôles et responsabilités</span><span class="n">10</span></li>
+    <li class="l1"><span class="t">4. Guide fonctionnel</span><span class="n">11</span></li>
+    <li class="l2"><span class="t">4.1 Accueil</span><span class="n">11</span></li>
+    <li class="l2"><span class="t">4.2 Emprunter</span><span class="n">13</span></li>
+    <li class="l2"><span class="t">4.3 Restituer</span><span class="n">15</span></li>
+    <li class="l2"><span class="t">4.4 Attestations</span><span class="n">17</span></li>
+    <li class="l2"><span class="t">4.5 Marquer comme signée</span><span class="n">19</span></li>
+    <li class="l2"><span class="t">4.6 Le PDF d'attestation et son aperçu</span><span class="n">20</span></li>
+    <li class="l2"><span class="t">4.7 Archives PDF</span><span class="n">22</span></li>
+    <li class="l2"><span class="t">4.8 Matériel perdu</span><span class="n">23</span></li>
+    <li class="l2"><span class="t">4.9 Activités récentes</span><span class="n">24</span></li>
+    <li class="l2"><span class="t">4.10 Filtrer par période</span><span class="n">25</span></li>
+    <li class="l2"><span class="t">4.11 Codes QR et scanner</span><span class="n">26</span></li>
+    <li class="l2"><span class="t">4.12 Fiche personne et commentaires</span><span class="n">26</span></li>
+    <li class="l2"><span class="t">4.13 Envoi des messages : Outlook et SMS</span><span class="n">28</span></li>
+    <li class="l2"><span class="t">4.14 Apparence : thèmes et couleurs</span><span class="n">30</span></li>
+    <li class="l2"><span class="t">4.15 Recherche rapide et raccourcis</span><span class="n">31</span></li>
+    <li class="l2"><span class="t">4.16 Rapports PDF et Excel</span><span class="n">33</span></li>
+    <li class="l2"><span class="t">4.17 Rôles et accès, vue « Mon matériel »</span><span class="n">38</span></li>
+    <li class="l2"><span class="t">4.18 Confort d'utilisation</span><span class="n">40</span></li>
+    <li class="l2"><span class="t">4.19 Annuaire Microsoft 365 : importer les utilisateurs</span><span class="n">42</span></li>
+    <li class="l2"><span class="t">4.20 Envoyer l'attestation signée par email</span><span class="n">43</span></li>
+    <li class="l2"><span class="t">4.21 Date de retour prévue et alertes de retard</span><span class="n">44</span></li>
+    <li class="l2"><span class="t">4.22 Actions groupées sur les attestations</span><span class="n">46</span></li>
+    <li class="l2"><span class="t">4.23 Scan rapide et panneau latéral</span><span class="n">48</span></li>
+    <li class="l1"><span class="t">5. Règles de gestion</span><span class="n">49</span></li>
+    <li class="l1"><span class="t">6. Procédures opérationnelles</span><span class="n">51</span></li>
+    <li class="l1"><span class="t">7. Architecture, données et sécurité</span><span class="n">54</span></li>
+    <li class="l2"><span class="t">7.1 Architecture et dépendances</span><span class="n">54</span></li>
+    <li class="l2"><span class="t">7.2 Modèle de données</span><span class="n">55</span></li>
+    <li class="l2"><span class="t">7.3 Accès, authentification et traçabilité</span><span class="n">55</span></li>
+    <li class="l2"><span class="t">7.4 Données personnelles</span><span class="n">55</span></li>
+    <li class="l2"><span class="t">7.5 Recommandations de sécurité</span><span class="n">56</span></li>
+    <li class="l1"><span class="t">8. Sauvegarde, continuité et reprise</span><span class="n">57</span></li>
+    <li class="l1"><span class="t">9. Exploitation et maintenance</span><span class="n">58</span></li>
+    <li class="l1"><span class="t">10. Plan de recette</span><span class="n">60</span></li>
+    <li class="l1"><span class="t">11. Registre des risques et limites</span><span class="n">64</span></li>
+    <li class="l1"><span class="t">12. Support et escalade</span><span class="n">66</span></li>
+    <li class="l1"><span class="t">13. Questions fréquentes</span><span class="n">67</span></li>
+    <li class="l1"><span class="t">Annexes (A. Exports CSV · B. Nommage · C. Messages types · D. Raccourcis et catalogue)</span><span class="n">70</span></li>
+  </ul>
+</div>
+
+<!-- ================= 1. INTRODUCTION ================= -->
+<div class="chap">
+  <h1 id="s1">1. Introduction</h1>
+  <h2>1.1 Objet</h2>
+  <p>Ce dossier décrit l'application <b>GPIEXALT</b> : ce qu'elle fait pour chaque bouton, la manière dont les attestations PDF sont produites, signées et archivées, l'organisation des données et de la sauvegarde, ainsi que les éléments nécessaires à son exploitation, à sa recette et à son audit.</p>
+  <h2>1.2 Périmètre</h2>
+  <p>Le document couvre l'application dans sa version 167 : tableau de bord d'accueil, emprunts avec date de retour prévue facultative, restitutions, alertes de retard, attestations (envoi avec choix du destinataire, signature tactile ou mention écrite obligatoire, signature et export groupés, annulation, envoi de l'attestation signée par email), archives PDF, matériel perdu, journal des activités, filtres par période, codes QR, scanner et scan rapide, recherche rapide et recherche dans la fiche, panneau latéral sur grand écran, rapport PDF ou Excel avec envoi par email, rôles et accès avec la vue « Mon matériel », import de l'annuaire Microsoft 365 (Entra ID), fiches et commentaires, envoi des messages (Outlook, SMS), thèmes (dont les thèmes eXalt), couleurs et densité, compatibilité PC, tablette et téléphone. Il ne couvre pas la connexion au parc réel (Intune, SharePoint ou Excel), mentionnée au § 11.</p>
+  <h2>1.3 Public visé</h2>
+  <table>
+    <tr><th style="width:24%">Lecteur</th><th>Chapitres utiles</th></tr>
+    <tr><td class="k">Agents du service informatique</td><td>2, 4, 5, 6, 13</td></tr>
+    <tr><td class="k">Responsable IT / DSI</td><td>2, 3, 5, 8, 10, 11, 12</td></tr>
+    <tr><td class="k">Administrateur de l'application</td><td>7, 8, 9, 10, 12</td></tr>
+    <tr><td class="k">RSSI / DPO</td><td>7, 8, 11</td></tr>
+  </table>
+  <h2>1.4 Conventions</h2>
+  <p>Les noms de boutons sont écrits <span class="btn">comme ceci</span> ; les valeurs techniques et noms de champs <code>comme ceci</code>. Les dates sont au format JJ/MM/AAAA. « Personne » désigne un collaborateur ou un consultant qui détient du matériel ; « utilisateur » désigne la personne du service informatique qui utilise l'application.</p>
+  <h2>1.5 Glossaire</h2>
+  <table>
+    <tr><th style="width:24%">Terme</th><th>Définition</th></tr>
+    <tr><td class="k">Attestation</td><td>Document PDF prouvant la restitution d'un ou plusieurs équipements par une personne.</td></tr>
+    <tr><td class="k">En attente</td><td>Statut d'une attestation envoyée mais pas encore marquée comme signée.</td></tr>
+    <tr><td class="k">À relancer</td><td>Attestation en attente depuis 3 jours ou plus.</td></tr>
+    <tr><td class="k">GPIEXALT</td><td>Nom de l'application : Gestion du Parc Informatique eXalt (anciennement « Prisme »).</td></tr>
+    <tr><td class="k">Retour prévu</td><td>Date, facultative, à laquelle une personne doit rendre le matériel emprunté ; saisie à l'emprunt (§ 4.21).</td></tr>
+    <tr><td class="k">En retard</td><td>Matériel non rendu alors que la date de retour prévue est dépassée.</td></tr>
+    <tr><td class="k">Mention de signature</td><td>Texte libre saisi à la signature, par exemple « Je signe à la place de … » ; reproduit dans le PDF et dans les listes.</td></tr>
+    <tr><td class="k">Annuaire</td><td>Liste des personnes proposées dans Emprunter et Restituer, importée depuis Microsoft 365 (Entra ID) par un administrateur (§ 4.19).</td></tr>
+    <tr><td class="k">Kit standard</td><td>Les 9 équipements attribués à chaque personne importée (ordinateur portable, téléphone mobile, casque, souris, adaptateur, trois chargeurs, Mac), en attendant la connexion au parc réel.</td></tr>
+    <tr><td class="k">Rôle</td><td>Profil attribué à une personne dans « Rôles et accès » : Administrateur full, Super utilisateur, Agent IT, Lecteur ou Collaborateur.</td></tr>
+    <tr><td class="k">Mon matériel</td><td>Vue en consultation seule dans laquelle un collaborateur voit son propre matériel, ses prêts, restitutions et pertes.</td></tr>
+    <tr><td class="k">Rapport</td><td>Document PDF ou classeur Excel de synthèse du parc et de l'activité, généré à la demande.</td></tr>
+    <tr><td class="k">Thème / accent</td><td>Fond d'affichage (clair, sombre, Minuit, eXalt…) et couleur des éléments actifs, choisis par chaque utilisateur.</td></tr>
+    <tr><td class="k">Archive</td><td>Copie du PDF signé conservée dans la base de l'application.</td></tr>
+    <tr><td class="k">DSI</td><td>Direction des systèmes d'information ; sert aussi de signature côté service informatique sur le PDF.</td></tr>
+    <tr><td class="k">Connecteur</td><td>Liaison autorisée entre l'application et un service externe (ici Microsoft 365 / Outlook).</td></tr>
+    <tr><td class="k">Brouillon</td><td>Message créé dans Outlook mais non envoyé.</td></tr>
+    <tr><td class="k">Mode local</td><td>Fonctionnement sans base de données : aucune donnée n'est conservée.</td></tr>
+    <tr><td class="k">RGPD / DPO / RSSI</td><td>Règlement général sur la protection des données / Délégué à la protection des données / Responsable de la sécurité des systèmes d'information.</td></tr>
+  </table>
+</div>
+
+<!-- ================= 2. PRÉSENTATION ================= -->
+<div class="chap">
+  <h1 id="s2">2. Présentation de l'application</h1>
+  <h2>2.1 Finalité</h2>
+  <p>GPIEXALT permet au service informatique de savoir à tout moment <b>qui détient quel matériel</b>, de prouver <b>ce qui a été restitué</b> par une attestation datée et signée, et de suivre le matériel <b>perdu, volé ou abîmé</b>. Chaque action est enregistrée avec son auteur et sa date.</p>
+  <h2>2.2 Cycle de vie d'un matériel</h2>
+  <svg viewBox="0 0 720 168" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial" font-size="12">
+    <defs><marker id="ar" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#586080"/></marker></defs>
+    <g stroke="#c9cbe0" fill="#f3f4fb"><rect x="4" y="34" width="150" height="66" rx="8"/><rect x="190" y="34" width="150" height="66" rx="8"/><rect x="376" y="34" width="150" height="66" rx="8"/><rect x="562" y="34" width="150" height="66" rx="8"/></g>
+    <g fill="#12162b" text-anchor="middle" font-weight="700"><text x="79" y="62">1. Emprunter</text><text x="265" y="62">2. Restituer</text><text x="451" y="62">3. Attestation</text><text x="637" y="62">4. Signée et archivée</text></g>
+    <g fill="#586080" text-anchor="middle" font-size="10.5"><text x="79" y="82">prêt enregistré</text><text x="265" y="82">email ou téléphone</text><text x="451" y="82">« En attente », relances</text><text x="637" y="82">PDF daté, signé, archivé</text></g>
+    <g stroke="#586080" stroke-width="1.6" marker-end="url(#ar)"><line x1="156" y1="67" x2="188" y2="67"/><line x1="342" y1="67" x2="374" y2="67"/><line x1="528" y1="67" x2="560" y2="67"/></g>
+    <line x1="265" y1="102" x2="265" y2="128" stroke="#c43d3d" stroke-width="1.6" marker-end="url(#ar)"/>
+    <rect x="150" y="130" width="230" height="30" rx="8" fill="#fbe4e4" stroke="#e6b3b3"/>
+    <text x="265" y="150" text-anchor="middle" fill="#c43d3d" font-weight="700">Perdu, volé, abîmé → Matériel perdu</text>
+  </svg>
+  <h2>2.3 Fonctions de l'application</h2>
+  <table>
+    <tr><th style="width:23%">Onglet</th><th>Fonction</th><th style="width:12%">Chapitre</th></tr>
+    <tr><td class="k">Accueil</td><td>Tableau de bord : ce qui demande une action (dont les retours en retard), répartition du parc, statistiques par type de matériel.</td><td>4.1, 4.21</td></tr>
+    <tr><td class="k">Emprunter</td><td>Enregistrer les équipements remis à une personne, avec une date de retour prévue facultative ; annuler un emprunt qui vient d'être saisi.</td><td>4.2, 4.21</td></tr>
+    <tr><td class="k">Restituer</td><td>Enregistrer un retour et envoyer l'attestation (email ou téléphone, destinataire au choix), ou déclarer une perte, un vol ou une casse ; filtrer les retours en retard.</td><td>4.3, 4.13, 4.21</td></tr>
+    <tr><td class="k">Matériel perdu</td><td>Synthèse des équipements perdus, volés ou abîmés, par type.</td><td>4.8</td></tr>
+    <tr><td class="k">Attestations</td><td>Suivre les attestations : en attente, à relancer, signées ; marquer comme signée (signature tactile ou mention écrite) puis l'envoyer par email ; actions groupées (signature, export) ; exporter.</td><td>4.4, 4.5, 4.20, 4.22</td></tr>
+    <tr><td class="k">Archives PDF</td><td>Retrouver et télécharger le PDF signé de chaque attestation.</td><td>4.7</td></tr>
+    <tr><td class="k">Activités récentes</td><td>Journal de tout ce qui a été enregistré, par jour.</td><td>4.9</td></tr>
+    <tr><td class="k">Rôles et accès</td><td>Attribuer un rôle à chaque personne ; rattacher les collaborateurs à leur fiche ; importer l'annuaire Microsoft 365 (administrateurs).</td><td>4.17, 4.19</td></tr>
+    <tr><td class="k">Mon matériel</td><td>Vue des collaborateurs : leur matériel, leurs prêts, restitutions et pertes, en consultation.</td><td>4.17</td></tr>
+    <tr><td class="k">Transversal</td><td>Recherche rapide (Ctrl K) ; rapport PDF ou Excel propre à chaque page, envoyé par email si on le souhaite ; filtre par période ; codes QR, scanner et scan rapide ; aperçu du PDF ; panneau latéral ; alertes de retard ; thèmes eXalt, couleurs et densité ; aide clavier et diagnostic.</td><td>4.6, 4.10, 4.11, 4.14 à 4.18, 4.21, 4.23</td></tr>
+  </table>  <h2>2.4 Environnements d'utilisation</h2>
+  <div class="cols">
+    <div>
+      <p>L'application est une page web unique, publiée à une adresse partagée avec des personnes désignées. Elle s'adapte à la taille de l'écran :</p>
+      <ul>
+        <li><b>PC</b> : menu latéral repliable, raccourcis clavier 1 à 7.</li>
+        <li><b>Tablette</b> : menu latéral en paysage, barre d'onglets en bas en portrait.</li>
+        <li><b>Téléphone</b> : barre d'onglets en bas de l'écran (sept onglets), boutons de 42 px minimum, champs à 16 px (pas de zoom automatique sur iPhone).</li>
+      </ul>
+      <p>Les boutons « Par email » et « Par téléphone » ouvrent la messagerie ou l'application SMS de l'appareil.</p>
+    </div>
+    <div><figure class="narrow"><img src="images/mobile.png" alt="Capture sur téléphone"><figcaption>Figure 1 — Accueil sur téléphone</figcaption></figure></div>
+  </div>
+</div>
+
+<!-- ================= 3. RÔLES ================= -->
+<div class="chap">
+  <h1 id="s3">3. Rôles et responsabilités</h1>
+  <h2>3.1 Profils</h2>
+  <table>
+    <tr><th style="width:26%">Profil</th><th>Rôle</th></tr>
+    <tr><td class="k">Agent du service informatique</td><td>Utilise l'application au quotidien : prêts, restitutions, relances, signatures, déclarations.</td></tr>
+    <tr><td class="k">Responsable IT / DSI</td><td>Supervise l'activité, valide les pratiques, répond des preuves de restitution et de la conformité.</td></tr>
+    <tr><td class="k">Administrateur de l'application</td><td>Publie les versions, gère le partage et les autorisations de connecteurs, tient la documentation à jour.</td></tr>
+    <tr><td class="k">Collaborateur / consultant</td><td>Reçoit le matériel et l'attestation ; n'utilise pas l'application.</td></tr>
+  </table>
+  <div class="box"><b class="t">Rôles dans l'application</b>L'application distingue cinq rôles : Administrateur full, Super utilisateur, Agent IT, Lecteur et Collaborateur (§ 4.17). Le niveau de partage de la page (consulter, interagir, modifier) reste la limite réelle appliquée par la plateforme ; les rôles précisent ce que chaque personne voit et peut faire. Seuls un partage « Peut consulter » (collaborateurs) et la séparation des données par la base interdisent techniquement l'accès aux fiches des autres ; les restrictions des rôles Agent IT et Lecteur portent sur l'affichage (§ 11).</div>
+  <h2>3.2 Matrice des responsabilités (proposition à valider par la DSI)</h2>
+  <p>R = réalise · A = approuve / responsable final · C = consulté · I = informé</p>
+  <table>
+    <tr><th>Activité</th><th class="c">Agent IT</th><th class="c">DSI</th><th class="c">Admin. appli</th><th class="c">Collaborateur</th></tr>
+    <tr><td>Enregistrer un prêt</td><td class="c">R</td><td class="c">I</td><td class="c">–</td><td class="c">C</td></tr>
+    <tr><td>Enregistrer une restitution et envoyer l'attestation</td><td class="c">R</td><td class="c">I</td><td class="c">–</td><td class="c">I</td></tr>
+    <tr><td>Relancer une attestation non signée</td><td class="c">R</td><td class="c">I</td><td class="c">–</td><td class="c">I</td></tr>
+    <tr><td>Marquer comme signée et archiver</td><td class="c">R</td><td class="c">A</td><td class="c">–</td><td class="c">C</td></tr>
+    <tr><td>Déclarer un matériel perdu, volé ou abîmé</td><td class="c">R</td><td class="c">A</td><td class="c">–</td><td class="c">C</td></tr>
+    <tr><td>Fournir un PDF signé (audit, litige)</td><td class="c">R</td><td class="c">A</td><td class="c">–</td><td class="c">–</td></tr>
+    <tr><td>Publier une nouvelle version de l'application</td><td class="c">C</td><td class="c">A</td><td class="c">R</td><td class="c">–</td></tr>
+    <tr><td>Gérer les accès (partage, connecteurs)</td><td class="c">–</td><td class="c">A</td><td class="c">R</td><td class="c">–</td></tr>
+    <tr><td>Tenir la documentation à jour</td><td class="c">C</td><td class="c">A</td><td class="c">R</td><td class="c">–</td></tr>
+  </table>
+</div>
+
+<!-- ================= 4. GUIDE FONCTIONNEL ================= -->
+<div class="chap">
+  <h1 id="s4">4. Guide fonctionnel</h1>
+  <p class="lead">Chaque fonction est décrite par son objectif, ses boutons, les données enregistrées et les contrôles appliqués. Les captures proviennent d'une copie locale de démonstration (plateforme simulée), en thème « eXalt nuit ».</p>
+
+  <h2 id="s41">4.1 Accueil</h2>
+  <p><b>Objectif :</b> voir en un coup d'œil ce qui demande une action, et y accéder en un clic.</p>
+  <figure><img src="images/home.png" alt="Accueil" style="width:60%; margin:0 auto;"><figcaption>Figure 2 — Accueil : situation du jour, indicateurs (dont « Retours en retard »), parc matériel, attestations, statistiques par type</figcaption></figure>
+  <table>
+    <tr><th style="width:28%">Élément</th><th>Comportement</th></tr>
+    <tr><td class="k">En-tête</td><td>Phrase de situation avec un voyant (vert : tout est à jour ; orange : des attestations attendent une signature ; rouge : des attestations dépassent 3 jours ou du matériel n'a pas été rendu à la date prévue). Accès rapides, dans cet ordre : <span class="btn">Rechercher</span> <span class="btn p">Nouvel emprunt</span> <span class="btn">Nouvelle restitution</span> <span class="btn">Scanner un QR</span> <span class="btn">Rapport</span> (choix de la période et du format PDF ou Excel, § 4.16). La date du jour et le lieu (ville, pays) s'affichent en haut à droite de chaque page.</td></tr>
+    <tr><td class="k">Indicateurs</td><td><b>Retours en retard</b> (carte rouge, visible seulement s'il y en a) · En attente de signature · Matériel à restituer (avec « dont N en retard ») · Perdu, volé ou abîmé (déclarations du mois). Un clic ouvre l'onglet concerné avec le filtre déjà appliqué. Les attestations en attente depuis 3 jours ou plus restent signalées par la phrase de situation, la pastille du menu et le filtre « À relancer » d'Attestations.</td></tr>
+    <tr><td class="k">Bandeau « PDF à archiver »</td><td>Apparaît seulement si des attestations signées n'ont pas de PDF archivé ; <span class="btn">Ouvrir les archives</span> mène au filtre « À archiver ».</td></tr>
+    <tr><td class="k">Parc matériel</td><td>Anneau de répartition des équipements suivis : chez les personnes, <b>retour en retard</b> (violet), restitution en attente de signature, perdu, volé ou abîmé. Au survol d'une couleur : le libellé et le nombre.</td></tr>
+    <tr><td class="k">Attestations</td><td>Barre d'avancement (signées, en attente, à relancer), taux de signature, délai moyen de signature et attestation en attente la plus ancienne.</td></tr>
+    <tr><td class="k">Par type de matériel</td><td>Une carte par type (ordinateur, casque, souris, chargeurs…) avec le nombre d'équipements, une jauge colorée (dont le segment « Retour en retard ») et, au survol, le détail en nombre d'équipements.</td></tr>
+  </table>
+
+  <h2 id="s42" style="break-before:page;">4.2 Emprunter</h2>
+  <p><b>Objectif :</b> enregistrer le matériel remis à une personne, avec sa date de remise.</p>
+  <figure><img src="images/loan.png" alt="Onglet Emprunter"><figcaption>Figure 3 — Onglet Emprunter : indicateurs, recherche, filtres, jauges de remise</figcaption></figure>
+  <table>
+    <tr><th style="width:28%">Élément</th><th>Comportement</th></tr>
+    <tr><td class="k">Indicateurs</td><td>Personnes à équiper · Matériel à remettre · Remises ce mois-ci · Dernière remise (date et personne). Les deux premiers appliquent le filtre « À emprunter ».</td></tr>
+    <tr><td class="k">Recherche et filtres</td><td>Recherche insensible aux accents (nom, rôle, email, identifiant d'équipement). Filtres <span class="btn">Tous</span> <span class="btn">À emprunter</span> <span class="btn">Tout emprunté</span> ; filtre de période (§ 4.10) ; tri par défaut, par nom, par matériel restant à emprunter.</td></tr>
+    <tr><td class="k">Ligne de résultat</td><td>Avatar, fonction, nombre d'équipements attribués, jauge « x / y remis » (survol : détail et pourcentage), pastille d'état, chevron. Un clic ouvre la fiche.</td></tr>
+    <tr><td class="k">Fiche personne</td><td>Trois étapes affichées en haut (Sélectionner le matériel, Choisir la date de remise, Enregistrer l'emprunt) qui se cochent au fil de la saisie. Équipements sur deux colonnes sur grand écran ; quantité au choix pour un équipement en plusieurs exemplaires ; <span class="btn">Sélectionner tout</span> ; bouton <span class="btn">Étiquettes QR du matériel (PDF)</span> (§ 4.11) ; un champ de recherche en haut de la fiche permet de passer à une autre personne sans fermer la fenêtre (§ 4.12).</td></tr>
+    <tr><td class="k">Date de remise</td><td>Aujourd'hui par défaut, modifiable avec le calendrier ou par les liens <span class="btn">Aujourd'hui</span> <span class="btn">Hier</span>.</td></tr>
+    <tr><td class="k">Retour prévu (facultatif)</td><td>Carte « Retour prévu le (facultatif) » sous la date de remise : date à laquelle le matériel doit être rendu, avec les pastilles + 1 semaine, + 1 mois, + 3 mois et <span class="btn">Effacer</span> (§ 4.21). Laissé vide, l'emprunt est enregistré sans échéance.</td></tr>
+    <tr><td class="k"><span class="btn p">Enregistrer</span></td><td>Situé en bas à droite de la carte « Retour prévu », à côté de la phrase d'aide (« N équipements sélectionnés — prêt à enregistrer »). Enregistre le prêt, met à jour la fiche et les compteurs. Sans équipement coché, un clic affiche « Choisissez d'abord le matériel remis… » ; pendant l'enregistrement le bouton est occupé et un second clic est ignoré. Le message de confirmation propose <span class="btn">Annuler</span> pendant 10 secondes au moins : l'emprunt est supprimé, sauf si une autre action a été enregistrée depuis pour cette personne.</td></tr>
+  </table>
+  <p><b>Données enregistrées :</b> équipements et quantités, date de remise, date de retour prévue (si renseignée), date et heure d'enregistrement, auteur.</p>
+
+  <h2 id="s43" style="break-before:page;">4.3 Restituer</h2>
+  <p><b>Objectif :</b> enregistrer le retour du matériel et envoyer l'attestation, ou déclarer un matériel perdu, volé ou abîmé.</p>
+  <figure><img src="images/returnlist.png" alt="Onglet Restituer"><figcaption>Figure 4 — Onglet Restituer : indicateurs, filtres et jauges de restitution</figcaption></figure>
+  <table>
+    <tr><th style="width:28%">Élément</th><th>Comportement</th></tr>
+    <tr><td class="k">Indicateurs</td><td>Matériel à restituer (et nombre de personnes) · En attente de signature · Restitués et signés · Perdu, volé ou abîmé. Un clic applique le filtre correspondant.</td></tr>
+    <tr><td class="k">Filtres</td><td><span class="btn">Tous</span> <span class="btn">À traiter</span> <span class="btn">En retard de retour</span> <span class="btn">En attente de signature</span> <span class="btn">Perdu / volé / abîmé</span> <span class="btn">Tout restitué</span> ; filtre de période ; tri (les personnes en retard passent en premier dans le tri par priorité).</td></tr>
+    <tr><td class="k">Jauge de la ligne</td><td>Une barre à quatre couleurs : restitué et signé (vert), encore chez la personne (bleu), restitution en attente de signature (jaune), perdu, volé ou abîmé (rouge). Survol : détail et pourcentage. Le bord gauche de la ligne reprend la priorité (perte, attente, en cours, tout rendu). Une personne dont la date de retour prévue est dépassée porte le repère rouge « Retour en retard ».</td></tr>
+  </table>
+  <figure style="margin-top:6pt;"><img src="images/return.png" alt="Fiche en restitution" style="width:58%; margin:0 auto;"><figcaption>Figure 5 — Fiche d'une personne dans l'onglet Restituer (étapes, matériel sélectionné, date de retour, actions)</figcaption></figure>
+  <table>
+    <tr><th style="width:28%">Bouton</th><th>Comportement</th></tr>
+    <tr><td class="k"><span class="btn">Par email</span></td><td>Ouvre d'abord l'<b>aperçu du PDF</b> (§ 4.6), où l'on choisit le <b>destinataire</b> : l'adresse enregistrée ou une autre adresse saisie à la main (§ 4.13). Après <span class="btn p">Continuer et envoyer</span>, l'attestation est enregistrée au statut <span class="tag w">En attente</span> et un brouillon Outlook est créé dans la boîte de l'utilisateur, adressé au destinataire choisi, avec le PDF en pièce jointe. La fenêtre « Message prêt à envoyer » indique où le trouver et propose de télécharger le message pour Outlook (§ 4.13).</td></tr>
+    <tr><td class="k"><span class="btn">Par téléphone</span></td><td>Enregistre l'attestation et ouvre l'application SMS avec le texte préparé. Tant que le numéro de test est actif, le SMS est adressé à 06 95 17 58 74.</td></tr>
+    <tr><td class="k"><span class="btn d">Déclarer perdu</span> <span class="btn d">Déclarer volé</span> <span class="btn d">Déclarer abîmé</span></td><td>Demande une confirmation (déclaration irréversible), puis enregistre la déclaration (motif, date, auteur). L'équipement sort de « chez la personne » et apparaît dans Matériel perdu.</td></tr>
+  </table>
+  <p><b>Contrôles :</b> seuls les équipements empruntés et non déjà couverts par une attestation en attente sont sélectionnables ; la date de retour est choisie avant l'envoi.</p>
+
+  <h2 id="s44" style="break-before:page;">4.4 Attestations</h2>
+  <p><b>Objectif :</b> suivre toutes les attestations envoyées et leur statut.</p>
+  <figure><img src="images/attest.png" alt="Onglet Attestations"><figcaption>Figure 6 — Onglet Attestations : indicateurs, filtres, cycle de vie de chaque attestation</figcaption></figure>
+  <table>
+    <tr><th style="width:28%">Élément</th><th>Comportement</th></tr>
+    <tr><td class="k">Indicateurs</td><td>Attestations envoyées (avec le taux de signature) · En attente de signature · À relancer · Délai moyen de signature. Chaque indicateur applique son filtre ; l'indicateur actif est entouré.</td></tr>
+    <tr><td class="k">Filtres</td><td><span class="btn">Toutes</span> <span class="btn">En attente</span> <span class="btn">À relancer</span> <span class="btn">Signées</span> <span class="btn">Par email</span> <span class="btn">Par téléphone</span> ; filtre de période sur la date d'envoi ; recherche par nom, équipement, email ou téléphone ; <b>tri</b> : en attente d'abord (défaut), plus récentes, plus anciennes, nom A→Z (l'export CSV suit l'ordre choisi).</td></tr>
+    <tr><td class="k">Ligne d'attestation</td><td>Avatar, personne et fonction, matériel, canal (email ou téléphone), dates d'envoi et de retour, auteurs, mention écrite éventuelle (§ 4.5) et <b>cycle de vie</b> : Envoyée → Signée → PDF archivé (survol : date ou état de chaque étape).</td></tr>
+    <tr><td class="k"><span class="btn">Rapport</span></td><td>En haut à droite : rapport PDF ou Excel des attestations (à traiter, envoyées, signées de la période), § 4.16.</td></tr>
+    <tr><td class="k">Sélection multiple</td><td>Une case par ligne et la case « Sélectionner toutes les attestations en attente de cette liste » : une barre d'actions permet de les marquer toutes comme signées ou d'exporter la sélection (§ 4.22).</td></tr>
+    <tr><td class="k">En attente · N j</td><td>Nombre de jours depuis l'envoi. Rouge à partir de 3 jours (réglage <code>REMINDER_AFTER_DAYS</code>) : l'attestation entre dans « À relancer ».</td></tr>
+    <tr><td class="k"><span class="btn p">Marquer comme signée</span></td><td>Voir 4.5.</td></tr>
+    <tr><td class="k"><span class="btn">PDF</span></td><td>Télécharge le PDF : la version archivée pour une attestation signée, la version « émise » sinon.</td></tr>
+    <tr><td class="k"><span class="btn">Exporter CSV</span></td><td>Exporte les lignes affichées, filtres et recherche appliqués (colonnes en annexe A).</td></tr>
+    <tr><td class="k"><span class="btn">Relancer</span></td><td>Bouton <b>masqué par défaut</b> (réglage <code>SHOW_REMIND_BUTTON</code>, § 9.3). Une fois affiché, il prépare un rappel par le canal de l'envoi initial (Outlook ou SMS) et le trace. Le suivi des retards reste assuré par le filtre « À relancer » et par l'Accueil.</td></tr>
+  </table>
+
+  <h2 id="s45" style="break-before:page;">4.5 Marquer comme signée</h2>
+  <p><b>Objectif :</b> enregistrer la signature d'une attestation, produire le PDF signé et l'archiver.</p>
+  <div class="cols">
+    <div>
+      <ol>
+        <li>Clic sur <span class="btn p">Marquer comme signée</span> (onglet Attestations ou fiche de la personne).</li>
+        <li>La fenêtre demande :
+          <ul>
+            <li>la <b>date de signature</b> : aujourd'hui par défaut, modifiable, jamais dans le futur ;</li>
+            <li>la <b>signature</b> : tracée au doigt, au stylet ou à la souris ; <span class="btn">Effacer</span> recommence ;</li>
+            <li>une <b>mention écrite</b> (140 caractères) : par exemple « Je signe à la place de Camille Dubois ». Le lien <span class="btn">Signer à la place de…</span> pré-remplit « Signé par … à la place de [nom] » ;</li>
+            <li><b>un tracé ou une mention est obligatoire</b> : tant que ni l'un ni l'autre n'est renseigné, le bouton <span class="btn p">Valider la signature</span> est grisé et un message l'explique. Un simple clic dans le cadre ne compte pas, et la mention pré-remplie doit être complétée (remplacer les points de suspension par le nom du signataire).</li>
+          </ul>
+        </li>
+        <li>Après <span class="btn p">Valider la signature</span>, l'application :
+          <ul>
+            <li>génère le PDF signé (§ 4.6) et l'archive (§ 4.7) ;</li>
+            <li>passe l'attestation à <span class="tag g">Signée</span> et enregistre l'auteur de la validation, la date et la mention ;</li>
+            <li>libère les équipements, qui redeviennent disponibles ;</li>
+            <li>propose d'envoyer l'attestation signée par email au collaborateur (§ 4.20).</li>
+          </ul>
+        </li>
+      </ol>
+    </div>
+    <div><figure><img src="images/sign.png" alt="Fenêtre de signature"><figcaption>Figure 7 — Date, signature ou mention : le bouton reste grisé tant que l'une des deux manque</figcaption></figure></div>
+  </div>
+  <div class="box"><b class="t">Annuler une signature</b>Le message de confirmation propose <span class="btn">Annuler</span> pendant 10 secondes au moins : l'attestation redevient « En attente », l'archive PDF et la mention sont supprimées. L'annulation est refusée si une autre action a été enregistrée depuis pour la même personne. Passé ce délai, la correction passe par l'administrateur.</div>
+  <div class="box"><b class="t">Cas particuliers</b>Si l'archivage échoue, la signature est quand même enregistrée ; le bouton « Archiver le PDF » permet de recommencer. Si la date choisie n'est pas celle du jour, la date et l'heure réelles du clic sont conservées à part (<code>signedRecordedAt</code>) et mentionnées dans le PDF. Si la signature tracée rend le PDF trop lourd pour la base (plus de 256 Ko), elle est remplacée par le nom du collaborateur.</div>
+
+  <h2 id="s46" style="break-before:page;">4.6 Le PDF d'attestation et son aperçu</h2>
+  <p>Le PDF est créé dans le navigateur (A4, une page) : aucun document n'est fabriqué par un serveur tiers. Il porte la référence <code>ATT-&lt;n° personne&gt;-&lt;n° attestation&gt;</code>.</p>
+  <div class="cols">
+    <div>
+      <figure><img src="images/pdfsigned.png" alt="PDF signé"><figcaption>Figure 8 — PDF signé : signature tracée, mention écrite, « DSI »</figcaption></figure>
+    </div>
+    <div>
+      <h3>Contenu</h3>
+      <ul>
+        <li>Collaborateur : nom, fonction, email, téléphone.</li>
+        <li>Texte d'attestation, tableau du matériel (désignation, quantité) et total d'unités.</li>
+        <li>Bloc de suivi : dates d'emprunt et de restitution, envoi (canal, date, auteur), signature, et <b>mention de signature</b> si elle existe.</li>
+        <li>Deux cases de signature, <b>toujours remplies</b> : date, puis signature tracée ou nom du collaborateur ; même date et « DSI » côté service informatique. La mention écrite figure aussi sous la case du collaborateur.</li>
+      </ul>
+      <h3>Deux versions</h3>
+      <table>
+        <tr><th>Version</th><th>Quand</th><th>Date</th></tr>
+        <tr><td><span class="tag i">Émise</span></td><td>À l'envoi, ou PDF d'une attestation en attente</td><td>Date d'envoi</td></tr>
+        <tr><td><span class="tag g">Signée</span></td><td>Après la signature</td><td>Date de signature</td></tr>
+      </table>
+      <p>Nom de fichier : <code>attestation_restitution_prenom-nom_ATT-3-5_signee.pdf</code> ; le suffixe <code>_signee</code> n'existe que pour la version signée.</p>
+    </div>
+  </div>
+  <h3>Aperçu avant envoi</h3>
+  <div class="cols">
+    <div>
+      <p>Avant d'envoyer une attestation par email, une fenêtre affiche le PDF tel qu'il sera joint. <span class="btn p">Continuer et envoyer</span> enregistre et prépare le message ; <span class="btn">Retour</span> ne change rien. L'aperçu utilise la bibliothèque pdf.js, chargée à la demande ; s'il est indisponible, l'envoi reste possible et le PDF est créé normalement.</p>
+    </div>
+    <div><figure style="margin:0;"><img src="images/preview.png" alt="Aperçu du PDF" style="width:78%; margin:0 auto;"><figcaption>Figure 9 — Aperçu du PDF avant l'envoi par email</figcaption></figure></div>
+  </div>
+
+  <h2 id="s47" style="break-before:page;">4.7 Archives PDF</h2>
+  <p><b>Objectif :</b> retrouver à tout moment le PDF signé d'une attestation, pour un contrôle ou un litige.</p>
+  <figure><img src="images/archives.png" alt="Onglet Archives PDF"><figcaption>Figure 10 — Onglet Archives PDF : documents archivés et à archiver</figcaption></figure>
+  <table>
+    <tr><th style="width:28%">Élément</th><th>Comportement</th></tr>
+    <tr><td class="k">Indicateurs</td><td>PDF signés archivés · PDF à archiver · Espace utilisé (taille cumulée) · Dernière signature (date et personne).</td></tr>
+    <tr><td class="k">Liste</td><td>Une ligne par attestation signée, la plus récente en premier : personne, référence, matériel, date de signature, personne ayant validé, taille, mention écrite éventuelle, cycle de vie.</td></tr>
+    <tr><td class="k">Recherche et filtres</td><td>Par nom, matériel, référence (ATT-…) ou date. <span class="btn">Tous</span> <span class="btn">Archivés</span> <span class="btn">À archiver</span> ; filtre de période sur la date de signature ; tri : plus récentes (défaut), plus anciennes, nom A→Z.</td></tr>
+    <tr><td class="k"><span class="btn p">Télécharger</span></td><td>Restitue exactement le PDF produit au moment de la signature (le fichier stocké, pas une recréation).</td></tr>
+    <tr><td class="k"><span class="btn">Rapport</span></td><td>En haut à droite : rapport des archives PDF (PDF signés à archiver, signatures de la période avec l'état de l'archive), § 4.16.</td></tr>
+    <tr><td class="k"><span class="btn p">Archiver le PDF</span></td><td>Crée et range le PDF d'une attestation signée qui n'a pas d'archive (signature antérieure aux archives, ou archivage échoué).</td></tr>
+  </table>
+
+  <h2 id="s48" style="break-before:page;">4.8 Matériel perdu</h2>
+  <p><b>Objectif :</b> avoir une vue consolidée des équipements perdus, volés ou abîmés.</p>
+  <figure><img src="images/lost.png" alt="Onglet Matériel perdu"><figcaption>Figure 11 — Onglet Matériel perdu</figcaption></figure>
+  <ul>
+    <li><b>Indicateurs</b> : unités perdues, volées ou abîmées · déclarations · type le plus touché · unités déclarées ce mois-ci. Les deux premiers suivent le filtre choisi.</li>
+    <li><b>Filtres</b> : liste déroulante « Type de matériel » et « Période » sur la même ligne ; recherche par matériel ou par personne.</li>
+    <li><b>Liste par type</b> : jauge « part des pertes », total, et une pastille par déclaration (personne, quantité, motif, date). Au-delà de six, le lien « + N autres » déplie la suite. L'auteur de la déclaration apparaît au survol de la pastille.</li>
+    <li><span class="btn">Exporter CSV</span> : lignes affichées (colonnes en annexe A).</li>
+    <li><span class="btn">Rapport</span> (en haut à droite) : rapport du matériel perdu, pertes par type et déclarations de la période (§ 4.16).</li>
+  </ul>
+
+  <h2 id="s49" style="break-before:page;">4.9 Activités récentes</h2>
+  <p><b>Objectif :</b> retrouver tout ce qui a été enregistré, du plus récent au plus ancien.</p>
+  <figure><img src="images/activity.png" alt="Onglet Activités récentes"><figcaption>Figure 12 — Onglet Activités récentes : journal groupé par jour</figcaption></figure>
+  <ul>
+    <li>Quatre indicateurs cliquables (prêts, attestations envoyées, signatures, pertes) qui servent aussi de filtres ; un second clic retire le filtre.</li>
+    <li>Journal groupé par jour (« Aujourd'hui », « Hier », puis la date complète) : chaque événement indique la personne, le matériel, l'heure et l'auteur. La mention de signature figure sous l'événement « attestation signée ».</li>
+    <li>Recherche par personne, équipement ou type d'action ; filtre de période ; 50 événements affichés à la fois.</li>
+  </ul>
+
+  <h2 id="s410" style="break-before:page;">4.10 Filtrer par période</h2>
+  <p>Chaque onglet de liste propose un filtre <b>Période</b>, à côté des autres filtres.</p>
+  <figure><img src="images/period.png" alt="Filtre de période"><figcaption>Figure 13 — Filtre de période en mode « Entre deux dates »</figcaption></figure>
+  <table>
+    <tr><th style="width:28%">Mode</th><th>Comportement</th></tr>
+    <tr><td class="k">Toutes les dates</td><td>Aucun filtre (par défaut).</td></tr>
+    <tr><td class="k">Entre deux dates</td><td>« du JJ/MM/AAAA au JJ/MM/AAAA », bornes comprises.</td></tr>
+    <tr><td class="k">De mois à mois</td><td>Du premier jour du premier mois au dernier jour du second.</td></tr>
+    <tr><td class="k">D'année à année</td><td>De l'année de début à l'année de fin comprise.</td></tr>
+  </table>
+  <table>
+    <tr><th style="width:28%">Onglet</th><th>Date utilisée pour le filtre</th></tr>
+    <tr><td class="k">Emprunter</td><td>Date de remise de l'emprunt</td></tr>
+    <tr><td class="k">Restituer et Matériel perdu</td><td>Date de retour ou date de la déclaration</td></tr>
+    <tr><td class="k">Attestations</td><td>Date d'envoi</td></tr>
+    <tr><td class="k">Archives PDF</td><td>Date de signature</td></tr>
+    <tr><td class="k">Activités récentes</td><td>Date de l'événement</td></tr>
+  </table>
+  <p>Le bouton <span class="btn">Réinitialiser</span> apparaît dès qu'un filtre est actif. Les indicateurs et compteurs de l'onglet suivent la période choisie.</p>
+
+  <h2 id="s411" style="break-before:page;">4.11 Codes QR et scanner</h2>
+  <p><b>Objectif :</b> retrouver un équipement en quelques secondes, et l'identifier physiquement.</p>
+  <figure class="narrow"><img src="images/scan.png" alt="Scanner un QR" style="width:62%;"><figcaption>Figure 14 — Scanner un QR : caméra, photo du QR ou saisie du code</figcaption></figure>
+  <table>
+    <tr><th style="width:28%">Fonction</th><th>Comportement</th></tr>
+    <tr><td class="k"><span class="btn">Étiquettes QR du matériel (PDF)</span></td><td>Dans la fiche d'une personne (Emprunter ou Restituer) : génère un PDF A4 de 24 étiquettes par page (3 × 8), prêtes à imprimer et coller sur le matériel. Chaque étiquette porte le QR, le libellé, le code (par exemple AP-1), le nom de la personne et la date.</td></tr>
+    <tr><td class="k"><span class="btn">Scanner un QR</span></td><td>Bouton en bas du menu latéral (aussi sur l'Accueil). Trois façons d'identifier un équipement : la <b>caméra</b> de l'appareil, une <b>photo</b> du QR, ou la <b>saisie du code</b> (ex. AP-1 ou numéro de série).</td></tr>
+    <tr><td class="k">Résultat</td><td>L'équipement, la personne concernée et son <b>état</b> : disponible, emprunté chez la personne, restitution en attente de signature, ou déclaré perdu, volé ou abîmé ; boutons <span class="btn p">Prêter maintenant</span> (équipement disponible) ou <span class="btn p">Restituer ce matériel</span> (équipement emprunté), <span class="btn">Ouvrir la fiche</span> et <span class="btn">Scanner un autre QR</span> : le scan rapide est décrit au § 4.23.</td></tr>
+  </table>
+  <p>Les bibliothèques de lecture (jsQR) et de dessin des codes (qrcode-generator) sont chargées à la demande depuis un CDN (§ 7.1).</p>
+
+  <h2 id="s412">4.12 Fiche personne et commentaires</h2>
+  <ul>
+    <li>La fiche s'ouvre dans une fenêtre (dans un panneau à droite de la liste sur un écran de 1 480 px ou plus, § 4.23) ; fermeture par la croix, <code>Échap</code> ou un clic à côté. Un clic sur l'email ou le téléphone le copie.</li>
+    <li>Elle affiche les compteurs (restitués, à signer, perdus), le matériel et les historiques, avec l'auteur de chaque action (« enregistrée par vous »).</li>
+    <li><b>Commentaires</b> : fil horodaté propre à chaque personne ; chaque message porte son auteur, la date et l'heure ; chacun peut modifier ses propres commentaires ; un brouillon en cours n'est jamais effacé.</li>
+    <li><b>Recherche d'une autre personne</b> : le champ en haut de la fiche (nom, fonction, email ou code d'équipement) propose jusqu'à 8 personnes ; un clic ouvre la fiche choisie dans le même onglet, avec une confirmation si du matériel coché n'est pas enregistré. <code>Échap</code> vide le champ.</li>
+  </ul>
+  <figure><img src="images/fiche.png" alt="Fiche avec recherche d'une autre personne" style="width:78%; margin:0 auto;"><figcaption>Figure 15 — Fiche d'une personne : compteurs et recherche d'une autre personne</figcaption></figure>
+
+  <h2 id="s413" style="break-before:page;">4.13 Envoi des messages : Outlook et SMS</h2>
+  <p>Une page publiée dans Claude ne peut ni ouvrir directement Outlook ni envoyer de SMS : l'application passe par le connecteur Microsoft 365 (brouillon ou envoi depuis la boîte de l'utilisateur) et par les applications de l'appareil.</p>
+  <table>
+    <tr><th style="width:34%">Situation</th><th>Résultat</th></tr>
+    <tr><td class="k">Connecteur « MS 365 » connecté et autorisé</td><td><b>Brouillon Outlook</b> créé dans la boîte de l'utilisateur, adressé au destinataire choisi (voir ci-dessous), avec l'attestation PDF jointe. La fenêtre <b>Message prêt à envoyer</b> indique où le trouver (dossier Brouillons) et propose de <b>télécharger le message (.eml)</b> à ouvrir dans Outlook, ou de copier le lien du brouillon. Rien n'est envoyé avant le clic sur Envoyer dans Outlook.</td></tr>
+    <tr><td class="k">Connecteur absent, expiré, refusé</td><td>La même fenêtre propose le fichier <b>.eml</b> (message adressé, PDF joint) et indique la raison de l'échec.</td></tr>
+    <tr><td class="k">Page ouverte hors de Claude</td><td>Pas de connecteur : la messagerie par défaut s'ouvre sur le message préparé et le PDF est téléchargé pour être joint.</td></tr>
+    <tr><td class="k">Pourquoi Outlook ne s'ouvre pas tout seul</td><td>Outlook sur le web refuse de s'afficher dans une fenêtre ouverte depuis une page publiée dans Claude (le navigateur affiche « ERR_BLOCKED_BY_RESPONSE »). L'application n'essaie donc plus cette ouverture : elle dépose le message en brouillon et propose le fichier .eml.</td></tr>
+    <tr><td class="k">SMS</td><td>Ouvre l'application de messages avec le texte prêt, vers le numéro de test <code>SMS_TEST_NUMBER</code> (06 95 17 58 74).</td></tr>
+  </table>
+  <h3>Choisir le destinataire de l'attestation de restitution</h3>
+  <div class="cols">
+    <div>
+      <p>Dans l'aperçu qui précède l'envoi (§ 4.6), le bloc <b>Destinataire du message</b> propose deux choix :</p>
+      <ul>
+        <li><b>Adresse enregistrée</b> : celle de la fiche (annuaire Microsoft 365), cochée par défaut ;</li>
+        <li><b>Une autre adresse, saisie à la main</b> : pour une personne sans compte professionnel (adresse personnelle ou externe). Une adresse vide ou invalide est refusée ; le choix est automatique si la fiche n'a aucune adresse.</li>
+      </ul>
+      <p>L'adresse choisie est <b>conservée avec l'attestation</b> (<code>mailTo</code>) : elle sert au brouillon Outlook, au message de repli (.eml ou messagerie), à la relance et au message d'attestation signée (§ 4.20) ; l'historique indique « Envoyée par email à … ».</p>
+    </div>
+    <div><figure style="margin:0;"><img src="images/rcp.png" alt="Aperçu avec choix du destinataire"><figcaption>Figure 16 — Aperçu de l'attestation : choix du destinataire, adresse saisie à la main</figcaption></figure></div>
+  </div>
+  <div class="box warn"><b class="t">Point de vigilance</b>La création du brouillon et l'envoi ont été testés avec un connecteur simulé ; le premier essai réel avec un compte Microsoft 365 doit être contrôlé (cas CR-12 et CR-37 du plan de recette). Pour l'attestation signée, voir le § 4.20.</div>
+
+  <h2 id="s414" style="break-before:page;">4.14 Apparence : thèmes et couleurs</h2>
+  <p>Le bouton en bas du menu latéral (« Thème système » par défaut) ouvre le panneau <b>Apparence</b>.</p>
+  <div class="cols">
+    <div><figure><img src="images/themes.png" alt="Panneau Apparence"><figcaption>Figure 17 — Panneau Apparence : douze thèmes et sept couleurs d'accent</figcaption></figure></div>
+    <div>
+      <table>
+        <tr><th style="width:30%">Réglage</th><th>Choix</th></tr>
+        <tr><td class="k">Thème</td><td>Système (suit l'appareil) · Clair · Sombre · Minuit · Ardoise · Noir · Océan · Forêt · Crème · Contraste (noir sur blanc, pour un confort de lecture maximal) · <b>eXalt</b> (clair) · <b>eXalt nuit</b> (fond bleu profond).</td></tr>
+        <tr><td class="k">Couleur d'accent</td><td>Orange (défaut) · Bleu · Violet · Turquoise · Rose · Graphite · <b>eXalt</b> (bleu de la charte, #5853FF). Appliquée aux boutons, filtres actifs, liens et menu sélectionné.</td></tr>
+      </table>
+      <p>Les thèmes eXalt appliquent la charte de l'entreprise : bleu eXalt, police <b>Poppins</b> et symbole eXalt (menu et PDF d'attestation) ; choisir l'un d'eux sélectionne aussi la couleur d'accent eXalt. Les captures de ce dossier sont en thème « eXalt nuit ».</p>
+      <p>Le choix est mémorisé <b>dans le navigateur de chaque personne</b> : il n'est ni partagé entre collègues ni synchronisé entre appareils. Le rouge et le vert ne sont pas proposés comme accents, car ils signalent « perdu » et « signé ».</p>
+    </div>
+  </div>
+  <h2 id="s415" style="break-before:page;">4.15 Recherche rapide et raccourcis</h2>
+  <p><b>Objectif :</b> trouver une personne, un équipement ou une page sans parcourir les listes.</p>
+  <div class="cols">
+    <div>
+      <table>
+        <tr><th style="width:30%">Élément</th><th>Comportement</th></tr>
+        <tr><td class="k"><span class="btn">Rechercher</span></td><td>Bouton visible en haut de chaque page (en premier sur l'Accueil). Raccourci : <code>Ctrl K</code>.</td></tr>
+        <tr><td class="k">Liste de départ (champ vide)</td><td><b>À traiter</b> : jusqu'à quatre lignes chiffrées (retours en retard, attestations à relancer ou en attente, PDF à archiver, matériel à restituer), un clic ouvre la page déjà filtrée · <b>Activité récente</b> : les quatre dernières personnes dont la fiche a bougé · <b>Aller à</b> (sept onglets) · <b>Actions</b>.</td></tr>
+        <tr><td class="k">Personnes</td><td>Une seule ligne par personne : avatar, fonction et repère (« En retard », « 8 à rendre », « Signature en attente »). <b>Entrée</b> ouvre l'action la plus utile (Restituer s'il y a du matériel à rendre ou une attestation en attente, sinon Emprunter) ; <b>Maj + Entrée</b> ouvre l'autre ; deux boutons cliquables apparaissent sur la ligne active.</td></tr>
+        <tr><td class="k">Équipement</td><td>Un code (ex. AP-1) ou un numéro de série affiche l'équipement, son état et ouvre la fiche de la personne (Restituer s'il est emprunté, Emprunter sinon).</td></tr>
+        <tr><td class="k">Pages et actions</td><td>Les sept onglets, Scanner un QR, Apparence, Raccourcis clavier, Visite guidée, Générer un rapport, et Rôles et accès pour un administrateur.</td></tr>
+        <tr><td class="k">Confort</td><td>Texte cherché surligné (sans tenir compte des accents), titres de groupes qui restent visibles, survol qui suit la ligne active, plein écran sur téléphone.</td></tr>
+        <tr><td class="k">Clavier</td><td>↑ ↓ pour parcourir, Entrée pour ouvrir, Maj + Entrée pour l'autre action, Échap, la croix ou un clic à côté pour fermer.</td></tr>
+      </table>
+    </div>
+    <div><figure style="margin:0;"><img src="images/cmdk.png" alt="Recherche rapide"><figcaption>Figure 18 — Recherche rapide : liste de départ (À traiter, Activité récente, Aller à)</figcaption></figure><figure style="margin:0;"><img src="images/cmdksearch.png" alt="Recherche rapide : résultats"><figcaption>Figure 19 — Résultats pour « bert » : une ligne par personne, texte surligné</figcaption></figure></div>
+  </div>
+  <div class="cols">
+    <div><figure style="margin:0;"><img src="images/keys.png" alt="Aide clavier"><figcaption>Figure 20 — Aide clavier (touche ?)</figcaption></figure></div>
+    <div>
+      <table>
+        <tr><th style="width:36%">Raccourci</th><th>Action</th></tr>
+        <tr><td class="k"><code>Ctrl K</code></td><td>Recherche rapide</td></tr>
+        <tr><td class="k"><code>Maj</code> + <code>Entrée</code></td><td>Dans la recherche rapide : l'autre action sur une personne</td></tr>
+        <tr><td class="k"><code>1</code> à <code>7</code></td><td>Changer d'onglet</td></tr>
+        <tr><td class="k"><code>/</code></td><td>Chercher dans la liste de l'onglet</td></tr>
+        <tr><td class="k"><code>Alt ←</code> <code>Alt →</code></td><td>Personne précédente ou suivante dans une fiche</td></tr>
+        <tr><td class="k"><code>Échap</code></td><td>Effacer la recherche, fermer une fenêtre</td></tr>
+        <tr><td class="k"><code>?</code></td><td>Afficher l'aide clavier</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <h2 id="s416" style="break-before:page;">4.16 Rapports PDF et Excel</h2>
+  <p><b>Objectif :</b> produire en un clic un état à partager (direction, audit), <b>propre à la page où l'on se trouve</b> : chaque page propose son rapport.</p>
+  <div class="cols">
+    <div>
+      <ol>
+        <li>Cliquer sur <span class="btn">Rapport</span>, en haut à droite de la page voulue, à côté de <span class="btn">Rechercher</span> : Accueil, Emprunter, Restituer, Attestations, Archives PDF ou Matériel perdu (la recherche rapide, « Générer un rapport », prend la page affichée).</li>
+        <li>Choisir la <b>période d'activité</b> : toutes les dates, ce mois-ci, mois précédent, cette année, ou entre deux dates. La situation du parc est toujours celle du jour.</li>
+        <li>Choisir le <b>format</b> : deux cartes, <b>PDF</b> (à lire, imprimer ou envoyer) ou <b>Excel</b> (tableaux à filtrer) ; le dernier choix est mémorisé.</li>
+        <li>Cliquer sur <span class="btn p">Générer le rapport</span>, puis confirmer le téléchargement ; ou sur <span class="btn">Envoyer par email</span> (voir ci-dessous). Un indicateur tourne pendant la préparation.</li>
+      </ol>
+      <p>Nom des fichiers : <code>rapport_gpiexalt_&lt;page&gt;_AAAA-MM-JJ.pdf</code> ou <code>.xlsx</code>, où &lt;page&gt; vaut <code>emprunts</code>, <code>restitutions</code>, <code>attestations</code>, <code>archives</code> ou <code>perdu</code> (l'Accueil produit <code>rapport_gpiexalt_AAAA-MM-JJ</code>). Les rapports sont créés dans le navigateur (bibliothèques jsPDF et autotable pour le PDF, ExcelJS pour Excel, chargées à la demande).</p>
+      <div class="box"><b class="t">Droits</b>Les rapports et les exports CSV sont réservés aux rôles Administrateur full, Super utilisateur et Lecteur ; ils sont masqués pour un Agent IT et absents de la vue d'un collaborateur.</div>
+    </div>
+    <div><figure style="margin:0;"><img src="images/reportmodal.png" alt="Fenêtre Générer un rapport"><figcaption>Figure 21 — Fenêtre « Générer un rapport » (Accueil) : période, format, envoi par email</figcaption></figure></div>
+  </div>
+  <div class="cols">
+    <div>
+      <h3>Contenu du PDF (rapport complet de l'Accueil)</h3>
+      <ul>
+        <li>Bandeau d'en-tête : date de génération, auteur, période.</li>
+        <li>Trois lignes d'indicateurs : situation du parc, attestations, activité sur la période.</li>
+        <li>Parc par type de matériel avec barre de répartition.</li>
+        <li>Attestations à traiter (les plus anciennes d'abord, « À relancer » en rouge), signatures, pertes et emprunts de la période.</li>
+        <li>Situation de chaque personne ; pied de page numéroté.</li>
+      </ul>
+      <h3>Classeur Excel (rapport complet : 8 feuilles)</h3>
+      <p>Synthèse · Par type · À traiter · Attestations · Signatures · Pertes · Emprunts · Par personne. En-têtes colorés, première ligne figée, filtres sur chaque colonne, largeurs adaptées.</p>
+    </div>
+    <div><figure style="margin:0;"><img src="images/reportpdf.png" alt="Première page du rapport PDF"><figcaption>Figure 22 — Première page d'un rapport PDF</figcaption></figure></div>
+  </div>
+  <h3>Le rapport selon la page</h3>
+  <div class="cols">
+    <div>
+      <table>
+        <tr><th style="width:24%">Page</th><th>Contenu du rapport</th></tr>
+        <tr><td class="k">Accueil</td><td>Rapport complet : parc par type, attestations à traiter, signatures, pertes, emprunts, situation de chaque personne.</td></tr>
+        <tr><td class="k">Emprunter</td><td>Indicateurs de remise, emprunts de la période avec leur retour prévu et son état (rendu, dans N j, en retard), matériel à remettre par personne.</td></tr>
+        <tr><td class="k">Restituer</td><td>Indicateurs, <b>retours en retard</b>, <b>retours prévus</b> par échéance, parc par type, situation de chaque personne.</td></tr>
+        <tr><td class="k">Attestations</td><td>Indicateurs, attestations à traiter, envoyées et signées de la période.</td></tr>
+        <tr><td class="k">Archives PDF</td><td>Indicateurs, PDF signés à archiver, signatures de la période avec l'état de l'archive.</td></tr>
+        <tr><td class="k">Matériel perdu</td><td>Indicateurs, pertes par type, déclarations de la période (matériel, personne, motif, date).</td></tr>
+      </table>
+      <p>La fenêtre reprend le titre de la page (« Rapport des archives PDF ») et décrit son contenu ; la période s'applique à l'activité de la page, les situations (parc, attestations en attente) sont celles d'aujourd'hui. Le classeur Excel contient les feuilles correspondantes (par exemple « Retours en retard » et « Retours prévus » pour Restituer).</p>
+    </div>
+    <div><figure style="margin:0;"><img src="images/reportpage.png" alt="Fenêtre du rapport des archives PDF"><figcaption>Figure 23 — Fenêtre du rapport d'une page (Archives PDF)</figcaption></figure><figure style="margin:0;"><img src="images/reportreturn.png" alt="Rapport des restitutions"><figcaption>Figure 24 — Rapport des restitutions : retours en retard et retours prévus</figcaption></figure></div>
+  </div>
+  <h3>Envoyer le rapport par email</h3>
+  <div class="cols">
+    <div>
+      <p>Le bouton <span class="btn">Envoyer par email</span> ouvre une fenêtre (la période et le format choisis sont repris) :</p>
+      <ul>
+        <li><b>Destinataire(s)</b> : champ vide, à saisir à la main (jusqu'à 10 adresses séparées par une virgule). Dès 2 lettres d'un nom, une liste de <b>suggestions</b> apparaît : personnes de GPIEXALT, puis comptes de l'annuaire Microsoft 365 ; flèches et Entrée (ou Tab), ou clic, pour choisir.</li>
+        <li><b>Objet</b> et <b>message</b> préremplis (date, format, période, nom de l'expéditeur), modifiables. Le sujet reprend le titre de la page (« Rapport du matériel perdu du JJ/MM/AAAA ») et la pièce jointe est indiquée (<code>rapport_gpiexalt_&lt;page&gt;_AAAA-MM-JJ.pdf</code> ou <code>.xlsx</code>).</li>
+        <li><span class="btn p">Envoyer maintenant</span> : le message part de la boîte Outlook de l'utilisateur et reste dans les éléments envoyés ; <span class="btn">Créer un brouillon</span> : le message est déposé dans les Brouillons ; <span class="btn">Télécharger le message</span> : fichier .eml à ouvrir dans Outlook (seul choix sans connecteur) ; <span class="btn">Annuler</span> : retour à la fenêtre du rapport.</li>
+      </ul>
+      <p>Une adresse vide ou invalide est refusée. Au-delà de <b>2,9 Mo</b>, l'envoi direct est refusé (limite de Microsoft Graph) : télécharger le rapport et le joindre à un message. Rien ne part sans le clic sur « Envoyer maintenant ».</p>
+    </div>
+    <div><figure style="margin:0;"><img src="images/reportmail.png" alt="Envoyer le rapport par email"><figcaption>Figure 25 — Envoi du rapport par email : suggestions de destinataires</figcaption></figure></div>
+  </div>
+
+  <h2 id="s417" style="break-before:page;">4.17 Rôles et accès, vue « Mon matériel »</h2>
+  <p><b>Objectif :</b> donner à chacun les droits qui correspondent à sa fonction, et permettre aux collaborateurs de consulter leur propre matériel.</p>
+  <h3>Deux niveaux complémentaires</h3>
+  <ul>
+    <li><b>Le partage de la page</b> (menu Partager) décide qui peut ouvrir l'application et avec quel niveau : « Peut consulter », « Peut interagir » ou « Peut modifier ». C'est la limite appliquée par la plateforme.</li>
+    <li><b>Le rôle</b> précise ce que l'application affiche et autorise. Il s'attribue dans l'écran « Rôles et accès » (menu, section Administration), réservé aux administrateurs.</li>
+  </ul>
+  <table>
+    <tr><th style="width:19%">Rôle</th><th>Ce que la personne voit et fait</th><th style="width:20%">Partage requis</th><th style="width:16%">Garantie</th></tr>
+    <tr><td class="k">Administrateur full</td><td>Tout, y compris « Rôles et accès ».</td><td>Peut modifier</td><td>Plateforme</td></tr>
+    <tr><td class="k">Super utilisateur</td><td>Toutes les opérations (prêts, restitutions, signatures, pertes), rapports PDF et Excel, exports. Rôle par défaut d'une personne qui peut interagir.</td><td>Peut interagir</td><td>Affichage</td></tr>
+    <tr><td class="k">Agent IT</td><td>Opérations courantes : prêts, restitutions, attestations, signatures. Ni déclaration de perte, ni rapports, ni exports.</td><td>Peut interagir</td><td>Affichage</td></tr>
+    <tr><td class="k">Lecteur</td><td>Tous les écrans et les rapports, sans aucune saisie.</td><td>Peut interagir</td><td>Affichage</td></tr>
+    <tr><td class="k">Collaborateur</td><td>Uniquement « Mon matériel », en consultation seule.</td><td>Peut consulter</td><td>Plateforme</td></tr>
+  </table>
+  <p>Une pastille en bas du menu rappelle le nom et le rôle de la personne connectée (photo ou initiales).</p>
+  <div class="cols">
+    <div>
+      <h3>Attribuer un accès</h3>
+      <ol>
+        <li>Partager la page avec la personne, au niveau indiqué ci-dessus.</li>
+        <li>Ouvrir <b>Rôles et accès</b>, chercher la personne par <b>prénom et nom</b> (ou email) : « Marie Dupont », « Dupont Marie » ou le début des mots (« mar dup ») trouvent la même personne ; les résultats affichent le <b>nom complet</b>, mots tapés surlignés (12 au plus). Choisir son rôle.</li>
+        <li>Pour un collaborateur, la fiche est <b>retrouvée automatiquement</b> (nom identique) ; le choix manuel n'apparaît qu'en cas d'échec. Enregistrer.</li>
+      </ol>
+      <p><b>Tous les utilisateurs</b> : cette option rattache d'un coup chaque fiche au compte correspondant (adresse email, puis nom exact). Elle ne modifie jamais un rôle attribué à la main et peut être relancée pour les nouvelles fiches ; un bilan liste les fiches sans compte trouvé.</p>
+      <p>Personne introuvable : elle ouvre l'application ; son écran « Compte non rattaché » affiche un identifiant à copier, que l'administrateur colle dans le champ de recherche.</p>
+    </div>
+    <div><figure style="margin:0;"><img src="images/roles.png" alt="Rôles et accès"><figcaption>Figure 26 — Écran « Rôles et accès » : recherche par prénom et nom</figcaption></figure></div>
+  </div>
+  <div class="cols">
+    <div><figure style="margin:0;"><img src="images/mine.png" alt="Mon matériel"><figcaption>Figure 27 — Vue « Mon matériel » d'un collaborateur</figcaption></figure></div>
+    <div>
+      <h3>La vue « Mon matériel »</h3>
+      <ul>
+        <li>Quatre indicateurs : matériel chez moi, en attente de signature, restitués et signés, perdu, volé ou abîmé.</li>
+        <li>Liste du matériel avec son état, mes attestations, mes prêts, mes pertes déclarées.</li>
+        <li>Aucune saisie ni signature : pour toute modification, contacter le service informatique.</li>
+        <li>Un compte non rattaché voit le message « Compte non rattaché » et son identifiant à communiquer.</li>
+      </ul>
+    </div>
+  </div>
+  <h3>Protection des données</h3>
+  <table>
+    <tr><th style="width:26%">Chemin dans la base</th><th>Contenu</th><th style="width:30%">Lecture · écriture</th></tr>
+    <tr><td class="k"><code>people</code>, <code>documents</code></td><td>Fiches, historiques, PDF signés.</td><td>Interagir · interagir</td></tr>
+    <tr><td class="k"><code>roles/&lt;compte&gt;</code></td><td>Rôle et fiche rattachée de chaque personne.</td><td>Administrateur · administrateur (chacun lit le sien)</td></tr>
+    <tr><td class="k"><code>links/&lt;fiche&gt;</code></td><td>Compte rattaché à une fiche.</td><td>Interagir · administrateur</td></tr>
+    <tr><td class="k"><code>mine/&lt;compte&gt;</code></td><td>Résumé personnel d'un collaborateur, tenu à jour à chaque action sur sa fiche.</td><td>Interagir · interagir (chacun lit le sien)</td></tr>
+    <tr><td class="k"><code>directory/meta</code>, <code>directory/chunk-N</code></td><td>Annuaire importé (nom, fonction, email, mobile, identifiant, code).</td><td>Interagir · interagir</td></tr>
+  </table>
+  <div class="box warn"><b class="t">Limites</b>Les rôles Agent IT et Lecteur sont des restrictions d'affichage : seul « Peut consulter » interdit techniquement toute écriture. La recherche de personnes ne trouve que les membres de l'organisation qui ont un compte Claude (12 résultats au plus ; le moteur de recherche est celui de la plateforme). Tant que l'annuaire n'est pas importé (§ 4.19), 15 personnes de démonstration sont proposées. La sécurité complète pour tous les collaborateurs passera par Entra ID et SharePoint (§ 11).</div>
+
+  <h2 id="s418" style="break-before:page;">4.18 Confort d'utilisation</h2>
+  <div class="cols">
+    <div>
+      <table>
+        <tr><th style="width:34%">Fonction</th><th>Comportement</th></tr>
+        <tr><td class="k">Recherche collante</td><td>Le champ de recherche reste visible en haut pendant le défilement ; un bouton « effacer » apparaît dès qu'il y a du texte.</td></tr>
+        <tr><td class="k">Saisie directe</td><td>Un clic de souris sur un onglet de liste place le curseur dans la recherche (les raccourcis 1 à 7 gardent leur effet).</td></tr>
+        <tr><td class="k">Filtres actifs</td><td>Une pastille « N filtres actifs · Réinitialiser » s'affiche au-dessus de chaque liste ; un bouton de réinitialisation apparaît aussi dans les états vides.</td></tr>
+        <tr><td class="k">Fiche précédente / suivante</td><td>Flèches à côté de la croix, ou <code>Alt ←</code> / <code>Alt →</code> : on traite plusieurs personnes à la suite sans fermer la fiche.</td></tr>
+        <tr><td class="k">Sélection non enregistrée</td><td>Fermer la fiche ou changer de personne avec du matériel coché demande une confirmation.</td></tr>
+        <tr><td class="k">Dates rapides</td><td>Liens « Aujourd'hui » et « Hier » sous les champs de date (remise, retour, signature).</td></tr>
+        <tr><td class="k">Messages</td><td>Les erreurs et refus s’affichent avec une icône d’alerte et un liseré rouge.</td></tr>
+      </table>
+    </div>
+    <div><figure style="margin:0;"><img src="images/return.png" alt="Fiche avec navigation et dates rapides" style="width:58%;"><figcaption>Figure 28 — Fiche : flèches précédent / suivant, dates rapides, étapes</figcaption></figure></div>
+  </div>
+  <table>
+    <tr><th style="width:26%">Fonction</th><th>Comportement</th></tr>
+    <tr><td class="k">Densité d'affichage</td><td>Choix « Confortable » ou « Compacte » dans le panneau Apparence : la version compacte affiche davantage de lignes à l'écran ; préférence propre au navigateur.</td></tr>
+    <tr><td class="k">Date et lieu</td><td>En haut à droite de chaque page : jour, date, ville et pays. Lieu déduit du fuseau horaire du navigateur (aucune géolocalisation), modifiable par <code>LOCATION_OVERRIDE</code>.</td></tr>
+    <tr><td class="k">Chargement</td><td>Une fine barre de progression défile en haut de l’écran pendant le chargement et la création d’un rapport ; les chiffres des indicateurs s’animent à leur apparition.</td></tr>
+    <tr><td class="k">Enregistrer sans sélection</td><td>Le bouton « Enregistrer » d'un emprunt reste cliquable : sans équipement coché, un message demande de cocher le matériel et la phrase d'aide se met en évidence.</td></tr>
+    <tr><td class="k">Enregistrement en cours</td><td>Le bouton affiche un indicateur ; un second clic affiche « Enregistrement en cours » au lieu de créer un doublon.</td></tr>
+    <tr><td class="k">Erreur d'enregistrement</td><td>Un message rouge « Enregistrement impossible : … » donne la raison ; la modification n'est pas conservée.</td></tr>
+    <tr><td class="k">Diagnostic</td><td>L'aide (touche <code>?</code>) affiche la version, le rôle, l'état de la base et du connecteur, le nombre de personnes et les dernières erreurs.</td></tr>
+    <tr><td class="k">Liste vide</td><td>Attestations sans aucune attestation : le message explique comment en créer une et propose « Aller à Restituer ».</td></tr>
+    <tr><td class="k">Visite guidée</td><td>Six étapes proposées à la première ouverture (menu, recherche, indicateurs, apparence) ; à relancer depuis l’aide (?) ou la recherche rapide.</td></tr>
+    <tr><td class="k">Impression</td><td>Un onglet s’imprime en noir sur blanc, sans menu ni boutons.</td></tr>
+    <tr><td class="k">Accessibilité</td><td>Focus géré dans les fenêtres, messages annoncés aux lecteurs d’écran, animations réduites si le système le demande.</td></tr>
+  </table>  <h2 id="s419" style="break-before:page;">4.19 Annuaire Microsoft 365 : importer les utilisateurs</h2>
+  <p><b>Objectif :</b> proposer dans Emprunter et Restituer les collaborateurs réels de l'organisation (comptes Entra ID) à la place des 15 personnes de démonstration. Fonction réservée aux administrateurs, dans l'écran « Rôles et accès ».</p>
+  <figure><img src="images/dir.png" alt="Carte Annuaire Microsoft 365" style="width:80%; margin:0 auto;"><figcaption>Figure 29 — Carte « Annuaire Microsoft 365 (Entra ID) » : recherche de personnes et de groupe, pastilles, bouton d'import</figcaption></figure>
+  <table>
+    <tr><th style="width:26%">Mode d'import</th><th>Comportement</th></tr>
+    <tr><td class="k">Tout l'annuaire</td><td>Bouton <span class="btn p">Importer tout l'annuaire</span> (puis « Synchroniser tout l'annuaire »). Lit les comptes <b>actifs</b>, de type <b>membre</b> (pas les invités), ayant une <b>adresse email</b>. Le connecteur lisant 999 comptes au plus à la fois, l'application lit par tranches (première lettre de l'identifiant) au-delà.</td></tr>
+    <tr><td class="k">Quelques personnes (essai)</td><td>Champ « Limiter à quelques personnes » : recherche par nom ou email (8 résultats). Chaque choix devient une pastille ; le bouton devient <span class="btn p">Importer les N personnes choisies</span>.</td></tr>
+    <tr><td class="k">Un groupe Entra ID</td><td>Champ « ou importer les membres d'un groupe » : recherche du groupe par nom ; le bouton devient <span class="btn p">Importer le groupe « … »</span>. Les membres actifs avec email, hors invités, sont importés. <b>Limite : moins de 999 membres</b> ; au-delà (par exemple le groupe « Tous les utilisateurs »), l'application refuse et propose un groupe plus petit ou l'import de tout l'annuaire.</td></tr>
+  </table>
+  <h3>Après l'import</h3>
+  <ul>
+    <li>Une fenêtre de confirmation résume ce qui va être importé (nombre, noms pour une sélection, personnes déjà importées qui ne seront plus proposées).</li>
+    <li><b>Données copiées depuis Entra ID</b> : nom, fonction (ou service à défaut), email, mobile. Rien n'est écrit dans Entra ID : l'import est une lecture.</li>
+    <li>Chaque personne reçoit le <b>kit standard de 9 équipements</b>, sans emprunt, et un code d'équipement dérivé de ses initiales (AD, AD2, …). Le code et le numéro de la personne restent stables d'une synchronisation à l'autre.</li>
+    <li><b>Synchroniser à nouveau</b> ajoute les arrivées ; les emprunts déjà enregistrés sont conservés. Un compte retiré de l'annuaire reste listé avec la mention « compte retiré de l'annuaire » : un départ avec du matériel encore dehors doit pouvoir être restitué.</li>
+    <li>En mode sélection ou groupe, les autres personnes déjà importées ne sont plus proposées ; leurs données, comme celles de la démonstration, restent dans la base.</li>
+  </ul>
+  <div class="box warn"><b class="t">Limites</b>Le <b>parc réel n'est pas importé</b> : le connecteur Microsoft 365 ne donne pas accès à Intune ; le matériel de chaque personne est un kit standard. L'annuaire importé contient des <b>données personnelles</b> de collaborateurs, lisibles par toute personne qui peut utiliser la page (§ 7.4) : à valider avec le DPO avant un import complet. Seule l'interface réserve l'import aux administrateurs (§ 7.3). Le rattachement des comptes collaborateurs à leur fiche reste celui du § 4.17.</div>
+
+  <h2 id="s420" style="break-before:page;">4.20 Envoyer l'attestation signée par email</h2>
+  <p><b>Objectif :</b> envoyer au collaborateur, juste après la signature, un message avec l'attestation signée en pièce jointe.</p>
+  <div class="cols">
+    <div>
+      <ol>
+        <li>Valider la signature (§ 4.5) ; la signature est enregistrée et le PDF archivé.</li>
+        <li>La fenêtre <b>« Envoyer l'attestation signée ? »</b> s'ouvre (connecteur Microsoft 365 autorisé et adresse email connue). Elle montre le destinataire, l'objet, le nom du PDF joint et le texte.</li>
+        <li>Choisir :
+          <ul>
+            <li><span class="btn p">Envoyer maintenant</span> : le message part de la boîte Outlook de l'utilisateur, avec le PDF signé, et est copié dans les éléments envoyés ; la date d'envoi est enregistrée sur l'attestation (<code>signedMailAt</code>) ;</li>
+            <li><span class="btn">Modifier</span> : l'objet et le texte deviennent modifiables (ils ne peuvent pas être vides) ; le destinataire et le PDF ne se modifient pas ici ; <span class="btn">Terminer la modification</span> remet l'aperçu à jour ;</li>
+            <li><span class="btn">Créer un brouillon</span> : le message (modifié le cas échéant) est déposé dans le dossier Brouillons d'Outlook ; la fenêtre « Message prêt à envoyer » propose le fichier .eml et le lien du brouillon (§ 4.13) ;</li>
+            <li><span class="btn">Ne pas envoyer</span> : la signature reste enregistrée, aucun message ne part.</li>
+          </ul>
+        </li>
+      </ol>
+    </div>
+    <div><figure style="margin:0;"><img src="images/sendmail.png" alt="Fenêtre Envoyer l'attestation signée"><figcaption>Figure 30 — Fenêtre « Envoyer l'attestation signée ? »</figcaption></figure></div>
+  </div>
+  <table>
+    <tr><th style="width:34%">Situation</th><th>Résultat</th></tr>
+    <tr><td class="k">Connecteur absent, expiré ou refusé</td><td>La fenêtre « Message prêt à envoyer » propose le fichier .eml (message adressé, PDF signé joint) à ouvrir dans Outlook.</td></tr>
+    <tr><td class="k">Envoi impossible</td><td>La fenêtre reste ouverte avec la raison ; l'utilisateur peut créer un brouillon à la place.</td></tr>
+    <tr><td class="k">Collaborateur sans adresse email</td><td>Aucune proposition d'envoi.</td></tr>
+    <tr><td class="k">Annuler la signature</td><td>Le bouton Annuler du message de confirmation n'annule pas un message déjà envoyé.</td></tr>
+  </table>
+  <div class="box warn"><b class="t">Point de vigilance</b>Le destinataire est l'adresse de l'annuaire, ou celle saisie à la main lors de l'envoi de l'attestation de restitution (§ 4.13) : la contrôler dans la fenêtre avant d'envoyer, surtout pendant les essais avec de vrais collaborateurs. L'envoi réel avec un compte Microsoft 365 reste à éprouver (cas CR-37). Le texte type figure en annexe C.</div>
+
+  <h2 id="s421" style="break-before:page;">4.21 Date de retour prévue et alertes de retard</h2>
+  <p><b>Objectif :</b> savoir à quelle date chaque personne doit rendre son matériel, et être alerté lorsque cette date est dépassée. La date est <b>facultative</b> : sans date, l'emprunt se comporte comme avant.</p>
+  <div class="cols">
+    <div>
+      <h3>Programmer le retour</h3>
+      <ol>
+        <li>Dans la fiche d'emprunt (§ 4.2), cocher le matériel puis renseigner <b>Retour prévu le (facultatif)</b> : calendrier, ou pastilles + 1 semaine, + 1 mois, + 3 mois (comptées à partir de la date de remise) ; <span class="btn">Effacer</span> vide le champ.</li>
+        <li>Une date antérieure à celle de l'emprunt est refusée avec un message.</li>
+        <li><span class="btn p">Enregistrer</span>, en bas à droite de la carte : la date est conservée avec l'emprunt (<code>due</code>) et rappelée dans le message de confirmation.</li>
+      </ol>
+      <p>Elle apparaît ensuite dans l'historique des emprunts (« retour prévu le … »), sur chaque équipement détenu (pastille « À rendre le … · dans N j », orangée à 3 jours ou moins, puis rouge « en retard de N j »), dans Restituer et dans le résultat d'un scan.</p>
+    </div>
+    <div><figure style="margin:0;"><img src="images/duedate.png" alt="Champ Retour prévu le"><figcaption>Figure 31 — Fiche d'emprunt : carte « Retour prévu le (facultatif) », pastilles et bouton Enregistrer</figcaption></figure></div>
+  </div>
+  <h3>Les alertes</h3>
+  <div class="cols">
+    <div><figure style="margin:0;"><img src="images/latealert.png" alt="Fenêtre d'alerte de retard"><figcaption>Figure 32 — Fenêtre d'alerte à l'ouverture de l'application</figcaption></figure></div>
+    <div>
+      <table>
+        <tr><th style="width:26%">Alerte</th><th>Comportement</th></tr>
+        <tr><td class="k">Fenêtre</td><td>À l'ouverture (puis toutes les 30 minutes ou au retour sur l'onglet) si du matériel n'a pas été rendu à la date prévue : personnes concernées (6 au plus), équipements et jours de retard. <span class="btn p">Voir les retards</span> ouvre Restituer filtré ; <span class="btn">Plus tard</span> la ferme. Elle ne revient pas plus d'une fois par jour, sauf si le nombre d'équipements en retard augmente, et jamais par-dessus une autre fenêtre.</td></tr>
+        <tr><td class="k">Accueil</td><td>Carte rouge « Retours en retard », phrase de situation, « dont N en retard » sur Matériel à restituer, segment violet « Retour en retard » dans le parc et dans chaque type (§ 4.1).</td></tr>
+        <tr><td class="k">Menu</td><td>Pastille de Restituer en rouge (info-bulle « N équipements à rendre en retard ») ; la pastille d'Accueil compte aussi les personnes en retard.</td></tr>
+        <tr><td class="k">Restituer</td><td>Filtre « En retard de retour » ; personnes en retard en tête du tri par priorité ; repère rouge sur la ligne.</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="box warn"><b class="t">Limite</b>L'application n'envoie aucune notification : l'alerte n'apparaît que lorsque quelqu'un ouvre GPIEXALT. Être prévenu sans ouvrir l'application demanderait une tâche planifiée (risque R-19).</div>
+
+  <h2 id="s422" style="break-before:page;">4.22 Actions groupées sur les attestations</h2>
+  <p><b>Objectif :</b> traiter plusieurs attestations d'un coup, par exemple après réception d'un lot de signatures papier.</p>
+  <figure><img src="images/bulk.png" alt="Sélection multiple dans Attestations"><figcaption>Figure 33 — Attestations : cases à cocher et barre d'actions groupées</figcaption></figure>
+  <table>
+    <tr><th style="width:28%">Élément</th><th>Comportement</th></tr>
+    <tr><td class="k">Sélection</td><td>Une case par ligne ; « Sélectionner toutes les attestations en attente de cette liste » (suit la recherche, les filtres et la période).</td></tr>
+    <tr><td class="k">Barre d'actions</td><td>Fixe en bas de la liste dès qu'une ligne est cochée : « N sélectionnées · N en attente », <span class="btn p">Marquer N comme signées</span> (rôles qui peuvent agir), <span class="btn">Exporter la sélection</span> (rôles autorisés aux exports), <span class="btn">Désélectionner</span>.</td></tr>
+    <tr><td class="k">Marquer comme signées</td><td>Fenêtre avec la <b>date de signature</b> (aujourd'hui par défaut, jamais dans le futur) et une <b>mention écrite obligatoire</b> (140 caractères) : le bouton reste grisé tant qu'elle est vide. Chaque attestation passe à « Signée », son PDF signé est archivé avec la mention ; progression « Signature et archivage… k / n ». Aucun tracé n'est enregistré et <b>aucun message n'est envoyé</b>.</td></tr>
+    <tr><td class="k">Exporter la sélection</td><td>Fichier <code>attestations_selection_AAAA-MM-JJ.csv</code> (colonnes en annexe A).</td></tr>
+  </table>
+  <div class="cols">
+    <div><figure style="margin:0;"><img src="images/bulkmodal.png" alt="Fenêtre de signature groupée"><figcaption>Figure 34 — Signature groupée : date et mention obligatoire</figcaption></figure></div>
+    <div><div class="box"><b class="t">Annulation</b>Contrairement à une signature individuelle, une signature groupée n'a pas de bouton Annuler dans le message de confirmation : le contrôle se fait avant, dans la fenêtre. Une correction passe par l'administrateur.</div></div>
+  </div>
+
+  <h2 id="s423" style="break-before:page;">4.23 Scan rapide et panneau latéral</h2>
+  <h3>Scan rapide</h3>
+  <p>Après un scan (caméra, photo ou saisie du code), le résultat propose l'action la plus probable (§ 4.11) :</p>
+  <div class="cols">
+    <div>
+      <ul>
+        <li><span class="btn p">Prêter maintenant</span> (équipement disponible, rôle autorisé) : enregistre l'emprunt à la date du jour, sans date de retour prévue ; le message propose <span class="btn">Annuler</span> ; la caméra repart sur le QR suivant après un court instant.</li>
+        <li><span class="btn p">Restituer ce matériel</span> (équipement emprunté et non encore rendu) : ouvre Restituer avec l'équipement déjà coché ; l'envoi de l'attestation reste un clic de l'utilisateur.</li>
+        <li><span class="btn">Ouvrir la fiche</span> ouvre Restituer si l'équipement est emprunté, Emprunter sinon.</li>
+      </ul>
+    </div>
+    <div><figure style="margin:0;"><img src="images/scanquick.png" alt="Scan rapide"><figcaption>Figure 35 — Scan rapide : « Prêter maintenant »</figcaption></figure></div>
+  </div>
+  <h3>Panneau latéral sur grand écran</h3>
+  <p>À partir de 1 480 px de large, la fiche d'une personne (Emprunter, Restituer) s'affiche dans un <b>panneau à droite</b> au lieu d'une fenêtre : la liste reste visible et cliquable. Un clic sur une autre personne change la fiche ; si du matériel est coché sans être enregistré, une confirmation « Abandonner la sélection ? » s'affiche. Sous 1 480 px, la fiche reste une fenêtre.</p>
+  <figure><img src="images/sidepanel.png" alt="Panneau latéral"><figcaption>Figure 36 — Restituer sur grand écran : liste à gauche, fiche dans le panneau à droite</figcaption></figure></div>
+
+<!-- ================= 5. RÈGLES DE GESTION ================= -->
+<div class="chap">
+  <h1 id="s5">5. Règles de gestion</h1>
+  <table>
+    <tr><th style="width:8%">Réf.</th><th>Règle</th></tr>
+    <tr><td class="k">RG-01</td><td>Un équipement ne peut être emprunté que s'il est disponible : jamais emprunté, ou redevenu libre (restitué et signé, ou déclaré perdu).</td></tr>
+    <tr><td class="k">RG-02</td><td>Une attestation ne couvre que du matériel emprunté et non déjà couvert par une attestation en attente.</td></tr>
+    <tr><td class="k">RG-03</td><td>Une attestation est créée au statut « En attente » ; elle passe à « Signée » uniquement par l'action « Marquer comme signée ».</td></tr>
+    <tr><td class="k">RG-04</td><td>Le matériel d'une attestation signée est considéré comme restitué et redevient disponible.</td></tr>
+    <tr><td class="k">RG-05</td><td>La date de signature ne peut pas être dans le futur ; elle est aujourd'hui par défaut.</td></tr>
+    <tr><td class="k">RG-06</td><td>Une attestation en attente depuis 3 jours ou plus est « À relancer » (filtre, indicateurs, Accueil). Le bouton Relancer, masqué par défaut, trace chaque relance (nombre, dernière date, auteur) lorsqu'il est activé.</td></tr>
+    <tr><td class="k">RG-07</td><td>Une relance utilise le canal de l'envoi initial (email ou téléphone).</td></tr>
+    <tr><td class="k">RG-08</td><td>Une déclaration de perte, vol ou casse demande une confirmation et ne peut être ni modifiée ni supprimée.</td></tr>
+    <tr><td class="k">RG-09</td><td>Un équipement déclaré perdu libère sa place et peut être remplacé par un nouvel emprunt.</td></tr>
+    <tr><td class="k">RG-10</td><td>Chaque événement (prêt, attestation, relance, signature, perte, commentaire) conserve l'identifiant de son auteur et sa date.</td></tr>
+    <tr><td class="k">RG-11</td><td>Le PDF signé archivé n'est pas recalculé : le téléchargement restitue le fichier stocké.</td></tr>
+    <tr><td class="k">RG-12</td><td>Aucun message ne part sans action de l'utilisateur : le SMS est envoyé depuis l'appareil, l'email depuis Outlook ou, pour l'attestation signée et pour le rapport, par le bouton « Envoyer maintenant » d'une fenêtre qui affiche le destinataire, l'objet et le texte. L'application n'envoie jamais de notification toute seule.</td></tr>
+    <tr><td class="k">RG-13</td><td>Un emprunt ou une signature qui vient d'être enregistré peut être annulé par le bouton Annuler du message de confirmation (10 secondes au moins), sauf si une autre action a été enregistrée depuis pour la même personne. Passé ce délai, la correction passe par un commentaire et l'administrateur.</td></tr>
+    <tr><td class="k">RG-14</td><td>La validation d'une signature exige un tracé ou une mention écrite (140 caractères) ; la mention est conservée avec l'attestation, reproduite dans le PDF signé et supprimée si la signature est annulée.</td></tr>
+    <tr><td class="k">RG-15</td><td>Un filtre de période ne modifie aucune donnée : il restreint l'affichage, les indicateurs et les exports de l'onglet concerné.</td></tr>
+    <tr><td class="k">RG-16</td><td>Un code QR ne contient que l'identifiant de l'équipement ; son état (disponible, emprunté, perdu) est toujours lu dans l'application au moment du scan.</td></tr>
+    <tr><td class="k">RG-17</td><td>Chaque personne a un rôle : Administrateur full, Super utilisateur, Agent IT, Lecteur ou Collaborateur. Sans rôle attribué, une personne qui peut modifier est administrateur, une personne qui peut interagir est super utilisateur, une personne qui peut seulement consulter est collaborateur.</td></tr>
+    <tr><td class="k">RG-18</td><td>Un collaborateur ne voit que sa propre fiche, en consultation seule ; la base refuse l'accès aux autres fiches. Il n'effectue aucune saisie ni signature.</td></tr>
+    <tr><td class="k">RG-19</td><td>Les rapports PDF et Excel et les exports CSV sont réservés aux administrateurs, aux super utilisateurs et aux lecteurs. La déclaration de perte est réservée aux administrateurs et aux super utilisateurs.</td></tr>
+    <tr><td class="k">RG-20</td><td>Fermer une fiche ou changer de personne alors que du matériel est coché sans être enregistré demande une confirmation.</td></tr>
+    <tr><td class="k">RG-21</td><td>Les personnes d'Emprunter et Restituer viennent de l'annuaire importé depuis Microsoft 365 par un administrateur (tout l'annuaire, une sélection ou un groupe) ; sans import, 15 personnes de démonstration sont proposées. Chaque personne importée reçoit le kit standard de 9 équipements.</td></tr>
+    <tr><td class="k">RG-22</td><td>Une synchronisation de l'annuaire conserve l'identifiant, le code et les emprunts de chaque personne ; un compte retiré de l'annuaire reste listé ; un import par sélection ou par groupe ne propose plus les autres personnes mais conserve leurs données.</td></tr>
+    <tr><td class="k">RG-23</td><td>Un import par groupe est refusé au-delà de 999 membres ; seuls les comptes actifs, de type membre, avec une adresse email sont importés.</td></tr>
+    <tr><td class="k">RG-24</td><td>L'envoi de l'attestation signée demande une confirmation ; la date d'envoi est tracée sur l'attestation ; l'objet et le texte sont modifiables avant l'envoi.</td></tr>
+    <tr><td class="k">RG-25</td><td>La date de retour prévue d'un emprunt est facultative et ne peut pas précéder la date de remise. Un équipement non rendu dont la date prévue est dépassée est « en retard ».</td></tr>
+    <tr><td class="k">RG-26</td><td>Les retards sont signalés par une fenêtre d'alerte à l'ouverture (au plus une fois par jour, ou si leur nombre augmente), la carte « Retours en retard » et la phrase de situation de l'Accueil, les pastilles rouges du menu et le filtre « En retard de retour ». Aucune notification n'est envoyée à l'extérieur.</td></tr>
+    <tr><td class="k">RG-27</td><td>La signature groupée exige une date (jamais dans le futur) et une mention écrite ; elle archive un PDF signé par attestation et n'envoie aucun message.</td></tr>
+    <tr><td class="k">RG-28</td><td>Un rapport peut être envoyé par email à 10 adresses au plus, saisies à la main ou choisies parmi les suggestions ; l'envoi n'a lieu qu'après un clic sur « Envoyer maintenant » ; au-delà de 2,9 Mo, l'envoi direct est refusé.</td></tr>
+    <tr><td class="k">RG-29</td><td>Le message d'une attestation de restitution est adressé à l'adresse de la fiche ou à une adresse saisie à la main ; cette adresse est conservée avec l'attestation et reprise pour la relance et pour le message d'attestation signée.</td></tr>
+    <tr><td class="k">RG-30</td><td>Le contenu d'un rapport dépend de la page d'où il est demandé (Accueil : rapport complet) ; la période s'applique à l'activité de la page, les situations sont celles du jour.</td></tr>
+  </table>
+</div>
+
+<!-- ================= 6. PROCÉDURES ================= -->
+<div class="chap compact">
+  <h1 id="s6">6. Procédures opérationnelles</h1>
+  <h2>P1 — Prêter du matériel</h2>
+  <table>
+    <tr><th style="width:6%">N°</th><th style="width:48%">Action</th><th>Résultat attendu</th></tr>
+    <tr><td>1</td><td>Onglet <b>Emprunter</b> : rechercher la personne et ouvrir sa fiche.</td><td>La fiche s'ouvre avec le matériel disponible.</td></tr>
+    <tr><td>2</td><td>Cocher les équipements remis (quantité si besoin) ; contrôler la date ; si besoin, renseigner « Retour prévu le » (facultatif).</td><td>Sélection visible, bouton Enregistrer actif.</td></tr>
+    <tr><td>3</td><td>Cliquer sur <b>Enregistrer</b>.</td><td>Message de confirmation (avec la date de retour prévue) ; équipements dans « Matériel actuellement emprunté ».</td></tr>
+  </table>
+  <h2>P2 — Enregistrer une restitution et envoyer l'attestation</h2>
+  <table>
+    <tr><th style="width:6%">N°</th><th style="width:48%">Action</th><th>Résultat attendu</th></tr>
+    <tr><td>1</td><td>Onglet <b>Restituer</b> : ouvrir la fiche de la personne, cocher le matériel rendu, choisir la date de retour.</td><td>Boutons d'envoi actifs.</td></tr>
+    <tr><td>2</td><td>Cliquer sur <b>Par email</b> ; dans l'aperçu, choisir le destinataire (adresse enregistrée ou autre adresse saisie à la main), puis <b>Continuer et envoyer</b>. Ou cliquer sur <b>Par téléphone</b>.</td><td>Attestation « En attente » créée ; brouillon Outlook avec PDF adressé au destinataire choisi (ou SMS prêt).</td></tr>
+    <tr><td>3</td><td>Relire puis envoyer le message dans Outlook (ou l'application SMS).</td><td>Message envoyé à la personne.</td></tr>
+  </table>
+  <h2>P3 — Suivre et relancer les attestations non signées</h2>
+  <table>
+    <tr><th style="width:6%">N°</th><th style="width:48%">Action</th><th>Résultat attendu</th></tr>
+    <tr><td>1</td><td>Accueil (phrase de situation et pastille du menu) ou onglet <b>Attestations</b>, filtre <b>À relancer</b>.</td><td>Liste des attestations en attente depuis 3 jours ou plus.</td></tr>
+    <tr><td>2</td><td>Contacter la personne (email ou téléphone) ; si le bouton <b>Relancer</b> est activé, l'utiliser pour préparer le message.</td><td>Message de rappel prêt ; relance tracée si le bouton est utilisé.</td></tr>
+  </table>
+  <h2>P4 — Enregistrer la signature et archiver le PDF</h2>
+  <table>
+    <tr><th style="width:6%">N°</th><th style="width:48%">Action</th><th>Résultat attendu</th></tr>
+    <tr><td>1</td><td>À réception de l'attestation signée, cliquer sur <b>Marquer comme signée</b>.</td><td>Fenêtre de date.</td></tr>
+    <tr><td>2</td><td>Contrôler la date de signature (modifier si la signature est antérieure). Faire signer au doigt ou au stylet ; si quelqu'un signe à la place de la personne, l'écrire dans <b>Mention écrite</b> (un tracé ou une mention est obligatoire). Puis <b>Valider la signature</b>.</td><td>« Signée le … » ; message « PDF archivé » avec bouton <b>Annuler</b> (10 s).</td></tr>
+    <tr><td>3</td><td>Dans la fenêtre <b>Envoyer l'attestation signée ?</b>, contrôler le destinataire et le texte (<b>Modifier</b> si besoin), puis <b>Envoyer maintenant</b> (ou <b>Créer un brouillon</b>, ou <b>Ne pas envoyer</b>).</td><td>Message envoyé avec le PDF signé joint ; date d'envoi tracée.</td></tr>
+    <tr><td>4</td><td>Vérifier dans <b>Archives PDF</b> que la ligne est « Archivé ».</td><td>Bouton Télécharger disponible.</td></tr>
+  </table>
+  <h2>P5 — Déclarer une perte, un vol ou une casse</h2>
+  <table>
+    <tr><th style="width:6%">N°</th><th style="width:48%">Action</th><th>Résultat attendu</th></tr>
+    <tr><td>1</td><td>Onglet <b>Restituer</b> : cocher le matériel concerné.</td><td>Boutons de déclaration actifs.</td></tr>
+    <tr><td>2</td><td>Cliquer sur <b>Déclarer perdu / volé / abîmé</b> et confirmer.</td><td>Déclaration enregistrée ; visible dans <b>Matériel perdu</b>.</td></tr>
+  </table>
+  <h2>P6 — Fournir un PDF signé (audit ou litige)</h2>
+  <table>
+    <tr><th style="width:6%">N°</th><th style="width:48%">Action</th><th>Résultat attendu</th></tr>
+    <tr><td>1</td><td>Onglet <b>Archives PDF</b> : rechercher par nom, référence ou date.</td><td>Ligne de l'attestation.</td></tr>
+    <tr><td>2</td><td>Cliquer sur <b>Télécharger</b>.</td><td>PDF signé identique à celui produit à la signature.</td></tr>
+  </table>
+  <h2>P7 — Identifier un équipement par son QR</h2>
+  <table>
+    <tr><th style="width:6%">N°</th><th style="width:48%">Action</th><th>Résultat attendu</th></tr>
+    <tr><td>1</td><td>Cliquer sur <b>Scanner un QR</b> (bas du menu) et viser l'étiquette, ou saisir le code (ex. AP-1).</td><td>Équipement, personne concernée et état affichés.</td></tr>
+    <tr><td>2</td><td>Si l'équipement est disponible, <b>Prêter maintenant</b> ; s'il est emprunté, <b>Restituer ce matériel</b> (équipement déjà coché) ; sinon <b>Ouvrir la fiche</b>.</td><td>Prêt enregistré (avec Annuler) ou fiche de restitution ouverte.</td></tr>
+  </table>
+  <p style="margin-top:6pt;"><b>P8 — Exporter un état.</b> Dans <b>Attestations</b> ou <b>Matériel perdu</b>, appliquer recherche et filtres, puis <b>Exporter CSV</b> : le fichier contient exactement les lignes affichées.</p>
+  <h2>P9 — Générer un rapport</h2>
+  <table>
+    <tr><th style="width:6%">N°</th><th style="width:48%">Action</th><th>Résultat attendu</th></tr>
+    <tr><td>1</td><td>Sur la page voulue (Accueil, Emprunter, Restituer, Attestations, Archives PDF ou Matériel perdu) : cliquer sur <b>Rapport</b>, en haut à droite.</td><td>Fenêtre du rapport de cette page.</td></tr>
+    <tr><td>2</td><td>Choisir la période d'activité et le format (PDF ou Excel), puis <b>Générer le rapport</b> et confirmer le téléchargement ; ou <b>Envoyer par email</b> : saisir ou choisir le destinataire, contrôler l'objet et le message, puis <b>Envoyer maintenant</b> (ou Créer un brouillon, ou Télécharger le message).</td><td>Fichier <code>rapport_gpiexalt_&lt;page&gt;_AAAA-MM-JJ</code> enregistré, ou message envoyé avec le rapport joint.</td></tr>
+  </table>
+  <h2>P10 — Attribuer un rôle ou rattacher un collaborateur</h2>
+  <table>
+    <tr><th style="width:6%">N°</th><th style="width:48%">Action</th><th>Résultat attendu</th></tr>
+    <tr><td>1</td><td>Partager la page avec la personne (Partager) : « Peut consulter » pour un collaborateur, « Peut interagir » pour un agent, un super utilisateur ou un lecteur.</td><td>La personne peut ouvrir l'application.</td></tr>
+    <tr><td>2</td><td><b>Rôles et accès</b> : chercher la personne, choisir son rôle, enregistrer (ou choisir <b>Tous les utilisateurs</b> pour rattacher tous les collaborateurs).</td><td>Accès listé dans « Accès attribués » ; fiche rattachée automatiquement.</td></tr>
+    <tr><td>3</td><td>Demander à la personne d'ouvrir la page ; contrôler son affichage (« Mon matériel » pour un collaborateur).</td><td>Vue conforme au rôle.</td></tr>
+  </table>
+  <h2>P11 — Importer l'annuaire Microsoft 365</h2>
+  <table>
+    <tr><th style="width:6%">N°</th><th style="width:48%">Action</th><th>Résultat attendu</th></tr>
+    <tr><td>1</td><td><b>Rôles et accès</b>, carte « Annuaire Microsoft 365 » : pour un essai, ajouter quelques personnes (champ de recherche) ou choisir un petit groupe Entra ID ; sinon ne rien choisir.</td><td>Pastilles affichées ; le bouton indique ce qui sera importé.</td></tr>
+    <tr><td>2</td><td>Cliquer sur le bouton d'import, autoriser le connecteur Microsoft 365 au premier usage, puis <b>Importer</b> dans la fenêtre de confirmation.</td><td>Message « Annuaire importé : N personnes dans Emprunter et Restituer ».</td></tr>
+    <tr><td>3</td><td>Ouvrir <b>Emprunter</b> et vérifier la liste ; relancer l'import pour ajouter les arrivées.</td><td>Personnes réelles, kit standard, aucun emprunt.</td></tr>
+  </table>
+  <h2>P12 — Signer plusieurs attestations en une fois</h2>
+  <table>
+    <tr><th style="width:6%">N°</th><th style="width:48%">Action</th><th>Résultat attendu</th></tr>
+    <tr><td>1</td><td>Onglet <b>Attestations</b> : filtrer (par exemple « En attente »), cocher les lignes ou « Sélectionner toutes les attestations en attente de cette liste ».</td><td>Barre d'actions en bas de la liste.</td></tr>
+    <tr><td>2</td><td>Cliquer sur <b>Marquer N comme signées</b>, contrôler la date, saisir la mention (obligatoire, ex. « Signatures papier reçues le … »), puis <b>Marquer comme signées</b>.</td><td>Attestations « Signées », PDF archivés ; aucun message envoyé.</td></tr>
+  </table>
+  <h2>P13 — Traiter un retour en retard</h2>
+  <table>
+    <tr><th style="width:6%">N°</th><th style="width:48%">Action</th><th>Résultat attendu</th></tr>
+    <tr><td>1</td><td>À l'alerte d'ouverture, cliquer sur <b>Voir les retards</b> (ou Accueil, carte « Retours en retard », ou Restituer, filtre « En retard de retour »).</td><td>Personnes dont la date prévue est dépassée, en tête de liste.</td></tr>
+    <tr><td>2</td><td>Contacter la personne, puis enregistrer la restitution (P2) ou, si le matériel est perdu, la déclaration (P5).</td><td>L'équipement sort du suivi des retards.</td></tr>
+  </table>
+</div>
+
+<!-- ================= 7. ARCHITECTURE & SÉCURITÉ ================= -->
+<div class="chap">
+  <h1 id="s7">7. Architecture, données et sécurité</h1>
+  <h2 id="s71">7.1 Architecture et dépendances</h2>
+  <svg viewBox="0 0 720 250" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial" font-size="11.5">
+    <defs><marker id="ar2" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#586080"/></marker></defs>
+    <rect x="4" y="60" width="170" height="120" rx="8" fill="#f3f4fb" stroke="#c9cbe0"/>
+    <text x="89" y="86" text-anchor="middle" font-weight="700" fill="#12162b">Navigateur</text>
+    <text x="89" y="106" text-anchor="middle" fill="#586080" font-size="10.5">PC, tablette, téléphone</text>
+    <text x="89" y="124" text-anchor="middle" fill="#586080" font-size="10.5">Page unique HTML / JavaScript</text>
+    <text x="89" y="142" text-anchor="middle" fill="#586080" font-size="10.5">Génération du PDF (jsPDF)</text>
+    <rect x="270" y="4" width="200" height="86" rx="8" fill="#14183a"/>
+    <text x="370" y="30" text-anchor="middle" font-weight="700" fill="#fff">Base de l'application</text>
+    <text x="370" y="50" text-anchor="middle" fill="#cadcfc" font-size="10.5">people : prêts, attestations,</text>
+    <text x="370" y="65" text-anchor="middle" fill="#cadcfc" font-size="10.5">pertes, commentaires</text>
+    <text x="370" y="80" text-anchor="middle" fill="#cadcfc" font-size="10.5">documents : PDF · directory : annuaire</text>
+    <rect x="270" y="110" width="200" height="60" rx="8" fill="#e4eefa" stroke="#b9d0ee"/>
+    <text x="370" y="136" text-anchor="middle" font-weight="700" fill="#12162b">Connecteur Microsoft 365</text>
+    <text x="370" y="154" text-anchor="middle" fill="#586080" font-size="10.5">annuaire Entra ID · Outlook (envoi, brouillon)</text>
+    <rect x="270" y="190" width="200" height="54" rx="8" fill="#fdf0d5" stroke="#efd49b"/>
+    <text x="370" y="214" text-anchor="middle" font-weight="700" fill="#12162b">cdnjs.cloudflare.com · jsDelivr</text>
+    <text x="370" y="232" text-anchor="middle" fill="#586080" font-size="10.5">jsPDF, pdf.js, QR (génération, lecture)</text>
+    <rect x="566" y="60" width="150" height="120" rx="8" fill="#e9f8f1" stroke="#b9e3d0"/>
+    <text x="641" y="92" text-anchor="middle" font-weight="700" fill="#12162b">Applications</text>
+    <text x="641" y="110" text-anchor="middle" font-weight="700" fill="#12162b">de l'appareil</text>
+    <text x="641" y="132" text-anchor="middle" fill="#586080" font-size="10.5">Messagerie (mailto)</text>
+    <text x="641" y="148" text-anchor="middle" fill="#586080" font-size="10.5">SMS (sms:)</text>
+    <g stroke="#586080" stroke-width="1.5" marker-end="url(#ar2)"><line x1="176" y1="90" x2="268" y2="52"/><line x1="176" y1="125" x2="268" y2="140"/><line x1="176" y1="152" x2="268" y2="208"/><line x1="176" y1="120" x2="564" y2="120" stroke-dasharray="5 4"/></g>
+  </svg>
+  <table>
+    <tr><th style="width:26%">Composant</th><th>Description</th></tr>
+    <tr><td class="k">Application</td><td>Page web unique (HTML, CSS, JavaScript), publiée par Claude à une adresse fixe ; chaque modification crée une version numérotée.</td></tr>
+    <tr><td class="k">Base de l'application</td><td>Base de documents hébergée avec l'application ; collections <code>people</code>, <code>documents</code>, <code>directory</code>, <code>roles</code>, <code>links</code> et <code>mine</code> (§ 7.2).</td></tr>
+    <tr><td class="k">jsPDF 2.5.1</td><td>Bibliothèque de création de PDF, <b>chargée depuis cdnjs.cloudflare.com</b> au premier usage. Dépendance externe : si l'accès est bloqué (proxy, pare-feu), la création de PDF échoue avec un message explicite.</td></tr>
+    <tr><td class="k">pdf.js 3.11.174</td><td>Affichage de l'aperçu du PDF avant envoi ; chargé depuis cdnjs.cloudflare.com à la demande.</td></tr>
+    <tr><td class="k">QR : qrcode-generator 1.4.4, jsQR 1.4.0</td><td>Dessin des étiquettes QR (cdnjs.cloudflare.com) et lecture par la caméra ou une photo (cdn.jsdelivr.net) ; chargés à la demande. La caméra n'est utilisée que pendant le scan et jamais enregistrée.</td></tr>
+    <tr><td class="k">ExcelJS 4.4.0, jspdf-autotable 3.8.2</td><td>Génération du classeur Excel et des tableaux du rapport PDF ; chargées à la demande depuis cdnjs.cloudflare.com.</td></tr>
+    <tr><td class="k">Police Poppins (Google Fonts)</td><td>Police des thèmes eXalt, chargée depuis fonts.googleapis.com ; si l'accès est bloqué, une police système la remplace sans autre effet. À faire valider par le RSSI comme les autres dépendances externes.</td></tr>
+    <tr><td class="k">Préférences d'affichage</td><td>Thème, couleur d'accent et densité : mémorisés dans le navigateur (<code>localStorage</code>), jamais envoyés à la base.</td></tr>
+    <tr><td class="k">Connecteur Microsoft 365</td><td>Autorisé par chaque utilisateur ; les appels utilisent ses propres droits et la page ne voit jamais les jetons d'accès. Opérations utilisées : lecture des utilisateurs et des groupes (list-users, list-groups, list-group-members), création de brouillon (create-draft-email) et envoi (send-mail). Aucune écriture dans Entra ID.</td></tr>
+    <tr><td class="k">Annuaire et catalogue</td><td>15 personnes de démonstration intégrées au code, remplacées par l'annuaire Entra ID importé (§ 4.19). Le matériel de chaque personne est un kit standard de 9 équipements : le parc réel (Intune) n'est pas encore connecté.</td></tr>
+  </table>
+
+  <h2 id="s72">7.2 Modèle de données</h2>
+  <table>
+    <tr><th style="width:22%">Collection</th><th>Contenu</th></tr>
+    <tr><td class="k"><code>people/{id}</code></td><td>Un document par personne touchée : <code>loans[]</code> (id, items, date, due, recordedAt, by) · <code>attestations[]</code> (id, items, channel, returnDate, sentAt, mailTo, status, signedAt, signedBy, signedRecordedAt, signNote, signedMailAt, by, reminders[], archive{ref, at, size}) · <code>losses[]</code> (id, items, date, reason, by) · <code>comments[]</code> (id, text, ts, at, authorId).</td></tr>
+    <tr><td class="k"><code>documents/{ATT-p-a}</code></td><td>Un document par attestation signée : <code>personId</code>, <code>attId</code>, <code>filename</code>, <code>signedAt</code>, <code>signedBy</code>, <code>signNote</code>, <code>size</code>, <code>pdf</code> (PDF en base64, de 6 à 15 Ko selon la signature tracée).</td></tr>
+    <tr><td class="k"><code>roles/{compte}</code></td><td>Un document par personne ayant un rôle attribué : <code>role</code> (admin, super, agent, reader, collab) et <code>personId</code> (fiche rattachée, pour un collaborateur).</td></tr>
+    <tr><td class="k"><code>links/{fiche}</code></td><td>Un document par fiche rattachée : <code>uid</code> (compte du collaborateur).</td></tr>
+    <tr><td class="k"><code>directory/meta</code>, <code>directory/chunk-N</code></td><td><code>meta</code> : count, mode (all ou selection), group, chunks, nextId, syncedAt, by. <code>chunk-N</code> : lots de 120 personnes <code>users[]</code> (k : identifiant Entra ID, id : numéro stable, code, name, role, email, phone, active, scope).</td></tr>
+    <tr><td class="k"><code>mine/{compte}</code></td><td>Résumé personnel d'un collaborateur : matériel et états, prêts, attestations, pertes, date de mise à jour. Recalculé à chaque action sur la fiche.</td></tr>
+  </table>
+  <p>Les auteurs sont référencés par leur identifiant (jamais par leur nom) ; les noms sont résolus à l'affichage. Une personne n'a de document qu'à partir de sa première action. Limite de la base : 256 Ko par document.</p>
+
+  <h2 id="s73">7.3 Accès, authentification et traçabilité</h2>
+  <table>
+    <tr><th style="width:26%">Sujet</th><th>Fonctionnement</th></tr>
+    <tr><td class="k">Accès</td><td>L'application est partagée avec des personnes désignées de l'organisation ; les autres ne peuvent pas ouvrir le lien. Le partage se gère depuis le menu de partage de la page publiée.</td></tr>
+    <tr><td class="k">Identité de l'utilisateur</td><td>Fournie par la plateforme (nom affiché, identifiant) ; utilisée pour tracer les actions.</td></tr>
+    <tr><td class="k">Droits</td><td>Cinq rôles (§ 4.17), combinés au niveau de partage. Règles d'accès de la base : <code>people</code> et <code>documents</code> lisibles et modifiables à partir du niveau « interagir » ; <code>roles</code> réservé aux administrateurs (chacun lit le sien) ; <code>links</code> modifiable par les administrateurs ; <code>mine</code> lisible par chaque collaborateur pour sa seule fiche ; <code>directory</code> lisible et modifiable à partir du niveau « interagir » (seule l'interface limite l'import aux administrateurs).</td></tr>
+    <tr><td class="k">Traçabilité</td><td>Chaque prêt, attestation, relance, signature, déclaration et commentaire garde l'auteur et la date ; l'historique de chaque personne est consultable dans sa fiche ; les PDF signés sont conservés tels que produits.</td></tr>
+    <tr><td class="k">Connecteur Microsoft 365</td><td>Consentement demandé à chaque utilisateur au premier usage ; l'autorisation empêche de rendre la page publique. Le connecteur permet aussi d'envoyer des messages : l'envoi de l'attestation signée exige un clic sur « Envoyer maintenant ».</td></tr>
+  </table>
+
+  <h2 id="s74">7.4 Données personnelles</h2>
+  <table>
+    <tr><th style="width:26%">Rubrique</th><th>Description</th></tr>
+    <tr><td class="k">Personnes concernées</td><td>Collaborateurs et consultants détenteurs de matériel ; utilisateurs de l'application (auteurs des actions).</td></tr>
+    <tr><td class="k">Données traitées</td><td>Nom, fonction ou service, adresse email, numéro de mobile (copiés depuis Entra ID à l'import de l'annuaire) ; adresse email saisie à la main pour l'envoi d'une attestation (personnelle ou externe, conservée avec l'attestation) ; matériel détenu, dates de prêt et de restitution ; signatures déclarées (y compris l'image d'une signature tracée, uniquement dans le PDF) et mentions de signature ; commentaires ; identifiant des auteurs ; PDF d'attestation (qui reprend ces données).</td></tr>
+    <tr><td class="k">Finalité</td><td>Gestion du parc de matériel, preuve de restitution, suivi des pertes.</td></tr>
+    <tr><td class="k">Base légale</td><td>À renseigner par le DPO (intérêt légitime de l'employeur ou obligation contractuelle, à confirmer).</td></tr>
+    <tr><td class="k">Accès</td><td>Personnes avec lesquelles l'application est partagée ; l'annuaire importé est lisible par toutes ces personnes.</td></tr>
+    <tr><td class="k">Hébergement</td><td>Base hébergée avec l'application par la plateforme Claude ; localisation et sous-traitants à confirmer par le RSSI / le DPO.</td></tr>
+    <tr><td class="k">Durée de conservation</td><td><b>À définir.</b> Aucune purge automatique n'existe : les données restent tant qu'elles ne sont pas supprimées par l'administrateur.</td></tr>
+    <tr><td class="k">Droits des personnes</td><td>Accès, rectification, effacement : traités par l'administrateur sur demande, la suppression se faisant directement dans la base.</td></tr>
+    <tr><td class="k">Données sensibles</td><td>Aucune donnée sensible au sens du RGPD n'est collectée.</td></tr>
+  </table>
+
+  <h2 id="s75">7.5 Recommandations de sécurité</h2>
+  <ul>
+    <li>Limiter le partage de l'application au strict nécessaire, attribuer à chacun le rôle le plus restreint qui suffit, et revoir la liste « Rôles et accès » chaque trimestre.</li>
+    <li>Faire valider par le RSSI le chargement de jsPDF, jspdf-autotable, ExcelJS, pdf.js et qrcode-generator depuis cdnjs.cloudflare.com, de jsQR depuis cdn.jsdelivr.net et de la police Poppins depuis fonts.googleapis.com ; héberger ces bibliothèques en interne si la politique l'exige.</li>
+    <li>Définir et appliquer une durée de conservation des attestations et des déclarations.</li>
+    <li>Ne pas saisir d'information sensible dans les commentaires ni dans la mention de signature (visibles de tous les utilisateurs et reproduites dans le PDF).</li>
+    <li>Contrôler les droits du connecteur Microsoft 365 autorisé (lecture de l'annuaire, brouillons et envoi de messages) et en documenter la revue ; valider avec le DPO l'import de l'annuaire (données de tous les collaborateurs) et préférer une sélection ou un groupe pour les essais.</li>
+    <li>Prévoir un export périodique (CSV et PDF) en l'absence de sauvegarde externe automatique.</li>
+  </ul>
+</div>
+
+<!-- ================= 8. SAUVEGARDE ================= -->
+<div class="chap">
+  <h1 id="s8">8. Sauvegarde, continuité et reprise</h1>
+  <h2>8.1 Enregistrement des données</h2>
+  <p>Chaque action est enregistrée immédiatement dans la base de l'application. Un message de confirmation s'affiche et la pastille en bas du menu indique <span class="tag g">Synchronisé à HH:MM</span>.</p>
+  <h2>8.2 Protection contre les écrasements</h2>
+  <ol>
+    <li>Avant chaque enregistrement, l'application <b>relit la dernière version</b> de la personne dans la base.</li>
+    <li>Elle applique la modification de l'utilisateur <b>par-dessus</b> cette version.</li>
+    <li>Elle enregistre le résultat.</li>
+  </ol>
+  <p>Deux utilisateurs travaillant sur des personnes différentes ne se gênent jamais. Sur la même personne au même instant, la dernière écriture l'emporte mais conserve le contenu relu juste avant.</p>
+  <h2>8.3 Chargement à l'ouverture</h2>
+  <p>L'annuaire importé est lu en premier, puis une seule requête charge toutes les personnes qui ont un historique (jusqu'à 1 000, puis des lectures complémentaires par lots). L'ouverture de l'application n'écrit aucune donnée. Les listes affichent 50 lignes à la fois.</p>
+  <h2>8.4 Cas d'échec</h2>
+  <table>
+    <tr><th style="width:32%">Situation</th><th>Comportement et action</th></tr>
+    <tr><td class="k">Enregistrement au-delà de 6 secondes</td><td>L'action est abandonnée pour ne pas bloquer l'écran ; la pastille passe à <span class="tag w">Mode local</span> ; l'action n'est pas conservée. Recharger la page et recommencer.</td></tr>
+    <tr><td class="k">Erreur d'enregistrement</td><td>Un message rouge « Enregistrement impossible : … » donne la raison (refus de la base, erreur interne) ; la modification n'est pas conservée. L'aide (touche <code>?</code>) affiche un diagnostic à transmettre au support.</td></tr>
+    <tr><td class="k">Base injoignable à l'ouverture</td><td>Même état « Mode local » : rien n'est conservé. Vérifier la connexion et rouvrir le lien de l'application.</td></tr>
+    <tr><td class="k">Fichier local ouvert hors de Claude</td><td>Aucune base : toutes les données sont perdues à la fermeture. Réservé aux démonstrations.</td></tr>
+    <tr><td class="k">Archivage du PDF échoué</td><td>Signature conservée ; relancer avec « Archiver le PDF ».</td></tr>
+  </table>
+  <h2>8.5 Sauvegarde de secours et restauration</h2>
+  <table>
+    <tr><th style="width:32%">Élément</th><th>État</th></tr>
+    <tr><td class="k">Exports CSV</td><td>Attestations et matériel perdu : copies lisibles dans Excel.</td></tr>
+    <tr><td class="k">PDF signés</td><td>Téléchargeables un par un depuis Archives PDF.</td></tr>
+    <tr><td class="k">Sauvegarde automatique externe</td><td><b>Non disponible.</b> Un export complet régulier est à prévoir avant la mise en production à grande échelle.</td></tr>
+    <tr><td class="k">Objectifs de reprise (RPO / RTO)</td><td>À définir par la DSI ; aucun engagement n'est pris par l'application.</td></tr>
+    <tr><td class="k">Retour à une version de l'application</td><td>Possible via l'historique des versions de la page publiée ; les données ne sont pas modifiées par un retour de version.</td></tr>
+  </table>
+</div>
+
+<!-- ================= 9. EXPLOITATION ================= -->
+<div class="chap">
+  <h1 id="s9">9. Exploitation et maintenance</h1>
+  <h2>9.1 Gestion des versions</h2>
+  <ul>
+    <li>Chaque modification publie une <b>nouvelle version numérotée</b> à la même adresse ; les utilisateurs la voient au rechargement.</li>
+    <li>Les <b>données sont conservées</b> d'une version à l'autre.</li>
+    <li>L'historique des versions permet un retour en arrière.</li>
+  </ul>
+  <h2>9.2 Procédure de changement (proposée)</h2>
+  <table>
+    <tr><th style="width:6%">N°</th><th style="width:30%">Étape</th><th>Description</th></tr>
+    <tr><td>1</td><td>Demande</td><td>Besoin exprimé par le service informatique ; validation par la DSI.</td></tr>
+    <tr><td>2</td><td>Développement</td><td>Modification de l'application par l'administrateur.</td></tr>
+    <tr><td>3</td><td>Test local</td><td>Vérification sur une copie locale (flux concernés et affichage PC, tablette, téléphone).</td></tr>
+    <tr><td>4</td><td>Recette</td><td>Exécution des cas du chapitre 10 concernés.</td></tr>
+    <tr><td>5</td><td>Publication</td><td>Nouvelle version publiée ; numéro noté dans le journal des révisions.</td></tr>
+    <tr><td>6</td><td>Documentation</td><td>Mise à jour de ce dossier et de la présentation (demande « mets à jour la documentation »).</td></tr>
+  </table>
+  <div class="box"><b class="t">La documentation ne se met pas à jour automatiquement</b>À chaque évolution, l'administrateur demande la mise à jour : les sections concernées sont ajustées, la version du document est incrémentée, le PDF et la présentation sont régénérés.</div>
+  <h2>9.3 Réglages dans le code</h2>
+  <table>
+    <tr><th style="width:30%">Réglage</th><th style="width:16%">Valeur actuelle</th><th>Effet</th></tr>
+    <tr><td class="k"><code>REMINDER_AFTER_DAYS</code></td><td>3</td><td>Délai avant qu'une attestation en attente soit « À relancer ».</td></tr>
+    <tr><td class="k"><code>SMS_TEST_NUMBER</code></td><td>06 95 17 58 74</td><td>Numéro de destination de tous les SMS ; à désactiver pour utiliser le numéro de chaque fiche.</td></tr>
+    <tr><td class="k"><code>PAGE_SIZE</code></td><td>50</td><td>Nombre de lignes affichées par liste avant « Afficher plus ».</td></tr>
+    <tr><td class="k"><code>SHOW_EQUIPMENT_SPECS</code></td><td>false</td><td>Affichage des caractéristiques (modèle, numéro de série) des équipements.</td></tr>
+    <tr><td class="k"><code>MAIL_SERVER</code></td><td>« MS 365 »</td><td>Nom du connecteur utilisé pour créer les brouillons Outlook.</td></tr>
+    <tr><td class="k"><code>LOCATION_OVERRIDE</code></td><td>null</td><td>Impose la ville et le pays affichés en haut à droite (ex. <code>{ city: "Paris", country: "France" }</code>) ; sinon déduits du fuseau horaire et de la langue du navigateur.</td></tr>
+    <tr><td class="k"><code>SHOW_REMIND_BUTTON</code></td><td>false</td><td>Affichage du bouton Relancer dans Attestations et dans la fiche personne.</td></tr>
+  </table>
+  <h2>9.4 Surveillance courante</h2>
+  <ul>
+    <li>Contrôler la pastille de sauvegarde en bas du menu : « Synchronisé » = normal ; « Mode local » = à traiter.</li>
+    <li>Contrôler chaque semaine l'onglet <b>Archives PDF</b>, filtre « À archiver », et l'onglet <b>Attestations</b>, filtre « À relancer ».</li>
+    <li>Contrôler à chaque évolution l'affichage sur téléphone et tablette, et les principaux thèmes.</li>
+    <li>Consulter l'Accueil chaque matin : la fenêtre d'alerte, la carte « Retours en retard » et le bandeau « PDF à archiver » résument les actions à traiter.</li>
+  </ul>
+</div>
+
+<!-- ================= 10. RECETTE ================= -->
+<div class="chap compact">
+  <h1 id="s10">10. Plan de recette</h1>
+  <p class="lead">État au 12/10/2026. « Local » : essai réalisé sur une copie locale de l'application. « Production » : essai à réaliser sur l'application publiée, avec la base et les connecteurs réels.</p>
+  <table>
+    <tr><th style="width:8%">Réf.</th><th style="width:14%">Fonction</th><th>Scénario</th><th style="width:25%">Résultat attendu</th><th class="c" style="width:9%">Local</th><th class="c" style="width:10%">Production</th></tr>
+    <tr><td class="k">CR-01</td><td>Emprunter</td><td>Cocher 2 équipements, choisir une date, enregistrer.</td><td>Prêt dans l'historique ; équipements « empruntés ».</td><td class="c"><span class="tag n">À faire</span></td><td class="c"><span class="tag n">À faire</span></td></tr>
+    <tr><td class="k">CR-02</td><td>Restituer</td><td>Sélectionner tout le matériel, cliquer sur « Par téléphone ».</td><td>Attestation « En attente » ; SMS préparé vers le numéro de test.</td><td class="c"><span class="tag n">À faire</span></td><td class="c"><span class="tag n">À faire</span></td></tr>
+    <tr><td class="k">CR-03</td><td>Restituer</td><td>Déclarer un équipement perdu (avec confirmation).</td><td>Déclaration dans la fiche et dans Matériel perdu.</td><td class="c"><span class="tag n">À faire</span></td><td class="c"><span class="tag n">À faire</span></td></tr>
+    <tr><td class="k">CR-04</td><td>Relance</td><td>Filtre « À relancer », bouton Relancer sur un envoi par email puis par téléphone.</td><td>Message de rappel adapté au canal ; relance tracée.</td><td class="c"><span class="tag g">OK</span></td><td class="c"><span class="tag n">À faire</span></td></tr>
+    <tr><td class="k">CR-05</td><td>Signature</td><td>« Marquer comme signée » avec la date du jour.</td><td>Statut « Signée » ; message « PDF archivé ».</td><td class="c"><span class="tag g">OK</span></td><td class="c"><span class="tag n">À faire</span></td></tr>
+    <tr><td class="k">CR-06</td><td>Signature</td><td>Idem avec une date passée (02/10/2026).</td><td>PDF « Signée le 02/10/2026, enregistrée le … ».</td><td class="c"><span class="tag g">OK</span></td><td class="c"><span class="tag n">À faire</span></td></tr>
+    <tr><td class="k">CR-07</td><td>Signature</td><td>Annuler dans la fenêtre de date.</td><td>Aucun changement.</td><td class="c"><span class="tag g">OK</span></td><td class="c"><span class="tag n">À faire</span></td></tr>
+    <tr><td class="k">CR-08</td><td>PDF</td><td>Télécharger le PDF d'une attestation signée.</td><td>Une page ; date et nom du collaborateur ; date et « DSI » côté IT.</td><td class="c"><span class="tag g">OK</span></td><td class="c"><span class="tag n">À faire</span></td></tr>
+    <tr><td class="k">CR-09</td><td>PDF</td><td>PDF d'une attestation de 8 équipements.</td><td>Reste sur une page.</td><td class="c"><span class="tag g">OK</span></td><td class="c"><span class="tag n">À faire</span></td></tr>
+    <tr><td class="k">CR-10</td><td>Archives</td><td>Rechercher une attestation par référence ou date ; télécharger.</td><td>Ligne trouvée ; PDF identique à celui de la signature.</td><td class="c"><span class="tag g">OK</span></td><td class="c"><span class="tag n">À faire</span></td></tr>
+    <tr><td class="k">CR-11</td><td>Archives</td><td>« Archiver le PDF » sur une ancienne attestation signée.</td><td>Ligne « Archivé » ; compteurs mis à jour.</td><td class="c"><span class="tag g">OK</span></td><td class="c"><span class="tag n">À faire</span></td></tr>
+    <tr><td class="k">CR-12</td><td>Outlook</td><td>« Par email » avec le connecteur Microsoft 365 autorisé.</td><td>Brouillon dans Outlook, PDF joint, destinataire correct.</td><td class="c"><span class="tag w">Simulé</span></td><td class="c"><span class="tag b">Prioritaire</span></td></tr>
+    <tr><td class="k">CR-13</td><td>Outlook</td><td>« Par email » connecteur refusé ou absent.</td><td>PDF téléchargé ; lien d'ouverture du message ; raison affichée.</td><td class="c"><span class="tag g">OK</span></td><td class="c"><span class="tag n">À faire</span></td></tr>
+    <tr><td class="k">CR-14</td><td>Sauvegarde</td><td>Enregistrer une action, recharger la page.</td><td>Données conservées ; pastille « Synchronisé ».</td><td class="c"><span class="tag n">N/A</span></td><td class="c"><span class="tag b">Prioritaire</span></td></tr>
+    <tr><td class="k">CR-15</td><td>Sauvegarde</td><td>Deux utilisateurs agissent sur deux personnes différentes.</td><td>Aucune perte de donnée.</td><td class="c"><span class="tag n">N/A</span></td><td class="c"><span class="tag n">À faire</span></td></tr>
+    <tr><td class="k">CR-16</td><td>Exports</td><td>Exporter les attestations filtrées en CSV.</td><td>Fichier avec les seules lignes affichées.</td><td class="c"><span class="tag n">À faire</span></td><td class="c"><span class="tag n">À faire</span></td></tr>
+    <tr><td class="k">CR-17</td><td>Mobile</td><td>Parcourir les 7 onglets à 375 px et 768 px.</td><td>Pas de défilement horizontal ; barre d'onglets en bas.</td><td class="c"><span class="tag g">OK</span></td><td class="c"><span class="tag n">À faire</span></td></tr>
+    <tr><td class="k">CR-18</td><td>Accès</td><td>Ouvrir le lien avec un compte non autorisé.</td><td>Accès refusé.</td><td class="c"><span class="tag n">N/A</span></td><td class="c"><span class="tag b">Prioritaire</span></td></tr>
+    <tr><td class="k">CR-19</td><td>Accueil</td><td>Ouvrir l'Accueil ; cliquer sur « Retours en retard » (s'il y en a), puis sur « PDF à archiver ».</td><td>Onglets ouverts avec le bon filtre ; chiffres cohérents avec les listes.</td><td class="c"><span class="tag g">OK</span></td><td class="c"><span class="tag n">À faire</span></td></tr>
+    <tr><td class="k">CR-20</td><td>Période</td><td>Filtrer Attestations « entre deux dates », puis « de mois à mois ».</td><td>Liste, indicateurs et export limités à la période ; Réinitialiser rétablit tout.</td><td class="c"><span class="tag n">À faire</span></td><td class="c"><span class="tag n">À faire</span></td></tr>
+    <tr><td class="k">CR-21</td><td>Signature</td><td>Marquer comme signée avec une signature tracée et une mention écrite.</td><td>PDF avec signature, mention sous la case et dans le bloc de suivi ; mention visible dans les listes.</td><td class="c"><span class="tag g">OK</span></td><td class="c"><span class="tag n">À faire</span></td></tr>
+    <tr><td class="k">CR-22</td><td>Annulation</td><td>Cliquer sur Annuler dans le message après un emprunt, puis après une signature.</td><td>Emprunt supprimé ; attestation « En attente », archive et mention supprimées.</td><td class="c"><span class="tag n">À faire</span></td><td class="c"><span class="tag n">À faire</span></td></tr>
+    <tr><td class="k">CR-23</td><td>Aperçu</td><td>« Par email » : contrôler l'aperçu, puis Continuer et envoyer.</td><td>PDF affiché ; brouillon créé après confirmation ; Retour ne change rien.</td><td class="c"><span class="tag n">À faire</span></td><td class="c"><span class="tag n">À faire</span></td></tr>
+    <tr><td class="k">CR-24</td><td>QR</td><td>Télécharger les étiquettes d'une personne ; scanner une étiquette (caméra, photo, saisie).</td><td>PDF d'étiquettes ; équipement et état corrects.</td><td class="c"><span class="tag n">À faire</span></td><td class="c"><span class="tag n">À faire</span></td></tr>
+    <tr><td class="k">CR-25</td><td>Apparence</td><td>Choisir un thème et une couleur d'accent, recharger la page.</td><td>Choix appliqué à tous les écrans et conservé au rechargement.</td><td class="c"><span class="tag g">OK</span></td><td class="c"><span class="tag n">À faire</span></td></tr>
+    <tr><td class="k">CR-26</td><td>Recherche</td><td>Ctrl K, chercher une personne, un code d'équipement, une page ; fermer par la croix.</td><td>Résultats corrects ; ouverture de la fiche ou de la page.</td><td class="c"><span class="tag g">OK</span></td><td class="c"><span class="tag n">À faire</span></td></tr>
+    <tr><td class="k">CR-27</td><td>Rapports</td><td>Générer un rapport PDF puis Excel, période « Toutes les dates » et « Entre deux dates ».</td><td>Fichiers conformes (3 pages PDF ; 8 feuilles Excel) ; période respectée.</td><td class="c"><span class="tag g">OK</span></td><td class="c"><span class="tag n">À faire</span></td></tr>
+    <tr><td class="k">CR-28</td><td>Rôles</td><td>Attribuer un rôle Collaborateur (fiche rattachée automatiquement) puis « Tous les utilisateurs ».</td><td>Accès listés ; fiches rattachées ; bilan des fiches sans compte.</td><td class="c"><span class="tag w">Simulé</span></td><td class="c"><span class="tag b">Prioritaire</span></td></tr>
+    <tr><td class="k">CR-29</td><td>Collaborateur</td><td>Ouvrir l'application avec un compte « Peut consulter » rattaché ; tenter d'ouvrir une autre fiche.</td><td>Seule la vue « Mon matériel » ; fiches des autres refusées par la base.</td><td class="c"><span class="tag w">Simulé</span></td><td class="c"><span class="tag b">Prioritaire</span></td></tr>
+    <tr><td class="k">CR-30</td><td>Rôles</td><td>Agent IT : vérifier l'absence des rapports, exports et déclarations de perte ; Lecteur : absence de saisie.</td><td>Boutons masqués ; message de refus si l'action est déclenchée autrement.</td><td class="c"><span class="tag g">OK</span></td><td class="c"><span class="tag n">À faire</span></td></tr>
+    <tr><td class="k">CR-31</td><td>Confort</td><td>Fiche suivante / précédente, confirmation avec sélection, dates rapides, tris Attestations et Archives.</td><td>Navigation correcte ; confirmation affichée ; tris conformes.</td><td class="c"><span class="tag g">OK</span></td><td class="c"><span class="tag n">À faire</span></td></tr>
+    <tr><td class="k">CR-32</td><td>Impression</td><td>Imprimer l'onglet Attestations en thème sombre.</td><td>Page claire sans menu ni boutons.</td><td class="c"><span class="tag g">OK</span></td><td class="c"><span class="tag n">À faire</span></td></tr>
+    <tr><td class="k">CR-33</td><td>Annuaire</td><td>Importer 3 personnes choisies (Rôles et accès), puis ouvrir Emprunter.</td><td>Seules ces 3 personnes sont proposées ; les autres restent en base.</td><td class="c"><span class="tag w">Simulé</span></td><td class="c"><span class="tag b">Prioritaire</span></td></tr>
+    <tr><td class="k">CR-34</td><td>Annuaire</td><td>Importer tout l'annuaire (plus de 999 comptes), puis relancer après un arrivant et un départ.</td><td>Tous les comptes actifs membres avec email ; arrivant ajouté ; départ « compte retiré » ; emprunts conservés.</td><td class="c"><span class="tag w">Simulé</span></td><td class="c"><span class="tag b">Prioritaire</span></td></tr>
+    <tr><td class="k">CR-35</td><td>Annuaire</td><td>Importer un petit groupe Entra ID ; essayer « Tous les utilisateurs ».</td><td>Membres importés ; groupe de 999 membres ou plus refusé avec message.</td><td class="c"><span class="tag w">Simulé</span></td><td class="c"><span class="tag n">À faire</span></td></tr>
+    <tr><td class="k">CR-36</td><td>Signature</td><td>Valider sans tracé ni mention ; avec la mention pré-remplie non complétée.</td><td>Bouton grisé et message explicatif.</td><td class="c"><span class="tag g">OK</span></td><td class="c"><span class="tag n">À faire</span></td></tr>
+    <tr><td class="k">CR-37</td><td>Message signé</td><td>Valider la signature, puis « Envoyer maintenant » (compte réel, destinataire de test).</td><td>Message reçu avec le PDF signé joint ; date d'envoi tracée.</td><td class="c"><span class="tag w">Simulé</span></td><td class="c"><span class="tag b">Prioritaire</span></td></tr>
+    <tr><td class="k">CR-38</td><td>Message signé</td><td>Modifier l'objet et le texte ; créer un brouillon ; télécharger le .eml et l'ouvrir.</td><td>Brouillon et fichier conformes ; .eml ouvert dans Outlook.</td><td class="c"><span class="tag w">Simulé</span></td><td class="c"><span class="tag n">À faire</span></td></tr>
+    <tr><td class="k">CR-39</td><td>Enregistrement</td><td>Enregistrer un second emprunt sur une personne déjà enregistrée ; cliquer sans équipement coché ; double clic.</td><td>Emprunt ajouté ; message clair ; pas de doublon.</td><td class="c"><span class="tag g">OK</span></td><td class="c"><span class="tag n">À faire</span></td></tr>
+    <tr><td class="k">CR-40</td><td>Fiche</td><td>Rechercher une autre personne depuis la fiche, avec une sélection non enregistrée.</td><td>Confirmation affichée ; fiche choisie ouverte.</td><td class="c"><span class="tag g">OK</span></td><td class="c"><span class="tag n">À faire</span></td></tr>
+    <tr><td class="k">CR-41</td><td>Retour prévu</td><td>Emprunter avec « + 1 mois » ; essayer une date antérieure ; enregistrer sans date.</td><td>Date conservée et rappelée ; date antérieure refusée ; emprunt sans échéance possible.</td><td class="c"><span class="tag g">OK</span></td><td class="c"><span class="tag n">À faire</span></td></tr>
+    <tr><td class="k">CR-42</td><td>Alerte retard</td><td>Enregistrer un emprunt dont la date prévue est passée ; rouvrir l'application.</td><td>Fenêtre d'alerte ; carte rouge, pastilles, filtre « En retard de retour » ; segment violet dans le parc.</td><td class="c"><span class="tag g">OK</span></td><td class="c"><span class="tag n">À faire</span></td></tr>
+    <tr><td class="k">CR-43</td><td>Actions groupées</td><td>Cocher des attestations en attente ; signer sans mention, puis avec mention.</td><td>Bouton grisé sans mention ; attestations signées, PDF archivés, aucun message envoyé.</td><td class="c"><span class="tag g">OK</span></td><td class="c"><span class="tag n">À faire</span></td></tr>
+    <tr><td class="k">CR-44</td><td>Actions groupées</td><td>« Exporter la sélection » (CSV).</td><td>Fichier avec les seules lignes cochées.</td><td class="c"><span class="tag n">À faire</span></td><td class="c"><span class="tag n">À faire</span></td></tr>
+    <tr><td class="k">CR-45</td><td>Scan rapide</td><td>Scanner (saisie) un équipement disponible puis un équipement emprunté ; « Prêter maintenant », « Restituer ce matériel ».</td><td>Prêt enregistré (Annuler possible) ; Restituer ouvert avec l'équipement coché.</td><td class="c"><span class="tag g">OK</span></td><td class="c"><span class="tag n">À faire</span></td></tr>
+    <tr><td class="k">CR-46</td><td>Panneau latéral</td><td>Écran de 1 480 px ou plus : ouvrir une fiche, changer de personne avec une sélection.</td><td>Fiche à droite, liste visible ; confirmation avant d'abandonner la sélection.</td><td class="c"><span class="tag g">OK</span></td><td class="c"><span class="tag n">À faire</span></td></tr>
+    <tr><td class="k">CR-47</td><td>Rapport par email</td><td>Saisir une adresse invalide, puis une valeur valide ; « Envoyer maintenant », « Créer un brouillon », « Télécharger le message ».</td><td>Adresse invalide refusée ; message reçu avec le rapport joint ; brouillon et .eml conformes.</td><td class="c"><span class="tag w">Simulé</span></td><td class="c"><span class="tag b">Prioritaire</span></td></tr>
+    <tr><td class="k">CR-48</td><td>Destinataire</td><td>Restituer « Par email » avec une autre adresse saisie à la main.</td><td>Brouillon adressé à cette adresse ; historique « Envoyée par email à … ».</td><td class="c"><span class="tag w">Simulé</span></td><td class="c"><span class="tag b">Prioritaire</span></td></tr>
+    <tr><td class="k">CR-49</td><td>Recherche rapide</td><td>Ctrl K : liste de départ, recherche d'une personne, Entrée puis Maj + Entrée.</td><td>« À traiter » chiffré ; une ligne par personne ; les deux actions s'ouvrent.</td><td class="c"><span class="tag g">OK</span></td><td class="c"><span class="tag n">À faire</span></td></tr>
+    <tr><td class="k">CR-50</td><td>Thème eXalt</td><td>Choisir « eXalt nuit » ; télécharger le PDF d'une attestation.</td><td>Police Poppins, accent eXalt, logo dans le menu et sur le PDF.</td><td class="c"><span class="tag g">OK</span></td><td class="c"><span class="tag n">À faire</span></td></tr>
+    <tr><td class="k">CR-51</td><td>Rôles</td><td>Chercher « prénom nom », « nom prénom » et un début de mots dans Rôles et accès.</td><td>Nom complet affiché, même personne trouvée.</td><td class="c"><span class="tag w">Simulé</span></td><td class="c"><span class="tag b">Prioritaire</span></td></tr>
+    <tr><td class="k">CR-52</td><td>Rapport par page</td><td>Cliquer sur « Rapport » dans Emprunter, Restituer, Attestations, Archives PDF et Matériel perdu ; générer le PDF et l'Excel.</td><td>Titre, sections et nom de fichier propres à chaque page ; Restituer liste les retards.</td><td class="c"><span class="tag g">OK</span></td><td class="c"><span class="tag n">À faire</span></td></tr>
+  </table>
+</div>
+
+<!-- ================= 11. RISQUES ================= -->
+<div class="chap">
+  <h1 id="s11">11. Registre des risques et limites</h1>
+  <table>
+    <tr><th style="width:7%">Réf.</th><th style="width:25%">Risque</th><th style="width:9%" class="c">Niveau</th><th>Mesure / état</th></tr>
+    <tr><td class="k">R-01</td><td>Données non conservées si la base est injoignable</td><td class="c"><span class="tag w">Moyen</span></td><td>Pastille « Mode local » ; action à refaire ; export CSV régulier recommandé.</td></tr>
+    <tr><td class="k">R-02</td><td>Signature enregistrée par erreur</td><td class="c"><span class="tag n">Faible</span></td><td>Fenêtre de confirmation de date ; bouton Annuler pendant 10 secondes ; au-delà, correction par l'administrateur.</td></tr>
+    <tr><td class="k">R-03</td><td>Accès par une personne non autorisée</td><td class="c"><span class="tag w">Moyen</span></td><td>Partage limité à des personnes désignées ; revue trimestrielle des accès.</td></tr>
+    <tr><td class="k">R-04</td><td>Rôles Agent IT et Lecteur appliqués à l'affichage seulement</td><td class="c"><span class="tag w">Moyen</span></td><td>Seul « Peut consulter » interdit techniquement l'écriture ; rôles réels via groupes Entra ID prévus.</td></tr>
+    <tr><td class="k">R-05</td><td>Dépendance aux CDN (jsPDF, pdf.js, QR : PDF, aperçu, étiquettes et scanner indisponibles si bloqués)</td><td class="c"><span class="tag w">Moyen</span></td><td>Message explicite ; hébergement interne des bibliothèques à étudier.</td></tr>
+    <tr><td class="k">R-06</td><td>Parc réel non connecté : chaque personne importée reçoit un kit standard de 9 équipements</td><td class="c"><span class="tag b">Élevé</span></td><td>Choisir la source du parc (Intune, SharePoint ou Excel) avant l'usage à 1 500 collaborateurs ; l'annuaire Entra ID est déjà importable (§ 4.19).</td></tr>
+    <tr><td class="k">R-07</td><td>Brouillon et envoi Outlook non éprouvés avec un compte réel</td><td class="c"><span class="tag w">Moyen</span></td><td>Cas CR-12 et CR-37 prioritaires ; fichier .eml en repli.</td></tr>
+    <tr><td class="k">R-08</td><td>SMS adressés à un numéro de test</td><td class="c"><span class="tag w">Moyen</span></td><td>À désactiver avant l'usage réel (<code>SMS_TEST_NUMBER</code>).</td></tr>
+    <tr><td class="k">R-09</td><td>Pas de durée de conservation ni de purge</td><td class="c"><span class="tag w">Moyen</span></td><td>Durée à définir avec le DPO ; purge à développer.</td></tr>
+    <tr><td class="k">R-10</td><td>Pas de sauvegarde externe automatique</td><td class="c"><span class="tag w">Moyen</span></td><td>Export complet périodique à mettre en place.</td></tr>
+    <tr><td class="k">R-12</td><td>Mention de signature en texte libre (informations sensibles, propos inadaptés)</td><td class="c"><span class="tag n">Faible</span></td><td>Limite de 140 caractères ; consigne d'usage (§ 7.5) ; auteur tracé.</td></tr>
+    <tr><td class="k">R-11</td><td>Signature déclarée par l'équipe IT, non qualifiée</td><td class="c"><span class="tag n">Faible</span></td><td>Le suivi indique qui a validé et quand ; recours à une signature électronique à étudier si exigé.</td></tr>
+      <tr><td class="k">R-13</td><td>Recherche de personnes limitée aux membres ayant un compte Claude (12 résultats au plus)</td><td class="c"><span class="tag w">Moyen</span></td><td>Message explicite ; rattachement par identifiant copié sur l'écran du collaborateur ; connexion Entra ID prévue.</td></tr>
+    <tr><td class="k">R-14</td><td>Résumés « Mon matériel » à tenir à jour (rattachement par fiche)</td><td class="c"><span class="tag n">Faible</span></td><td>Mise à jour à chaque action d'un agent ; résumé créé dès le rattachement ; relancer « Tous les utilisateurs » pour les nouvelles fiches.</td></tr>
+    <tr><td class="k">R-15</td><td>Annuaire importé : données personnelles de tous les collaborateurs lisibles par toute personne qui peut utiliser la page</td><td class="c"><span class="tag w">Moyen</span></td><td>Validation du DPO ; essais sur une sélection ou un groupe ; règle de lecture réservée aux administrateurs à ajouter avant le déploiement.</td></tr>
+    <tr><td class="k">R-16</td><td>Message envoyé à un mauvais destinataire ou au texte inadapté</td><td class="c"><span class="tag n">Faible</span></td><td>Fenêtre de confirmation montrant destinataire, objet et texte ; texte modifiable ; brouillon possible.</td></tr>
+    <tr><td class="k">R-17</td><td>Outlook sur le web non ouvrable depuis la page (navigateur)</td><td class="c"><span class="tag n">Faible</span></td><td>Brouillon dans Outlook et fichier .eml proposés (§ 4.13).</td></tr>
+    <tr><td class="k">R-18</td><td>Import limité à 999 comptes par lecture et par groupe</td><td class="c"><span class="tag n">Faible</span></td><td>Lecture par tranches pour tout l'annuaire ; message pour un groupe trop grand.</td></tr>
+    <tr><td class="k">R-19</td><td>Alertes de retard visibles seulement à l'ouverture de l'application (aucune notification automatique)</td><td class="c"><span class="tag w">Moyen</span></td><td>Fenêtre d'alerte, carte et pastilles rouges ; tâche planifiée à étudier pour prévenir sans ouverture.</td></tr>
+    <tr><td class="k">R-20</td><td>Adresse saisie à la main erronée ou non vérifiée (attestation, rapport)</td><td class="c"><span class="tag n">Faible</span></td><td>Format contrôlé, destinataire affiché avant l'envoi ; l'existence de l'adresse n'est pas vérifiée.</td></tr>
+    <tr><td class="k">R-21</td><td>Police Poppins chargée depuis Google Fonts</td><td class="c"><span class="tag n">Faible</span></td><td>Police système en repli ; hébergement interne possible.</td></tr>
+    <tr><td class="k">R-22</td><td>Rapport trop volumineux pour l'envoi direct (plus de 2,9 Mo)</td><td class="c"><span class="tag n">Faible</span></td><td>Message explicite ; téléchargement puis jonction manuelle.</td></tr>
+    <tr><td class="k">R-23</td><td>Recherche de personnes de « Rôles et accès » dépendante du moteur de la plateforme</td><td class="c"><span class="tag n">Faible</span></td><td>Recherche par mots et début de nom ; identifiant copiable en dernier recours ; cas CR-51 à confirmer en production.</td></tr>
+</table>
+  <h2>Évolutions envisagées</h2>
+  <table>
+    <tr><th style="width:30%">Évolution</th><th>Description</th></tr>
+    <tr><td class="k">Annuaire et parc réels</td><td>Parc réel : source à choisir (Intune, SharePoint ou Excel) ; l'annuaire Entra ID est déjà importable (§ 4.19).</td></tr>
+    <tr><td class="k">Envoi direct</td><td>Envoi automatique sans confirmation : non retenu ; l'envoi de l'attestation signée se fait par un clic dans une fenêtre de confirmation (§ 4.20).</td></tr>
+    <tr><td class="k">Rôles et droits réels</td><td>Rôles issus de groupes Entra ID, séparation des données par collaborateur côté serveur, signature par le collaborateur sur son propre appareil.</td></tr>
+    <tr><td class="k">Départs à venir</td><td>Date de départ par collaborateur et alerte si du matériel est encore dehors.</td></tr>
+    <tr><td class="k">Notification des retards</td><td>Prévenir sans ouvrir l'application (tâche planifiée) : à étudier (R-19).</td></tr>
+    <tr><td class="k">Purge, export complet</td><td>Purge selon la durée de conservation, export intégral des données ; annulation étendue au-delà du message de confirmation.</td></tr>
+  </table>
+</div>
+
+<!-- ================= 12. SUPPORT ================= -->
+<div class="chap">
+  <h1 id="s12">12. Support et escalade</h1>
+  <table>
+    <tr><th style="width:14%">Niveau</th><th style="width:34%">Qui</th><th>Rôle</th></tr>
+    <tr><td class="k">Niveau 1</td><td>Référent de l'application — <i>À renseigner</i></td><td>Premier contact des utilisateurs ; applique le chapitre 13.</td></tr>
+    <tr><td class="k">Niveau 2</td><td>Administrateur de l'application — <i>À renseigner</i></td><td>Corrections, publication d'une version, réglages, accès, connecteurs.</td></tr>
+    <tr><td class="k">Niveau 3</td><td>DSI / RSSI — <i>À renseigner</i></td><td>Décisions de sécurité, données personnelles, incidents majeurs.</td></tr>
+  </table>
+  <h2>Informations à fournir lors d'un incident</h2>
+  <ul>
+    <li>Date et heure, nom de la personne et référence de l'attestation concernée (ATT-…).</li>
+    <li>Action tentée et message affiché (copier le texte de la bulle en bas à droite).</li>
+    <li>Appareil et navigateur ; état de la pastille de sauvegarde (« Synchronisé » ou « Mode local »).</li>
+    <li>Ligne « Diagnostic » de l'aide (touche <code>?</code>) : version, rôle, état de la base, erreurs récentes.</li>
+    <li>Capture d'écran si possible.</li>
+  </ul>
+  <div class="box warn"><b class="t">À renseigner avant l'approbation</b>Les noms et moyens de contact des trois niveaux de support doivent être complétés par la DSI.</div>
+</div>
+
+<!-- ================= 13. FAQ ================= -->
+<div class="chap">
+  <h1 id="s13">13. Questions fréquentes</h1>
+  <table>
+    <tr><th style="width:36%">Question</th><th>Réponse</th></tr>
+    <tr><td class="k">La pastille indique « Mode local ».</td><td>La base est injoignable ou la page est un fichier local. Recharger depuis le lien de l'application ; les actions faites en mode local ne sont pas conservées.</td></tr>
+    <tr><td class="k">Je n'ai pas les mêmes données qu'un collègue.</td><td>Recharger la page : les données sont chargées à l'ouverture.</td></tr>
+    <tr><td class="k">Le brouillon Outlook ne se crée pas.</td><td>Vérifier que le connecteur Microsoft 365 est connecté dans les paramètres de Claude et autorisé pour la page. Le fichier .eml proposé dans la fenêtre « Message prêt à envoyer » fonctionne dans tous les cas.</td></tr>
+    <tr><td class="k">Le PDF d'une ancienne attestation signée n'est pas dans les archives.</td><td>Onglet Archives PDF, filtre « À archiver », bouton « Archiver le PDF ».</td></tr>
+    <tr><td class="k">J'ai signé une attestation ou enregistré un emprunt par erreur.</td><td>Cliquer tout de suite sur <b>Annuler</b> dans le message de confirmation (10 secondes). Si le message a disparu, ajouter un commentaire sur la fiche et contacter l'administrateur (niveau 2).</td></tr>
+    <tr><td class="k">Quelqu'un signe à la place du collaborateur.</td><td>Dans la fenêtre de signature, écrire la mention (« Je signe à la place de … ») : elle est reproduite dans le PDF et dans les listes.</td></tr>
+    <tr><td class="k">Comment changer la couleur ou le fond de l'application ?</td><td>Bouton en bas du menu latéral (Thème) : choisir un thème et une couleur d'accent. Le choix est propre à votre navigateur.</td></tr>
+    <tr><td class="k">Une personne ne voit pas « Mon matériel » ou voit « Compte non rattaché ».</td><td>Elle doit être partagée en « Peut consulter » et rattachée à sa fiche dans « Rôles et accès » (ou via « Tous les utilisateurs »). Si elle reste introuvable, elle copie l'identifiant affiché sur son écran et l'administrateur le colle dans le champ de recherche.</td></tr>
+    <tr><td class="k">Je ne trouve pas une personne dans « Rôles et accès ».</td><td>La recherche ne retrouve que les membres de l'organisation qui ont un compte Claude, 12 résultats au plus ; saisir le prénom et le nom (ou le début), ou l'adresse email.</td></tr>
+    <tr><td class="k">Où générer un rapport ?</td><td>Bouton « Rapport » en haut à droite de chaque page (Accueil, Emprunter, Restituer, Attestations, Archives PDF, Matériel perdu) : le rapport est celui de la page ; choisir la période et le format PDF ou Excel, puis « Générer le rapport » ou « Envoyer par email » (réservé aux administrateurs, super utilisateurs et lecteurs).</td></tr>
+    <tr><td class="k">Comment envoyer un rapport par email ?</td><td>Rapport, choisir période et format, « Envoyer par email » : saisir le nom ou l'adresse du destinataire (suggestions), contrôler le message, puis « Envoyer maintenant ». Au-delà de 2,9 Mo : télécharger le rapport et le joindre à la main.</td></tr>
+    <tr><td class="k">La personne n'a pas de compte eXalt : comment lui envoyer l'attestation ?</td><td>Dans l'aperçu de « Par email », choisir « Une autre adresse, saisie à la main » et taper son adresse personnelle ; elle est conservée avec l'attestation.</td></tr>
+    <tr><td class="k">À quoi sert la date de retour prévue, et est-elle obligatoire ?</td><td>Elle indique quand le matériel doit revenir ; elle est facultative. Dépassée, elle déclenche l'alerte de retard (§ 4.21).</td></tr>
+    <tr><td class="k">Comment être prévenu d'un retard ?</td><td>À l'ouverture, une fenêtre liste les retards (une fois par jour au plus) ; l'Accueil, les pastilles rouges et le filtre « En retard de retour » les rappellent. Rien n'est envoyé tout seul.</td></tr>
+    <tr><td class="k">Comment signer plusieurs attestations d'un coup ?</td><td>Attestations : cocher les lignes, « Marquer N comme signées », saisir la mention obligatoire (§ 4.22).</td></tr>
+    <tr><td class="k">Comment passer vite d'une personne à l'autre ?</td><td>Dans une fiche, les flèches à côté de la croix ou <code>Alt ←</code> / <code>Alt →</code>.</td></tr>
+    <tr><td class="k">Je ne vois pas les collaborateurs de l'organisation dans Emprunter et Restituer.</td><td>L'annuaire doit être importé : Rôles et accès, carte « Annuaire Microsoft 365 », bouton d'import (§ 4.19). Sans import, 15 personnes de démonstration sont proposées.</td></tr>
+    <tr><td class="k">Le groupe « Tous les utilisateurs » est refusé.</td><td>Il compte 999 membres ou plus, limite de lecture du connecteur : utiliser « Importer tout l'annuaire » ou un groupe plus petit.</td></tr>
+    <tr><td class="k">Le bouton « Valider la signature » est grisé.</td><td>Tracer une signature dans le cadre ou écrire une mention ; compléter la mention pré-remplie (« Signé par … »).</td></tr>
+    <tr><td class="k">Outlook ne s'ouvre pas après la signature ou « Par email ».</td><td>Outlook sur le web ne peut pas s'ouvrir depuis la page. Le message est dans le dossier Brouillons d'Outlook, ou télécharger le message pour Outlook (.eml) et l'ouvrir par double-clic.</td></tr>
+    <tr><td class="k">« Enregistrer » ne fait rien.</td><td>Cocher d'abord du matériel (un message le dit). Si un message rouge « Enregistrement impossible » s'affiche, relever la ligne de diagnostic de l'aide (touche <code>?</code>).</td></tr>
+    <tr><td class="k">Où est passé le bouton Relancer ?</td><td>Il est masqué (réglage <code>SHOW_REMIND_BUTTON</code>). Les retards restent visibles dans le filtre « À relancer » et sur l'Accueil.</td></tr>
+    <tr><td class="k">La création du PDF, l'aperçu, les étiquettes ou le scanner échouent.</td><td>Une bibliothèque n'a pas pu être chargée (réseau ou pare-feu bloquant cdnjs.cloudflare.com ou cdn.jsdelivr.net). Contacter le niveau 2.</td></tr>
+    <tr><td class="k">Les relances partent-elles seules ?</td><td>Non : l'application ne contacte personne seule ; le bouton Relancer (masqué par défaut) ne fait que préparer un message.</td></tr>
+    <tr><td class="k">Comment changer le délai de relance ?</td><td>Réglage <code>REMINDER_AFTER_DAYS</code> (3 jours) : demander la modification à l'administrateur.</td></tr>
+    <tr><td class="k">Peut-on utiliser l'application sur téléphone ?</td><td>Oui : barre d'onglets en bas, boutons adaptés au tactile, signature au doigt ; les boutons email et SMS ouvrent les applications de l'appareil.</td></tr>
+  </table>
+</div>
+
+<!-- ================= ANNEXES ================= -->
+<div class="chap">
+  <h1 id="sA">Annexes</h1>
+  <h2>A. Colonnes des exports CSV</h2>
+  <table>
+    <tr><th style="width:26%">Export</th><th>Colonnes</th></tr>
+    <tr><td class="k">Attestations</td><td>Personne · Rôle · Email · Téléphone · Matériel · Canal · Envoyée le · Date de retour déclarée · Statut · Signée le · Enregistrée par · Signée par · Relances · Mention de signature</td></tr>
+    <tr><td class="k">Matériel perdu</td><td>Matériel · Personne · Quantité · Motif · Déclaré par</td></tr>
+  </table>
+  <p>Nom des fichiers : <code>attestations_AAAA-MM-JJ.csv</code>, <code>attestations_selection_AAAA-MM-JJ.csv</code> (sélection d'attestations) et <code>materiel_perdu_AAAA-MM-JJ.csv</code> ; rapports : <code>rapport_gpiexalt_AAAA-MM-JJ.pdf</code> et <code>.xlsx</code> pour l'Accueil (feuilles Excel : Synthèse, Par type, À traiter, Attestations, Signatures, Pertes, Emprunts, Par personne), et <code>rapport_gpiexalt_emprunts|restitutions|attestations|archives|perdu_AAAA-MM-JJ</code> pour les pages. Encodage UTF-8 avec marque d'ordre (lisible dans Excel).</p>
+  <h2>B. Conventions de nommage</h2>
+  <table>
+    <tr><th style="width:26%">Objet</th><th>Convention</th></tr>
+    <tr><td class="k">Référence d'attestation</td><td><code>ATT-&lt;n° personne&gt;-&lt;n° attestation&gt;</code>, par exemple ATT-2-4</td></tr>
+    <tr><td class="k">Fichier PDF</td><td><code>attestation_restitution_prenom-nom_ATT-2-4.pdf</code> ; version signée : suffixe <code>_signee</code></td></tr>
+    <tr><td class="k">Étiquettes QR</td><td><code>etiquettes_qr_prenom-nom.pdf</code> ; le QR contient l'identifiant de l'équipement (ex. AP-1)</td></tr>
+    <tr><td class="k">Document d'archive</td><td><code>documents/ATT-2-4</code> dans la base</td></tr>
+  </table>
+  <h2>C. Messages types</h2>
+  <table>
+    <tr><th style="width:26%">Message</th><th>Texte</th></tr>
+    <tr><td class="k">Email de restitution</td><td>Objet : « Restitution de matériel ». « Merci Monsieur/Madame d'avoir restitué le matériel suivant : [liste]. Vous trouverez ci-joint l'attestation de restitution. Cordialement, »</td></tr>
+    <tr><td class="k">Email d'attestation signée</td><td>Objet : « Attestation de restitution de matériel signée ». « Bonjour [prénom], Vous trouverez ci-joint l'attestation de restitution signée le [date], concernant le matériel suivant : [liste]. Merci d'en conserver un exemplaire. Cordialement, » (modifiable avant l'envoi)</td></tr>
+    <tr><td class="k">Email de rapport</td><td>Objet : « [titre du rapport] du [date] », par exemple « Rapport des restitutions du 12/10/2026 ». « Bonjour, Vous trouverez ci-joint le document « [titre du rapport] » (format [PDF ou Excel]), généré le [date]. Période : [période]. Cordialement, [nom] » (modifiable avant l'envoi)</td></tr>
+    <tr><td class="k">SMS de restitution</td><td>« Merci Monsieur/Madame d'avoir restitué le matériel : [liste]. Cordialement, »</td></tr>
+    <tr><td class="k">Email de relance</td><td>Objet : « Rappel : attestation de restitution à signer ». « Bonjour, Sauf erreur de notre part, l'attestation de restitution du matériel suivant, envoyée le [date], n'a pas encore été signée : [liste]. Merci de bien vouloir la signer et nous la retourner dès que possible. Cordialement, »</td></tr>
+    <tr><td class="k">SMS de relance</td><td>« Rappel : l'attestation de restitution du matériel ([liste]) envoyée le [date] n'est pas encore signée. Merci de la signer dès que possible. Cordialement, »</td></tr>
+  </table>
+  <h2>D. Raccourcis clavier et catalogue</h2>
+  <table>
+    <tr><th style="width:26%">Élément</th><th>Détail</th></tr>
+    <tr><td class="k">Raccourcis</td><td><code>1</code> Accueil · <code>2</code> Emprunter · <code>3</code> Restituer · <code>4</code> Matériel perdu · <code>5</code> Attestations · <code>6</code> Archives PDF · <code>7</code> Activités récentes · <code>Ctrl K</code> recherche rapide (<code>Maj</code> + <code>Entrée</code> : autre action sur une personne) · <code>/</code> recherche dans la liste · <code>Alt ←</code> <code>Alt →</code> personne précédente ou suivante · <code>?</code> aide clavier · <code>Échap</code> vider la recherche ou fermer une fenêtre</td></tr>
+    <tr><td class="k">Types de matériel</td><td>Ordinateur portable · Mac · Téléphone mobile · Casque · Souris · Adaptateur · Chargeur USB-C · Chargeur HP · Chargeur Asus</td></tr>
+  </table>
+  <p style="margin-top:14pt; color:#586080; font-size:9pt;">Fin du document — DOC-GPIEXALT-001, version 7.0, 12/10/2026.</p>
+</div>
+
+</body>
+</html>

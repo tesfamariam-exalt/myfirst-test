@@ -3,8 +3,8 @@
   "configurations": [
     {
       "name": "static-server",
-      "runtimeExecutable": "python",
-      "runtimeArgs": ["-m", "http.server", "8000"],
+      "runtimeExecutable": "powershell",
+      "runtimeArgs": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "_serve.ps1"],
       "port": 8000
     }
   ]
