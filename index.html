@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registre — Inscriptions & Dashboard</title>
+<style>
+  :root{
+    --bg: #1B1F2B;
+    --surface: #242938;
+    --surface-2: #2C3244;
+    --border: #363D52;
+    --text: #F1EFEA;
+    --text-muted: #939AB0;
+    --accent: #E8A33D;
+    --accent-dim: #6B5327;
+    --success: #4CAF82;
+    --danger: #E06B6B;
+    --radius: 10px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    min-height:100vh;
+  }
+  .app{
+    display:flex;
+    min-height:100vh;
+  }
+  .sidebar{
+    width:220px;
+    flex-shrink:0;
+    background:var(--surface);
+    border-right:1px solid var(--border);
+    padding:28px 16px;
+    display:flex;
+    flex-direction:column;
+    gap:24px;
+  }
+  .brand{
+    font-family: Georgia, "Times New Roman", serif;
+    font-size:20px;
+    letter-spacing:0.02em;
+    padding:0 8px;
+  }
+  .brand span{color:var(--accent);}
+  nav{display:flex; flex-direction:column; gap:4px;}
+  .nav-item{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:10px 12px;
+    border-radius:8px;
+    color:var(--text-muted);
+    cursor:pointer;
+    font-size:14px;
+    border:1px solid transparent;
+    transition: background .15s, color .15s;
+  }
+  .nav-item:hover{ background:var(--surface-2); color:var(--text); }
+  .nav-item.active{
+    background:var(--surface-2);
+    color:var(--text);
+    border-color:var(--border);
+  }
+  .nav-item .dot{
+    width:6px;height:6px;border-radius:50%;
+    background:var(--text-muted);
+  }
+  .nav-item.active .dot{ background:var(--accent); }
+
+  .sidebar-stack{
+    margin-top:auto;
+    padding:12px;
+    border-top:1px solid var(--border);
+  }
+  .stack-label{ font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:.08em; margin-bottom:10px;}
+  .avatars{ display:flex; }
+  .avatar{
+    width:28px;height:28px;border-radius:50%;
+    background:var(--accent-dim);
+    color:var(--accent);
+    display:flex;align-items:center;justify-content:center;
+    font-size:11px; font-weight:600;
+    border:2px solid var(--surface);
+    margin-left:-8px;
+  }
+  .avatar:first-child{ margin-left:0; }
+  .count-text{ font-size:12px; color:var(--text-muted); margin-top:8px;}
+
+  main{
+    flex:1;
+    padding:40px 48px;
+    max-width:960px;
+  }
+  h1{
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight:400;
+    font-size:28px;
+    margin:0 0 6px 0;
+  }
+  .subtitle{ color:var(--text-muted); font-size:14px; margin-bottom:32px;}
+
+  .card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:28px;
+    max-width:420px;
+  }
+  .field{ margin-bottom:16px; }
+  label{
+    display:block;
+    font-size:12px;
+    color:var(--text-muted);
+    margin-bottom:6px;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+  }
+  input{
+    width:100%;
+    background:var(--bg);
+    border:1px solid var(--border);
+    color:var(--text);
+    padding:10px 12px;
+    border-radius:6px;
+    font-size:14px;
+    outline:none;
+    transition:border-color .15s;
+  }
+  input:focus{ border-color:var(--accent); }
+  input::placeholder{ color:#5A6178; }
+  .error-msg{ color:var(--danger); font-size:12px; margin-top:6px; min-height:16px; }
+
+  button.primary{
+    width:100%;
+    background:var(--accent);
+    color:#1B1F2B;
+    border:none;
+    padding:12px;
+    border-radius:6px;
+    font-size:14px;
+    font-weight:600;
+    cursor:pointer;
+    margin-top:6px;
+    transition:opacity .15s;
+  }
+  button.primary:hover{ opacity:.9; }
+  button.primary:disabled{ opacity:.5; cursor:not-allowed; }
+
+  .toast{
+    margin-top:14px;
+    padding:10px 12px;
+    border-radius:6px;
+    font-size:13px;
+    background:rgba(76,175,130,.12);
+    color:var(--success);
+    border:1px solid rgba(76,175,130,.3);
+    display:none;
+  }
+  .toast.show{ display:block; }
+
+  .table-wrap{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    overflow:hidden;
+  }
+  table{ width:100%; border-collapse:collapse; }
+  thead th{
+    text-align:left;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    color:var(--text-muted);
+    padding:12px 16px;
+    border-bottom:1px solid var(--border);
+    font-weight:500;
+  }
+  tbody td{
+    padding:14px 16px;
+    font-size:14px;
+    border-bottom:1px solid var(--border);
+  }
+  tbody tr:last-child td{ border-bottom:none; }
+  tbody tr:hover{ background:var(--surface-2); }
+  .mono{ font-family: "SF Mono", "Consolas", monospace; font-size:13px; color:var(--text-muted); }
+  .user-cell{ display:flex; align-items:center; gap:10px; }
+  .initials{
+    width:30px;height:30px;border-radius:50%;
+    background:var(--accent-dim);
+    color:var(--accent);
+    display:flex;align-items:center;justify-content:center;
+    font-size:12px;font-weight:600;
+    flex-shrink:0;
+  }
+  .row-actions{ display:flex; gap:8px; }
+  .del-btn, .edit-btn{
+    background:none;
+    border:1px solid var(--border);
+    color:var(--text-muted);
+    padding:6px 10px;
+    border-radius:6px;
+    font-size:12px;
+    cursor:pointer;
+  }
+  .del-btn:hover{ color:var(--danger); border-color:var(--danger); }
+  .edit-btn:hover{ color:var(--accent); border-color:var(--accent); }
+
+  .modal-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:100;
+  }
+  .modal{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:28px;
+    width:100%;
+    max-width:380px;
+  }
+  .modal h2{
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight:400;
+    font-size:20px;
+    margin:0 0 20px 0;
+  }
+  .modal-actions{
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+    margin-top:20px;
+  }
+  button.secondary{
+    background:none;
+    border:1px solid var(--border);
+    color:var(--text);
+    padding:10px 16px;
+    border-radius:6px;
+    font-size:14px;
+    cursor:pointer;
+  }
+  button.secondary:hover{ background:var(--surface-2); }
+
+  .empty-state{
+    padding:60px 20px;
+    text-align:center;
+    color:var(--text-muted);
+  }
+  .empty-state .big{ font-size:32px; margin-bottom:8px; }
+
+  .stats-row{
+    display:flex;
+    gap:16px;
+    margin-bottom:24px;
+  }
+  .stat{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:16px 20px;
+    flex:1;
+  }
+  .stat-num{ font-family: Georgia, serif; font-size:26px; }
+  .stat-label{ font-size:12px; color:var(--text-muted); margin-top:4px; }
+
+  .hidden{ display:none !important; }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="sidebar">
+    <div class="brand">Registre<span>.</span></div>
+    <nav>
+      <div class="nav-item active" data-page="signup"><span class="dot"></span>Inscription</div>
+      <div class="nav-item" data-page="dashboard"><span class="dot"></span>Utilisateurs</div>
+    </nav>
+    <div class="sidebar-stack">
+      <div class="stack-label">Communauté</div>
+      <div class="avatars" id="avatarStack"></div>
+      <div class="count-text" id="countText">0 inscrit</div>
+    </div>
+  </div>
+
+  <main>
+    <section id="page-signup">
+      <h1>Créer un compte</h1>
+      <div class="subtitle">Renseigne les informations pour ajouter un utilisateur au registre.</div>
+      <div class="card">
+        <form id="signupForm">
+          <div class="field">
+            <label for="fullname">Nom complet</label>
+            <input type="text" id="fullname" placeholder="Jeanne Dupont" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="jeanne@exemple.com" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" placeholder="8 caractères minimum" autocomplete="off">
+            <div class="error-msg" id="formError"></div>
+          </div>
+          <button type="submit" class="primary" id="submitBtn">Inscrire l'utilisateur</button>
+        </form>
+        <div class="toast" id="toast">Utilisateur inscrit avec succès.</div>
+      </div>
+    </section>
+
+    <section id="page-dashboard" class="hidden">
+      <h1>Utilisateurs inscrits</h1>
+      <div class="subtitle">Vue d'ensemble de toutes les personnes enregistrées.</div>
+
+      <div class="stats-row">
+        <div class="stat">
+          <div class="stat-num" id="statTotal">0</div>
+          <div class="stat-label">Total inscrits</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num" id="statToday">0</div>
+          <div class="stat-label">Aujourd'hui</div>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table id="userTable">
+          <thead>
+            <tr>
+              <th>Utilisateur</th>
+              <th>Email</th>
+              <th>Date d'inscription</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="userTableBody"></tbody>
+        </table>
+        <div class="empty-state hidden" id="emptyState">
+          <div class="big">👤</div>
+          Aucun utilisateur inscrit pour l'instant.<br>
+          Ajoute le premier via la page Inscription.
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div class="modal-overlay hidden" id="editModalOverlay">
+  <div class="modal">
+    <h2>Modifier l'utilisateur</h2>
+    <div class="field">
+      <label for="editName">Nom complet</label>
+      <input type="text" id="editName">
+    </div>
+    <div class="field">
+      <label for="editEmail">Email</label>
+      <input type="email" id="editEmail">
+      <div class="error-msg" id="editError"></div>
+    </div>
+    <div class="modal-actions">
+      <button type="button" class="secondary" id="editCancelBtn">Annuler</button>
+      <button type="button" class="primary" id="editSaveBtn">Enregistrer</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const USERS_KEY = 'registered-users';
+  let users = [];
+
+  const navItems = document.querySelectorAll('.nav-item');
+  const pages = {
+    signup: document.getElementById('page-signup'),
+    dashboard: document.getElementById('page-dashboard')
+  };
+
+  navItems.forEach(item=>{
+    item.addEventListener('click', ()=>{
+      navItems.forEach(i=>i.classList.remove('active'));
+      item.classList.add('active');
+      const target = item.dataset.page;
+      Object.keys(pages).forEach(p=>{
+        pages[p].classList.toggle('hidden', p !== target);
+      });
+      if(target === 'dashboard') renderDashboard();
+    });
+  });
+
+  function initials(name){
+    return name.trim().split(/\s+/).slice(0,2).map(w=>w[0]?.toUpperCase()||'').join('');
+  }
+
+  function formatDate(iso){
+    const d = new Date(iso);
+    return d.toLocaleDateString('fr-FR', {day:'2-digit', month:'short', year:'numeric'}) +
+           ' · ' + d.toLocaleTimeString('fr-FR', {hour:'2-digit', minute:'2-digit'});
+  }
+
+  const hasArtifactStorage = (typeof window.storage !== 'undefined' && window.storage && typeof window.storage.get === 'function');
+
+  async function loadUsers(){
+    try{
+      if(hasArtifactStorage){
+        const res = await window.storage.get(USERS_KEY, true);
+        users = res ? JSON.parse(res.value) : [];
+      }else{
+        const raw = window.localStorage.getItem(USERS_KEY);
+        users = raw ? JSON.parse(raw) : [];
+      }
+    }catch(e){
+      console.error('Erreur de chargement', e);
+      users = [];
+    }
+    renderSidebarStack();
+  }
+
+  async function saveUsers(){
+    try{
+      if(hasArtifactStorage){
+        await window.storage.set(USERS_KEY, JSON.stringify(users), true);
+      }else{
+        window.localStorage.setItem(USERS_KEY, JSON.stringify(users));
+      }
+    }catch(e){
+      console.error('Erreur de sauvegarde', e);
+    }
+  }
+
+  function renderSidebarStack(){
+    const stack = document.getElementById('avatarStack');
+    const countText = document.getElementById('countText');
+    stack.innerHTML = '';
+    users.slice(0,5).forEach(u=>{
+      const el = document.createElement('div');
+      el.className = 'avatar';
+      el.textContent = initials(u.name);
+      stack.appendChild(el);
+    });
+    countText.textContent = users.length + (users.length > 1 ? ' inscrits' : ' inscrit');
+  }
+
+  function renderDashboard(){
+    const tbody = document.getElementById('userTableBody');
+    const emptyState = document.getElementById('emptyState');
+    const table = document.getElementById('userTable');
+
+    if(users.length === 0){
+      table.classList.add('hidden');
+      emptyState.classList.remove('hidden');
+    }else{
+      table.classList.remove('hidden');
+      emptyState.classList.add('hidden');
+    }
+
+    tbody.innerHTML = '';
+    [...users].reverse().forEach(u=>{
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>
+          <div class="user-cell">
+            <div class="initials">${initials(u.name)}</div>
+            <span>${escapeHtml(u.name)}</span>
+          </div>
+        </td>
+        <td class="mono">${escapeHtml(u.email)}</td>
+        <td class="mono">${formatDate(u.createdAt)}</td>
+        <td>
+          <div class="row-actions">
+            <button class="edit-btn" data-id="${u.id}">Modifier</button>
+            <button class="del-btn" data-id="${u.id}">Supprimer</button>
+          </div>
+        </td>
+      `;
+      tbody.appendChild(tr);
+    });
+
+    tbody.querySelectorAll('.del-btn').forEach(btn=>{
+      btn.addEventListener('click', async ()=>{
+        const id = btn.dataset.id;
+        users = users.filter(u=>u.id !== id);
+        await saveUsers();
+        renderSidebarStack();
+        renderDashboard();
+        updateStats();
+      });
+    });
+
+    tbody.querySelectorAll('.edit-btn').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        openEditModal(btn.dataset.id);
+      });
+    });
+
+    updateStats();
+  }
+
+  let editingId = null;
+  const editModalOverlay = document.getElementById('editModalOverlay');
+  const editName = document.getElementById('editName');
+  const editEmail = document.getElementById('editEmail');
+  const editError = document.getElementById('editError');
+  const editCancelBtn = document.getElementById('editCancelBtn');
+  const editSaveBtn = document.getElementById('editSaveBtn');
+
+  function openEditModal(id){
+    const u = users.find(u=>u.id === id);
+    if(!u) return;
+    editingId = id;
+    editError.textContent = '';
+    editName.value = u.name;
+    editEmail.value = u.email;
+    editModalOverlay.classList.remove('hidden');
+  }
+
+  function closeEditModal(){
+    editingId = null;
+    editModalOverlay.classList.add('hidden');
+  }
+
+  editCancelBtn.addEventListener('click', closeEditModal);
+  editModalOverlay.addEventListener('click', (e)=>{
+    if(e.target === editModalOverlay) closeEditModal();
+  });
+
+  editSaveBtn.addEventListener('click', async ()=>{
+    const name = editName.value.trim();
+    const email = editEmail.value.trim();
+
+    if(!name || !email){
+      editError.textContent = 'Tous les champs sont requis.';
+      return;
+    }
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+      editError.textContent = 'Format d\'email invalide.';
+      return;
+    }
+    if(users.some(u=>u.id !== editingId && u.email.toLowerCase() === email.toLowerCase())){
+      editError.textContent = 'Cet email est déjà utilisé par un autre utilisateur.';
+      return;
+    }
+
+    const u = users.find(u=>u.id === editingId);
+    u.name = name;
+    u.email = email;
+    await saveUsers();
+    renderSidebarStack();
+    renderDashboard();
+    closeEditModal();
+  });
+
+  function updateStats(){
+    document.getElementById('statTotal').textContent = users.length;
+    const today = new Date().toDateString();
+    const todayCount = users.filter(u => new Date(u.createdAt).toDateString() === today).length;
+    document.getElementById('statToday').textContent = todayCount;
+  }
+
+  function escapeHtml(str){
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  const form = document.getElementById('signupForm');
+  const errorMsg = document.getElementById('formError');
+  const toast = document.getElementById('toast');
+  const submitBtn = document.getElementById('submitBtn');
+
+  form.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    errorMsg.textContent = '';
+    toast.classList.remove('show');
+
+    const name = document.getElementById('fullname').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+
+    if(!name || !email || !password){
+      errorMsg.textContent = 'Tous les champs sont requis.';
+      return;
+    }
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+      errorMsg.textContent = 'Format d\'email invalide.';
+      return;
+    }
+    if(password.length < 8){
+      errorMsg.textContent = 'Le mot de passe doit contenir au moins 8 caractères.';
+      return;
+    }
+    if(users.some(u=>u.email.toLowerCase() === email.toLowerCase())){
+      errorMsg.textContent = 'Cet email est déjà inscrit.';
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Inscription...';
+
+    const newUser = {
+      id: Date.now().toString(36) + Math.random().toString(36).slice(2,7),
+      name, email,
+      createdAt: new Date().toISOString()
+    };
+    users.push(newUser);
+    await saveUsers();
+    renderSidebarStack();
+
+    form.reset();
+    toast.classList.add('show');
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Inscrire l'utilisateur";
+  });
+
+  loadUsers();
+})();
+</script>
+</body>
+</html>
