@@ -195,8 +195,6 @@
   :root[data-skin^="exalt"] .btn-primary{ background:#5853FF; color:#FFFFFF; }
   :root[data-skin="exaltnight"] .btn-primary{ background:#7F7BFF; color:#0B0A3D; }
   .brand-x{ width:34px; height:34px; flex:none; object-fit:contain; display:block; }
-  :root[data-theme="dark"] .brand-x{ filter:brightness(0) invert(1); }
-  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .brand-x{ filter:brightness(0) invert(1); } }
   .tp-mode{ gap:6px; padding:6px 6px 7px; font-size:11.5px; }
   .tp-prev{ display:block; position:relative; width:100%; height:36px; border-radius:7px; background:var(--pv-bg); border:1px solid var(--pv-bd); overflow:hidden; }
   .tp-prev b{ position:absolute; left:6px; top:6px; right:6px; height:11px; border-radius:3px; background:var(--pv-sf); }
@@ -725,6 +723,21 @@
   .teams-remind:hover{ background:color-mix(in srgb, #7b83eb 24%, transparent); border-color:#7b83eb; color:var(--ink); }
   html[data-theme="light"] .teams-remind{ color:#4b4fb8; }
   html[data-role="reader"] .teams-remind{ display:none !important; }
+  .row-prolong{ flex:none; display:inline-flex; align-items:center; gap:6px; padding:5px 12px; font-size:12px; font-weight:700; border-radius:99px; white-space:nowrap; }
+  .row-prolong svg{ width:14px; height:14px; }
+  html[data-role="reader"] .row-prolong, html[data-role="reader"] .remind-banner{ display:none !important; }
+  .remind-banner{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; padding:12px 16px; margin:0 0 14px; border-radius:16px; border:1px solid color-mix(in srgb, #7b83eb 45%, var(--border)); background:color-mix(in srgb, #7b83eb 10%, transparent); }
+  .remind-banner > svg{ width:22px; height:22px; flex:none; color:#8e93ff; }
+  html[data-theme="light"] .remind-banner > svg{ color:#4b4fb8; }
+  .rb-txt{ display:flex; flex-direction:column; gap:2px; flex:1; min-width:200px; }
+  .rb-txt span{ font-size:12.5px; color:var(--ink-soft); }
+  .rq-list{ display:flex; flex-direction:column; gap:8px; max-height:52vh; overflow:auto; margin:8px 0; }
+  .rq-row{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; padding:10px 12px; border-radius:12px; border:1px solid var(--border); }
+  .rq-who{ flex:1; min-width:180px; display:flex; flex-direction:column; gap:2px; }
+  .rq-who span{ font-size:12px; color:var(--ink-soft); }
+  .ext-chips{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin:10px 0 4px; }
+  .due-chip.on{ border-color:var(--accent); color:var(--accent); background:color-mix(in srgb, var(--accent) 14%, transparent); }
+  .ext-prev{ font-size:14px; margin:6px 0 12px; }
   #teams-remind .modal-actions{ display:grid !important; gap:10px; margin-top:20px; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); }
   #teams-remind .modal-actions [data-sr="send"]{ grid-column:1 / -1; order:9; padding:14px 22px; font-size:15px; font-weight:800; display:inline-flex; align-items:center; justify-content:center; gap:8px; }
   #teams-remind .modal-actions [data-sr="send"] svg{ width:18px; height:18px; }
@@ -1009,7 +1022,9 @@
   .legend .lg-val{ font-weight:700; color:var(--ink); font-variant-numeric:tabular-nums; }
   .legend .lg-val em{ font-style:normal; font-weight:500; color:var(--ink-faint); margin-left:4px; }
   .legend.compact li{ padding:4px 0; }
-  .home-types-card{ margin-top:20px; margin-bottom:0; }
+  .home-types-card{ margin-top:0; margin-bottom:0; }
+  /* L'écart entre les deux rangées de cartes de l'Accueil est celui des colonnes (gap de .home-grid) */
+  #view-home .home-grid{ margin-bottom:20px; }
   .tip{ position:fixed; z-index:5000; left:0; top:0; max-width:300px; padding:8px 12px; border-radius:8px; background:var(--ink); color:var(--surface); font-size:12.5px; font-weight:600; line-height:1.4; pointer-events:none; opacity:0; transform:translateY(3px); transition:opacity .12s ease, transform .12s ease; box-shadow:0 8px 24px rgba(0,0,0,.35); }
   .tip.on{ opacity:1; transform:none; }
   .tip-seg{ cursor:default; transition:filter .12s ease; }
@@ -1433,6 +1448,16 @@
   .modal-backdrop{ overflow-y:auto; align-items:flex-start; overscroll-behavior:contain; }
   .modal-backdrop > .modal{ margin-top:auto; margin-bottom:auto; }
   .modal{ flex:none; }
+  /* Croix de fermeture en haut à droite d'une fenêtre (Échap ou clic à côté ferment aussi) */
+  .modal:has(> .modal-x){ position:relative; }
+  .modal-x{ position:absolute; top:14px; right:14px; width:34px; height:34px; padding:0; display:flex; align-items:center; justify-content:center; background:color-mix(in srgb, var(--ink) 6%, transparent); color:var(--ink-soft); border:1px solid var(--border); border-radius:10px; cursor:pointer; transition:background .12s ease, color .12s ease, border-color .12s ease; z-index:2; }
+  .modal-x:hover, .modal-x:focus-visible{ color:var(--ink); border-color:var(--accent); background:color-mix(in srgb, var(--accent) 14%, transparent); outline:none; }
+  .modal-x svg{ width:16px; height:16px; }
+  .tour-x{ top:12px; right:12px; width:32px; height:32px; border-radius:10px; z-index:3; }
+  .tour-card .tour-head{ padding-right:56px; }
+  @media (max-width: 480px){ .tour-card .tour-kicker{ font-size:10px; letter-spacing:.05em; padding:6px 10px; white-space:nowrap; } .tour-card .tour-head{ gap:8px; } }
+  .tp-x{ top:12px; right:12px; width:28px; height:28px; border-radius:9px; }
+  .tp-x svg{ width:14px; height:14px; }
 
   /* ---------- Finitions : jauges qui se dessinent, graphique, reflet des boutons ---------- */
   .stack{ animation:growx .9s var(--ease) both; }
@@ -1533,7 +1558,8 @@
   .inv-opt-head b{ display:block; font-size:14.5px; color:var(--ink); }
   .inv-opt-head div > span{ display:block; font-size:12.5px; color:var(--ink-soft); line-height:1.4; }
   .inv-opt-head[hidden], .inv-opt-head .n[hidden], .inv-opt-head div > span[hidden]{ display:none !important; }
-  #inv-manual-head{ margin-top:18px; padding-top:16px; border-top:1px dashed var(--border); }
+  #inv-import-head{ margin-top:18px; padding-top:16px; border-top:1px dashed var(--border); }
+  #inv-import-head + .inv-drop{ margin-top:8px; }
   .inv-extract{ padding:11px 13px; border-radius:12px; border:1px solid color-mix(in srgb, var(--accent) 40%, var(--border)); background:color-mix(in srgb, var(--accent) 9%, transparent); font-size:13px; line-height:1.5; color:var(--ink); }
   .inv-extract[hidden]{ display:none; }
   .inv-extract.bad{ border-color:var(--warn); background:color-mix(in srgb, var(--warn) 10%, transparent); }
@@ -1549,6 +1575,7 @@
   .inv-fact-btn{ display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:10px; font-size:12.5px; font-weight:700; }
   .inv-fact-btn svg{ width:14px; height:14px; color:var(--accent); }
   .inv-viewer-dlg{ width:min(900px, calc(100vw - 32px)); max-width:none; max-height:calc(100vh - 32px); display:flex; flex-direction:column; }
+  .inv-viewer-head{ padding-right:44px; }
   .inv-viewer-head h2{ margin:0 0 2px; }
   .inv-viewer-head p{ margin:0 0 10px; color:var(--ink-soft); font-size:13px; }
   .inv-viewer-body{ flex:1; min-height:240px; overflow:auto; border-radius:14px; border:1px solid var(--edge); background:color-mix(in srgb, var(--ink) 6%, var(--surface)); padding:10px; display:grid; gap:10px; justify-items:center; align-content:start; }
@@ -2608,7 +2635,7 @@
   .inv-eur .inv-input{ padding-right:36px; }
   .inv-eur span{ position:absolute; right:14px; top:50%; transform:translateY(-50%); font-weight:800; color:var(--ink-faint); pointer-events:none; }
   .inv-total{ min-height:20px; margin:6px 2px 0; font-size:13.5px; font-weight:800; color:var(--accent); font-variant-numeric:tabular-nums; }
-  #inv-price-wrap[hidden]{ display:none; }
+  #inv-price-wrap[hidden], #inv-ht-row[hidden]{ display:none; }
   .inv-nums .price b{ color:var(--accent); }
   .inv-amount{ display:flex; flex-direction:column; align-items:flex-end; gap:1px; margin-right:8px; font-variant-numeric:tabular-nums; }
   .inv-amount b{ font-size:14px; font-weight:800; color:var(--ink); }
@@ -2732,6 +2759,9 @@
   #home-types .inv-sum-main{ position:relative; padding-top:46px; }
   #home-types .inv-sum-title{ position:absolute; top:18px; left:20px; margin:0; font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint); }
   #home-types .inv-sum-title::before{ content:""; display:inline-block; width:3px; height:12px; border-radius:2px; background:var(--accent); margin-right:9px; vertical-align:-1px; }
+  /* Accueil : tous les titres de carte ont le même style (couleur d'accent, même taille, même barre) */
+  #view-home .home-card > h3, #view-home .home-recent-head h3, #home-att .inv-sum-title, #home-types .inv-sum-title, #home-types .spend-card .inv-chart-title{ font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--accent); }
+  #home-types .spend-card .inv-chart-title::before{ content:""; display:inline-block; width:3px; height:12px; border-radius:2px; background:var(--accent); margin-right:9px; vertical-align:-1px; }
   .inv-legend-sum li.go{ padding:3px 8px; margin:-3px -8px; border-radius:10px; cursor:pointer; transition:background .15s var(--ease), transform .15s var(--ease); }
   .inv-legend-sum li.go:hover, .inv-legend-sum li.go:focus-visible{ background:color-mix(in srgb, var(--accent) 13%, transparent); transform:translateX(2px); }
   .inv-legend-sum li.go:hover .nm{ color:var(--accent); font-weight:700; }
@@ -2956,6 +2986,90 @@
     .nav-item svg{ width:19px; height:19px; }
     .main{ padding-bottom:calc(64px + env(safe-area-inset-bottom, 0px)); }
   }
+  /* ---------- Compatibilité : téléphone, tablette, portable, grand écran, écran tactile ---------- */
+  /* Hauteur réelle de l'écran sur mobile : 100vh compte la barre d'adresse (iOS Safari, Chrome Android), 100dvh la suit */
+  @supports (height:100dvh){
+    .app{ min-height:100dvh; }
+    .theme-pop{ max-height:calc(100dvh - 20px); }
+    .inv-viewer-dlg{ max-height:calc(100dvh - 32px); }
+    .cmdk{ max-height:min(560px, calc(100dvh - 40px)); }
+    @media (min-width: 881px){ .sidebar{ height:100dvh; } }
+    @media (max-width: 880px){ .cmdk{ max-height:100dvh; } }
+  }
+  /* Les fenêtres à croix de fermeture n'en dépendent pas de :has() (navigateurs plus anciens) */
+  #inv-modal > .modal, #inv-viewer > .modal{ position:relative; }
+  /* Écrans tactiles : cibles d'au moins 40 px, et champs à 16 px pour que iPhone et iPad ne zooment pas à la saisie */
+  @media (pointer:coarse), (max-width: 880px){
+    input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=file]), select, textarea, .df-row .sort-select{ font-size:16px; }
+    .btn, .chip, .due-chip, .sort-select, .tp-sw, .tp-mode{ min-height:40px; }
+    .btn.row-prolong, .btn.teams-remind{ min-height:36px; }
+    input[type=checkbox], input[type=radio]{ width:22px; height:22px; }
+    .inv-legend li.go, #home-types .spend-card .inv-legend li.go{ min-height:36px; display:flex; align-items:center; }
+    .rl-hist{ min-height:32px; display:inline-flex; align-items:center; }
+    .search-box input, .hist-search input{ min-height:36px; }
+    .modal-x{ width:40px; height:40px; }
+    .tp-x{ width:36px; height:36px; }
+  }
+  /* Petits écrans : les boutons d'action des fenêtres restent visibles en bas, sans avoir à défiler jusqu'au bout */
+  @media (max-width: 640px){
+    .modal-backdrop{ padding:10px; }
+    .modal{ padding-left:16px; padding-right:16px; }
+    .modal .modal-actions{ position:sticky; bottom:0; z-index:3; margin-left:-16px; margin-right:-16px; padding:12px 16px calc(12px + env(safe-area-inset-bottom, 0px)); background:linear-gradient(180deg, transparent, var(--surface) 22%); }
+  }
+  /* En-têtes : les boutons d'action (Guide compris) passent à la ligne au lieu d'écraser le titre ou de déborder sur le menu */
+  .home-actions [data-open-cmdk], .head-search{ min-width:190px; }
+  .view .view-head .head-tools, html.dialog-open .view .view-head .head-tools{ flex-wrap:wrap; }
+  @media (min-width: 1181px){
+    html:not(.dialog-open) .view .view-head{ grid-template-columns:minmax(210px, 1fr) minmax(0, auto); }
+  }
+  /* Accueil : les cinq boutons restent sur une seule ligne, collés au titre ; « Rechercher » prend la place qui reste */
+#view-home .head-tools .btn{ flex:0 0 auto; }  #view-home .head-tools [data-open-cmdk]{ flex:1 1 150px; min-width:110px; }  @media (min-width: 1181px){    #view-home .head-tools, html.dialog-open #view-home .view-head .head-tools{ flex-wrap:nowrap; justify-content:stretch; }    html:not(.dialog-open) #view-home .view-head{ grid-template-columns:minmax(150px, max-content) minmax(640px, 1fr); }  }
+  /* Guide de la page (bouton « Guide » de chaque en-tête) */
+  .guide-dlg{ position:relative; max-width:600px !important; }
+  .guide-dlg h2{ margin:0 0 6px; padding-right:44px; }
+  .guide-lead{ margin:0 0 14px; color:var(--ink-soft); }
+  .guide-steps{ list-style:none; margin:0 0 14px; padding:0; display:grid; gap:10px; }
+  .guide-steps li{ display:flex; gap:12px; align-items:flex-start; line-height:1.5; font-size:14px; }
+  .guide-steps .n{ flex:none; width:24px; height:24px; border-radius:50%; display:grid; place-items:center; font-size:12.5px; font-weight:800; background:var(--accent); color:var(--accent-ink, #fff); margin-top:1px; }
+  .guide-steps b{ color:var(--ink); }
+  .guide-steps .g-t{ display:block; font-size:14.5px; }
+  .guide-steps .g-d{ display:block; margin-top:2px; font-size:13.5px; color:var(--ink-soft); line-height:1.5; }
+  .guide-tabrow{ display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px 16px; margin:4px 0 14px; }
+  .guide-tabs{ display:flex; flex-wrap:wrap; gap:6px; margin:0; }
+  .guide-demos{ display:flex; flex-wrap:wrap; gap:8px; margin-left:auto; }
+  .guide-demo{ font:inherit; font-size:13px; font-weight:800; padding:8px 14px; border-radius:999px; border:1px solid var(--accent); background:var(--accent); color:var(--accent-ink, #fff); cursor:pointer; box-shadow:0 8px 18px -10px var(--accent); transition:transform .15s, box-shadow .15s; }
+  .guide-demo:hover{ transform:translateY(-1px); box-shadow:0 12px 22px -10px var(--accent); }
+  .guide-key{ margin:0 0 14px; padding:12px 14px; border-radius:12px; border:1px solid color-mix(in srgb, var(--warn) 55%, var(--border)); background:color-mix(in srgb, var(--warn) 10%, transparent); font-size:13.5px; line-height:1.5; }
+  .guide-key > b{ display:block; margin-bottom:4px; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--warn); }
+  .guide-key ul{ margin:0; padding-left:18px; display:grid; gap:4px; }
+  .guide-tab{ font:inherit; font-size:13px; font-weight:700; padding:7px 13px; border-radius:999px; border:1px solid var(--border); background:var(--bg); color:var(--ink-soft); cursor:pointer; transition:border-color .15s, color .15s, background .15s; }
+  .guide-tab:hover{ border-color:var(--accent); color:var(--ink); }
+  .guide-tab.on{ border-color:var(--accent); color:var(--accent); background:color-mix(in srgb, var(--accent) 14%, transparent); }
+  .guide-body{ max-height:min(54vh, 520px); overflow-y:auto; padding-right:4px; margin-bottom:6px; }
+  @supports (height:100dvh){ .guide-body{ max-height:min(54dvh, 520px); } }
+  .guide-tips{ padding:12px 14px; border-radius:12px; border:1px dashed color-mix(in srgb, var(--accent) 45%, var(--border)); background:color-mix(in srgb, var(--accent) 7%, transparent); font-size:13.5px; line-height:1.5; }
+  .guide-tips > b{ display:block; margin-bottom:4px; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--accent); }
+  .guide-tips ul{ margin:0; padding-left:18px; display:grid; gap:4px; }
+  .head-guide svg{ color:var(--accent); }
+  /* Graphique des dépenses par mois : sur écran moyen, les montants au-dessus des barres ne se chevauchent plus */
+  @media (max-width: 1280px){ .inv-bars .mv{ font-size:9px; letter-spacing:-.03em; } }
+  @media (max-width: 1280px) and (min-width: 881px){ .inv-bars .mv{ font-size:8.5px; } }
+  /* Navigateur trop ancien : bandeau d'information (voir le script « Compatibilité ») */
+  .old-browser{ position:fixed; left:12px; right:12px; bottom:12px; z-index:4000; display:flex; align-items:center; gap:12px; padding:12px 16px; border-radius:14px; border:1px solid var(--warn); background:var(--surface); color:var(--ink); box-shadow:0 18px 44px -12px rgba(0,0,0,.5); font-size:13.5px; line-height:1.45; }
+  .old-browser button{ flex:none; font:inherit; font-weight:700; padding:7px 14px; border-radius:10px; border:1px solid var(--border); background:var(--bg); color:var(--ink); cursor:pointer; }
+  /* Très petits écrans (320 à 440 px) : la barre du haut de l'Inventaire passe sur deux lignes, la recherche garde sa place */
+  @media (max-width: 440px){
+    .inv-toprow{ flex-wrap:wrap !important; }
+    .inv-toprow .inv-top-actions{ flex:1 1 100%; flex-wrap:wrap; }
+    .inv-toprow .inv-top-actions .btn{ flex:1 1 auto; justify-content:center; }
+  }
+  @media (max-width: 360px){
+    .search-box .search-hint{ display:none; }
+  }
+  /* Le survol ne doit pas « rester collé » après un appui sur écran tactile */
+  @media (hover:none){
+    .inv-ov-item:hover, .stat-card:hover, .home-card:hover, .result-row:hover{ transform:none; }
+  }
   .inv-detail-act{ display:flex; flex-wrap:wrap; gap:8px; }
   .inv-detail-act .btn{ max-width:100%; white-space:normal; text-align:left; }
   @media (max-width: 480px){
@@ -3137,11 +3251,6 @@
         <button class="chip" data-filter="pending">À emprunter</button>
         <button class="chip" data-filter="done">Tout emprunté</button>
         <button type="button" class="chip loan-new-chip" id="loan-new-btn" title="Emprunter pour un collaborateur absent de la liste : saisir son nom à la main"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Nouvel emprunt</button>
-        <select class="sort-select" id="loan-sort" aria-label="Trier la liste">
-          <option value="default">Tri : par défaut</option>
-          <option value="name">Tri : nom (A→Z)</option>
-          <option value="units">Tri : le plus à emprunter</option>
-        </select>
       </div>
 
       <div class="section-title" id="loan-results-title">Résultats</div>
@@ -3165,6 +3274,8 @@
         <input id="return-search-input" type="text" placeholder="Nom du collaborateur, nom du PC / Mac ou numéro de série…" autocomplete="off" aria-label="Rechercher un collaborateur, un PC ou un Mac">
         <span class="search-hint" id="return-search-count">3 personnes</span>
       </div>
+
+      <div id="return-remind-slot"></div>
 
       <div class="filter-chips" id="return-filter-chips" data-df-inline>
         <button class="chip active" data-filter="all">Tous</button>
@@ -3491,6 +3602,7 @@
 </div>
 
 <div class="theme-pop" id="theme-pop" role="dialog" aria-label="Apparence" hidden>
+  <button type="button" class="modal-x tp-x" data-tp-close aria-label="Fermer" title="Fermer (Échap)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
   <div class="tp-title">Thème</div>
   <div class="tp-seg" role="radiogroup" aria-label="Mode d'affichage" id="tp-modes"></div>
   <div class="tp-title">Couleur d'accent</div>
@@ -3500,21 +3612,12 @@
 </div>
 <div class="modal-backdrop" id="inv-modal" hidden>
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="inv-modal-title">
+    <button type="button" class="modal-x" id="inv-x" aria-label="Fermer" title="Fermer (Échap)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     <div class="modal-icon" style="background:var(--accent-soft); color:var(--accent);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8l-9-5-9 5 9 5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg></div>
     <h2 id="inv-modal-title">Enregistrer une entrée de stock</h2>
     <p>Chaque entrée s'ajoute à l'historique : le stock se recalcule tout de suite. Pour corriger une erreur, enregistrez un retrait.</p>
     <div class="report-opts">
-      <div class="inv-opt-head"><span class="n" id="inv-import-n">1</span><div><b id="inv-import-title">Importer la facture</b><span id="inv-import-sub">Les champs se remplissent tout seuls à partir du PDF (type, quantité, prix, date, fournisseur, numéros de série) : vous n'avez plus qu'à vérifier.</span></div></div>
-      <div class="inv-drop" id="inv-drop" tabindex="0" role="button" aria-label="Importer une facture : glisser-déposer un fichier ou choisir un fichier">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6"/><path d="M9 15l3-3 3 3"/></svg>
-        <div class="inv-drop-txt"><b>Glissez-déposez la facture ici</b><span>depuis votre ordinateur ou depuis un autre site (Amazon, fournisseur…) · PDF (lecture automatique), PNG, JPG</span></div>
-        <button type="button" class="btn" id="inv-file-btn">Choisir un fichier</button>
-        <input type="file" id="inv-file" accept="application/pdf,image/png,image/jpeg,image/webp" hidden>
-      </div>
-      <div class="inv-attached" id="inv-attached" hidden></div>
-      <div class="inv-extract" id="inv-extract" role="status" aria-live="polite" hidden></div>
-      <input type="url" id="inv-invoice-url" class="inv-input" placeholder="ou collez le lien de la facture (https://…)" autocomplete="off" maxlength="500">
-      <div class="inv-opt-head" id="inv-manual-head"><span class="n">2</span><div><b>Ou saisir à la main</b><span>Remplissez ou corrigez les champs ci-dessous.</span></div></div>
+      <div class="inv-opt-head" id="inv-manual-head"><span class="n">1</span><div><b>Saisir à la main</b><span>Remplissez ou corrigez les champs ci-dessous.</span></div></div>
       <label class="report-lbl" for="inv-type">Type de matériel</label>
       <select class="sort-select" id="inv-type" style="margin-left:0; width:100%;"></select>
       <div id="inv-variant-wrap" hidden>
@@ -3532,8 +3635,37 @@
         <div><label class="report-lbl" for="inv-date">Date</label><div class="date-field"><input type="date" id="inv-date" aria-label="Date de l'entrée"></div></div>
       </div>
       <div id="inv-price-wrap">
-        <label class="report-lbl" for="inv-price">Prix total TTC de l'entrée en € (TVA comprise) <span class="opt" style="font-weight:500; text-transform:none; letter-spacing:0;">(facultatif)</span></label>
-        <div class="inv-eur"><input type="text" id="inv-price" class="inv-input" inputmode="decimal" placeholder="Montant payé pour toute la quantité, par exemple 8 990,00" autocomplete="off" maxlength="14"><span aria-hidden="true">€</span></div>
+        <div class="inv-two">
+          <div>
+            <label class="report-lbl" for="inv-unit">Prix par unité TTC</label>
+            <div class="inv-eur"><input type="text" id="inv-unit" class="inv-input" inputmode="decimal" placeholder="Par exemple 1 200,00" autocomplete="off" maxlength="14"><span aria-hidden="true">€</span></div>
+          </div>
+          <div>
+            <label class="report-lbl" for="inv-price">Prix total TTC</label>
+            <div class="inv-eur"><input type="text" id="inv-price" class="inv-input" inputmode="decimal" placeholder="Par exemple 8 990,00" autocomplete="off" maxlength="14"><span aria-hidden="true">€</span></div>
+          </div>
+        </div>
+        <div class="inv-two" id="inv-ht-row">
+          <div>
+            <label class="report-lbl" for="inv-unit-ht">Prix par unité HT</label>
+            <div class="inv-eur"><input type="text" id="inv-unit-ht" class="inv-input" inputmode="decimal" placeholder="Hors taxes" autocomplete="off" maxlength="14"><span aria-hidden="true">€</span></div>
+          </div>
+          <div>
+            <label class="report-lbl" for="inv-total-ht">Prix total HT</label>
+            <div class="inv-eur"><input type="text" id="inv-total-ht" class="inv-input" inputmode="decimal" placeholder="Hors taxes" autocomplete="off" maxlength="14"><span aria-hidden="true">€</span></div>
+          </div>
+        </div>
+        <div class="inv-two">
+          <div>
+            <label class="report-lbl" for="inv-vat">Taux de TVA</label>
+            <select class="sort-select" id="inv-vat" style="margin-left:0; width:100%;"><option value="20">20 %</option><option value="10">10 %</option><option value="5.5">5,5 %</option><option value="2.1">2,1 %</option><option value="0">0 % (sans TVA)</option><option value="custom">Autre taux (à saisir)…</option><option value="ttc">TTC (sans HT)</option></select>
+          </div>
+          <div id="inv-vat-custom-wrap" hidden>
+            <label class="report-lbl" for="inv-vat-custom">Votre taux de TVA</label>
+            <div class="inv-eur"><input type="text" id="inv-vat-custom" class="inv-input" inputmode="decimal" placeholder="Par exemple 8,5" autocomplete="off" maxlength="6"><span aria-hidden="true">%</span></div>
+          </div>
+        </div>
+        <p class="inv-dev-hint" id="inv-price-hint">Facultatif : saisissez un seul prix (TTC ou HT, par unité ou au total) ; les trois autres se calculent avec la quantité et le taux de TVA.</p>
         <p class="inv-total" id="inv-total"></p>
       </div>
       <div id="inv-devices" hidden>
@@ -3543,6 +3675,16 @@
       </div>
       <label class="report-lbl" for="inv-note">Note ou fournisseur <span class="opt" style="font-weight:500; text-transform:none; letter-spacing:0;">(facultatif)</span></label>
       <input type="text" id="inv-note" class="inv-input" maxlength="80" placeholder="Par exemple : commande Dell du 12/10, facture 2026-114" autocomplete="off">
+      <div class="inv-opt-head" id="inv-import-head"><span class="n" id="inv-import-n">2</span><div><b id="inv-import-title">Ou importer la facture</b><span id="inv-import-sub">Les champs se remplissent tout seuls à partir du PDF (type, quantité, prix, date, fournisseur, numéros de série) : vous n'avez plus qu'à vérifier.</span></div></div>
+      <div class="inv-drop" id="inv-drop" tabindex="0" role="button" aria-label="Importer une facture : glisser-déposer un fichier ou choisir un fichier">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6"/><path d="M9 15l3-3 3 3"/></svg>
+        <div class="inv-drop-txt"><b>Glissez-déposez la facture ici</b><span>depuis votre ordinateur ou depuis un autre site (Amazon, fournisseur…) · PDF (lecture automatique), PNG, JPG</span></div>
+        <button type="button" class="btn" id="inv-file-btn">Choisir un fichier</button>
+        <input type="file" id="inv-file" accept="application/pdf,image/png,image/jpeg,image/webp" hidden>
+      </div>
+      <div class="inv-attached" id="inv-attached" hidden></div>
+      <div class="inv-extract" id="inv-extract" role="status" aria-live="polite" hidden></div>
+      <input type="url" id="inv-invoice-url" class="inv-input" placeholder="ou collez le lien de la facture (https://…)" autocomplete="off" maxlength="500">
     </div>
     <p id="inv-modal-msg" role="status" style="font-size:13px; font-weight:600; min-height:18px; margin:8px 0 0;"></p>
     <div class="modal-actions">
@@ -3575,6 +3717,7 @@
 </div>
 <div class="modal-backdrop" id="inv-viewer" hidden>
   <div class="modal inv-viewer-dlg" role="dialog" aria-modal="true" aria-labelledby="inv-viewer-title">
+    <button type="button" class="modal-x" id="inv-viewer-x" aria-label="Fermer" title="Fermer (Échap)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     <div class="inv-viewer-head"><div><h2 id="inv-viewer-title">Facture</h2><p id="inv-viewer-sub"></p></div></div>
     <div class="inv-viewer-tools" id="inv-viewer-tools" hidden>
       <div class="search-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input id="inv-fq" type="text" placeholder="Rechercher une facture : matériel, nom du fichier, note, montant…" autocomplete="off"><span class="search-hint" id="inv-fcount">0</span></div>
@@ -4216,23 +4359,24 @@
         const snap = await withTimeout(db.doc("people/" + p.id).get(), 6000);
         if(snap.exists){
           const latest = thaw(snap.data() || {});
-          p.loans = latest.loans || [];
+          LEDGER_REV++; p.loans = latest.loans || [];
           p.attestations = latest.attestations || [];
           p.losses = latest.losses || [];
           p.notes = latest.notes || "";
           p.comments = normalizeComments(latest);
+          if(latest.managerEmail) p.managerEmail = latest.managerEmail;
         }
       }catch(e){
         console.error("Échec de synchronisation", e);
       }
     }
-    mutateFn(p);
+    LEDGER_REV++; mutateFn(p); LEDGER_REV++;
     let saveError = null;
     if(db){
       try{
         await withTimeout(db.doc("people/" + p.id).set({
           loans: p.loans, attestations: p.attestations, losses: p.losses || [], notes: p.notes || "",
-          comments: p.comments || []
+          comments: p.comments || [], ...(p.managerEmail ? { managerEmail: p.managerEmail } : {})
         }), 6000);
         setSyncStatus("synced");
         mirrorPerson(p);
@@ -4256,7 +4400,18 @@
   //                       perdue, l'unité n'est plus "chez la personne" : elle libère un emplacement pour un
   //                       nouvel emprunt (ex. un remplacement), au même titre qu'une restitution signée.
   //   - availableToLoan : unités jamais empruntées, ou redevenues libres (restituées et signées, ou perdues) → sélectionnables pour un emprunt
+  // Registre par équipement : mis en cache par personne (quelques milliers d'appels par affichage avec 1 800 personnes). Le cache est vidé
+  // à chaque enregistrement ou chargement de données (LEDGER_REV) : toutes les modifications passent par syncAndPersist ou loadPersistedData.
+  let LEDGER_REV = 0;
+  const LEDGER_CACHE = new WeakMap();
   function itemLedger(person, itemId){
+    let c = LEDGER_CACHE.get(person);
+    if(!c || c.rev !== LEDGER_REV){ c = { rev: LEDGER_REV, map: new Map() }; LEDGER_CACHE.set(person, c); }
+    let r = c.map.get(itemId);
+    if(r === undefined){ r = itemLedgerCompute(person, itemId); c.map.set(itemId, r); }
+    return r;
+  }
+  function itemLedgerCompute(person, itemId){
     const item = person.equipment.find(e => e.id === itemId);
     let total = item.qty || 1;
     let loaned = 0, signedReturn = 0, pendingReturn = 0, lost = 0;
@@ -4365,7 +4520,14 @@
     return Math.round((d.getTime() - t.getTime()) / 86400000);
   }
   // Personnes dont une date de retour prévue est dépassée alors que du matériel n'est pas encore rendu
+  // Retards : mis en cache tant que les données et le jour ne changent pas (appelé plusieurs fois par affichage)
+  let lateMemo = null;
   function lateStats(){
+    const day = todayISO();
+    if(!lateMemo || lateMemo.rev !== LEDGER_REV || lateMemo.day !== day) lateMemo = { rev: LEDGER_REV, day, v: lateStatsCompute() };
+    return lateMemo.v;
+  }
+  function lateStatsCompute(){
     const people = []; let units = 0;
     LEAVERS.forEach(p => {
       let u = 0, days = 0;
@@ -4536,7 +4698,7 @@
       if(!dIso){ msg("Indiquez la date de remise."); return; }
       if(uIso && uIso < dIso){ msg("La date de retour prévue ne peut pas être antérieure à la date de remise."); return; }
       const over = rows.find((r, i) => qtys[i] > r.it.qty && r.stock != null && qtys[i] - r.it.qty > r.stock);
-      if(over && !(await confirmDialog({ title: "Le stock est dépassé : enregistrer quand même ?", message: `${over.label} : ${qtys[rows.indexOf(over)]} remis pour ${over.it.qty + over.stock} possibles avec le stock actuel.\n\nLa modification sera enregistrée ; le stock s'affichera à 0 et l'écart à commander apparaîtra dans l'Inventaire.`, confirmLabel: "Enregistrer quand même", cancelLabel: "Revoir" }))) return;
+      if(over && !(await confirmDialog({ title: "Le stock est dépassé : enregistrer quand même ?", message: `${over.label} : ${qtys[rows.indexOf(over)]} remis pour ${over.it.qty + over.stock} possibles avec le stock actuel.\n\nLa modification sera enregistrée ; le stock s'affichera à 0 et le type apparaîtra « à commander » dans l'Inventaire.`, confirmLabel: "Enregistrer quand même", cancelLabel: "Revoir" }))) return;
       const date = formatDateFR(dIso), due = uIso ? formatDateFR(uIso) : "";
       const changes = [];
       rows.forEach((r, i) => { if(qtys[i] !== r.it.qty) changes.push(`${r.label} ${r.it.qty} → ${qtys[i]}`); });
@@ -4969,6 +5131,7 @@
   // Le filtre de matériel ne survit pas à une navigation normale : seul le passage par la carte d'un anneau le garde
   document.querySelectorAll(".nav-item").forEach(nv => nv.addEventListener("click", () => { if(!ovNavKeep) returnTypeFilter = null; }, true));
   function renderReturnResults(filter){
+    renderRemindBanner();
     const q = normalizeText((filter||"").trim());
     let list = q ? LEAVERS.filter(p => searchHaystack(p).includes(q) || personDevHits(p, q).length) : LEAVERS;
     list = list.filter(p => personInPeriod("return", p));
@@ -5107,7 +5270,7 @@
   function familyGroups(person){
     return FAMILIES.map(f => { const items = person.equipment.filter(it => f.variants.includes(it.label)); return { f, id: GRP_PREFIX + f.label, items, pseudo: { id: GRP_PREFIX + f.label, type: f.type, label: f.label, model: "", qty: 1 } }; }).filter(g => g.items.length);
   }
-  function familyGroupRow(g){
+  function familyGroupRow(g, person){
     const selected = selectedLoanEquip.has(g.id), allOut = g.items.every(c => invStockOf(c.label) === 0);
     const qv = selectedLoanEquip.get(g.id) || loanDefQty(g.pseudo);
     return `
@@ -5120,7 +5283,7 @@
           <input type="number" class="qs-n" inputmode="numeric" min="1" max="${loanCap(g.pseudo)}" value="${qv}" aria-label="Quantité : ${g.f.label}" ${selected ? "" : "disabled"}>
           <button type="button" class="qs-btn" data-qs-d="1" aria-label="Augmenter la quantité" ${selected ? "" : "disabled"}>+</button>
         </span>
-        <div class="equip-pills">${allOut ? `<span class="pill pill-bad">${INV_ICO.box} Plus en stock</span>` : ""}</div>
+        <div class="equip-pills">${allOut ? `<span class="pill pill-bad">${INV_ICO.box} Plus en stock</span>` : ""}${person && g.f.type === "charger" ? dupPillHTML(person, "charger") : ""}</div>
       </label>
       <div class="equip-dev" data-chg-for="${g.id}"${selected ? "" : " hidden"}></div>`;
   }
@@ -5200,8 +5363,8 @@
           <div class="equip-label">${escapeHTML(item.label)}</div>
           <div class="equip-pcline">${ICONS.laptop} ${escapeHTML(devText(d))}</div>
         </div>
-        <div class="equip-pills">${dueChipHTML(dueOf(person, item.id))}</div>
-        <span class="row-acts">${teamsBtnHTML(person, dueOf(person, item.id))}<button type="button" class="btn row-return" data-direct-return="${escapeHTML(key)}" ${selected ? "" : "disabled"} title="${selected ? "Enregistrer la restitution de ce PC tout de suite, sans envoyer d'attestation" : "Cochez d'abord ce PC pour pouvoir le restituer"}">${ICONS.check} Restituer</button></span>
+        <div class="equip-pills">${dueChipHTML(dueOf(person, item.id))}${remindChipHTML(person, item.id)}</div>
+        <span class="row-acts">${prolongBtnHTML(person, item.id)}${teamsBtnHTML(person, dueOf(person, item.id))}<button type="button" class="btn row-return" data-direct-return="${escapeHTML(key)}" ${selected ? "" : "disabled"} title="${selected ? "Enregistrer la restitution de ce PC tout de suite, sans envoyer d'attestation" : "Cochez d'abord ce PC pour pouvoir le restituer"}">${ICONS.check} Restituer</button></span>
       </label>`;
   }
   // Nombre d'exemplaires restituables sans nom de machine (cas des PC prêtés sans choix de machine) ; pour les autres matériels : tout ce qui est restituable
@@ -5249,10 +5412,11 @@
         ` : ""}
         <div class="equip-pills">
         ${noStock ? `<span class="pill pill-bad">${INV_ICO.box} Plus en stock</span>` : ""}
-        ${mode === "return" && L.returnable > 0 ? dueChipHTML(dueOf(person, item.id)) : ""}
+        ${mode === "return" && L.returnable > 0 ? dueChipHTML(dueOf(person, item.id)) + remindChipHTML(person, item.id) : ""}
+        ${mode === "loan" ? dupPillHTML(person, dupKeyOf(item)) : ""}
         ${L.lost > 0 ? `<span class="pill pill-bad">${ICONS.alert} ${L.lost}${item.qty > 1 ? `/${item.qty}` : ""} ${lossWordFor(L.lostReasons, L.lost)}</span>` : ""}
         </div>
-        ${mode === "return" && L.returnable > 0 ? `<span class="row-acts">${teamsBtnHTML(person, dueOf(person, item.id))}<button type="button" class="btn row-return" data-direct-return="${item.id}" ${selected ? "" : "disabled"} title="${selected ? "Enregistrer la restitution tout de suite, sans envoyer d'attestation" : "Cochez d'abord ce matériel pour pouvoir le restituer"}">${ICONS.check} Restituer</button></span>` : ""}
+        ${mode === "return" && L.returnable > 0 ? `<span class="row-acts">${prolongBtnHTML(person, item.id)}${teamsBtnHTML(person, dueOf(person, item.id))}<button type="button" class="btn row-return" data-direct-return="${item.id}" ${selected ? "" : "disabled"} title="${selected ? "Enregistrer la restitution tout de suite, sans envoyer d'attestation" : "Cochez d'abord ce matériel pour pouvoir le restituer"}">${ICONS.check} Restituer</button></span>` : ""}
       </label>
       ${mode === "loan" && isPcType(item.type) && !locked ? devSelectHTML(person, item, selected) : ""}
     `;
@@ -5271,8 +5435,9 @@
           ${pcLineHTML(heldDevicesOf(person, item.id))}${brandLineHTML(heldBrandsOf(person, item.id))}
         </div>
         <div class="equip-pills">
-          ${L.returnable > 0 ? dueChipHTML(dueOf(person, item.id)) : ""}
+          ${L.returnable > 0 ? dueChipHTML(dueOf(person, item.id)) + remindChipHTML(person, item.id) : ""}
         </div>
+        ${L.returnable > 0 ? `<span class="row-acts">${prolongBtnHTML(person, item.id)}</span>` : ""}
       </div>
     `;
   }
@@ -5302,10 +5467,45 @@
     a.remove();
   }
 
-  // ---- Relance Teams : date de retour dépassée ----
-  // Une page web ne peut pas écrire seule dans Teams : le bouton ouvre la discussion avec la personne, message déjà rédigé
-  // (lien profond officiel Teams) ; l'administrateur relit puis appuie sur Entrée. Rien ne part sans ce geste.
+  // ---- Rappels et relances Teams par paliers : échéance proche, atteinte, dépassée, très en retard ----
+  // Une page web ne peut pas écrire seule dans Teams, ni travailler quand elle est fermée : l'application prépare chaque
+  // relance (palier, texte, destinataires) à l'ouverture puis toutes les 30 minutes ; l'administrateur relit le message
+  // et appuie sur Entrée dans Teams (lien profond officiel). Rien ne part sans ce geste. Chaque relance est consignée sur
+  // l'emprunt (palier, date, auteur) pour ne plus être reproposée tant que la date de retour ne change pas.
   const TEAMS_ICO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 11h7M8.5 14h4"/></svg>';
+  const REMIND_TIERS = {
+    soon:  { rank: 1, short: "Avant l'échéance", name: "Rappel : l'échéance approche (J-3)", help: "Message aimable, avant la date de retour." },
+    today: { rank: 2, short: "Échéance", name: "Date de retour atteinte (J0)", help: "Message neutre : la date de retour est atteinte ou vient d'être dépassée." },
+    late:  { rank: 3, short: "Retard d'une semaine", name: "Retard d'une semaine (J+7)", help: "Message plus ferme : plus d'une semaine de retard." },
+    esc:   { rank: 4, short: "Retard de plus de 15 jours", name: "Plus de 15 jours de retard (J+15)", help: "Message ferme, avec le responsable en copie." }
+  };
+  // Un palier par tranche de jours restants : une seule relance est proposée à la fois, la plus avancée atteinte
+  function tierOfDays(n){
+    if(n === null || n === undefined || n > 3) return null;
+    return n >= 1 ? "soon" : n >= -6 ? "today" : n >= -15 ? "late" : "esc";
+  }
+  // L'emprunt qui fixe la date de retour d'un équipement : le plus récent qui le contient
+  function loanOfItem(person, itemId){
+    const ls = (person.loans || []).filter(l => l.items.some(e => e.id === itemId)).sort((a, b) => b.id - a.id);
+    return ls[0] || null;
+  }
+  const remindersOf = (loan) => (loan.reminders || []).filter(r => r.due === (loan.due || ""));
+  // Ce qu'il faut relancer pour une personne : une ligne par équipement encore à rendre dont l'échéance est dans un palier
+  function remindPlanOf(person, onlyUnsent){
+    const rows = [];
+    person.equipment.forEach(it => {
+      const L = itemLedger(person, it.id); if(L.returnable < 1) return;
+      if(dueOf(person, it.id) === null) return;
+      const loan = loanOfItem(person, it.id); if(!loan || !loan.due) return;
+      const n = dueDays(loan.due), tier = tierOfDays(n); if(!tier) return;
+      const sent = remindersOf(loan).some(r => r.tier === tier);
+      if(onlyUnsent && sent) return;
+      rows.push({ it, loan, due: loan.due, n, tier, qty: L.returnable });
+    });
+    if(!rows.length) return null;
+    const rank = Math.max(...rows.map(r => REMIND_TIERS[r.tier].rank));
+    return { person, rows, rank, tier: Object.keys(REMIND_TIERS).find(k => REMIND_TIERS[k].rank === rank) };
+  }
   function lateItemsOf(person){
     const out = [];
     person.equipment.forEach(it => {
@@ -5317,28 +5517,57 @@
   }
   function teamsBtnHTML(person, due){
     const n = due ? dueDays(due) : null;
-    if(n === null || n >= 0 || !person.email) return "";
-    return `<button type="button" class="btn teams-remind" data-teams-remind="${person.id}" title="Prévenir ${escapeHTML(person.name)} sur Microsoft Teams que la date de retour est dépassée">${TEAMS_ICO} Relancer sur Teams</button>`;
+    if(!tierOfDays(n) || !person.email) return "";
+    const late = n < 0;
+    return `<button type="button" class="btn teams-remind" data-teams-remind="${person.id}" title="${late ? `Prévenir ${escapeHTML(person.name)} sur Microsoft Teams que la date de retour est dépassée` : `Envoyer un rappel à ${escapeHTML(person.name)} sur Microsoft Teams`}">${TEAMS_ICO} ${late ? "Relancer sur Teams" : "Rappeler sur Teams"}</button>`;
   }
-  function teamsRemindText(person){
-    const late = lateItemsOf(person), first = person.name.split(" ")[0];
-    const lines = late.map(x => {
+  // Dernière relance déjà envoyée pour cet équipement (même date de retour), sous forme de pastille
+  function remindChipHTML(person, itemId){
+    const loan = loanOfItem(person, itemId); if(!loan) return "";
+    const list = remindersOf(loan).filter(r => r.via !== "ignoré"); if(!list.length) return "";
+    const last = list[list.length - 1], who = byText("", last.by).trim();
+    return `<span class="pill pill-neutral" title="${escapeHTML(`${list.length} relance${list.length > 1 ? "s" : ""} Teams · dernière : ${REMIND_TIERS[last.tier] ? REMIND_TIERS[last.tier].name : ""}${who ? " " + who : ""}`)}">${TEAMS_ICO} Relancé le ${escapeHTML(String(last.at).split(" ")[0])}</span>`;
+  }
+  const whenTxt = (n) => n > 1 ? `dans ${n} jours` : n === 1 ? "demain" : n === 0 ? "aujourd'hui" : `${-n} jour${-n > 1 ? "s" : ""} de retard`;
+  function teamsRemindText(person, plan){
+    plan = plan || remindPlanOf(person, false); if(!plan) return "";
+    const first = person.name.split(" ")[0], rows = plan.rows;
+    const lines = rows.map(x => {
       const pcs = heldDevicesOf(person, x.it.id).map(d => d.name).filter(Boolean);
-      return `- ${x.it.label}${x.qty > 1 ? ` ×${x.qty}` : ""}${pcs.length ? ` (${pcs.join(", ")})` : ""} : à rendre le ${x.due} (${x.days} jour${x.days > 1 ? "s" : ""} de retard)`;
-    });
-    const many = late.length > 1 || (late[0] && late[0].qty > 1);
-    return `Bonjour ${first},\n\nSauf erreur de ma part, la date de retour prévue ${many ? "des matériels suivants est dépassée" : "du matériel suivant est dépassée"} :\n${lines.join("\n")}\n\nEst-ce que tu peux ${many ? "les" : "le"} rendre dès que possible ? Merci d'avance !`;
+      return `- ${x.it.label}${x.qty > 1 ? ` ×${x.qty}` : ""}${pcs.length ? ` (${pcs.join(", ")})` : ""} : à rendre le ${x.due} (${whenTxt(x.n)})`;
+    }).join("\n");
+    const many = rows.length > 1 || rows[0].qty > 1, it = many ? "les" : "le", s = many ? "s" : "", anyLate = rows.some(x => x.n < 0);
+    if(plan.tier === "soon") return `Bonjour ${first},\n\nPetit rappel : ${many ? "les matériels suivants doivent être rendus" : "le matériel suivant doit être rendu"} très bientôt :\n${lines}\n\nPeux-tu prévoir de ${it} rapporter d'ici là ? Si tu as besoin de plus de temps, dis-le-moi et je prolonge le prêt. Merci !`;
+    if(plan.tier === "today") return `Bonjour ${first},\n\nSauf erreur de ma part, la date de retour prévue ${many ? "des matériels suivants" : "du matériel suivant"} est ${anyLate ? "dépassée" : "arrivée à échéance"} :\n${lines}\n\nEst-ce que tu peux ${it} rendre dès que possible ? Merci d'avance !`;
+    if(plan.tier === "late") return `Bonjour ${first},\n\nJe me permets de te relancer : ${many ? "les matériels suivants n'ont" : "le matériel suivant n'a"} toujours pas été rendu${s}, avec plus d'une semaine de retard :\n${lines}\n\nMerci de ${it} rapporter cette semaine. Si tu ne peux pas, préviens-moi pour que l'on trouve une solution (prolongation, remplacement…).`;
+    return `Bonjour ${first},\n\nMalgré mes précédents messages, ${many ? "les matériels suivants n'ont" : "le matériel suivant n'a"} toujours pas été rendu${s}, avec plus de 15 jours de retard :\n${lines}\n\nJe mets ton responsable en copie de cette discussion. Merci de ${it} rendre sous 48 h, ou de me confirmer par écrit une date de retour précise.`;
   }
-  const teamsChatUrl = (email, text) => `https://teams.microsoft.com/l/chat/0/0?users=${encodeURIComponent(email)}&message=${encodeURIComponent(text)}`;
-  function openTeamsRemind(person){
-    if(!lateItemsOf(person).length){ showToast("Plus aucun retard pour cette personne."); return; }
+  // Une ou plusieurs personnes dans la discussion : la personne, et son responsable à partir du dernier palier
+  const teamsChatUrl = (to, text) => `https://teams.microsoft.com/l/chat/0/0?users=${[].concat(to).filter(Boolean).map(encodeURIComponent).join(",")}&message=${encodeURIComponent(text)}`;
+  // Consigne les relances sur les emprunts concernés (palier, date, auteur) : elles ne seront plus reproposées
+  function logReminders(person, rows, via, cc){
+    const at = nowStamp(), by = actorId(), done = new Set();
+    return syncAndPersist(person, (pp) => {
+      rows.forEach(x => {
+        const k = x.loan.id + "|" + x.tier; if(done.has(k)) return; done.add(k);
+        const t = (pp.loans || []).find(l => l.id === x.loan.id); if(!t) return;
+        t.reminders = [...(t.reminders || []), { tier: x.tier, due: x.due, at, by, via, ...(cc ? { cc } : {}) }];
+      });
+      if(cc) pp.managerEmail = cc;
+    }, () => refreshAllAttestationViews());
+  }
+  function openTeamsRemind(person, plan, onDone){
+    plan = plan || remindPlanOf(person, false);
+    if(!plan){ showToast("Aucune échéance proche ou dépassée pour cette personne."); return; }
+    const T = REMIND_TIERS[plan.tier], esc = plan.tier === "esc";
     const old = document.getElementById("teams-remind"); if(old) old.remove();
     const el = document.createElement("div");
     el.className = "modal-backdrop"; el.id = "teams-remind";
     el.innerHTML = `<div class="modal" role="dialog" aria-modal="true" aria-labelledby="tr-title" style="max-width:560px;">
-      <h2 id="tr-title">Relancer sur Microsoft Teams</h2>
-      <p style="margin-bottom:10px;">La discussion Teams s'ouvre avec ce message déjà écrit : relisez-le, puis appuyez sur Entrée dans Teams pour l'envoyer.</p>
+      <h2 id="tr-title">${plan.rows.some(x => x.n < 0) ? "Relancer" : "Rappeler"} sur Microsoft Teams</h2>
+      <p style="margin-bottom:10px;"><span class="pill ${plan.rank >= 3 ? "pill-bad" : plan.rank === 2 ? "pill-warn" : "pill-due"}">${escapeHTML(T.name)}</span><br>La discussion Teams s'ouvre avec ce message déjà écrit : relisez-le, puis appuyez sur Entrée dans Teams pour l'envoyer.</p>
       <div class="sr-box"><div style="display:block; text-align:left;"><b>À :</b> ${escapeHTML(person.name)} &lt;${escapeHTML(person.email)}&gt;</div>
+        ${esc ? `<div style="display:block; text-align:left; margin-top:8px;"><label for="tr-cc" style="font-weight:700;">En copie : responsable</label><input type="email" id="tr-cc" class="inv-input" maxlength="120" placeholder="prenom.nom@exalt-company.com" autocomplete="off" value="${escapeHTML(person.managerEmail || "")}" style="margin-top:4px;"></div>` : ""}
         <textarea id="tr-body" class="sign-note" rows="9" style="margin:6px 0 0; resize:vertical;" maxlength="1500" aria-label="Texte du message Teams"></textarea></div>
       <p id="tr-msg" role="status" style="font-size:13px; min-height:18px; margin:8px 0 0;"></p>
       <div class="modal-actions" style="flex-wrap:wrap;">
@@ -5347,8 +5576,9 @@
         <button type="button" class="btn btn-primary" data-sr="send">${TEAMS_ICO} Ouvrir dans Teams</button>
       </div></div>`;
     document.body.appendChild(el);
-    const body = el.querySelector("#tr-body"), msg = el.querySelector("#tr-msg");
-    body.value = teamsRemindText(person);
+    const body = el.querySelector("#tr-body"), msg = el.querySelector("#tr-msg"), ccIn = el.querySelector("#tr-cc");
+    let warned = false;
+    body.value = teamsRemindText(person, plan);
     const close = () => { el.remove(); document.removeEventListener("keydown", onKey, true); };
     const onKey = (e) => { if(e.key === "Escape"){ e.preventDefault(); e.stopPropagation(); close(); } };
     document.addEventListener("keydown", onKey, true);
@@ -5363,10 +5593,14 @@
         catch(err){ try{ legacyCopy(text); msg.style.color = "var(--good)"; msg.textContent = "Message copié : collez-le dans Teams."; }catch(e2){ msg.style.color = "var(--bad)"; msg.textContent = "Copie impossible : sélectionnez le texte et copiez-le."; } }
         return;
       }
+      const cc = ccIn ? ccIn.value.trim() : "";
+      if(cc && !/^[^\s@<>()]+@[^\s@<>()]+\.[^\s@<>()]{2,}$/.test(cc)){ msg.style.color = "var(--bad)"; msg.textContent = "L'adresse du responsable n'est pas valide."; ccIn.focus(); return; }
+      if(esc && !cc && !warned){ warned = true; msg.style.color = "var(--warn)"; msg.textContent = "Aucun responsable renseigné : le message partira sans copie. Cliquez de nouveau pour continuer, ou saisissez son adresse."; if(ccIn) ccIn.focus(); return; }
       const link = document.createElement("a");
-      link.href = teamsChatUrl(person.email, text); link.target = "_blank"; link.rel = "noopener noreferrer"; link.style.display = "none";
+      link.href = teamsChatUrl(cc ? [person.email, cc] : person.email, text); link.target = "_blank"; link.rel = "noopener noreferrer"; link.style.display = "none";
       document.body.appendChild(link); link.click(); link.remove();
-      close(); showToast(`Teams ouvert avec le message pour ${person.name}.`);
+      close(); showToast(`Teams ouvert avec le message pour ${person.name}${cc ? ` (responsable en copie : ${cc})` : ""}.`);
+      Promise.resolve(logReminders(person, plan.rows, "teams", cc)).then(() => { if(onDone) onDone(); });
     });
     body.focus();
   }
@@ -5376,6 +5610,180 @@
     const p = PERSON_BY_ID.get(Number(b.dataset.teamsRemind)) || PERSON_BY_ID.get(b.dataset.teamsRemind);
     if(p) openTeamsRemind(p);
   }, true);
+
+  // File des relances à envoyer (toutes les personnes) : bandeau dans Restituer et fenêtre de préparation
+  let remindMemo = null;
+  function reminderQueue(){
+    let ok = false; try{ ok = canAct(); }catch(e){}
+    if(!ok) return [];
+    const day = todayISO();
+    if(!remindMemo || remindMemo.rev !== LEDGER_REV || remindMemo.day !== day) remindMemo = { rev: LEDGER_REV, day, v: LEAVERS.map(p => p.email ? remindPlanOf(p, true) : null).filter(Boolean).sort((a, b) => b.rank - a.rank || a.person.name.localeCompare(b.person.name, "fr")) };
+    return remindMemo.v;
+  }
+  function renderRemindBanner(){
+    const slot = document.getElementById("return-remind-slot"); if(!slot) return;
+    const q = reminderQueue();
+    if(!q.length){ slot.innerHTML = ""; return; }
+    const by = {}; q.forEach(pl => { by[pl.tier] = (by[pl.tier] || 0) + 1; });
+    const parts = Object.keys(REMIND_TIERS).filter(k => by[k]).map(k => `${by[k]} · ${REMIND_TIERS[k].short.toLowerCase()}`);
+    slot.innerHTML = `<div class="remind-banner">${TEAMS_ICO}<div class="rb-txt"><b>${q.length} relance${q.length > 1 ? "s" : ""} Teams à envoyer</b><span>${parts.join("  ·  ")}</span></div><button type="button" class="btn btn-primary" data-open-remind-queue>Préparer les relances</button></div>`;
+  }
+  function openReminderQueue(){
+    const old = document.getElementById("remind-queue"); if(old) old.remove();
+    const el = document.createElement("div");
+    el.className = "modal-backdrop"; el.id = "remind-queue";
+    const draw = () => {
+      const q = reminderQueue();
+      el.innerHTML = `<div class="modal" role="dialog" aria-modal="true" aria-labelledby="rq-title" style="max-width:700px;">
+        <h2 id="rq-title">Relances à envoyer</h2>
+        <p style="margin-bottom:8px;">Le message est préparé selon l'échéance : rappel 3 jours avant, le jour du retour, après une semaine de retard, puis au-delà de 15 jours avec le responsable en copie. Vous relisez chaque message dans Teams avant de l'envoyer ; une relance envoyée n'est plus reproposée.</p>
+        <div class="rq-list">${q.length ? q.map(pl => `<div class="rq-row"><div class="rq-who"><b>${escapeHTML(pl.person.name)}</b><span>${escapeHTML(pl.rows.map(x => `${x.it.label}${x.qty > 1 ? ` ×${x.qty}` : ""} · ${whenTxt(x.n)}`).join("  ;  "))}</span></div><span class="pill ${pl.rank >= 3 ? "pill-bad" : pl.rank === 2 ? "pill-warn" : "pill-due"}" title="${escapeHTML(REMIND_TIERS[pl.tier].name)}">${escapeHTML(REMIND_TIERS[pl.tier].short)}</span><button type="button" class="btn teams-remind" data-rq-send="${pl.person.id}">${TEAMS_ICO} Préparer</button><button type="button" class="btn" data-rq-skip="${pl.person.id}" title="Ne plus proposer ce palier pour cette personne">Ignorer</button></div>`).join("") : `<div class="result-empty is-ok">Aucune relance à envoyer : tout est à jour.</div>`}</div>
+        <div class="modal-actions"><button type="button" class="btn" data-rq="close">Fermer</button></div></div>`;
+    };
+    draw(); document.body.appendChild(el);
+    const close = () => { el.remove(); document.removeEventListener("keydown", onKey, true); };
+    const onKey = (e) => { if(e.key === "Escape" && !document.getElementById("teams-remind")){ e.preventDefault(); e.stopPropagation(); close(); } };
+    document.addEventListener("keydown", onKey, true);
+    el.addEventListener("mousedown", (e) => { if(e.target === el) close(); });
+    el.addEventListener("click", async (e) => {
+      if(e.target.closest("[data-rq='close']")){ close(); return; }
+      const s = e.target.closest("[data-rq-send]"), k = e.target.closest("[data-rq-skip]"), id = s ? s.dataset.rqSend : k ? k.dataset.rqSkip : null;
+      if(id === null) return;
+      const pl = reminderQueue().find(x => String(x.person.id) === String(id)); if(!pl){ draw(); return; }
+      if(s) openTeamsRemind(pl.person, pl, draw);
+      else { await logReminders(pl.person, pl.rows, "ignoré"); draw(); }
+    });
+    const f = el.querySelector("button"); if(f) f.focus();
+  }
+  document.addEventListener("click", (e) => {
+    if(!(e.target.closest && e.target.closest("[data-open-remind-queue]"))) return;
+    e.preventDefault(); e.stopPropagation(); openReminderQueue();
+  }, true);
+
+  // ---- Prolonger un prêt : repousse la date de retour prévue et garde la trace (ancienne date, nouvelle date, auteur, motif) ----
+  const frToISO = (s) => { const m = String(s || "").match(/(\d{2})\/(\d{2})\/(\d{4})/); return m ? `${m[3]}-${m[2]}-${m[1]}` : ""; };
+  function addDaysISO(iso, d){
+    const [y, m, dd] = iso.split("-").map(Number), t = new Date(y, m - 1, dd + d);
+    return `${t.getFullYear()}-${String(t.getMonth() + 1).padStart(2, "0")}-${String(t.getDate()).padStart(2, "0")}`;
+  }
+  function prolongBtnHTML(person, itemId){
+    const loan = loanOfItem(person, itemId);
+    if(!loan || !loan.due) return "";
+    return `<button type="button" class="btn row-prolong" data-extend-loan="${loan.id}" data-extend-person="${person.id}" title="Repousser la date de retour prévue (${escapeHTML(loan.due)}) : la prolongation est consignée sur l'emprunt">${ICONS.clock} Prolonger</button>`;
+  }
+  function extensionInfoHTML(l){
+    const ex = l.extensions || [];
+    if(!ex.length) return "";
+    const last = ex[ex.length - 1], who = byText("", last.by).trim();
+    return ` · prolongé ${ex.length} fois : dernière le ${dateHL(last.at)} (${escapeHTML(last.from)} → ${escapeHTML(last.to)}${last.note ? `, ${escapeHTML(last.note)}` : ""})${who ? " " + who : ""}`;
+  }
+  function openExtendLoan(person, loanId){
+    const loan = (person.loans || []).find(l => l.id === loanId);
+    if(!loan || !loan.due){ showToast("Cet emprunt n'a pas de date de retour prévue."); return; }
+    const old = document.getElementById("extend-modal"); if(old) old.remove();
+    const today = todayISO(), curISO = frToISO(loan.due), baseISO = curISO > today ? curISO : today;
+    const list = loan.items.filter(x => { try{ return itemLedger(person, x.id).returnable > 0; }catch(e){ return false; } });
+    const names = (list.length ? list : loan.items).map(x => { const eq = person.equipment.find(e => e.id === x.id); return `${eq ? eq.label : x.id}${x.qty > 1 ? ` ×${x.qty}` : ""}`; });
+    let newISO = addDaysISO(baseISO, 7), picked = "7";
+    const el = document.createElement("div");
+    el.className = "modal-backdrop"; el.id = "extend-modal";
+    el.innerHTML = `<div class="modal" role="dialog" aria-modal="true" aria-labelledby="ex-title" style="max-width:520px;">
+      <div class="modal-icon" style="background:var(--accent-soft); color:var(--accent);">${ICONS.clock}</div>
+      <h2 id="ex-title">Prolonger le prêt</h2>
+      <p>${escapeHTML(person.name)} · ${escapeHTML(names.join(", "))}<br>Retour prévu actuellement le <b>${escapeHTML(loan.due)}</b>${curISO < today ? ` (dépassé de ${-dueDays(loan.due)} jour${-dueDays(loan.due) > 1 ? "s" : ""})` : ""}.</p>
+      <div class="ext-chips" role="group" aria-label="Durée de la prolongation">
+        <button type="button" class="due-chip on" data-ext="7">+ 1 semaine</button><button type="button" class="due-chip" data-ext="14">+ 2 semaines</button><button type="button" class="due-chip" data-ext="30">+ 1 mois</button><button type="button" class="due-chip" data-ext="90">+ 3 mois</button>
+        <span class="date-field">${ICONS.clock} <input type="date" id="ex-date" min="${addDaysISO(curISO > today ? curISO : today, curISO > today ? 1 : 0)}" aria-label="Autre date de retour"></span>
+      </div>
+      <p class="ext-prev" id="ex-prev" role="status"></p>
+      <label class="report-lbl" for="ex-note">Motif <span class="opt" style="font-weight:500; text-transform:none; letter-spacing:0;">(facultatif)</span></label>
+      <input type="text" id="ex-note" class="inv-input" maxlength="100" list="ex-notes" placeholder="Ex. mission prolongée" autocomplete="off">
+      <datalist id="ex-notes"><option value="Mission prolongée"><option value="Télétravail"><option value="Projet en cours"><option value="À la demande du collaborateur"></datalist>
+      <p id="ex-msg" role="status" style="font-size:13px; font-weight:600; min-height:18px; margin:8px 0 0; color:var(--bad);"></p>
+      <div class="modal-actions"><button type="button" class="btn" id="ex-cancel">Annuler</button><button type="button" class="btn btn-primary" id="ex-ok">${ICONS.check} Prolonger</button></div>
+    </div>`;
+    document.body.appendChild(el);
+    const $ = (s) => el.querySelector(s), prev = document.activeElement;
+    const close = () => { document.removeEventListener("keydown", onKey, true); el.remove(); if(prev && prev.focus) prev.focus(); };
+    const onKey = (e) => { if(e.key === "Escape"){ e.preventDefault(); e.stopPropagation(); close(); } };
+    document.addEventListener("keydown", onKey, true);
+    el.addEventListener("mousedown", (e) => { if(e.target === el) close(); });
+    const show = () => {
+      $("#ex-prev").innerHTML = newISO ? `Nouveau retour prévu : <s>${escapeHTML(loan.due)}</s> → <b>${escapeHTML(formatDateFR(newISO))}</b>${picked !== "date" && curISO < today ? " <span class=\"soft\">(à partir d'aujourd'hui, l'échéance étant dépassée)</span>" : ""}` : "Choisissez une durée ou une date.";
+      el.querySelectorAll("[data-ext]").forEach(c => c.classList.toggle("on", c.dataset.ext === picked));
+      $("#ex-msg").textContent = "";
+    };
+    el.querySelectorAll("[data-ext]").forEach(c => c.addEventListener("click", () => { picked = c.dataset.ext; newISO = addDaysISO(baseISO, Number(picked)); $("#ex-date").value = ""; show(); }));
+    $("#ex-date").addEventListener("change", (e) => { if(e.target.value){ picked = "date"; newISO = e.target.value; } show(); });
+    $("#ex-cancel").addEventListener("click", close);
+    $("#ex-ok").addEventListener("click", () => {
+      if(!newISO){ $("#ex-msg").textContent = "Choisissez une durée ou une date."; return; }
+      if(newISO <= curISO || newISO < today){ $("#ex-msg").textContent = `La nouvelle date doit être postérieure au ${loan.due} et à aujourd'hui.`; return; }
+      const note = $("#ex-note").value.trim(), to = formatDateFR(newISO), at = nowStamp();
+      $("#ex-ok").disabled = true;
+      syncAndPersist(person, (pp) => {
+        const t = (pp.loans || []).find(l => l.id === loanId); if(!t) return;
+        const from = t.due || "";
+        t.extensions = [...(t.extensions || []), { at, by: actorId(), from, to, ...(note ? { note } : {}) }];
+        t.due = to;
+      }, () => {
+        close(); refreshAllAttestationViews();
+        showToast(`Prêt prolongé : retour prévu le ${to} (au lieu du ${loan.due}).`, 0, () => undoExtend(person, loanId, at));
+      });
+    });
+    show();
+    setTimeout(() => { const f = $("#ex-ok"); if(f) f.focus(); }, 40);
+  }
+  async function undoExtend(person, loanId, at){
+    await syncAndPersist(person, (pp) => {
+      const t = (pp.loans || []).find(l => l.id === loanId), ex = t && t.extensions;
+      if(!ex || !ex.length || ex[ex.length - 1].at !== at) return;
+      t.due = ex[ex.length - 1].from; t.extensions = ex.slice(0, -1); if(!t.extensions.length) delete t.extensions;
+    }, () => { refreshAllAttestationViews(); showToast("Prolongation annulée : la date de retour d'origine est rétablie."); });
+  }
+  document.addEventListener("click", (e) => {
+    const b = e.target.closest && e.target.closest("[data-extend-loan]"); if(!b) return;
+    e.preventDefault(); e.stopPropagation();
+    const p = PERSON_BY_ID.get(Number(b.dataset.extendPerson)) || PERSON_BY_ID.get(b.dataset.extendPerson);
+    if(p) openExtendLoan(p, Number(b.dataset.extendLoan));
+  }, true);
+
+  // ---- Doublons : avertir quand la personne a déjà un ordinateur ou un chargeur ----
+  const DUP_KINDS = { pc: { name: "ordinateur", plural: "ordinateurs" }, charger: { name: "chargeur", plural: "chargeurs" } };
+  function dupKeyOf(it){
+    if(isPcType(it.type)) return "pc";
+    const f = familyOfLabel(it.label); return f && f.type === "charger" ? "charger" : null;
+  }
+  // Exemplaires du même genre (PC ou Mac ; chargeur de n'importe quel modèle) déjà chez la personne
+  function heldOfKind(person, key){
+    const out = [];
+    person.equipment.forEach(it => {
+      if(dupKeyOf(it) !== key) return;
+      const L = itemLedger(person, it.id); if(L.outstanding < 1) return;
+      const pcs = heldDevicesOf(person, it.id).map(d => d.name).filter(Boolean);
+      out.push({ it, n: L.outstanding, pcs });
+    });
+    return out;
+  }
+  const heldKindText = (h) => h.map(x => `${x.it.label}${x.n > 1 ? ` ×${x.n}` : ""}${x.pcs.length ? ` (${x.pcs.join(", ")})` : ""}`).join(", ");
+  function dupWarnings(person, items){
+    const out = [];
+    Object.keys(DUP_KINDS).forEach(key => {
+      const asked = items.reduce((s, x) => { const it = person.equipment.find(e => e.id === x.id); return s + (it && dupKeyOf(it) === key ? x.qty : 0); }, 0);
+      if(!asked) return;
+      const held = heldOfKind(person, key); if(!held.length) return;
+      const n = held.reduce((s, x) => s + x.n, 0), K = DUP_KINDS[key];
+      out.push(`• ${person.name.split(" ")[0]} a déjà ${n} ${n > 1 ? K.plural : K.name} : ${heldKindText(held)}. Vous en remettez ${asked} de plus.`);
+    });
+    return out;
+  }
+  // Pastille d'information sur la ligne du catalogue (jamais bloquante)
+  function dupPillHTML(person, key){
+    if(!key) return "";
+    const held = heldOfKind(person, key); if(!held.length) return "";
+    const n = held.reduce((s, x) => s + x.n, 0);
+    return `<span class="pill pill-warn" title="${escapeHTML(`${person.name} a déjà : ${heldKindText(held)}`)}">${ICONS.alert} Déjà ${n} ${n > 1 ? DUP_KINDS[key].plural : DUP_KINDS[key].name}</span>`;
+  }
 
   // Numéro de test : tant qu'il est renseigné, les SMS partent vers lui au lieu du numéro
   // affiché sur la fiche. Le remplacer par null pour utiliser le vrai numéro de chaque personne.
@@ -5735,7 +6143,7 @@
       <div class="action-row">
         <div class="action-text">
           <strong>${labels}</strong><br>
-          <span style="color:var(--ink-soft); font-size:12px;">Emprunté le ${dateHL(l.date)}${l.due ? ` · retour prévu le ${dateHL(l.due)}` : ""} · enregistré le ${dateHL(l.recordedAt)}${creditHTML("enregistré", l.by)}${l.edits && l.edits.length ? ` · modifié le ${dateHL(l.edits[l.edits.length - 1].at)}${creditHTML("modifié", l.edits[l.edits.length - 1].by)}` : ""}</span>
+          <span style="color:var(--ink-soft); font-size:12px;">Emprunté le ${dateHL(l.date)}${l.due ? ` · retour prévu le ${dateHL(l.due)}` : ""}${extensionInfoHTML(l)} · enregistré le ${dateHL(l.recordedAt)}${creditHTML("enregistré", l.by)}${l.edits && l.edits.length ? ` · modifié le ${dateHL(l.edits[l.edits.length - 1].at)}${creditHTML("modifié", l.edits[l.edits.length - 1].by)}` : ""}</span>
         </div>
         <button type="button" class="btn row-edit" data-edit-loan="${l.id}" title="Corriger la date, le retour prévu ou les quantités de cet emprunt">${ICONS.pencil} Modifier</button>
       </div>
@@ -5785,7 +6193,7 @@
     const inFamily = (it) => !!familyOfLabel(it.label);
     const loanable = p.equipment.filter(it => !inFamily(it));
     const firstOfFam = new Map(); p.equipment.forEach((it, i) => { const f = familyOfLabel(it.label); if(f && !firstOfFam.has(f.label)) firstOfFam.set(f.label, i); });
-    const loanListHTML = p.equipment.map((it, i) => { const f = familyOfLabel(it.label); if(!f) return equipRow(p, it, "loan"); return firstOfFam.get(f.label) === i ? familyGroupRow(groupOf(GRP_PREFIX + f.label)) : ""; }).join("");
+    const loanListHTML = p.equipment.map((it, i) => { const f = familyOfLabel(it.label); if(!f) return equipRow(p, it, "loan"); return firstOfFam.get(f.label) === i ? familyGroupRow(groupOf(GRP_PREFIX + f.label), p) : ""; }).join("");
     const lendable = loanable.filter(it => invStockOf(it.label) !== 0);     // équipements dont le stock n'est pas épuisé
     const currentlyHeld = p.equipment.filter(it => itemLedger(p, it.id).outstanding > 0);
     const today = todayISO();
@@ -5948,12 +6356,18 @@ ${p.manual && canDeclareLoss() ? `<div class="detail-manage"><button type="butto
         cnt.forEach((q, id) => loanEntries.push([id, q]));
       }
       const items = loanEntries.map(([id, qty]) => { const ds = (selectedLoanDev.get(id) || []).slice(0, qty).map(k => k ? devAll.find(x => devKey(x) === k) : null).filter(Boolean).map(d => ({ name: d.name, serial: d.serial, ...(d.brand ? { brand: d.brand } : {}) })); return { id, qty, ...(ds.length ? { dev: ds[0], devs: ds } : {}) }; });
+      const dups = dupWarnings(p, items);
+      if(dups.length && !(await confirmDialog({
+        title: "Matériel du même type déjà en sa possession",
+        message: `${dups.join("\n")}\n\nEnregistrer quand même cet emprunt ?`,
+        confirmLabel: "Enregistrer quand même", cancelLabel: "Revoir le matériel"
+      }))) return;
       const noStockItems = items.filter(x => { const it = p.equipment.find(e => e.id === x.id), sl = it ? invStockOf(it.label) : null; return sl != null && x.qty > sl; });
       if(noStockItems.length){
         const lines = noStockItems.map(x => { const it = p.equipment.find(e => e.id === x.id) || {}, sl = invStockOf(it.label); return `• ${it.label} : ${x.qty} remis pour ${sl} en stock (${x.qty - sl} de plus)`; }).join("\n");
         const go = await confirmDialog({
           title: "Le stock est dépassé : enregistrer quand même ?",
-          message: `${lines}\n\nL'emprunt sera enregistré tel quel ; le stock s'affichera à 0 et l'écart à commander apparaîtra dans l'Inventaire.`,
+          message: `${lines}\n\nL'emprunt sera enregistré tel quel ; le stock s'affichera à 0 et le type apparaîtra « à commander » dans l'Inventaire.`,
           confirmLabel: "Enregistrer quand même", cancelLabel: "Revoir les quantités"
         });
         if(!go) return;
@@ -7594,14 +8008,15 @@ ${p.manual && canDeclareLoss() ? `<div class="detail-manage"><button type="butto
       renderLoanResults(document.getElementById("loan-search-input").value);
     });
   });
-  document.getElementById("return-filter-chips").querySelectorAll(".chip").forEach(chip => {
+  document.getElementById("return-filter-chips").querySelectorAll(".chip[data-filter]").forEach(chip => {
     chip.addEventListener("click", () => {
       returnFilter = chip.dataset.filter; returnLimit = PAGE_SIZE;
-      document.getElementById("return-filter-chips").querySelectorAll(".chip").forEach(c => c.classList.toggle("active", c === chip));
+      document.getElementById("return-filter-chips").querySelectorAll(".chip[data-filter]").forEach(c => c.classList.toggle("active", c === chip));
       renderReturnResults(document.getElementById("return-search-input").value);
     });
   });
-  document.getElementById("loan-sort").addEventListener("change", (e) => {
+  const loanSortEl = document.getElementById("loan-sort");   // le sélecteur de tri a été retiré de la page : le tri par défaut reste actif
+  if(loanSortEl) loanSortEl.addEventListener("change", (e) => {
     loanSort = e.target.value; loanLimit = PAGE_SIZE;
     renderLoanResults(document.getElementById("loan-search-input").value);
   });
@@ -8135,7 +8550,7 @@ ${p.manual && canDeclareLoss() ? `<div class="detail-manage"><button type="butto
     document.getElementById("home-summary").innerHTML = `<span class="sum-dot ${tone}"></span><span>${msg}</span>`;
 
     // Indicateurs
-    // « À commander » : unités manquantes calculées par l'Inventaire (0 et « Aucun achat enregistré » tant qu'aucun achat n'est saisi)
+    // « À commander » : nombre de types de matériel dont le stock est à 0 (0 et « Aucun achat enregistré » tant qu'aucun achat n'est saisi)
     const invOK = !!(INV && INV.entries && INV.entries.length);
     const needHome = invOK ? invCompute().reduce((s, r) => s + (r.need || 0), 0) : 0;
     const kpi = (go, filter, value, label, hint, color, icon) =>
@@ -8145,7 +8560,7 @@ ${p.manual && canDeclareLoss() ? `<div class="detail-manage"><button type="butto
       kpi("attestations", "pending", pending.length, "En attente de signature", "Envoyées, pas encore signées", pending.length ? "var(--warn)" : "var(--good)", ICONS.clock) +
       kpi("return", "todo", toReturnUnits, "Matériel à restituer", `${fmtCount(toReturnPeople)} personne${toReturnPeople > 1 ? "s" : ""}${lateUnits ? ` · dont ${fmtCount(lateUnits)} en retard` : ""}`, "var(--accent)", ICONS.laptop) +
       kpi("lost", "", lostMonth, "Perdu, volé ou abîmé", "Déclarations de ce mois-ci", lostMonth ? "var(--bad)" : "var(--ink)", ICONS.alert) +
-      kpi("inventory", "order", needHome, "À commander", invOK ? (needHome ? "Pour couvrir les prêts restants" : "Le stock suffit") : "Aucun achat enregistré", needHome ? "var(--warn)" : (invOK ? "var(--good)" : "var(--ink)"), `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>`);
+      kpi("inventory", "order", needHome, "À commander", invOK ? (needHome ? `Type${needHome > 1 ? "s" : ""} de matériel sans stock` : "Le stock suffit") : "Aucun achat enregistré", needHome ? "var(--warn)" : (invOK ? "var(--good)" : "var(--ink)"), `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>`);
     kpis.querySelectorAll("[data-go]").forEach(b => b.addEventListener("click", () => goTo(b.dataset.go, b.dataset.filter)));
     kpis.querySelectorAll("[data-late-alert]").forEach(b => b.addEventListener("click", () => checkLateReturns(true)));
 
@@ -8290,11 +8705,12 @@ ${p.manual && canDeclareLoss() ? `<div class="detail-manage"><button type="butto
       // Ne jamais écraser une personne déjà modifiée localement : son état en mémoire
       // est plus récent que n'importe quel instantané qu'on pourrait lire ici.
       if(!p || touchedPeople.has(p.id)) return;
-      p.loans = data.loans || [];
+      LEDGER_REV++; p.loans = data.loans || [];
       p.attestations = data.attestations || [];
       p.losses = data.losses || [];
       p.notes = data.notes || "";
       p.comments = normalizeComments(data);
+      if(data.managerEmail) p.managerEmail = data.managerEmail;
       changed = true;
     };
     try{
@@ -8339,14 +8755,14 @@ ${p.manual && canDeclareLoss() ? `<div class="detail-manage"><button type="butto
   // force : ouverture à la demande (carte « Alerte de retard » de l'accueil), sans les limites de fréquence.
   async function checkLateReturns(force){
     if(lateAlertBusy || ROLE === "collab") return;
-    const ls = lateStats();
-    if(!ls.units){ if(force === true) showToast("Aucun retard : tout le matériel prêté est dans les délais."); return; }
-    const key = `${todayISO()}|${ls.units}`;
+    const ls = lateStats(), rq = reminderQueue(), total = ls.units + rq.length;
+    if(!total){ if(force === true) showToast("Aucun retard ni relance à envoyer : tout le matériel prêté est dans les délais."); return; }
+    const key = `${todayISO()}|${total}`;
     if(force !== true){
       let seen = null; try{ seen = localStorage.getItem("prisme-late-alert"); }catch(e){}
       if(seen === key) return;
       const [seenDay, seenUnits] = (seen || "").split("|");
-      if(seenDay === todayISO() && Number(seenUnits) >= ls.units) return;
+      if(seenDay === todayISO() && Number(seenUnits) >= total) return;
       const root = document.documentElement;
       if(document.hidden || root.classList.contains("is-loading") || root.classList.contains("dialog-open") || document.querySelector(".modal-backdrop:not([hidden])") || (typeof tourEl !== "undefined" && tourEl)) return;
     }
@@ -8354,13 +8770,14 @@ ${p.manual && canDeclareLoss() ? `<div class="detail-manage"><button type="butto
     try{ localStorage.setItem("prisme-late-alert", key); }catch(e){}
     const top = ls.people.slice(0, 6).map(x => `• ${x.p.name} : ${x.units} équipement${x.units > 1 ? "s" : ""}, ${x.days} jour${x.days > 1 ? "s" : ""} de retard`);
     if(ls.people.length > top.length) top.push(`… et ${ls.people.length - top.length} autre${ls.people.length - top.length > 1 ? "s" : ""} personne${ls.people.length - top.length > 1 ? "s" : ""}`);
+    const rqLine = rq.length ? `${rq.length} relance${rq.length > 1 ? "s" : ""} Teams ${rq.length > 1 ? "sont prêtes" : "est prête"} à être envoyée${rq.length > 1 ? "s" : ""} (rappel avant l'échéance, jour du retour, retard d'une semaine, plus de 15 jours).` : "";
     const go = await confirmDialog({
-      title: `${ls.units} équipement${ls.units > 1 ? "s" : ""} non rendu${ls.units > 1 ? "s" : ""} à la date prévue`,
-      message: `La date de retour prévue est dépassée pour ${ls.people.length} personne${ls.people.length > 1 ? "s" : ""} :\n${top.join("\n")}`,
-      confirmLabel: "Voir les retards", cancelLabel: "Plus tard"
+      title: ls.units ? `${ls.units} équipement${ls.units > 1 ? "s" : ""} non rendu${ls.units > 1 ? "s" : ""} à la date prévue` : `${rq.length} relance${rq.length > 1 ? "s" : ""} à envoyer`,
+      message: (ls.units ? `La date de retour prévue est dépassée pour ${ls.people.length} personne${ls.people.length > 1 ? "s" : ""} :\n${top.join("\n")}` : "") + (ls.units && rqLine ? "\n\n" : "") + rqLine,
+      confirmLabel: rq.length ? "Préparer les relances" : "Voir les retards", cancelLabel: "Plus tard"
     });
     lateAlertBusy = false;
-    if(go) goTo("return", "late");
+    if(go){ if(rq.length) openReminderQueue(); else goTo("return", "late"); }
   }
   setInterval(checkLateReturns, 30 * 60 * 1000);
   document.addEventListener("visibilitychange", () => { if(!document.hidden) checkLateReturns(); });
@@ -8620,6 +9037,7 @@ ${p.manual && canDeclareLoss() ? `<div class="detail-manage"><button type="butto
     themeToggleBtn.addEventListener("click", (e) => { e.stopPropagation(); themePop.hidden ? openThemePop() : closeThemePop(); });
     themePop.addEventListener("click", (e) => {
       e.stopPropagation();
+      if(e.target.closest("[data-tp-close]")){ closeThemePop(); themeToggleBtn.focus(); return; }
       const m = e.target.closest("[data-mode]"), a = e.target.closest("[data-accent-pick]"), dn = e.target.closest("[data-density-pick]");
       if(dn){ applyDensity(dn.dataset.densityPick); drawThemePop(); }
       if(m){ currentTheme = applyTheme(m.dataset.mode); if(/^exalt/.test(currentTheme)) currentAccent = applyAccent("exalt"); drawThemePop(); placeThemePop(); }
@@ -9194,7 +9612,7 @@ ${p.manual && canDeclareLoss() ? `<div class="detail-manage"><button type="butto
       const tracked = comp.filter(r => r.hasEntries);
       inv = {
         k: { bought, spent, unpriced, entries: ents.length, stock: tracked.reduce((s, r) => s + r.stock, 0), need: comp.reduce((s, r) => s + r.need, 0), soldOut: tracked.filter(r => r.stock === 0).length },
-        stockRows: comp.filter(r => r.hasEntries || r.tracked > 0).sort((a, b) => (b.need - a.need) || a.label.localeCompare(b.label, "fr")).map(r => [r.label, r.hasEntries ? Math.max(0, r.bought) : "–", r.hasEntries ? r.stock : "–", r.held, r.pending, r.lost, r.toGive, r.need]),
+        stockRows: comp.filter(r => r.hasEntries || r.tracked > 0).sort((a, b) => (b.need - a.need) || a.label.localeCompare(b.label, "fr")).map(r => [r.label, r.hasEntries ? Math.max(0, r.bought) : "–", r.hasEntries ? r.stock : "–", r.held, r.pending, r.lost, r.toGive, r.need > 0 ? "Oui" : "–"]),
         spendRows: [...spendBy.entries()].sort((a, b) => b[1].tot - a[1].tot).map(([k, s]) => [k, s.qty, eurR(s.tot), eurR(s.tot / s.qty), s.min === s.max ? "–" : `${eurR(s.min)} – ${eurR(s.max)}`, eurR(s.last)]),
         entryRows: ents.map(e => { const t = invTotalOf(e); return [String(e.date || "").split(" ")[0], e.label, (e.qty > 0 ? "+" : "") + e.qty, e.kind === "retrait" ? "Retrait" : e.kind === "initial" ? "Stock initial" : "Achat", t ? eurR(t) : "", t ? eurR(t / e.qty) : "", e.note || ""]; })
       };
@@ -9392,7 +9810,7 @@ ${p.manual && canDeclareLoss() ? `<div class="detail-manage"><button type="butto
       invStock: () => {
         heading("Stock par type de matériel", "Situation d'aujourd'hui. Le stock est l'acheté moins ce qui est chez les personnes, en attente de signature ou perdu.");
         table(["Type de matériel", "Acheté", "En stock", "Chez les pers.", "En attente", "Perdu", "À remettre", "À commander"], d.inv.stockRows,
-          Object.assign({ columnStyles: { 1: { halign: "right", cellWidth: 16 }, 2: { halign: "right", cellWidth: 17 }, 3: { halign: "right", cellWidth: 21 }, 4: { halign: "right", cellWidth: 18 }, 5: { halign: "right", cellWidth: 14 }, 6: { halign: "right", cellWidth: 19 }, 7: { halign: "right", cellWidth: 22 } } }, redIf(7, (v) => v > 0)));
+          Object.assign({ columnStyles: { 1: { halign: "right", cellWidth: 16 }, 2: { halign: "right", cellWidth: 17 }, 3: { halign: "right", cellWidth: 21 }, 4: { halign: "right", cellWidth: 18 }, 5: { halign: "right", cellWidth: 14 }, 6: { halign: "right", cellWidth: 19 }, 7: { halign: "right", cellWidth: 22 } } }, redIf(7, (v) => v === "Oui")));
       },
       invSpend: () => {
         heading("Dépenses par type de matériel", `Achats avec un prix sur la période : ${d.period.label}`);
@@ -9460,7 +9878,7 @@ ${p.manual && canDeclareLoss() ? `<div class="detail-manage"><button type="butto
     const pct = (v, t) => t ? `${Math.round(100 * v / t)} % du parc` : "";
     if(sc === "all"){
       section("Indicateurs de l'Accueil (aujourd'hui)");
-      line("En attente de signature", d.home.k.pending); line("Matériel à restituer", d.home.k.toRetU, `${d.home.k.toRetP} personne(s)`); line("Perdu, volé ou abîmé (ce mois-ci)", d.home.k.lostMonth); line("À commander", d.home.k.invHas ? d.home.k.need : "–", "Unités manquantes d'après l'Inventaire");
+      line("En attente de signature", d.home.k.pending); line("Matériel à restituer", d.home.k.toRetU, `${d.home.k.toRetP} personne(s)`); line("Perdu, volé ou abîmé (ce mois-ci)", d.home.k.lostMonth); line("À commander", d.home.k.invHas ? d.home.k.need : "–", "Types sans stock d'après l'Inventaire");
       r++; section("Compléments");
       line("Retours en retard", d.home.k.late); line("PDF signés à archiver", d.home.k.unarchived); line("Matériel acheté", d.home.k.invHas ? d.home.k.bought : "–"); line("Total dépensé (€)", Math.round(d.home.k.spent * 100) / 100);
     } else if(sc === "loan"){
@@ -9482,7 +9900,7 @@ ${p.manual && canDeclareLoss() ? `<div class="detail-manage"><button type="butto
       line("Unités déclarées sur la période", d.act.losses, d.period.label); line("Déclarations sur la période", d.k.lossDecl); line("Type le plus touché", d.k.topLoss); line("Unités déclarées depuis le début", d.k.lossAll);
     } else if(sc === "inventory"){
       section("Stock (aujourd'hui)");
-      line("Unités en stock", d.inv.k.stock); line("Types de matériel épuisés", d.inv.k.soldOut, "Plus aucun exemplaire en stock"); line("Unités à commander", d.inv.k.need, "Matériel à remettre au-delà du stock");
+      line("Unités en stock", d.inv.k.stock); line("Types de matériel épuisés", d.inv.k.soldOut, "Plus aucun exemplaire en stock"); line("Types à commander", d.inv.k.need, "Plus rien en stock");
       r++; section(`Achats sur la période : ${d.period.label}`);
       line("Total dépensé (€)", Math.round(d.inv.k.spent * 100) / 100); line("Unités achetées", d.inv.k.bought); line("Entrées de stock", d.inv.k.entries); line("Entrées sans prix", d.inv.k.unpriced);
     }
@@ -9502,7 +9920,7 @@ ${p.manual && canDeclareLoss() ? `<div class="detail-manage"><button type="butto
       homeStock: () => addTable("Stock par type", ["Type de matériel", "En stock", "Part"], d.home.stockRows, [30, 12, 10], [1, 2]),
       homeSpend: () => addTable("Dépenses par type", ["Type de matériel", "Montant", "Part"], d.home.spendRows, [30, 16, 10], [1, 2]),
       homeMonths: () => addTable("Dépenses par mois", ["Mois", "Dépenses"], d.home.months, [20, 16], [1]),
-      invStock: () => addTable("Stock", ["Type de matériel", "Acheté", "En stock", "Chez les personnes", "Restitution en attente", "Perdu", "À remettre", "À commander"], d.inv.stockRows, [30, 10, 10, 18, 22, 10, 12, 14], [1, 2, 3, 4, 5, 6, 7], redCell(8, (v) => v > 0)),
+      invStock: () => addTable("Stock", ["Type de matériel", "Acheté", "En stock", "Chez les personnes", "Restitution en attente", "Perdu", "À remettre", "À commander"], d.inv.stockRows, [30, 10, 10, 18, 22, 10, 12, 14], [1, 2, 3, 4, 5, 6, 7], redCell(8, (v) => v === "Oui")),
       invSpend: () => addTable("Dépenses par type", ["Type de matériel", "Quantité", "Montant", "Prix moyen", "Min – max", "Dernier prix"], d.inv.spendRows, [30, 10, 14, 14, 22, 14], [1, 2, 3, 5]),
       invEntries: () => addTable("Entrées de stock", ["Date", "Type de matériel", "Quantité", "Nature", "Montant", "Prix unitaire", "Note"], d.inv.entryRows, [12, 30, 10, 14, 14, 14, 40], [2, 4, 5]),
       people: () => addTable("Par personne", ["Personne", "Fonction", "Équipements", "Chez la personne", "En attente de signature", "Restitués", "Perdus", "Statut"], d.people, [24, 28, 12, 16, 20, 12, 10, 32], [2, 3, 4, 5, 6])
@@ -9853,7 +10271,7 @@ ${p.manual && canDeclareLoss() ? `<div class="detail-manage"><button type="butto
     cmdkPrev = document.activeElement; cmdkEl.hidden = false; cmdkInput.value = "";
     cmdkItems = buildCmdk(""); cmdkIdx = 0; drawCmdk(); cmdkInput.focus();
   }
-  function closeCmdk(){ cmdkEl.hidden = true; if(cmdkPrev && cmdkPrev.focus) cmdkPrev.focus(); }
+  function closeCmdk(){ clearTimeout(cmdkTimer); cmdkEl.hidden = true; if(cmdkPrev && cmdkPrev.focus) cmdkPrev.focus(); }
   function runCmdk(i, which){ const it = cmdkItems[i]; if(!it) return; const fn = cmdkRunOf(it, which); cmdkEl.hidden = true; if(fn) fn(); }
   document.querySelectorAll(".view-head").forEach(h => {
     if(h.querySelector(":scope > .head-tools")) return;   // l'Accueil apporte ses propres boutons
@@ -9883,9 +10301,352 @@ ${p.manual && canDeclareLoss() ? `<div class="detail-manage"><button type="butto
     tools.appendChild(b);
     h.insertAdjacentElement("afterbegin", tools);
   });
+
+  // ---- Guide : un bouton « Guide » dans l'en-tête de chaque page explique comment l'utiliser ----
+  // Chaque page a plusieurs rubriques (onglets) ; une étape est un texte, ou { t: titre, d: détail }.
+  // La dernière rubrique, « Partout », est commune à toutes les pages.
+  const GUIDE_ICO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1.1.9-1.1 1.7"/><line x1="12" y1="17" x2="12" y2="17.01"/></svg>';
+  const KBD = (k) => `<kbd class="kbd">${k}</kbd>`;
+  const GUIDE_COMMON = { name: "Partout", lead: "Ce qui marche de la même façon sur toutes les pages.",
+    steps: [
+      { t: "Recherche rapide", d: `${KBD("Ctrl")} ${KBD("K")} (ou le bouton Rechercher) cherche dans toute l'application : personnes, types de matériel, PC et Mac (nom ou numéro de série), achats, factures, attestations et pages. ${KBD("↑")} ${KBD("↓")} parcourent les résultats, ${KBD("↵")} ouvre.` },
+      { t: "Raccourcis", d: `${KBD("1")} à ${KBD("8")} changent de page, ${KBD("/")} place le curseur dans la recherche de la page, ${KBD("Échap")} ferme une fenêtre, ${KBD("?")} affiche l'aide.` },
+      { t: "Filtrer par période", d: "Le sélecteur « Période » des pages de suivi propose : Toutes les dates, Entre deux dates, Entre deux mois ou Entre deux années. Il s'applique à la liste et aux chiffres de la page." },
+      { t: "Rapport", d: "Le bouton Rapport génère un document de situation : choix de la période (toutes les dates, ce mois-ci, mois précédent, cette année, entre deux dates), d'une personne (facultatif) et du format, PDF ou Excel. « Générer le rapport » le télécharge ; « Envoyer par email » l'adresse à qui vous voulez." },
+      { t: "Exporter CSV", d: "Les pages Attestations, Matériel perdu et l'Inventaire proposent un export de la liste affichée, à rouvrir dans Excel." },
+      { t: "Apparence", d: "Le bouton Thème, en bas du menu, règle le thème (12), la couleur d'accent (7) et la densité (confortable ou compacte). Le choix est gardé sur votre navigateur." },
+      { t: "Enregistrement", d: "En bas du menu, « Synchronisé à … » confirme que vos données sont bien enregistrées dans la base. Si l'indicateur signale un problème, une modification peut ne pas être conservée : rechargez la page." },
+      { t: "Rôles", d: "Selon votre rôle, certains boutons sont masqués : un Lecteur consulte seulement, un Collaborateur ne voit que son matériel. Les rôles se gèrent dans « Rôles et accès »." }],
+    tips: ["« Aide et astuces » (en bas du menu) rouvre les raccourcis et la visite guidée complète."] };
+  const PAGE_GUIDES = {
+    home: { title: "Accueil", tabs: [
+      { name: "Vue d'ensemble", lead: "Le tableau de bord montre ce qui demande une action aujourd'hui.",
+        steps: [
+          { t: "Les cartes du haut", d: "Alerte de retard, attestations en attente de signature, matériel à restituer, pertes du mois et types à commander. Un clic ouvre la page concernée, déjà filtrée." },
+          { t: "Les boutons du haut", d: "Rechercher (tout trouver), Nouvel emprunt, Nouvelle restitution et Rapport." },
+          { t: "Le bandeau « PDF signés à archiver »", d: "Il mène aux Archives quand des attestations signées n'y sont pas encore." },
+          { t: "Les cartes du bas", d: "Le parc, le stock par type et les dépenses : cliquez une ligne, une couleur ou une barre pour ouvrir l'Inventaire sur ce sujet." }] },
+      { name: "Alertes du jour", lead: "Ce qui vous est signalé sans que vous le cherchiez.",
+        steps: [
+          { t: "À l'ouverture", d: "Si des retours sont en retard ou si des relances Teams sont prêtes, une fenêtre le signale : une fois par jour, ou plus tôt si leur nombre augmente. Ses boutons « Voir les retards » et « Préparer les relances » mènent directement à la bonne page." },
+          { t: "Carte « Alerte de retard »", d: "Elle rouvre cette fenêtre à la demande. Le menu affiche aussi une pastille sur Accueil tant qu'il y a des retards ou des attestations à relancer." },
+          { t: "Carte « À commander »", d: "Elle compte les types de matériel dont le stock est à 0 ; un clic ouvre l'Inventaire filtré sur ces types." },
+          { t: "Pastilles du menu", d: "Les chiffres à côté de chaque page (Restituer, Matériel perdu, Inventaire, Attestations) résument ce qui y attend une action." }] }] },
+
+    loan: { title: "Emprunter", tabs: [
+      { name: "Faire un emprunt", lead: "Du choix de la personne à l'enregistrement, en six gestes.",
+        steps: [
+          { t: "Trouvez la personne", d: "Tapez un nom, un nom de PC ou un numéro de série dans la barre de recherche (la touche / y place le curseur). Les filtres Tous, À emprunter et Tout emprunté trient la liste. Cliquez la ligne de la personne : sa fiche s'ouvre." },
+          { t: "Regardez ce qu'elle a déjà", d: "En haut de la fiche, « Matériel actuellement emprunté » liste ce qu'elle détient, avec la date de retour et le bouton Prolonger." },
+          { t: "Cochez le matériel remis", d: "Dans « Matériel disponible », cochez chaque équipement. Réglez la quantité avec − et +. Un matériel marqué « Plus en stock » est épuisé : voir l'Inventaire." },
+          { t: "Précisez selon le matériel", d: "Ordinateur ou Mac : choisissez la machine par son nom ou son numéro de série (facultatif). Chargeur : le modèle de chaque exemplaire. Écran : la marque." },
+          { t: "Choisissez les dates", d: "La date de remise est celle du jour par défaut. « Retour prévu » est facultatif : + 1 semaine, + 1 mois, + 3 mois, ou une date. Avec une date de retour, l'application signale les retards et prépare les relances." },
+          { t: "Enregistrez", d: "Cliquez sur Enregistrer. Une bulle confirme, avec un bouton Annuler pour défaire l'emprunt aussitôt. Le stock se met à jour tout seul." }],
+        tips: ["Une pastille « Déjà 1 ordinateur » prévient quand la personne a déjà un ordinateur ou un chargeur ; une confirmation avant l'enregistrement vous laisse décider."] },
+      { name: "Cas particuliers", lead: "Les situations qui sortent du cas simple.",
+        steps: [
+          { t: "Personne absente de la liste", d: "Cliquez « Nouvel emprunt » : saisissez le nom et le prénom (obligatoires), la fonction, l'email et le téléphone (facultatifs), puis « Continuer vers l'emprunt »." },
+          { t: "Plusieurs exemplaires", d: "Pour 3 chargeurs, mettez la quantité à 3 puis choisissez le modèle de chacun dans les listes qui apparaissent." },
+          { t: "Stock épuisé ou dépassé", d: "Si vous remettez plus que le stock, l'application demande une confirmation. L'emprunt est enregistré, le stock passe à 0 et le type apparaît « à commander » dans l'Inventaire." },
+          { t: "Prolonger un prêt", d: "Bouton Prolonger sur la ligne du matériel : + 1 semaine, + 2 semaines, + 1 mois, + 3 mois ou une date, avec un motif facultatif. L'ancienne et la nouvelle date restent dans l'historique ; Annuler défait la prolongation." }] },
+      { name: "Historique et corrections", lead: "Retrouver, corriger ou annoter ce qui a déjà été enregistré.",
+        steps: [
+          { t: "L'historique de la fiche", d: "Sous le formulaire, la liste des emprunts de la personne : matériel, dates, qui l'a enregistré. Une barre de recherche filtre par matériel, date ou nom de PC." },
+          { t: "Modifier un emprunt", d: "Bouton Modifier sur une ligne : corrigez les quantités (jamais en dessous de ce qui a déjà été rendu ou perdu), la date de remise et le retour prévu. Les modifications sont consignées." },
+          { t: "Annuler aussitôt", d: "Juste après un enregistrement, le bouton Annuler de la bulle défait l'emprunt, tant qu'aucune autre action n'a été faite pour cette personne." },
+          { t: "Commentaires", d: "Le panneau « Commentaires » de la fiche garde des notes pour l'équipe, avec la date et l'auteur. Vous pouvez modifier les vôtres." }] }] },
+
+    "return": { title: "Restituer", tabs: [
+      { name: "Restituer", lead: "Quand la personne rapporte le matériel.",
+        steps: [
+          { t: "Trouvez la personne", d: "Recherche, ou filtres : Tous, À traiter, En retard de retour, En attente de signature, Perdu / volé / abîmé, Tout restitué. Cliquez la ligne." },
+          { t: "Cochez ce qui est rendu", d: "« Matériel emprunté » liste ce qu'elle détient, avec la date de retour (pastille rouge « en retard de 8 j »). Cochez le matériel rendu, choisissez la quantité si besoin ; un ordinateur se coche machine par machine. « Sélectionner tout » coche tout." },
+          { t: "Choisissez la date de retour", d: "Celle du jour par défaut ; changez-la si le matériel est revenu un autre jour." },
+          { t: "Concluez avec un des trois boutons", d: "« Par email » et « Par téléphone » préparent une attestation de restitution à faire signer. « Restituer sans attestation » enregistre le retour tout de suite, sans document." }],
+        tips: ["Sur chaque ligne cochée, « Restituer » fait la même chose que « Restituer sans attestation » pour ce seul matériel.", "Un retour enregistré se défait avec Annuler dans la bulle de confirmation."] },
+      { name: "Attestation et signature", lead: "La preuve que le matériel a bien été rendu.",
+        steps: [
+          { t: "Envoyez l'attestation", d: "Après « Par email » ou « Par téléphone » : un aperçu du PDF s'affiche, la personne signe à l'écran, puis le message prêt à envoyer s'ouvre (Outlook pour l'email, l'application de messages pour le téléphone). Pour l'email, vous pouvez choisir une autre adresse que celle de la fiche." },
+          { t: "Suivez la signature", d: "Une attestation envoyée est « en attente de signature » : elle figure dans la page Attestations et sur la fiche. Quand la personne a signé, cliquez « Marquer comme signée »." },
+          { t: "Retrouvez le PDF signé", d: "Le PDF signé est archivé : il se retrouve dans Archives PDF." }],
+        tips: ["Tant que l'attestation n'est pas signée, le matériel compte « à signer » : il n'est pas encore en stock."] },
+      { name: "Retards et relances", lead: "Quand la date de retour prévue est atteinte ou dépassée.",
+        steps: [
+          { t: "Repérez les retards", d: "La carte « Alerte de retard » de l'Accueil et le filtre « En retard de retour » listent les personnes dont la date prévue est dépassée." },
+          { t: "Relancez sur Teams", d: "Le bandeau « relances Teams à envoyer » prépare les messages : 3 jours avant, le jour du retour, après une semaine de retard, puis au-delà de 15 jours avec le responsable en copie. « Préparer » ouvre Teams avec le message écrit ; vous le relisez puis l'envoyez. « Ignorer » écarte le palier." },
+          { t: "Relancer une ligne", d: "Le bouton Teams d'une ligne en retard ouvre le même message pour cette personne seule." },
+          { t: "Prolongez si besoin", d: "Si la personne garde le matériel plus longtemps, « Prolonger » sur la ligne repousse la date de retour et garde la trace." }] },
+      { name: "Perte, vol, dégât", lead: "Quand le matériel ne reviendra pas.",
+        steps: [
+          { t: "Cochez le matériel concerné", d: "Dans « Matériel emprunté », cochez ce qui est perdu, volé ou abîmé." },
+          { t: "Déclarez", d: "Dans le cadre rouge : « Déclarer perdu », « Déclarer volé » ou « Déclarer abîmé », puis confirmez." },
+          { t: "La suite", d: "La perte sort du stock et apparaît dans Matériel perdu. Un remplacement peut ensuite être prêté à la personne." }] },
+      { name: "La fiche", lead: "Ce que montre la fiche d'une personne.",
+        steps: [
+          { t: "Les compteurs", d: "En haut : matériel emprunté, attestations à signer et pertes de la personne." },
+          { t: "Les listes", d: "Sous les boutons : ses attestations (avec leur état et le PDF), ses pertes et son historique." },
+          { t: "Commentaires", d: "Le panneau « Commentaires » garde des notes pour l'équipe, avec la date et l'auteur." }] }] },
+
+    attestations: { title: "Attestations", tabs: [
+      { name: "Suivre", lead: "Toutes les preuves de restitution envoyées, et où elles en sont.",
+        steps: [
+          { t: "Lisez les cartes", d: "Elles comptent les attestations envoyées (avec le taux de signature), celles en attente de signature et celles à relancer." },
+          { t: "Filtrez", d: "Toutes, En attente, À relancer (plus de 3 jours sans signature), Signées, Par email, Par téléphone. Choisissez aussi une période et cherchez un nom ou un matériel." },
+          { t: "Gardez la liste", d: "« Exporter CSV » (à côté de Période) enregistre la liste affichée." }] },
+      { name: "Marquer comme signée", lead: "Finaliser une attestation quand la personne a signé.",
+        steps: [
+          { t: "Ouvrez le PDF", d: "Le bouton PDF de la ligne télécharge l'attestation pour la relire." },
+          { t: "Cliquez « Marquer comme signée »", d: "Une fenêtre demande la date de signature (aujourd'hui par défaut) et la signature du collaborateur, tracée au doigt ou à la souris. Sans tracé, une mention écrite avec son nom est inscrite." },
+          { t: "Confirmez", d: "Le PDF signé est généré et archivé. Si la personne a une adresse email, l'application prépare ensuite l'envoi de l'attestation signée. Annuler dans la bulle défait la signature." }] },
+      { name: "Plusieurs à la fois", lead: "Pour traiter un lot d'attestations.",
+        steps: [
+          { t: "Cochez", d: "Cochez les attestations en attente concernées, ou la case en tête de liste pour toutes." },
+          { t: "Traitez", d: "La barre qui apparaît en bas affiche le nombre choisi : « Marquer comme signées » les finalise ensemble." }] }] },
+
+    archives: { title: "Archives PDF", tabs: [{ name: "Archives PDF", lead: "Les PDF des attestations signées, conservés pour preuve.",
+      steps: [
+        { t: "Cherchez", d: "Par nom, équipement ou date, avec une période si besoin." },
+        { t: "Filtrez", d: "« Archivés » : le PDF est conservé. « À archiver » : l'attestation est signée mais son PDF n'est pas encore conservé." },
+        { t: "Téléchargez un PDF archivé", d: "Bouton « Télécharger » sur la ligne : le PDF signé s'enregistre sur votre appareil." },
+        { t: "Archivez un PDF manquant", d: "Bouton « Archiver le PDF » : l'application génère le PDF signé et le conserve." }],
+      tips: ["Le bandeau de l'Accueil signale les PDF signés encore à archiver."] }] },
+
+    lost: { title: "Matériel perdu", tabs: [
+      { name: "Suivre les pertes", lead: "Les unités perdues, volées ou abîmées, par type de matériel et par personne.",
+        steps: [
+          { t: "Lisez les cartes", d: "Unités perdues, volées ou abîmées, nombre de déclarations, type le plus touché et unités déclarées ce mois-ci." },
+          { t: "Filtrez par type", d: "Le menu « Type de matériel » (ou un clic sur un type) ne garde que ce matériel. « Période » limite aux dates choisies." },
+          { t: "Cherchez une personne", d: "Pour voir ce qu'elle a perdu, volé ou abîmé." },
+          { t: "Gardez la liste", d: "« Exporter CSV » (à côté de Période)." }] },
+      { name: "Déclarer et remplacer", lead: "D'où vient une perte, et ce qui se passe ensuite.",
+        steps: [
+          { t: "Déclarer", d: "Une perte se déclare depuis Restituer, sur la fiche de la personne : cochez le matériel puis « Déclarer perdu », « volé » ou « abîmé »." },
+          { t: "Effet sur le stock", d: "L'unité sort du stock et n'est plus comptée chez la personne." },
+          { t: "Remplacement", d: "L'emplacement est libéré : un remplacement peut être prêté à la personne depuis Emprunter." }] }] },
+
+    inventory: { title: "Inventaire", start: () => { try{ return INV && INV.tab === "price" ? 2 : 0; }catch(e){ return 0; } }, tabs: [
+      { name: "Stock", lead: "Ce qui est acheté, en stock, chez les personnes, à signer ou perdu.",
+        steps: [
+          { t: "Lisez la vue d'ensemble", d: "Un anneau par type : le chiffre au centre est le stock disponible, les couleurs montrent où est le reste (chez les personnes, à signer, perdu). Survolez une couleur de la légende pour la repérer sur tous les anneaux." },
+          { t: "Repérez ce qui manque", d: "« À commander » signale les types dont le stock est à 0. Le filtre « À commander » de la liste les isole ; « Non renseigné » montre les types sans achat enregistré." },
+          { t: "Filtrez", d: "« Période » et « Type de matériel » (une famille comme Chargeur, ou un modèle précis) limitent la vue d'ensemble et la liste." },
+          { t: "Ouvrez un type", d: "Cliquez un anneau ou une ligne : vous voyez qui a le matériel, les derniers mouvements et le détail du calcul du stock." },
+          { t: "Consultez l'historique", d: "Le bouton Historique affiche tous les achats, stocks initiaux et retraits, avec « Modifier » pour les corriger." }],
+        tips: ["Stock = acheté − chez les personnes − à signer − perdu."] },
+      { name: "Enregistrer un achat", lead: "Deux façons de remplir le formulaire : à la main, ou en important la facture.",
+        steps: [
+          { t: "Ouvrez le formulaire", d: "Bouton « Enregistrer un achat » en haut à droite." },
+          { t: "Type de matériel", d: "Choisissez le type. Selon le type, un second choix apparaît : Marque (ordinateur), Modèle (chargeur) ou Marque (écran)." },
+          { t: "Nature", d: "« Achat ou réception » ajoute au stock. « Retrait » enlève du stock : mise au rebut, don ou correction d'une erreur." },
+          { t: "Quantité et date", d: "Le nombre d'exemplaires et la date de l'entrée." },
+          { t: "Prix (facultatif)", d: "Saisissez un seul prix : par unité ou au total, TTC ou HT. Les trois autres se calculent avec la quantité et le taux de TVA (20 % par défaut, ou « Autre taux » pour saisir le vôtre). Seul le total TTC est enregistré." },
+          { t: "Machines (ordinateurs)", d: "Facultatif : le nom du PC et son numéro de série, un par exemplaire. Ils seront proposés au moment de l'emprunt." },
+          { t: "Note ou fournisseur", d: "Texte libre, par exemple « commande Dell du 12/10, facture 2026-114 »." },
+          { t: "Ou importez la facture", d: "En bas du formulaire, glissez la facture (PDF) ou collez son lien : type, marque, quantité, date, prix et numéros de série se remplissent seuls. Vérifiez les champs entourés avant d'enregistrer." },
+          { t: "Enregistrez", d: "Le stock se recalcule tout de suite." }] },
+      { name: "Prix et dépenses", lead: "Combien le parc a coûté, par type et par mois.",
+        steps: [
+          { t: "Ouvrez l'onglet", d: "« Prix et dépenses » à côté de « Stock », en haut de la page." },
+          { t: "Les quatre cartes", d: "Total dépensé, dépenses du mois (ou unités achetées sur la période choisie), type le plus coûteux et entrées sans prix." },
+          { t: "Les graphiques", d: "L'anneau répartit les dépenses par type, les barres par mois sur 12 mois. Cliquez un type ou un mois pour filtrer ; cliquez-le encore pour revenir à tout." },
+          { t: "Prix par type de matériel", d: "Quantité, montant, prix moyen, min – max, dernier prix et évolution (▲ hausse, ▼ baisse)." },
+          { t: "Contrôle des prix, entrée par entrée", d: "Chaque achat avec son prix unitaire. Ceux qui s'écartent d'au moins 25 % de la moyenne du type sont signalés. Filtrez par type et par dates ; « Exporter les prix (CSV) » garde la liste." },
+          { t: "Complétez les prix manquants", d: "« Entrées à compléter » liste les achats sans prix : « Modifier » pour saisir le montant." }] },
+      { name: "Factures et corrections", lead: "Retrouver une facture, corriger une entrée, démarrer l'inventaire.",
+        steps: [
+          { t: "Le bouton Factures", d: "En haut, avec le nombre de factures. La fenêtre liste toutes les factures enregistrées, de la plus récente à la plus ancienne : recherche (matériel, nom du fichier, note, montant), filtres par matériel et par dates. « Lire » ouvre l'aperçu, « Télécharger » enregistre le fichier." },
+          { t: "Corriger une entrée", d: "Dans l'historique, « Modifier » change la quantité, la date, le prix ou la note. Pour une erreur de stock, enregistrez plutôt un retrait." },
+          { t: "Au tout début", d: "Quand l'Inventaire est vide, « Reprendre le parc suivi » prend le matériel déjà suivi dans l'application comme stock initial ; vous ajustez ensuite avec des achats ou des retraits." },
+          { t: "Qui a quoi", d: "Un type ouvert dans la liste montre les personnes qui détiennent le matériel : cliquez leur nom pour ouvrir leur fiche dans Restituer." }] }] },
+
+    activity: { title: "Activités récentes", tabs: [{ name: "Activités récentes", lead: "Le journal des prêts, attestations, signatures et pertes, du plus récent au plus ancien.",
+      steps: [
+        { t: "Filtrez par type", d: "Tout, Prêts, Attestations envoyées, Signatures ou Pertes." },
+        { t: "Cherchez", d: "Une personne ou un matériel, et choisissez une période." },
+        { t: "Lisez chaque ligne", d: "Ce qui s'est passé, pour qui, quand et par qui." }] }] },
+
+    roles: { title: "Rôles et accès", tabs: [
+      { name: "Annuaire", lead: "Qui apparaît dans Emprunter et Restituer.",
+        steps: [
+          { t: "Importer l'annuaire", d: "Bouton « Importer l'annuaire » : l'annuaire Microsoft 365 (Entra ID) alimente la liste des personnes, avec le kit standard de matériel." },
+          { t: "Pour un essai", d: "« Limiter à quelques personnes » n'importe que celles que vous cherchez ; « importer les membres d'un groupe Entra ID » reprend un groupe entier." },
+          { t: "Ajoutés à la main", d: "Les personnes créées par « Nouvel emprunt » apparaissent dans « Collaborateurs ajoutés à la main »." }] },
+      { name: "Rôles", lead: "Ce que chaque personne peut voir et faire.",
+        steps: [
+          { t: "Choisir un rôle", d: "Dans « Ajouter ou modifier un accès » : cherchez la personne de l'organisation, choisissez son rôle et, si besoin, la fiche rattachée à son compte, puis « Enregistrer l'accès »." },
+          { t: "Les rôles", d: "Lecteur : consultation seule. Collaborateur : ne voit que son propre matériel. Agent IT, Super utilisateur et Administrateur : des droits croissants." },
+          { t: "Quand ça s'applique", d: "À sa prochaine ouverture de l'application." }] }] },
+
+    mine: { title: "Mon matériel", tabs: [{ name: "Mon matériel", lead: "Votre matériel, vos prêts, vos attestations et vos pertes, en consultation.",
+      steps: [
+        { t: "Votre matériel", d: "Ce qui vous est prêté, avec les dates de retour prévues." },
+        { t: "Vos attestations", d: "Les attestations de restitution et leur état." },
+        { t: "Rien à saisir", d: "Pour une question ou une restitution, contactez l'équipe IT." }],
+      tips: ["Cette page est en lecture seule."] }] }
+  };
+  // « À retenir » : les points importants, affichés en tête de la première rubrique de chaque guide
+  const GUIDE_KEY_POINTS = {
+    home: ["Commencez par les cartes du haut : elles disent où agir en premier.", "Un clic sur une carte ouvre la page concernée, déjà filtrée.", "Ctrl K retrouve tout, depuis n'importe quelle page."],
+    loan: ["Rien n'est enregistré tant que vous n'avez pas cliqué sur « Enregistrer ».", "Indiquez une date de retour : sans elle, aucun retard ni relance n'est signalé.", "Une erreur ? Le bouton « Annuler » de la bulle défait l'emprunt aussitôt."],
+    "return": ["« Restituer sans attestation » n'envoie aucun document : pour une preuve signée, utilisez « Par email » ou « Par téléphone ».", "Tant que l'attestation n'est pas signée, le matériel reste « à signer » : il n'est pas encore en stock.", "Perdu, volé ou abîmé : déclarez-le, ne le « restituez » pas."],
+    attestations: ["Une attestation n'est finalisée qu'avec « Marquer comme signée ».", "« À relancer » : en attente depuis 3 jours ou plus.", "Le PDF signé est archivé au moment de la signature."],
+    archives: ["Un PDF « À archiver » se conserve avec « Archiver le PDF »."],
+    lost: ["Une perte se déclare depuis Restituer, pas depuis cette page.", "Une unité perdue sort du stock."],
+    inventory: ["Le stock se calcule tout seul : enregistrez les achats, ne le saisissez pas à la main.", "« À commander » veut dire : stock à 0.", "Une erreur ? Enregistrez un retrait, ou utilisez « Modifier »."],
+    activity: ["Le journal est en lecture seule : il garde la trace de tout."],
+    roles: ["Le rôle décide de ce que la personne voit et peut faire.", "Un Lecteur ne peut rien modifier."]
+  };
+  // Démonstrations : le vrai écran est mis en surbrillance étape par étape. Elles ouvrent des fiches et cochent une ligne
+  // pour montrer le geste, mais n'enregistrent rien ; tout est remis en place à la fin (ou avec Échap).
+  const demoUnion = (...els) => {
+    const list = els.flat().filter(Boolean); if(!list.length) return null;
+    // Zone qui réunit plusieurs éléments ; une zone plus haute que l'écran est coupée au bas de l'écran, et défile pour montrer son début
+    return { getBoundingClientRect(){ const rs = list.map(e => e.getBoundingClientRect()), l = Math.min(...rs.map(r => r.left)), t = Math.min(...rs.map(r => r.top)), rt = Math.max(...rs.map(r => r.right)), b0 = Math.max(...rs.map(r => r.bottom)), b = Math.min(b0, Math.max(t + 60, window.innerHeight - 24)); return { left: l, top: t, right: rt, bottom: b, width: rt - l, height: b - t }; }, scrollIntoView(){ try{ list[0].scrollIntoView({ block: "start", behavior: "auto" }); }catch(e){} } };
+  };
+  const $q = (s) => document.querySelector(s);
+  const demoTitleList = (slot, re) => [...document.querySelectorAll(slot + " .actions-title")].find(t => re.test(t.textContent));
+  const demoListAfter = (t) => { let n = t && t.nextElementSibling; while(n && !n.classList.contains("equip-list")) n = n.nextElementSibling; return n; };
+  const demoLoanOpen = () => { if($q("#loan-detail-slot .person-dialog")) return; const r = $q("#loan-result-list .result-row"); if(r) r.click(); };
+  const demoLoanTick = () => { demoLoanOpen(); const cb = [...document.querySelectorAll("#loan-detail-slot .equip-row .equip-check:not(:disabled)")].find(c => !c.checked && !isGroupId(c.dataset.eq) && !/Ordinateur|Mac/.test((c.closest(".equip-row").querySelector(".equip-label") || {}).textContent || "")); if(cb) cb.click(); };
+  const demoLoanClose = () => { selectedLoanEquip.clear(); selectedLoanDev.clear(); selectedLoanChg.clear(); const x = $q("#loan-detail-slot [data-close-dialog]"); if(x) x.click(); };   // la sélection est vidée avant la fermeture : sinon l'application demande « Abandonner la sélection ? »
+  const demoRetOpen = () => { if($q("#return-detail-slot .person-dialog")) return; const t = $q('#return-filter-chips [data-filter="todo"]'); if(t) t.click(); const r = $q("#return-result-list .result-row"); if(r) r.click(); };
+  const demoRetTick = () => { demoRetOpen(); const cb = $q("#return-detail-slot .equip-row .equip-check:not(:disabled)"); if(cb && !cb.checked) cb.click(); };
+  const demoRetClose = () => { selectedEquip.clear(); const x = $q("#return-detail-slot [data-close-dialog]"); if(x) x.click(); const a = $q('#return-filter-chips [data-filter="all"]'); if(a) a.click(); };
+  const demoInvClose = () => { const m = document.getElementById("inv-modal"); if(m && !m.hidden){ const x = document.getElementById("inv-x"); if(x) x.click(); } };
+  const demoInvOpen = () => { const m = document.getElementById("inv-modal"); if(m && m.hidden){ const b = document.getElementById("inv-add-btn"); if(b) b.click(); } };
+  // Restituer : étapes de la démonstration. 0 = liste, 2 = fiche ouverte et ligne cochée, 3 = aperçu du PDF (« Par email »),
+  // 4 = fenêtre de signature, 5 = « Message prêt à envoyer », 6 = confirmation de « Restituer sans attestation ».
+  // Ces fenêtres sont les vraies, mais rien n'est enregistré : on les ferme par « Annuler » avant toute validation.
+  const demoDraftAtt = () => { const k = String([...selectedEquip.keys()][0] || ""); return { id: 0, items: [{ id: k.split("@")[0], qty: 1 }], channel: "email", returnDate: formatDateFR(todayISO()), sentAt: nowStamp(), status: "signed", signedAt: nowStamp() }; };
+  const demoRetStage = (st) => {
+    const hid = (id) => { const m = document.getElementById(id); return !m || m.hidden; };
+    if(st !== 3 && !hid("preview-modal")) document.getElementById("preview-cancel").click();
+    if(st !== 4 && !hid("sign-modal")) document.getElementById("sign-cancel").click();
+    if(st !== 6 && !hid("confirm-modal")) document.getElementById("confirm-cancel").click();
+    if(st !== 5){ const b = $q('#mail-ready [data-mr="close"]'); if(b) b.click(); }
+    if(st === 0){ demoRetClose(); return; }
+    demoRetTick();
+    if(st === 3 && hid("preview-modal")){ const b = $q("#send-email"); if(b && !b.disabled) b.click(); }
+    if(st === 4 && hid("sign-modal")) askSignatureDate(selectedReturnPerson);
+    if(st === 5 && !$q("#mail-ready")) showMailReady(selectedReturnPerson, demoDraftAtt(), { link: null, draftOk: false, why: "", kind: "return" });
+    if(st === 6 && hid("confirm-modal")){ const b = $q("#return-direct"); if(b && !b.disabled) b.click(); }
+  };
+  const DEMO_RET_START = [
+    { ico: "back", title: "1. Trouvez la personne", text: "Cherchez par nom, ou utilisez les filtres : À traiter (matériel à rendre), En retard de retour, En attente de signature…", tip: "", go: "return", sel: () => demoUnion($q("#view-return .search-box"), $q("#return-filter-chips")), side: "bottom", before: () => demoRetStage(0) },
+    { ico: "back", title: "2. Ouvrez sa fiche", text: "Cliquez la ligne de la personne : sa fiche s'ouvre avec le matériel qu'elle détient.", tip: "", go: "return", sel: "#return-result-list .result-row", side: "bottom", before: () => { demoRetStage(0); const t = $q('#return-filter-chips [data-filter="todo"]'); if(t) t.click(); } },
+    { ico: "back", title: "3. Cochez ce qui est rendu", text: "« Matériel emprunté » liste ce qu'elle détient, avec la date de retour (pastille rouge si elle est dépassée). Cochez le matériel rendu.", tip: "Un ordinateur se coche machine par machine ; « Sélectionner tout » coche tout.", go: "return", sel: () => { const t = demoTitleList("#return-detail-slot", /emprunt/i); return demoUnion(t, demoListAfter(t)); }, side: "left", before: () => demoRetStage(2) },
+    { ico: "back", title: "4. Date de retour", text: "Celle du jour par défaut ; changez-la si le matériel est revenu un autre jour.", tip: "", go: "return", sel: () => $q("#return-detail-slot .select-bar"), side: "left", before: () => demoRetStage(2) }];
+  const PAGE_DEMOS = {
+    home: [{ name: "Faire le tour de l'Accueil", steps: [
+      { ico: "bolt", title: "Les accès rapides", text: "Rechercher (tout trouver), Nouvel emprunt, Nouvelle restitution et Rapport : les gestes de tous les jours, en un clic.", tip: "Ctrl K ouvre la recherche depuis n'importe quelle page.", go: "home", sel: "#home-actions", side: "bottom" },
+      { ico: "chart", title: "Vos priorités du jour", text: "Retards de retour, attestations à signer, matériel à restituer, pertes du mois, types à commander : commencez par les cartes colorées.", tip: "Un clic sur une carte ouvre la liste déjà filtrée.", go: "home", sel: () => { const k = $q("#view-home .home-kpi"); return k ? k.parentElement : null; }, side: "bottom" },
+      { ico: "donut", title: "Le parc en un coup d'œil", text: "Où se trouvent les équipements : en stock, chez les personnes, en retard, à signer, perdus.", tip: "Cliquez une ligne de la légende pour voir la liste.", go: "home", sel: "#home-parc", side: "right" },
+      { ico: "box", title: "Stock et dépenses", text: "Le stock par type et les dépenses par type et par mois. Cliquez une ligne ou une barre pour ouvrir l'Inventaire sur ce sujet.", tip: "", go: "home", sel: "#home-types", side: "top" }] }],
+    loan: [{ name: "Voir comment emprunter", steps: [
+      { ico: "out", title: "1. Trouvez la personne", text: "Tapez un nom, un nom de PC ou un numéro de série. La touche / place le curseur ici. Les filtres en dessous trient la liste : Tous, À emprunter, Tout emprunté.", tip: "", go: "loan", sel: () => demoUnion($q("#view-loan .search-box"), $q("#loan-filter-chips")), side: "bottom", before: demoLoanClose },
+      { ico: "out", title: "Personne absente de la liste ?", text: "Cliquez « Nouvel emprunt » : saisissez son nom et son prénom, puis continuez vers l'emprunt.", tip: "Les autres champs sont facultatifs.", go: "loan", sel: "#loan-new-btn", side: "bottom", before: demoLoanClose },
+      { ico: "out", title: "2. Ouvrez sa fiche", text: "Cliquez sur la ligne de la personne : sa fiche s'ouvre.", tip: "Vous y voyez ce qu'elle a déjà, le matériel disponible et l'historique.", go: "loan", sel: "#loan-result-list .result-row", side: "bottom", before: demoLoanClose },
+      { ico: "out", title: "Ce qu'elle a déjà", text: "En haut de la fiche : le matériel qu'elle détient, avec sa date de retour et le bouton Prolonger.", tip: "Une pastille orange « Déjà 1 ordinateur » prévient d'un doublon.", go: "loan", sel: () => $q("#loan-detail-slot .actions-title"), side: "left", scroll: "center", before: demoLoanOpen },
+      { ico: "out", title: "3. Cochez le matériel remis", text: "Cochez chaque équipement remis. Réglez la quantité avec − et +. Un matériel « Plus en stock » est épuisé.", tip: "Pour un ordinateur, choisissez la machine par son nom ou son numéro de série.", go: "loan", sel: () => { const t = demoTitleList("#loan-detail-slot", /disponible/i); return demoUnion(t, demoListAfter(t)); }, side: "left", before: demoLoanTick },
+      { ico: "out", title: "4. Choisissez les dates", text: "La date de remise est celle du jour. « Retour prévu » est facultatif : + 1 semaine, + 1 mois, + 3 mois. Avec une date, les retards sont signalés.", tip: "", go: "loan", sel: () => demoUnion($q("#loan-detail-slot .select-bar"), $q("#loan-detail-slot .due-card")), side: "left", before: demoLoanTick },
+      { ico: "out", title: "5. Enregistrez", text: "Cliquez Enregistrer. Une bulle confirme, avec « Annuler » pour défaire l'emprunt aussitôt.", tip: "Dans cette démonstration, rien n'est enregistré.", go: "loan", sel: "#register-loan", side: "left", scroll: "center", before: demoLoanTick },
+      { ico: "help", title: "À vous de jouer !", text: "Rien n'a été enregistré. Refaites ces gestes avec la vraie personne.", tip: "Le bouton Guide est toujours là en haut de la page.", go: "loan", sel: null, before: demoLoanClose }],
+      onEnd: demoLoanClose }],
+    "return": [
+      { name: "Restituer sans attestation", steps: [
+        ...DEMO_RET_START,
+        { ico: "back", title: "5. « Restituer sans attestation »", text: "Ce bouton enregistre le retour tout de suite, sans document ni signature. Sur une ligne cochée, le bouton « Restituer » fait la même chose pour ce seul matériel.", tip: "Pour une preuve signée, utilisez « Par email » (démonstration suivante).", go: "return", sel: "#return-direct", side: "left", before: () => demoRetStage(2) },
+        { ico: "back", title: "6. Confirmez", text: "Une fenêtre rappelle ce qui va être enregistré : le matériel, la personne et la date. « Restituer » valide : le retour est enregistré et le matériel revient en stock.", tip: "Ici, nous annulons : rien n'est enregistré.", go: "return", sel: () => $q("#confirm-modal .modal"), side: "left", before: () => demoRetStage(6) },
+        { ico: "back", title: "7. Défaire en cas d'erreur", text: "Après un vrai retour, une bulle apparaît en bas de l'écran avec le bouton « Annuler » : il défait la restitution tant qu'aucune autre action n'a été faite pour cette personne.", tip: "", go: "return", sel: null, before: () => demoRetStage(2) },
+        { ico: "help", title: "À vous de jouer !", text: "Rien n'a été enregistré. Refaites ces gestes avec la vraie personne.", tip: "", go: "return", sel: null, before: () => demoRetStage(0) }],
+        onEnd: () => demoRetStage(0) },
+      { name: "Restituer avec attestation (email)", steps: [
+        ...DEMO_RET_START,
+        { ico: "doc", title: "5. Cliquez « Par email »", text: "« Par email » prépare une attestation de restitution à faire signer. Rien n'est enregistré avant d'avoir validé l'aperçu.", tip: "", go: "return", sel: "#send-email", side: "left", before: () => demoRetStage(2) },
+        { ico: "doc", title: "6. L'aperçu du PDF", text: "Le document s'affiche : contrôlez le matériel, la personne et la date de retour.", tip: "", go: "return", sel: "#preview-sheet", side: "left", wait: 3000, before: () => demoRetStage(3) },
+        { ico: "doc", title: "7. Le destinataire", text: "Choisissez à qui envoyer : l'adresse enregistrée sur la fiche, ou une autre adresse saisie à la main (personne sans compte professionnel).", tip: "", go: "return", sel: "#preview-rcp", side: "left", before: () => demoRetStage(3) },
+        { ico: "doc", title: "8. Continuer vers la signature", text: "Ce clic enregistre l'attestation (« en attente de signature ») et ouvre la fenêtre de signature.", tip: "Dans cette démonstration, nous ne cliquons pas.", go: "return", sel: "#preview-ok", side: "left", before: () => demoRetStage(3) },
+        { ico: "doc", title: "9. La signature", text: "La personne signe au doigt ou à la souris, ou écrit une mention. La date de signature est celle du jour par défaut. Valider marque l'attestation « signée » et archive le PDF.", tip: "Sans signature, l'attestation reste en attente : finalisez-la plus tard avec « Marquer comme signée » (page Attestations).", go: "return", sel: () => $q("#sign-modal .modal"), side: "left", before: () => demoRetStage(4) },
+        { ico: "doc", title: "10. Le message est prêt", text: "Le message est déjà adressé, avec l'attestation en pièce jointe. Avec Outlook connecté, il est déposé dans vos Brouillons : relisez puis envoyez. Sinon : « Envoyer maintenant » ou « Télécharger le message ».", tip: "Le message ne part jamais sans ce dernier geste de votre part.", go: "return", sel: () => $q("#mail-ready .modal"), side: "left", before: () => demoRetStage(5) },
+        { ico: "doc", title: "Par téléphone", text: "« Par téléphone » suit le même principe, mais prépare un SMS. L'attestation reste en attente de signature jusqu'à « Marquer comme signée ».", tip: "", go: "return", sel: "#send-phone", side: "left", before: () => demoRetStage(2) },
+        { ico: "help", title: "Et ensuite ?", text: "L'attestation figure dans la page Attestations (en attente, puis signée), et le PDF signé dans Archives PDF. Rien n'a été enregistré pendant cette démonstration.", tip: "", go: "return", sel: null, before: () => demoRetStage(0) }],
+        onEnd: () => demoRetStage(0) }],
+    inventory: [
+      { name: "Voir comment enregistrer un achat", steps: [
+        { ico: "box", title: "1. Ouvrez le formulaire", text: "Le bouton « Enregistrer un achat » ouvre le formulaire d'entrée de stock.", tip: "", go: "inventory", sel: "#inv-add-btn", side: "bottom", before: demoInvClose },
+        { ico: "box", title: "2. Choisissez le type", text: "Le type de matériel ; selon le type, un second choix apparaît : marque (ordinateur), modèle (chargeur) ou marque (écran).", tip: "", go: "inventory", sel: () => demoUnion($q("#inv-type"), $q("#inv-brand-wrap:not([hidden])"), $q("#inv-variant-wrap:not([hidden])")), side: "right", before: demoInvOpen },
+        { ico: "box", title: "3. Nature, quantité et date", text: "« Achat ou réception » ajoute au stock, « Retrait » en enlève. Indiquez le nombre d'exemplaires et la date.", tip: "", go: "inventory", sel: () => demoUnion($q("#inv-kind"), $q("#inv-qty").closest(".inv-two")), side: "right", before: demoInvOpen },
+        { ico: "box", title: "4. Le prix (facultatif)", text: "Saisissez un seul prix : par unité ou au total, TTC ou HT. Les autres se calculent avec la quantité et le taux de TVA.", tip: "Seul le total TTC est enregistré.", go: "inventory", sel: "#inv-price-wrap", side: "right", before: demoInvOpen },
+        { ico: "doc", title: "5. Ou importez la facture", text: "Glissez la facture PDF ici, ou collez son lien : le type, la quantité, la date, le prix et les numéros de série se remplissent seuls.", tip: "Vérifiez les champs entourés avant d'enregistrer.", go: "inventory", sel: () => demoUnion($q("#inv-import-head"), $q("#inv-drop")), side: "top", before: demoInvOpen },
+        { ico: "box", title: "6. Enregistrez", text: "Le stock se recalcule tout de suite.", tip: "Dans cette démonstration, rien n'est enregistré.", go: "inventory", sel: "#inv-save", side: "top", before: demoInvOpen },
+        { ico: "help", title: "À vous de jouer !", text: "Rien n'a été enregistré. Le formulaire se ferme ; rouvrez-le pour saisir un vrai achat.", tip: "", go: "inventory", sel: null, before: demoInvClose }],
+        onEnd: demoInvClose },
+      { name: "Voir Prix et dépenses", steps: [
+        { ico: "chart", title: "1. Ouvrez l'onglet", text: "« Prix et dépenses » est à côté de « Stock », en haut de la page.", tip: "", go: "inventory", sel: ".inv-tabs", side: "bottom", before: () => { demoInvClose(); const s = $q('[data-inv-tab="stock"]'); if(s) s.click(); } },
+        { ico: "chart", title: "2. Les chiffres clés", text: "Total dépensé, dépenses du mois, type le plus coûteux et entrées sans prix.", tip: "", go: "inventory", sel: "#inv-price-kpis", side: "bottom", before: () => { const p = $q('[data-inv-tab="price"]'); if(p) p.click(); } },
+        { ico: "donut", title: "3. Les graphiques", text: "L'anneau répartit les dépenses par type, les barres par mois. Cliquez un type ou un mois pour filtrer.", tip: "", go: "inventory", sel: "#inv-price-body .inv-charts", side: "top", before: () => { const p = $q('[data-inv-tab="price"]'); if(p) p.click(); } },
+        { ico: "doc", title: "4. Le détail", text: "« Prix par type » donne le prix moyen et l'évolution ; « Contrôle des prix » liste chaque achat et signale les écarts d'au moins 25 %.", tip: "", go: "inventory", sel: "#inv-ptabs-top", side: "bottom", before: () => { const p = $q('[data-inv-tab="price"]'); if(p) p.click(); } },
+        { ico: "help", title: "Terminé", text: "Les achats sans prix sont listés sous « Entrées à compléter » : « Modifier » pour saisir le montant.", tip: "", go: "inventory", sel: null }],
+        onEnd: () => { const s = $q('[data-inv-tab="stock"]'); if(s) s.click(); } }]
+  };
+  function openGuide(key){
+    const g0 = PAGE_GUIDES[key]; if(!g0) return;
+    const g = { ...g0, tabs: key === "mine" ? g0.tabs : g0.tabs.concat([GUIDE_COMMON]) };
+    const old = document.getElementById("guide-modal"); if(old) old.remove();
+    const el = document.createElement("div");
+    el.className = "modal-backdrop"; el.id = "guide-modal";
+    const stepHTML = (s) => typeof s === "string" ? s : `<b class="g-t">${s.t}</b>${s.d ? `<span class="g-d">${s.d}</span>` : ""}`;
+    const keys = GUIDE_KEY_POINTS[key] || [], demos = PAGE_DEMOS[key] || [];
+    const panel = (tb, first) => `${first && keys.length ? `<div class="guide-key"><b>À retenir</b><ul>${keys.map(k => `<li>${k}</li>`).join("")}</ul></div>` : ""}<p class="guide-lead">${tb.lead}</p>
+      <ol class="guide-steps">${tb.steps.map((s, i) => `<li><span class="n">${i + 1}</span><div>${stepHTML(s)}</div></li>`).join("")}</ol>
+      ${tb.tips && tb.tips.length ? `<div class="guide-tips"><b>Astuces</b><ul>${tb.tips.map(t => `<li>${t}</li>`).join("")}</ul></div>` : ""}`;
+    el.innerHTML = `<div class="modal guide-dlg" role="dialog" aria-modal="true" aria-labelledby="guide-title">
+      <button type="button" class="modal-x" data-guide-close aria-label="Fermer" title="Fermer (Échap)">${ICONS.x}</button>
+      <div class="modal-icon" style="background:var(--accent-soft); color:var(--accent);">${GUIDE_ICO}</div>
+      <h2 id="guide-title">Guide : ${g.title}</h2>
+      <div class="guide-tabrow">
+        ${g.tabs.length > 1 ? `<div class="guide-tabs" role="tablist" aria-label="Rubriques du guide">${g.tabs.map((tb, i) => `<button type="button" class="guide-tab" role="tab" data-guide-tab="${i}">${tb.name}</button>`).join("")}</div>` : ""}
+        ${demos.length ? `<div class="guide-demos">${demos.map((d, i) => `<button type="button" class="guide-demo" data-guide-demo="${i}" title="Le vrai écran est mis en surbrillance, étape par étape. Rien n'est enregistré.">▶ ${d.name}</button>`).join("")}</div>` : ""}
+      </div>
+      <div class="guide-body" id="guide-body"></div>
+      <div class="modal-actions"><button type="button" class="btn" data-guide-tour>Visite guidée de l'application</button><button type="button" class="btn btn-primary" data-guide-close>Compris</button></div>
+    </div>`;
+    document.body.appendChild(el);
+    const body = el.querySelector("#guide-body");
+    const show = (i) => {
+      body.innerHTML = panel(g.tabs[i], i === 0); body.scrollTop = 0;
+      el.querySelectorAll(".guide-tab").forEach(b => { const on = Number(b.dataset.guideTab) === i; b.classList.toggle("on", on); b.setAttribute("aria-selected", on ? "true" : "false"); });
+    };
+    show(Math.max(0, Math.min(g.tabs.length - 1, g.start ? g.start() : 0)));
+    const prev = document.activeElement;
+    const close = () => { document.removeEventListener("keydown", onKey, true); el.remove(); if(prev && prev.focus) prev.focus(); };
+    const onKey = (e) => { if(e.key === "Escape"){ e.preventDefault(); e.stopPropagation(); close(); } };
+    document.addEventListener("keydown", onKey, true);
+    el.addEventListener("mousedown", (e) => { if(e.target === el) close(); });
+    el.addEventListener("click", (e) => {
+      const t = e.target.closest("[data-guide-tab]"); if(t){ show(Number(t.dataset.guideTab)); return; }
+      const dm = e.target.closest("[data-guide-demo]"); if(dm){ const d = demos[Number(dm.dataset.guideDemo)]; close(); setTimeout(() => startTour(d.steps, { label: "Démonstration", onEnd: d.onEnd }), 200); return; }
+      if(e.target.closest("[data-guide-close]")){ close(); return; }
+      if(e.target.closest("[data-guide-tour]")){ close(); if(typeof startTour === "function") startTour(); }
+    });
+    const ok = el.querySelector(".btn-primary"); if(ok) ok.focus();
+  }
+  document.querySelectorAll(".view-head .head-tools").forEach(tools => {
+    const view = tools.closest(".view"); if(!view) return;
+    const key = view.id.replace(/^view-/, ""); if(!PAGE_GUIDES[key]) return;
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "btn head-guide"; b.title = "Comment utiliser cette page : pas à pas détaillé et astuces";
+    b.innerHTML = `${GUIDE_ICO} Guide`;
+    b.addEventListener("click", () => openGuide(key));
+    tools.insertBefore(b, tools.firstChild);
+  });
   document.querySelectorAll("[data-open-cmdk]").forEach(b => b.addEventListener("click", openCmdk));
   document.getElementById("cmdk-close").addEventListener("click", closeCmdk);
-  cmdkInput.addEventListener("input", () => { cmdkItems = buildCmdk(cmdkInput.value); cmdkIdx = 0; drawCmdk(); });
+  // Recherche rapide : léger délai de frappe (la liste se recalcule sur toutes les personnes) ; Entrée et les flèches appliquent d'abord la frappe en attente
+  let cmdkTimer = null;
+  const cmdkRefresh = () => { clearTimeout(cmdkTimer); cmdkTimer = null; cmdkItems = buildCmdk(cmdkInput.value); cmdkIdx = 0; drawCmdk(); };
+  const cmdkFlush = () => { if(cmdkTimer !== null) cmdkRefresh(); };
+  cmdkInput.addEventListener("input", () => { clearTimeout(cmdkTimer); cmdkTimer = setTimeout(cmdkRefresh, 110); });
   cmdkList.addEventListener("click", (e) => { const b = e.target.closest(".cmdk-item"); if(!b) return; const a = e.target.closest("[data-act]"); runCmdk(Number(b.dataset.i), a ? a.dataset.act : undefined); });
   cmdkList.addEventListener("mousemove", (e) => { const b = e.target.closest(".cmdk-item"); if(b) setCmdkIdx(Number(b.dataset.i)); });
   cmdkEl.addEventListener("mousedown", (e) => { if(e.target === cmdkEl) closeCmdk(); });
@@ -9897,8 +10658,8 @@ ${p.manual && canDeclareLoss() ? `<div class="detail-manage"><button type="butto
     }
     if(cmdkEl.hidden) return;
     if(e.key === "Escape"){ e.preventDefault(); e.stopPropagation(); closeCmdk(); }
-    else if(e.key === "ArrowDown" || e.key === "ArrowUp"){ e.preventDefault(); const n = cmdkItems.length; if(n){ cmdkIdx = (cmdkIdx + (e.key === "ArrowDown" ? 1 : -1) + n) % n; drawCmdk(); } }
-    else if(e.key === "Enter"){ e.preventDefault(); e.stopPropagation(); const it = cmdkItems[cmdkIdx]; runCmdk(cmdkIdx, e.shiftKey && it && it.runs ? it.alt : undefined); }
+    else if(e.key === "ArrowDown" || e.key === "ArrowUp"){ e.preventDefault(); cmdkFlush(); const n = cmdkItems.length; if(n){ cmdkIdx = (cmdkIdx + (e.key === "ArrowDown" ? 1 : -1) + n) % n; drawCmdk(); } }
+    else if(e.key === "Enter"){ e.preventDefault(); e.stopPropagation(); cmdkFlush(); const it = cmdkItems[cmdkIdx]; runCmdk(cmdkIdx, e.shiftKey && it && it.runs ? it.alt : undefined); }
   }, true);
 
   // Champ de recherche : bouton « effacer » dès qu'il y a du texte
@@ -9979,7 +10740,7 @@ ${p.manual && canDeclareLoss() ? `<div class="detail-manage"><button type="butto
 
   // ---- Finitions : aide clavier, retour en haut, filtres actifs, bannière hors ligne, focus dans les fiches ----
   const keysModal = document.getElementById("keys-modal");
-  const APP_VERSION = 417, diagErrors = [];
+  const APP_VERSION = 452, diagErrors = [];
   const diagPush = (m) => { diagErrors.push(String(m).slice(0, 160)); if(diagErrors.length > 4) diagErrors.shift(); };
   window.addEventListener("error", (e) => diagPush(`${e.message || "erreur"} (${(e.filename || "").split("/").pop()}:${e.lineno || 0})`));
   window.addEventListener("unhandledrejection", (e) => diagPush(`promesse rejetée : ${e.reason && e.reason.message ? e.reason.message : e.reason}`));
@@ -10046,7 +10807,7 @@ ${p.manual && canDeclareLoss() ? `<div class="detail-manage"><button type="butto
       id: e.id, name: e.name, role: e.active === false ? `${e.role || "Personne"} · compte retiré de l'annuaire` : (e.role || ""), email: e.email || "", phone: e.phone || "", aad: e.k,
       equipment: dirKit(e.code), loans: [], attestations: [], losses: [], notes: "", comments: []
     }));
-    LEAVERS.splice(0, LEAVERS.length, ...people);
+    LEDGER_REV++; LEAVERS.splice(0, LEAVERS.length, ...people);
     PERSON_BY_ID.clear(); people.forEach(p => PERSON_BY_ID.set(p.id, p));
     touchedPeople.clear();
     selectedLoanPerson = null; selectedReturnPerson = null; selectedLoanEquip = new Map(); selectedEquip = new Map();
@@ -10060,7 +10821,7 @@ ${p.manual && canDeclareLoss() ? `<div class="detail-manage"><button type="butto
     MANUAL.people.forEach(m => {
       if(PERSON_BY_ID.has(m.id)) return;
       const p = { id: m.id, name: m.name, role: m.role || "Ajouté à la main", email: m.email || "", phone: m.phone || "", manual: true, equipment: dirKit(m.code), loans: [], attestations: [], losses: [], notes: "", comments: [] };
-      LEAVERS.push(p); PERSON_BY_ID.set(p.id, p); added++;
+      LEDGER_REV++; LEAVERS.push(p); PERSON_BY_ID.set(p.id, p); added++;
     });
     return added;
   }
@@ -10107,7 +10868,7 @@ ${p.manual && canDeclareLoss() ? `<div class="detail-manage"><button type="butto
       }catch(e){ console.error("Suppression du collaborateur", e); showToast("Suppression impossible : " + (e && e.message ? e.message : "erreur de la base") + ". Rien n'a été supprimé.", 8000); return; }
     }
     MANUAL.people = MANUAL.people.filter(m => m.id !== p.id);
-    const i = LEAVERS.indexOf(p); if(i >= 0) LEAVERS.splice(i, 1);
+    LEDGER_REV++; const i = LEAVERS.indexOf(p); if(i >= 0) LEAVERS.splice(i, 1);
     PERSON_BY_ID.delete(p.id); touchedPeople.delete(p.id);
     if(selectedLoanPerson === p) selectedLoanPerson = null;
     if(selectedReturnPerson === p) selectedReturnPerson = null;
@@ -10642,7 +11403,7 @@ ${p.manual && canDeclareLoss() ? `<div class="detail-manage"><button type="butto
     { ico: "box", title: "4. Suivre le stock", text: "Inventaire montre ce qui est acheté, en stock, chez les personnes ou perdu, avec les prix. Enregistrez vos achats : le stock se met à jour à chaque prêt, retour signé ou perte.", tip: "Un matériel qui n'est plus en stock est grisé dans Emprunter.", go: "inventory", sel: "#inv-kpis", side: "bottom" },
     { ico: "palette", title: "Votre style", text: "Douze thèmes, sept couleurs d'accent et deux densités d'affichage : réglez l'application à votre goût.", tip: "Le choix est mémorisé sur votre navigateur.", go: "home", sel: "#theme-toggle", side: "right" },
     { ico: "help", title: "À vous de jouer !", text: "Besoin d'un rappel ? « Aide et astuces » en bas du menu regroupe les raccourcis et relance cette visite.", tip: "Appuyez sur ? à tout moment pour l'aide.", go: "home", sel: "#help-link", side: "right" }
-  ];  let tourEl = null, tourIdx = 0;
+  ];  let tourEl = null, tourIdx = 0, tourSteps = TOUR_STEPS, tourCtx = null;
   const tourSeen = () => { try{ localStorage.setItem("prisme-tour", "1"); }catch(e){} };
   function tourTarget(step){
     const el = typeof step.sel === "function" ? step.sel() : step.sel ? document.querySelector(step.sel) : null;
@@ -10652,17 +11413,17 @@ ${p.manual && canDeclareLoss() ? `<div class="detail-manage"><button type="butto
   }
   function placeTour(){
     if(!tourEl) return;
-    const step = TOUR_STEPS[tourIdx], hole = tourEl.querySelector(".tour-hole"), card = tourEl.querySelector(".tour-card");
+    const step = tourSteps[tourIdx], hole = tourEl.querySelector(".tour-hole"), card = tourEl.querySelector(".tour-card");
     const kicker = card.querySelector(".tour-kicker");
-    kicker.textContent = `Étape ${tourIdx + 1} sur ${TOUR_STEPS.length}`;
+    kicker.textContent = `${tourCtx ? tourCtx.label + " · " : ""}Étape ${tourIdx + 1} sur ${tourSteps.length}`;
     card.querySelector(".tour-title").textContent = step.title;
     card.querySelector(".tour-text").textContent = step.text;
     const tipEl = card.querySelector(".tour-tip"); tipEl.textContent = step.tip || ""; tipEl.hidden = !step.tip;
     card.querySelector(".tour-ico svg").innerHTML = TOUR_ICONS[step.ico] || TOUR_ICONS.hello;
-    card.querySelector(".tour-bar i").style.width = ((tourIdx + 1) / TOUR_STEPS.length * 100) + "%";
+    card.querySelector(".tour-bar i").style.width = ((tourIdx + 1) / tourSteps.length * 100) + "%";
     card.querySelectorAll(".tour-dots i").forEach((d, i) => d.classList.toggle("on", i === tourIdx));
     card.querySelector("[data-tour=prev]").hidden = tourIdx === 0;
-    card.querySelector("[data-tour=next]").textContent = tourIdx === TOUR_STEPS.length - 1 ? "Terminer" : "Suivant";
+    card.querySelector("[data-tour=next]").textContent = tourIdx === tourSteps.length - 1 ? "Terminer" : "Suivant";
     const tgt = tourTarget(step), vw = window.innerWidth, vh = window.innerHeight, pad = 8, gap = 16;
     const cw = card.offsetWidth, ch = card.offsetHeight;
     let left, top;
@@ -10671,9 +11432,12 @@ ${p.manual && canDeclareLoss() ? `<div class="detail-manage"><button type="butto
       hole.style.left = (r.left - pad) + "px"; hole.style.top = (r.top - pad) + "px";
       hole.style.width = (r.width + pad * 2) + "px"; hole.style.height = (r.height + pad * 2) + "px";
       let side = step.side || "bottom";
-      if(side === "right" && r.right + pad + gap + cw > vw - 12) side = r.bottom + ch + gap < vh ? "bottom" : "top";
+      // côté gauche (fiche ouverte à droite) : repli à droite, en dessous ou au-dessus s'il n'y a pas la place
+      if(side === "left" && r.left - pad - gap - cw < 12) side = r.right + pad + gap + cw <= vw - 12 ? "right" : (r.bottom + ch + gap < vh ? "bottom" : "top");
+      if(side === "right" && r.right + pad + gap + cw > vw - 12) side = r.left - pad - gap - cw >= 12 ? "left" : (r.bottom + ch + gap < vh ? "bottom" : "top");
       if(side === "bottom" && r.bottom + pad + gap + ch > vh - 12) side = "top";
-      if(side === "right"){ left = r.right + pad + gap; top = r.top + r.height / 2 - ch / 2; }
+      if(side === "left"){ left = r.left - pad - gap - cw; top = r.top + r.height / 2 - ch / 2; }
+      else if(side === "right"){ left = r.right + pad + gap; top = r.top + r.height / 2 - ch / 2; }
       else if(side === "bottom"){ left = r.left + r.width / 2 - cw / 2; top = r.bottom + pad + gap; }
       else { left = r.left + r.width / 2 - cw / 2; top = r.top - pad - gap - ch; }
     }else{
@@ -10684,16 +11448,22 @@ ${p.manual && canDeclareLoss() ? `<div class="detail-manage"><button type="butto
     card.style.top = Math.max(12, Math.min(vh - ch - 12, top)) + "px";
   }
   function showTourStep(i){
-    tourIdx = Math.max(0, Math.min(TOUR_STEPS.length - 1, i));
-    const step = TOUR_STEPS[tourIdx];
+    tourIdx = Math.max(0, Math.min(tourSteps.length - 1, i));
+    const step = tourSteps[tourIdx];
     const settle = () => {
-      if(!tourEl || TOUR_STEPS[tourIdx] !== step) return;
+      if(!tourEl || tourSteps[tourIdx] !== step) return;
       const el = typeof step.sel === "function" ? step.sel() : step.sel ? document.querySelector(step.sel) : null;
-      if(el && el.scrollIntoView){ try{ el.scrollIntoView({ block: "nearest", behavior: "auto" }); }catch(e){} }
+      if(el && el.scrollIntoView){ try{ el.scrollIntoView({ block: step.scroll || "nearest", behavior: "auto" }); }catch(e){} }
       placeTour();
     };
     const cur = (document.querySelector(".view.active") || {}).id;
-    if(step.go && cur !== "view-" + step.go){ goTo(step.go); window.scrollTo(0, 0); placeTour(); setTimeout(settle, 450); } else settle();
+    // Démonstration : une étape peut préparer l'écran (ouvrir une fiche, cocher une ligne…) sans rien enregistrer.
+    // La mise en surbrillance est replacée pendant ~4 s : les fenêtres qui s'ouvrent ou se chargent (aperçu du PDF) décalent les éléments.
+    const prep = () => { if(step.before){ try{ step.before(); }catch(e){ console.error("Démonstration", e); } } };
+    const follow = () => { let n = 0; const iv = setInterval(() => { if(!tourEl || tourSteps[tourIdx] !== step || ++n > 16){ clearInterval(iv); return; } settle(); }, 250); };
+    if(step.go && cur !== "view-" + step.go){ goTo(step.go); window.scrollTo(0, 0); placeTour(); setTimeout(() => { prep(); setTimeout(settle, step.before ? 380 : 0); if(step.before) follow(); }, 450); }
+    else if(step.before){ prep(); setTimeout(settle, 380); follow(); } else settle();
+    if(step.wait) setTimeout(settle, step.wait);   // fenêtres lentes à s'afficher (aperçu du PDF) : on replace la mise en surbrillance
     tourEl.querySelector("[data-tour=next]").focus({ preventScroll: true });
   }
   function endTour(){
@@ -10701,6 +11471,8 @@ ${p.manual && canDeclareLoss() ? `<div class="detail-manage"><button type="butto
     tourSeen();
     window.removeEventListener("keydown", tourKeys, true); window.removeEventListener("resize", placeTour);
     tourEl.remove(); tourEl = null;
+    // Une démonstration remet l'écran comme avant et reste sur la page ; la visite complète revient à l'Accueil
+    if(tourCtx){ const c = tourCtx; tourCtx = null; tourSteps = TOUR_STEPS; try{ if(c.onEnd) c.onEnd(); }catch(e){ console.error("Démonstration", e); } return; }
     goTo("home"); window.scrollTo(0, 0);
   }
   function tourKeys(e){
@@ -10709,26 +11481,27 @@ ${p.manual && canDeclareLoss() ? `<div class="detail-manage"><button type="butto
     else if(e.key === "ArrowRight" || e.key === "Enter"){
       if(e.key === "Enter" && e.target && e.target.tagName === "BUTTON" && e.target.dataset.tour !== "next"){ return; }
       e.preventDefault(); e.stopPropagation();
-      if(tourIdx >= TOUR_STEPS.length - 1) endTour(); else showTourStep(tourIdx + 1);
+      if(tourIdx >= tourSteps.length - 1) endTour(); else showTourStep(tourIdx + 1);
     }
     else if(e.key === "ArrowLeft"){ e.preventDefault(); e.stopPropagation(); showTourStep(tourIdx - 1); }
     else if(e.key.length === 1 || /^F\d/.test(e.key)){ e.preventDefault(); e.stopPropagation(); }
   }
-  function startTour(){
+  // startTour() : visite complète. startTour(étapes, { label, onEnd }) : démonstration d'une page (rien n'est enregistré)
+  function startTour(steps, ctx){
     if(tourEl || ROLE === "collab") return;
     ["cmdk", "keys-modal"].forEach(id => { const m = document.getElementById(id); if(m) m.hidden = true; });
-    goTo("home");
-    window.scrollTo(0, 0);
+    tourSteps = Array.isArray(steps) ? steps : TOUR_STEPS; tourCtx = Array.isArray(steps) ? (ctx || { label: "Démonstration" }) : null;
+    if(!tourCtx){ goTo("home"); window.scrollTo(0, 0); }
     tourEl = document.createElement("div");
     tourEl.className = "tour-layer";
-    tourEl.innerHTML = `<div class="tour-hole"></div><div class="tour-card" role="dialog" aria-modal="true" aria-labelledby="tour-title"><div class="tour-bar"><i></i></div><div class="tour-head"><span class="tour-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg></span><div class="tour-kicker"></div></div><h2 class="tour-title" id="tour-title"></h2><p class="tour-text"></p><p class="tour-tip"></p><div class="tour-foot"><div class="tour-dots">${TOUR_STEPS.map(() => "<i></i>").join("")}</div><button type="button" class="tour-skip" data-tour="skip">Passer</button><button type="button" class="btn" data-tour="prev">Précédent</button><button type="button" class="btn btn-primary" data-tour="next">Suivant</button></div></div>`;
+    tourEl.innerHTML = `<div class="tour-hole"></div><div class="tour-card" role="dialog" aria-modal="true" aria-labelledby="tour-title"><button type="button" class="modal-x tour-x" data-tour="skip" aria-label="Quitter" title="Quitter (Échap)">${ICONS.x}</button><div class="tour-bar"><i></i></div><div class="tour-head"><span class="tour-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg></span><div class="tour-kicker"></div></div><h2 class="tour-title" id="tour-title"></h2><p class="tour-text"></p><p class="tour-tip"></p><div class="tour-foot"><div class="tour-dots">${tourSteps.map(() => "<i></i>").join("")}</div><button type="button" class="tour-skip" data-tour="skip">Passer</button><button type="button" class="btn" data-tour="prev">Précédent</button><button type="button" class="btn btn-primary" data-tour="next">Suivant</button></div></div>`;
     document.body.appendChild(tourEl);
     tourEl.addEventListener("click", (e) => {
       const b = e.target.closest("[data-tour]"); if(!b) return;
       const a = b.dataset.tour;
       if(a === "skip") endTour();
       else if(a === "prev") showTourStep(tourIdx - 1);
-      else if(tourIdx >= TOUR_STEPS.length - 1) endTour(); else showTourStep(tourIdx + 1);
+      else if(tourIdx >= tourSteps.length - 1) endTour(); else showTourStep(tourIdx + 1);
     });
     window.addEventListener("keydown", tourKeys, true); window.addEventListener("resize", placeTour);
     setTimeout(() => { if(tourEl) showTourStep(0); }, 380);
@@ -10747,6 +11520,22 @@ ${p.manual && canDeclareLoss() ? `<div class="detail-manage"><button type="butto
       clearInterval(timer);
       setTimeout(startTour, 700);
     }, 500);
+  })();
+
+  // ---- Compatibilité : l'affichage repose sur des fonctions CSS récentes (couleurs mélangées, :has, requêtes de conteneur) ----
+  // Sur un navigateur plus ancien (avant Chrome / Edge 111, Safari 16.4, Firefox 121), l'application reste utilisable mais l'affichage peut être dégradé : on le dit.
+  (function compatCheck(){
+    try{
+      const ok = window.CSS && CSS.supports && CSS.supports("color", "color-mix(in srgb, red 50%, blue)") && CSS.supports("selector(:has(a))") && CSS.supports("container-type", "inline-size");
+      if(ok) return;
+      let seen = null; try{ seen = sessionStorage.getItem("gpi-old-browser"); }catch(e){}
+      if(seen) return;
+      const b = document.createElement("div");
+      b.className = "old-browser"; b.setAttribute("role", "status");
+      b.innerHTML = `<span><b>Navigateur ancien détecté.</b> L'application fonctionne, mais l'affichage peut être dégradé. Pour un rendu complet, utilisez une version récente de Chrome, Edge, Safari (16.4 ou plus) ou Firefox (121 ou plus).</span><button type="button">Compris</button>`;
+      b.querySelector("button").addEventListener("click", () => { b.remove(); try{ sessionStorage.setItem("gpi-old-browser", "1"); }catch(e){} });
+      document.body.appendChild(b);
+    }catch(e){ /* la vérification est facultative */ }
   })();
 
   // Bannière « Mode local » : visible tant que la sauvegarde n'est pas disponible
@@ -11214,7 +12003,7 @@ ${p.manual && canDeclareLoss() ? `<div class="detail-manage"><button type="butto
     });
     rows.forEach(r => {
       r.out = r.held + r.pending;
-      if(r.hasEntries){ r.stock = Math.max(0, r.bought - r.out - r.lost); r.need = Math.max(0, r.toGive - r.stock); }
+      if(r.hasEntries){ r.stock = Math.max(0, r.bought - r.out - r.lost); r.need = r.stock === 0 ? 1 : 0; }   // « à commander » : plus rien en stock
       else { r.stock = null; r.need = 0; }
       r.state = !r.hasEntries ? "unset" : r.need > 0 ? "order" : "ok";
     });
@@ -11230,11 +12019,12 @@ ${p.manual && canDeclareLoss() ? `<div class="detail-manage"><button type="butto
       const vs = f.variants.map(v => rows.find(x => x.label === v)).filter(Boolean);
       const g = { label: f.label, type: f.type, family: f, variants: vs, tracked: 0, held: 0, pending: 0, lost: 0, toGive: 0, holders: [], lossers: [], bought: 0, hasEntries: false, spent: 0, pricedQty: 0, out: 0, stock: null, need: 0 };
       vs.forEach(v => {
-        ["tracked", "held", "pending", "lost", "toGive", "bought", "spent", "pricedQty", "out", "need"].forEach(k => { g[k] += v[k] || 0; });
+        ["tracked", "held", "pending", "lost", "toGive", "bought", "spent", "pricedQty", "out"].forEach(k => { g[k] += v[k] || 0; });
         g.holders.push(...v.holders); g.lossers.push(...v.lossers);
         if(v.hasEntries) g.hasEntries = true;
         if(v.stock != null) g.stock = (g.stock || 0) + v.stock;
       });
+      g.need = g.hasEntries && g.stock === 0 ? 1 : 0;
       g.state = !g.hasEntries ? "unset" : g.need > 0 ? "order" : "ok";
       out.push(g);
     });
@@ -11286,7 +12076,7 @@ ${p.manual && canDeclareLoss() ? `<div class="detail-manage"><button type="butto
   function invStatePill(r){
     if(r.state === "unset") return `<span class="pill pill-neutral" title="Aucun achat enregistré pour ce type">${INV_ICO.cart} À renseigner</span>`;
     if(r.state === "gap") return `<span class="pill pill-bad" title="Plus de matériel sorti ou perdu que d'acheté : vérifiez les entrées de stock">${ICONS.alert} Écart ${fmtCount(r.stock)}</span>`;
-    if(r.state === "order") return `<span class="pill pill-warn" title="Le stock ne couvre pas tout le matériel restant à remettre">${INV_ICO.cart} À commander : ${fmtCount(r.need)}</span>`;
+    if(r.state === "order") return `<span class="pill pill-warn" title="Plus aucun exemplaire en stock : le matériel ne peut plus être prêté">${INV_ICO.cart} À commander : stock épuisé</span>`;
     if(r.stock === 0) return `<span class="pill pill-warn" title="Plus aucun exemplaire en stock : le matériel ne peut plus être prêté">${ICONS.alert} Plus en stock</span>`;
     return `<span class="pill pill-good">${ICONS.check} En stock : ${fmtCount(r.stock)}</span>`;
   }
@@ -11313,7 +12103,13 @@ ${p.manual && canDeclareLoss() ? `<div class="detail-manage"><button type="butto
     const big = r.hasEntries ? fmtCount(Math.max(0, r.stock || 0)) : "–";
     return `<div class="inv-ring"><svg viewBox="0 0 140 140" class="inv-donut" role="img" aria-label="${escapeHTML(r.label)} : ${r.hasEntries ? `${Math.max(0, r.stock || 0)} en stock sur ${Math.max(0, r.bought)} achetés` : "achat à renseigner"}">${track}${ring}${thin}<text x="70" y="72" text-anchor="middle" class="dt">${big}</text><text x="70" y="91" text-anchor="middle" class="ds">${r.hasEntries ? "en stock" : "à renseigner"}</text></svg></div>`;
   }
-  function invOverviewHTML(all){
+  function invOverviewHTML(all0){
+    // Avec un type choisi dans le filtre, la vue d'ensemble ne montre que ce type (une famille, ou un modèle précis)
+    let all = all0;
+    if(INV && INV.type && INV.type !== "all"){
+      const sel = INV.type, hit = all0.filter(r => r.label === sel);
+      all = hit.length ? hit : all0.flatMap(r => (r.variants || []).filter(v => v.label === sel));
+    }
     const rows = all.slice().sort((a, b) => (b.need - a.need) || (b.bought - a.bought) || a.label.localeCompare(b.label, "fr"));
     const stockN = rows.reduce((s, r) => s + (r.stock != null ? Math.max(0, r.stock) : 0), 0), boughtN = rows.reduce((s, r) => s + Math.max(0, r.bought || 0), 0), orderN = rows.filter(r => r.need > 0).length;
     const needN = rows.reduce((s, r) => s + (r.hasEntries ? Math.max(0, r.need || 0) : 0), 0);
@@ -11322,19 +12118,19 @@ ${p.manual && canDeclareLoss() ? `<div class="detail-manage"><button type="butto
       const sub = r.hasEntries && !(r.need > 0) ? `<span class="sub ok">sur ${fmtCount(Math.max(0, r.bought))}</span>` : "";
       const cls = !r.hasEntries ? "is-unset" : r.need > 0 ? "is-order" : "is-ok";
       const tr = (c, l, v, go) => `<div class="tp-r tp-link" role="button" tabindex="0" data-go="${go}"><i style="background:${c}"></i><span>${l}</span><b>${fmtCount(v)}</b><u>›</u></div>`;
-      const badge = !r.hasEntries ? `<span class="tp-b none">À renseigner</span>` : r.need > 0 ? `<span class="tp-b warn">À commander : ${fmtCount(r.need)}</span>` : `<span class="tp-b ok">Stock suffisant</span>`;
+      const badge = !r.hasEntries ? `<span class="tp-b none">À renseigner</span>` : r.need > 0 ? `<span class="tp-b warn">À commander : stock épuisé</span>` : `<span class="tp-b ok">En stock</span>`;
       const tip = `<div class="tp-h"><b>${escapeHTML(r.label)}</b>${badge}</div>` + (r.hasEntries
         ? `<div class="tp-g">${tr("#4DA3FF", "Acheté au total", Math.max(0, r.bought), "bought")}${tr("var(--good)", "En stock", Math.max(0, r.stock || 0), "stock")}${tr("#A78BFA", "Chez les personnes", r.held, "held")}${tr("var(--warn)", "À signer", r.pending, "pend")}${tr("var(--bad)", "Perdu, volé ou abîmé", r.lost, "lost")}${tr("var(--accent)", "À remettre aux personnes", r.toGive, "give")}</div><div class="tp-f">Cliquez sur une ligne pour y aller</div>`
-        : `<div class="tp-n">Aucun achat enregistré pour ce type.</div><div class="tp-g">${tr("#A78BFA", "Chez les personnes", r.held, "held")}${tr("var(--warn)", "À signer", r.pending, "pend")}${tr("var(--bad)", "Perdu, volé ou abîmé", r.lost, "lost")}${tr("var(--accent)", "À remettre aux personnes", r.toGive, "give")}</div><div class="tp-f">Cliquez sur une ligne pour y aller</div>`) + (r.variants && r.variants.length ? `<div class="tp-vh">Par ${r.family.vword.toLowerCase()}</div><div class="tp-g">${r.variants.map(v => `<div class="tp-r tp-v"><span>${escapeHTML(variantName(r.family, v.label))}</span>${v.need > 0 ? `<em>à commander : ${fmtCount(v.need)}</em>` : ""}<b>${v.hasEntries ? fmtCount(Math.max(0, v.stock || 0)) : "–"}</b></div>`).join("")}</div>` : "");
-      const cnt = r.hasEntries ? ` data-n-stock="${Math.max(0, r.stock || 0)}" data-n-held="${Math.max(0, r.held || 0)}" data-n-pend="${Math.max(0, r.pending || 0)}" data-n-lost="${Math.max(0, r.lost || 0)}" data-n-need="${Math.max(0, r.need || 0)}"` : "";
+        : `<div class="tp-n">Aucun achat enregistré pour ce type.</div><div class="tp-g">${tr("#A78BFA", "Chez les personnes", r.held, "held")}${tr("var(--warn)", "À signer", r.pending, "pend")}${tr("var(--bad)", "Perdu, volé ou abîmé", r.lost, "lost")}${tr("var(--accent)", "À remettre aux personnes", r.toGive, "give")}</div><div class="tp-f">Cliquez sur une ligne pour y aller</div>`) + (r.variants && r.variants.length ? `<div class="tp-vh">Par ${r.family.vword.toLowerCase()}</div><div class="tp-g">${r.variants.map(v => `<div class="tp-r tp-v"><span>${escapeHTML(variantName(r.family, v.label))}</span>${v.need > 0 ? `<em>à commander</em>` : ""}<b>${v.hasEntries ? fmtCount(Math.max(0, v.stock || 0)) : "–"}</b></div>`).join("")}</div>` : "");
+      const cnt = r.hasEntries ? ` data-n-stock="${Math.max(0, r.stock || 0)}" data-n-held="${Math.max(0, r.held || 0)}" data-n-pend="${Math.max(0, r.pending || 0)}" data-n-lost="${Math.max(0, r.lost || 0)}" data-n-need="${r.need > 0 ? Math.max(0, r.toGive || 0) : 0}"` : "";
       return `<button type="button" class="inv-ov-item ${cls}" data-ov-type="${escapeHTML(r.label)}"${cnt} data-ovtip="${escapeHTML(tip)}" aria-label="${escapeHTML(r.label)}">${invCardRing(r).replace(new RegExp("<title>[^<]*</title>", "g"), "").replace('class="inv-ring"', 'class="inv-ring mini"')}<span class="nm">${escapeHTML(r.label)}</span>${sub}</button>`;
     }).join("");
-    const lg = (k, color, label, n) => `<span class="lg" data-hl="${k}" tabindex="0"><i style="background:${color}"></i>${label} <b>${fmtCount(n)}</b></span>`;
+    const lg = (k, color, label, n, tip) => `<span class="lg" data-hl="${k}" tabindex="0"${tip ? ` title="${tip}"` : ""}><i style="background:${color}"></i>${label} <b>${fmtCount(n)}</b></span>`;
     return `<div class="inv-ov">
       <div class="inv-ov-head">
         <span class="inv-ov-title">Vue d'ensemble</span>
         <span class="inv-ov-tot"><b>${fmtCount(boughtN)}</b> acheté${orderN ? ` · <b class="warn">${orderN}</b> type${orderN > 1 ? "s" : ""} à commander` : ""}</span>
-        <span class="inv-ov-leg" title="Survolez une couleur pour la repérer sur tous les anneaux">${orderN ? lg("need", "var(--accent)", "À commander", needN) : ""}${lg("stock", "var(--good)", "En stock", stockN)}${lg("held", "#A78BFA", "Chez les personnes", heldN)}${lg("pend", "var(--warn)", "À signer", pendN)}${lg("lost", "var(--bad)", "Perdu", lostN)}</span>
+        <span class="inv-ov-leg" title="Survolez une couleur pour la repérer sur tous les anneaux">${orderN ? lg("need", "var(--accent)", "À commander", needN, "Types dont le stock est épuisé. Au survol, chaque anneau affiche ce qu'il reste à remettre aux personnes.") : ""}${lg("stock", "var(--good)", "En stock", stockN)}${lg("held", "#A78BFA", "Chez les personnes", heldN)}${lg("pend", "var(--warn)", "À signer", pendN)}${lg("lost", "var(--bad)", "Perdu", lostN)}</span>
       </div>
       <div class="inv-ov-grid">${items || `<div class="result-empty">Aucun type de matériel : enregistrez un achat.</div>`}</div>
     </div>`;
@@ -11436,7 +12232,7 @@ ${p.manual && canDeclareLoss() ? `<div class="detail-manage"><button type="butto
             <span class="st-fact${nFact ? "" : " none"}" role="button" tabindex="0" data-inv-facts="${escapeHTML(r.label)}" title="Factures des entrées de ce type : cliquez pour les lire ou les télécharger"><b>${nFact}</b> facture${nFact > 1 ? "s" : ""}</span>
             <span class="st-need" title="Exemplaires qu'il reste à remettre aux personnes (attribués, pas encore prêtés)"><b>${n(r.toGive)}</b> à remettre aux personnes</span>
           </div>
-          ${r.hasEntries ? `<div class="inv-calc">Stock : ${fmtCount(Math.max(0, r.bought))} acheté − ${fmtCount(r.held)} chez les personnes − ${fmtCount(r.pending)} à signer − ${fmtCount(r.lost)} perdu = <b>${fmtCount(r.stock)}</b>${r.need > 0 ? ` · À commander : ${fmtCount(r.toGive)} à remettre − ${fmtCount(r.stock)} en stock = <b>${fmtCount(r.need)}</b>` : ""}</div>` : ""}
+          ${r.hasEntries ? `<div class="inv-calc">Stock : ${fmtCount(Math.max(0, r.bought))} acheté − ${fmtCount(r.held)} chez les personnes − ${fmtCount(r.pending)} à signer − ${fmtCount(r.lost)} perdu = <b>${fmtCount(r.stock)}</b>${r.need > 0 ? ` · <b>À commander</b> : plus rien en stock${r.toGive ? ` (${fmtCount(r.toGive)} à remettre aux personnes)` : ""}` : ""}</div>` : ""}
           <details class="loss-more inv-more" data-inv-open="${escapeHTML(r.label)}"${INV.open.has(r.label) ? " open" : ""}><summary>Qui l'a ? Derniers mouvements</summary>
             <div class="inv-detail">
               ${isPcType(r.type) ? "" : `<div class="inv-sub inv-dev-head"><span>Qui a emprunté, rendu ou perdu ?</span><label class="inv-dev-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input type="search" class="inv-dev-q" data-inv-pq autocomplete="off" aria-label="Rechercher une personne par nom, prénom ou email" placeholder="Nom, prénom ou email…" value="${escapeHTML((INV.pqs && INV.pqs[r.label]) || "")}"></label></div><div class="inv-pq-res" data-inv-pqres>${invPeopleHTML(r.label, (INV.pqs && INV.pqs[r.label]) || "")}</div>`}
@@ -11881,7 +12677,7 @@ ${p.manual && canDeclareLoss() ? `<div class="detail-manage"><button type="butto
       let qty = r.qty; if(qty != null && r.serials.length > qty) qty = Math.min(60, r.serials.length);
       if(qty != null && qty >= 1 && invUntouched("inv-qty")){ invSet("inv-qty", String(Math.min(9999, qty))); invAutoMark($("inv-qty")); done.push("Quantité : " + qty); }
       if(r.date && invUntouched("inv-date")){ invSet("inv-date", r.date); invAutoMark($("inv-date").closest(".date-field") || $("inv-date")); done.push("Date : " + formatDateFR(r.date)); }
-      if(r.price != null && invUntouched("inv-price")){ invSet("inv-price", r.price.toFixed(2).replace(".", ",")); invAutoMark($("inv-price")); done.push("Prix total TTC : " + eur(r.price) + (r.totalApprox || r.priceApprox ? " (à vérifier)" : "")); }
+      if(r.price != null && invUntouched("inv-price")){ if(r.vatRate != null) setVat(r.vatRate); invSet("inv-price", r.price.toFixed(2).replace(".", ",")); invAutoMark($("inv-price")); invAutoMark($("inv-unit")); invAutoMark($("inv-unit-ht")); invAutoMark($("inv-total-ht")); done.push("Prix total TTC : " + eur(r.price) + (r.totalApprox || r.priceApprox ? " (à vérifier)" : "")); }
       if(r.note && invUntouched("inv-note")){ invSet("inv-note", r.note); invAutoMark($("inv-note")); done.push("Note : " + r.note); }
       if(r.serials.length && devRowsVisible()){
         renderDevRows();
@@ -12005,6 +12801,7 @@ ${p.manual && canDeclareLoss() ? `<div class="detail-manage"><button type="butto
       $("inv-viewer-back").hidden = false;
     });
     $("inv-viewer-close").addEventListener("click", closeViewer);
+    $("inv-viewer-x").addEventListener("click", closeViewer);
     viewer.addEventListener("mousedown", (e) => { if(e.target === viewer) closeViewer(); });
     // zone de dépôt
     const drop = $("inv-drop");
@@ -12087,7 +12884,7 @@ ${p.manual && canDeclareLoss() ? `<div class="detail-manage"><button type="butto
       if(typeLabel && labels.includes(typeLabel)) $("inv-type").value = typeLabel;
       $("inv-variant").innerHTML = ""; syncVariant();
       if(famOfOpen) $("inv-variant").value = label;
-      $("inv-kind").value = "achat"; $("inv-qty").value = "1"; $("inv-date").value = todayISO(); $("inv-date").max = todayISO(); $("inv-note").value = ""; $("inv-price").value = ""; refreshTotal();
+      $("inv-kind").value = "achat"; $("inv-qty").value = "1"; $("inv-date").value = todayISO(); $("inv-date").max = todayISO(); $("inv-note").value = ""; $("inv-price").value = ""; $("inv-unit").value = ""; $("inv-unit-ht").value = ""; $("inv-total-ht").value = ""; $("inv-vat").value = "20"; $("inv-vat-custom").value = ""; syncVatUI(); priceSrc = "total"; refreshTotal();
       INV.editId = editId || null;
       const en = editId ? INV.entries.find(x => x.id === editId) : null;
       $("inv-modal-title").textContent = en ? "Modifier une entrée de stock" : "Enregistrer une entrée de stock";
@@ -12097,7 +12894,7 @@ ${p.manual && canDeclareLoss() ? `<div class="detail-manage"><button type="butto
         $("inv-type").innerHTML = `<option>${escapeHTML(en.label)}</option>`; $("inv-type").value = en.label; $("inv-variant-wrap").hidden = true;
         $("inv-kind").value = en.qty < 0 ? "retrait" : "achat"; $("inv-qty").value = String(Math.abs(en.qty));
         const d = parseFRDate(en.date); $("inv-date").value = d ? `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}` : "";
-        $("inv-note").value = en.note || ""; const tt = invTotalOf(en); $("inv-price").value = tt ? String(tt).replace(".", ",") : "";
+        $("inv-note").value = en.note || ""; const tt = invTotalOf(en); $("inv-price").value = tt ? String(tt).replace(".", ",") : ""; setVat(en.vat != null ? en.vat : 20); priceSrc = "total";
         refreshTotal();
       }
       invDevVals = en && en.devices ? en.devices.map(d => ({ name: d.name || "", serial: d.serial || "" })) : []; renderDevRows();
@@ -12106,25 +12903,83 @@ ${p.manual && canDeclareLoss() ? `<div class="detail-manage"><button type="butto
       // deux façons de remplir un achat : importer la facture (remplissage automatique) ou saisir à la main ; en modification, seule la facture se gère ici
       invShowExtract("");
       modal.querySelectorAll(".inv-auto").forEach(el => el.classList.remove("inv-auto"));
-      ["inv-type", "inv-variant", "inv-brand", "inv-qty", "inv-date", "inv-price", "inv-note"].forEach(id => { delete $(id).dataset.touched; });
+      ["inv-type", "inv-variant", "inv-brand", "inv-qty", "inv-date", "inv-price", "inv-unit", "inv-unit-ht", "inv-total-ht", "inv-note"].forEach(id => { delete $(id).dataset.touched; });
       $("inv-manual-head").hidden = !!en; $("inv-import-n").hidden = !!en; $("inv-import-sub").hidden = !!en;
-      $("inv-import-title").textContent = en ? "Facture" : "Importer la facture";
+      $("inv-import-title").textContent = en ? "Facture" : "Ou importer la facture";
       msg("");
       modal.hidden = false;
       document.addEventListener("keydown", onKey, true);
       setTimeout(() => { $("inv-qty").focus(); $("inv-qty").select(); }, 30);
     }
     const parsePrice = (s) => { const v = String(s || "").trim().replace(/\s/g, "").replace(",", "."); if(!v) return { ok: true, v: null }; if(!/^\d{1,9}(\.\d{1,2})?$/.test(v)) return { ok: false }; return { ok: true, v: Math.round(Number(v) * 100) / 100 }; };
+    // Prix par unité / total, TTC / HT : un seul est saisi, les trois autres se calculent avec la quantité et le taux de TVA (le dernier champ saisi fait foi)
+    let priceSrc = "total";
+    const fmtIn = (v) => v.toFixed(2).replace(".", ",");
+    const round2 = (v) => Math.round(v * 100) / 100;
+    const PRICE_IDS = { unit: "inv-unit", total: "inv-price", unitHT: "inv-unit-ht", totalHT: "inv-total-ht" };
+    // Taux de TVA : une liste de taux courants, ou « Autre taux » saisi à la main (0 à 100 %, jusqu'à 2 décimales) ; null = taux saisi invalide
+    // Choix « TTC » : seuls les prix TTC sont saisis ; les champs HT et le taux sont masqués, aucun taux n'est enregistré
+    const isTTC = () => $("inv-vat").value === "ttc";
+    const vatRate = () => {
+      if(isTTC()) return null;
+      if($("inv-vat").value !== "custom") return Number($("inv-vat").value) || 0;
+      const s = $("inv-vat-custom").value.trim().replace(",", ".");
+      if(!/^\d{1,3}(\.\d{1,2})?$/.test(s)) return null;
+      const v = Number(s); return v <= 100 ? v : null;
+    };
+    const vatK = () => { const r = vatRate(); return r === null ? null : 1 + r / 100; };
+    const syncVatUI = () => {
+      $("inv-vat-custom-wrap").hidden = $("inv-vat").value !== "custom";
+      $("inv-ht-row").hidden = isTTC();
+      if(isTTC()){ $("inv-unit-ht").value = ""; $("inv-total-ht").value = ""; if(priceSrc === "unitHT" || priceSrc === "totalHT") priceSrc = "total"; }
+    };
+    const setVat = (v) => {
+      const sel = $("inv-vat"), s = String(v);
+      if([...sel.options].some(o => o.value === s && o.value !== "custom")) sel.value = s;
+      else { sel.value = "custom"; $("inv-vat-custom").value = s.replace(".", ","); }
+      syncVatUI();
+    };
+    function syncPrices(){
+      const q = Number($("inv-qty").value), okQ = Number.isInteger(q) && q > 0, k = vatK();
+      const f = {}; Object.keys(PRICE_IDS).forEach(n => { f[n] = $(PRICE_IDS[n]); });
+      const src = f[priceSrc], ps = parsePrice(src.value);
+      if(!ps.ok) return;
+      if(ps.v == null){ Object.values(f).forEach(el => { if(el !== src) el.value = ""; }); return; }
+      if(k === null && (priceSrc === "unitHT" || priceSrc === "totalHT")) return;            // pas de conversion HT sans taux valide
+      let T;                                                                                  // total TTC : la valeur enregistrée
+      if(priceSrc === "total") T = ps.v;
+      else if(priceSrc === "totalHT") T = ps.v * k;
+      else if(!okQ) return;
+      else T = (priceSrc === "unit" ? ps.v : ps.v * k) * q;
+      T = round2(T);
+      const put = (n, v) => { if(f[n] !== src) f[n].value = fmtIn(round2(v)); };
+      put("total", T);
+      if(k !== null) put("totalHT", T / k); else { f.totalHT.value = ""; f.unitHT.value = ""; }
+      if(okQ){ put("unit", T / q); if(k !== null) put("unitHT", T / k / q); }
+    }
     function refreshTotal(){
       const retrait = $("inv-kind").value === "retrait";
       $("inv-price-wrap").hidden = retrait;
+      syncPrices();
       const p = parsePrice($("inv-price").value), q = Number($("inv-qty").value), t = $("inv-total");
-      t.textContent = !retrait && p.ok && p.v && Number.isInteger(q) && q > 0 ? `${fmtCount(q)} unité${q > 1 ? "s" : ""} pour ${eur(p.v)}, soit ${eur(p.v / q)} l'unité` : "";
+      const kk = vatK();
+      t.textContent = !retrait && p.ok && p.v && Number.isInteger(q) && q > 0
+        ? (kk === null ? `${fmtCount(q)} unité${q > 1 ? "s" : ""} pour ${eur(p.v)} TTC, soit ${eur(p.v / q)} TTC l'unité${isTTC() ? "" : " (indiquez le taux de TVA pour voir le HT)"}`
+          : `${fmtCount(q)} unité${q > 1 ? "s" : ""} pour ${eur(p.v)} TTC (${eur(p.v / kk)} HT), soit ${eur(p.v / q)} TTC (${eur(p.v / kk / q)} HT) l'unité`) : "";
     }
-    ["inv-price", "inv-qty"].forEach(id => $(id).addEventListener("input", refreshTotal));
+    Object.keys(PRICE_IDS).forEach(name => $(PRICE_IDS[name]).addEventListener("input", (e) => {
+      priceSrc = name;
+      Object.keys(PRICE_IDS).forEach(n => { if(n !== name) $(PRICE_IDS[n]).classList.remove("inv-auto"); });
+      if(e.isTrusted && name !== "total"){ $("inv-price").dataset.touched = "1"; $(PRICE_IDS[name]).classList.remove("inv-auto"); }
+      refreshTotal();
+    }));
+    $("inv-vat").addEventListener("change", () => { syncVatUI(); if($("inv-vat").value === "custom") $("inv-vat-custom").focus(); refreshTotal(); });
+    $("inv-vat-custom").addEventListener("input", refreshTotal);
+    $("inv-qty").addEventListener("input", refreshTotal);
     $("inv-kind").addEventListener("change", refreshTotal);
     modal.addEventListener("mousedown", (e) => { if(e.target === modal) closeModal(); });
     $("inv-cancel").addEventListener("click", closeModal);
+    $("inv-x").addEventListener("click", closeModal);
     $("inv-save").addEventListener("click", async () => {
       const qty = Number($("inv-qty").value), label = curTypeLabel(), kind = $("inv-kind").value, iso = $("inv-date").value;
       { const fam = familyByLabel($("inv-type").value); if(fam && !INV.editId && !label){ msg(`Choisissez ${fam.label === "Écran" ? "la marque" : "le modèle"} dans la liste « ${fam.vword} ».`, true); return; } }
@@ -12138,6 +12993,7 @@ ${p.manual && canDeclareLoss() ? `<div class="detail-manage"><button type="butto
       }
       const pr = kind === "retrait" ? { ok: true, v: null } : parsePrice($("inv-price").value);
       if(!pr.ok){ msg("Indiquez le montant avec au plus deux décimales, par exemple 8990,00.", true); return; }
+      if(pr.v && !isTTC() && vatRate() === null){ msg("Indiquez un taux de TVA entre 0 et 100 %, par exemple 8,5.", true); $("inv-vat-custom").focus(); return; }
       let devList = [];
       if(devRowsVisible()){ const dv = collectDevices(); if(dv.error){ msg(dv.error, true); return; } devList = dv.list; }
       const brandVal = brandRowVisible() ? $("inv-brand").value : "";
@@ -12160,19 +13016,19 @@ ${p.manual && canDeclareLoss() ? `<div class="detail-manage"><button type="butto
         if(eid){
           const en = INV.entries.find(x => x.id === eid); if(!en) return;
           en.qty = en.qty < 0 ? -qty : qty; en.date = formatDateFR(iso); en.note = note; delete en.price;
-          if(pr.v && en.qty > 0) en.total = pr.v; else delete en.total;
+          if(pr.v && en.qty > 0){ en.total = pr.v; if(isTTC()) delete en.vat; else en.vat = vatRate() ?? 0; } else { delete en.total; delete en.vat; }
           if(invMeta) en.invoice = invMeta; else delete en.invoice;
           if(devList.length) en.devices = devList; else delete en.devices;
           if(brandVal) en.brand = brandVal; else if(brandRowVisible()) delete en.brand;
           if(urlIn) en.invoiceUrl = urlIn; else delete en.invoiceUrl;
-        } else INV.entries.push({ id: INV.nextId++, label, qty: kind === "retrait" ? -qty : qty, kind, date: formatDateFR(iso), note, ...(pr.v ? { total: pr.v } : {}), ...(invMeta ? { invoice: invMeta } : {}), ...(devList.length ? { devices: devList } : {}), ...(brandVal ? { brand: brandVal } : {}), ...(urlIn ? { invoiceUrl: urlIn } : {}), by: actorId(), at: nowStamp() }); });
+        } else INV.entries.push({ id: INV.nextId++, label, qty: kind === "retrait" ? -qty : qty, kind, date: formatDateFR(iso), note, ...(pr.v ? { total: pr.v, ...(isTTC() ? {} : { vat: vatRate() ?? 0 }) } : {}), ...(invMeta ? { invoice: invMeta } : {}), ...(devList.length ? { devices: devList } : {}), ...(brandVal ? { brand: brandVal } : {}), ...(urlIn ? { invoiceUrl: urlIn } : {}), by: actorId(), at: nowStamp() }); });
       $("inv-save").disabled = false;
       if(ok){ closeModal(); if(eid){ showToast("Entrée modifiée."); return; } showToast(kind === "retrait" ? `${qty} × ${label} retiré${qty > 1 ? "s" : ""} du stock.` : `${qty} × ${label} ajouté${qty > 1 ? "s" : ""} au stock${pr.v ? ` (${eur(pr.v)})` : ""}.`); }
     });
     // un champ modifié à la main n'est plus écrasé par une facture importée ensuite
     ["inv-type", "inv-variant", "inv-brand", "inv-qty", "inv-date", "inv-price", "inv-note"].forEach(id => ["input", "change"].forEach(ev => $(id).addEventListener(ev, (e) => { if(e.isTrusted){ $(id).dataset.touched = "1"; $(id).classList.remove("inv-auto"); } })));
     $("inv-qty").addEventListener("keydown", (e) => { if(e.key === "Enter"){ e.preventDefault(); $("inv-save").click(); } });
-    $("inv-price").addEventListener("keydown", (e) => { if(e.key === "Enter"){ e.preventDefault(); $("inv-save").click(); } });
+    ["inv-price", "inv-unit", "inv-unit-ht", "inv-total-ht"].forEach(id => $(id).addEventListener("keydown", (e) => { if(e.key === "Enter"){ e.preventDefault(); $("inv-save").click(); } }));
     $("inv-note").addEventListener("keydown", (e) => { if(e.key === "Enter"){ e.preventDefault(); $("inv-save").click(); } });
     $("inv-search-input").addEventListener("input", renderInventory);
     { // Barre unique : filtre les types de matériel ET propose les PC et Mac dont le nom ou le numéro de série correspond (un clic ouvre la fiche du type avec la machine)
@@ -12211,7 +13067,7 @@ ${p.manual && canDeclareLoss() ? `<div class="detail-manage"><button type="butto
     const openType = (el) => { INV.type = el.dataset.invType; INV.tab = "list"; INV.filter = "all"; goTo("inventory"); };
     document.addEventListener("click", (e) => { const el = e.target.closest("li[data-inv-type]"); if(el) openType(el); });
     // Légende de la vue d'ensemble : survoler (ou cibler au clavier) une couleur la fait ressortir sur tous les anneaux
-    const OV_UNIT = { stock: "en stock", held: "prêtés", pend: "à signer", lost: "perdus", need: "à commander" };
+    const OV_UNIT = { stock: "en stock", held: "prêtés", pend: "à signer", lost: "perdus", need: "à remettre" };
     // k = couleur mise en avant (survol, clavier ou clic épinglé) ; null = retour à l'état normal (le stock au centre)
     const applyHl = (box, k) => {
       if(k) box.dataset.hl = k; else delete box.dataset.hl;
@@ -12298,7 +13154,7 @@ ${p.manual && canDeclareLoss() ? `<div class="detail-manage"><button type="butto
     $("inv-price-body").addEventListener("click", (e) => { if(e.target.closest("#inv-creset")){ INV.ctl = { q: "", type: "all", from: "", to: "" }; $("inv-cq").value = ""; $("inv-ctype").value = "all"; $("inv-cfrom").value = ""; $("inv-cto").value = ""; fillInvControl(); } });
     buildDateFilter("invent", "inv-period-anchor", renderInventory);
     $("inv-export-btn").addEventListener("click", () => {
-      const rows = invCompute().map(r => [r.label, r.hasEntries ? r.bought : "", r.hasEntries ? r.stock : "", r.held, r.pending, r.lost, r.toGive, r.need, r.spent ? r.spent.toFixed(2).replace(".", ",") : ""]);
+      const rows = invCompute().map(r => [r.label, r.hasEntries ? r.bought : "", r.hasEntries ? r.stock : "", r.held, r.pending, r.lost, r.toGive, r.need > 0 ? "Oui" : "", r.spent ? r.spent.toFixed(2).replace(".", ",") : ""]);
       downloadCSV(`inventaire_${todayISO()}.csv`, ["Matériel", "Acheté", "En stock", "Chez les personnes", "Restitution en attente de signature", "Perdu, volé ou abîmé", "Restant à remettre", "À commander", "Montant des entrées (€)"], rows);
     });
     view.addEventListener("keydown", (e) => { if(e.key !== "Enter" && e.key !== " ") return; const fg = e.target.closest && e.target.closest(".inv-fig.go"); if(fg){ e.preventDefault(); fg.click(); return; } const pt = e.target.closest && e.target.closest("[data-inv-ptype]"); if(pt){ e.preventDefault(); INV.type = INV.type === pt.dataset.invPtype ? "all" : pt.dataset.invPtype; renderInventory(); } });
