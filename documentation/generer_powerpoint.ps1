@@ -148,7 +148,7 @@ function NewSlide($kicker,$title,$sub,$notes){
   $k = Txt $s 48 24 600 16 $kicker.ToUpper() 11 $ACC $true
   $k.TextFrame2.TextRange.Font.Spacing = 1.5
   if($sub){ $null = Txt $s 48 88 864 22 $sub 15 $SOFT }
-  $null = Txt $s 48 512 700 14 "GPIEXALT  ·  DOC-GPIEXALT-001  ·  Version 7.7  ·  28/10/2026  ·  Classification : Interne" 9 $SOFT
+  $null = Txt $s 48 512 700 14 "GPIEXALT  ·  DOC-GPIEXALT-001  ·  Version 7.8  ·  30/10/2026  ·  Classification : Interne" 9 $SOFT
   $num = Txt $s 812 512 100 14 "" 9 $SOFT $false 3
   $num.TextFrame.TextRange.InsertSlideNumber() | Out-Null
   if($notes){ $s.NotesPage.Shapes.Placeholders.Item(2).TextFrame.TextRange.Text = $notes }
@@ -165,7 +165,7 @@ function Divider($num,$title,$sub){
   $null = Txt $s 96 150 300 80 $num 80 $ACC $true
   $null = Txt $s 96 316 620 60 $sub 20 'AEB9E3'
   Prism $s 660 130 2.6
-  $null = Txt $s 96 500 700 14 "GPIEXALT  ·  DOC-GPIEXALT-001  ·  Version 7.7" 9 '7C86B8'
+  $null = Txt $s 96 500 700 14 "GPIEXALT  ·  DOC-GPIEXALT-001  ·  Version 7.8" 9 '7C86B8'
   return $s
 }
 
@@ -182,7 +182,7 @@ $t2.TextFrame.TextRange.Text = "Dossier de documentation : gestion du parc infor
 $t2.TextFrame.TextRange.Font.Name='Calibri'; $t2.TextFrame.TextRange.Font.Size = 22; $t2.TextFrame.TextRange.Font.Color.RGB = (Rgb 'CADCFC'); $t2.TextFrame.TextRange.ParagraphFormat.Alignment = 1; $t2.TextFrame.VerticalAnchor = 1; $t2.TextFrame.MarginLeft = 0
 $k = Txt $s 96 168 600 18 'DOCUMENTATION FONCTIONNELLE, TECHNIQUE ET D''EXPLOITATION' 12 'B9B6FF' $true
 $k.TextFrame2.TextRange.Font.Spacing = 1.5
-$null = Txt $s 96 430 620 18 "DOC-GPIEXALT-001  ·  Version 7.7  ·  28/10/2026  ·  Application v417" 13 'AEB9E3'
+$null = Txt $s 96 430 620 18 "DOC-GPIEXALT-001  ·  Version 7.8  ·  30/10/2026  ·  Application v452" 13 'AEB9E3'
 $null = Txt $s 96 452 620 18 "Propriétaire : Service informatique (DSI)  ·  Classification : Interne  ·  Statut : diffusé pour validation" 13 'AEB9E3'
 $s.NotesPage.Shapes.Placeholders.Item(2).TextFrame.TextRange.Text = "Présentation de GPIEXALT (Gestion du Parc Informatique eXalt, anciennement Prisme) : fonctions, procédures, règles de gestion, architecture, sécurité, sauvegarde, recette et risques. Version 6.0 : thème et logo eXalt, retour prévu et alertes de retard, actions groupées, scan rapide, rapport par email, destinataire au choix. Version 7.0 : rapport propre à chaque page, fiche d'emprunt réorganisée. Version 7.4 : onglet Inventaire (stock, achats, prix et dépenses), stock jamais négatif et matériel épuisé grisé dans Emprunter, calendrier et listes de l'application, rapport de l'Inventaire."
 
@@ -191,17 +191,17 @@ $s = NewSlide 'Gouvernance' 'Contrôle du document' 'Référence, version, propr
 $null = Card $s 48 126 420 366
 $null = Txt $s 68 140 380 22 'Informations générales' 17 $NAVY $true
 $null = MakeTable $s 62 170 392 @(120,272) @(
-  @('Rubrique','Valeur'),@('Référence','DOC-GPIEXALT-001'),@('Version','7.7 — 28/10/2026'),@('Application','GPIEXALT, version 417'),
+  @('Rubrique','Valeur'),@('Référence','DOC-GPIEXALT-001'),@('Version','7.8 — 30/10/2026'),@('Application','GPIEXALT, version 452'),
   @('Propriétaire','Service informatique (DSI)'),@('Classification','Interne'),@('Statut','Diffusé pour validation'),@('Diffusion','Équipe IT, DSI ; RSSI et DPO (sécurité, données)')) 12 36
 $null = Card $s 492 126 420 234
 $null = Txt $s 512 138 380 22 'Historique des révisions' 17 $NAVY $true
-$null = MakeTable $s 506 168 392 @(56,82,254) @(@('Version','Date','Nature'),@('1.0-2.0','05/10/2026','Première édition, édition entreprise'),@('3.0','06/10/2026','App 106 : accueil, QR, signature'),@('4.0','07/10/2026','App 128 : rôles, rapports, recherche'),@('5.0','08/10/2026','App 147 : annuaire, envoi signé'),@('6.0','09/10/2026','App 161 : GPIEXALT, retards, rapport'),@('7.0-7.2','12/10/2026','App 167 à 192 : rapport par page, finition, catalogue'),@('7.3','13/10/2026','App 206 : Par email dans l''ordre, menu collaborateur'),@('7.4','14/10/2026','App 242 : Inventaire, prix, stock, calendrier'),@('7.5','16/10/2026','App 299 : Nouvel emprunt, quantités, machines, achats'),@('7.6','27/10/2026','App 409 : Teams, recherche globale, anneaux, familles'),@('7.7','28/10/2026','App 417 : import de facture, À commander')) 8 14
+$null = MakeTable $s 506 168 392 @(56,82,254) @(@('Version','Date','Nature'),@('1.0-2.0','05/10/2026','Première édition, édition entreprise'),@('3.0','06/10/2026','App 106 : accueil, QR, signature'),@('4.0','07/10/2026','App 128 : rôles, rapports, recherche'),@('5.0','08/10/2026','App 147 : annuaire, envoi signé'),@('6.0','09/10/2026','App 161 : GPIEXALT, retards, rapport'),@('7.0-7.2','12/10/2026','App 167 à 192 : rapport par page, finition, catalogue'),@('7.3-7.4','13/10/2026','App 206 à 242 : Par email, Inventaire, prix, stock'),@('7.5','16/10/2026','App 299 : Nouvel emprunt, quantités, machines, achats'),@('7.6','27/10/2026','App 409 : Teams, recherche globale, anneaux, familles'),@('7.7','28/10/2026','App 417 : import de facture, À commander'),@('7.8','30/10/2026','App 452 : prolonger, relances, Guide, TVA')) 8 14
 $null = Card $s 492 368 420 124
 $null = Txt $s 512 374 380 22 'Circuit de validation' 17 $NAVY $true
-$null = MakeTable $s 506 400 392 @(100,190,102) @(@('Étape','Nom et fonction','Date'),@('Rédaction','Service informatique','28/10/2026'),@('Vérification','À renseigner',''),@('Approbation','À renseigner (DSI)','')) 12 22
+$null = MakeTable $s 506 400 392 @(100,190,102) @(@('Étape','Nom et fonction','Date'),@('Rédaction','Service informatique','30/10/2026'),@('Vérification','À renseigner',''),@('Approbation','À renseigner (DSI)','')) 12 22
 
 # ================= 3. Sommaire =================
-$s = NewSlide 'Gouvernance' 'Sommaire' 'Sept parties, de la vue d''ensemble aux actions attendues' "Le dossier PDF détaille chaque partie (91 pages, procédures, plan de recette, registre des risques)."
+$s = NewSlide 'Gouvernance' 'Sommaire' 'Sept parties, de la vue d''ensemble aux actions attendues' "Le dossier PDF détaille chaque partie (100 pages, procédures, plan de recette, registre des risques)."
 $sm = @(
   @('01','Vue d''ensemble','Finalité, cycle de vie, les huit onglets'),
   @('02','Fonctions','Prêts, retours, inventaire, attestations, archives, QR, recherche, rapports, rôles, thèmes'),
@@ -282,15 +282,15 @@ $s = NewSlide 'Onglet 1' 'Accueil : le tableau de bord' 'Ce qui demande une acti
 $null = ShotAuto $s 'home.png' 48 126 330 1440 @(@(1,763,60),@(2,280,196),@(3,1180,198),@(4,350,310),@(5,356,525),@(6,945,525),@(7,365,950))
 $null = Card $s 400 126 512 366
 $null = Txt $s 418 138 476 22 'Repères' 17 $NAVY $true
-Legend $s 418 168 476 @('Accès rapides : recherche, prêt, retour, rapport','Indicateurs cliquables, dont Retours en retard','Carte « À commander » : unités manquantes (Inventaire)','Bandeau « PDF à archiver » (si besoin)','Parc matériel : anneau cliquable, avec « En stock »','Stock par type de matériel : tous les types','Dépenses : répartition par type et par mois') 13 40
+Legend $s 418 168 476 @('Accès rapides : recherche, prêt, retour, rapport','Indicateurs cliquables, dont Retours en retard','Carte « À commander » : types sans stock (Inventaire)','Bandeau « PDF à archiver » (si besoin)','Parc matériel : anneau cliquable, avec « En stock »','Stock par type de matériel : tous les types','Dépenses : répartition par type et par mois') 13 40
 # ================= 10. Emprunter =================
 $s = NewSlide 'Onglet 2' 'Emprunter : enregistrer un prêt' 'Rechercher la personne, cocher le matériel, choisir la date, enregistrer' "La fiche s'ouvre dans une fenêtre avec trois étapes. Un équipement peut être emprunté et restitué plusieurs fois. Annuler (10 secondes) supprime l'emprunt qui vient d'être saisi."
-$null = ShotAuto $s 'loan.png' 48 126 552 1440 @(@(1,284,238),@(2,308,353),@(3,301,433),@(4,749,433),@(5,1321,433),@(6,1080,572),@(7,1314,561),@(8,905,433))
+$null = ShotAuto $s 'loan.png' 48 126 552 1440 @(@(1,284,238),@(2,308,353),@(3,301,433),@(4,749,433),@(5,1080,572),@(6,1314,561),@(7,905,433),@(8,927,79))
 $null = Card $s 636 126 276 366
 $null = Txt $s 654 138 240 22 'Repères' 17 $NAVY $true
-Legend $s 654 168 240 @('Quatre indicateurs','Recherche (accents ignorés)','Filtres : à emprunter, tout emprunté','Période (entre deux dates…)','Tri','Dernier mouvement : matériel, emprunté le, retour prévu','Historique (N) : tout le matériel avec ses dates','Nouvel emprunt : collaborateur absent de la liste') 13 29
+Legend $s 654 168 240 @('Quatre indicateurs','Recherche (accents ignorés)','Filtres : à emprunter, tout emprunté','Période (entre deux dates…)','Dernier mouvement et retour prévu','Historique (N) : matériel et dates','Nouvel emprunt : personne absente','Guide : mode d''emploi') 13 29
 $null = Txt $s 654 408 240 18 'Dans la fiche' 14 $NAVY $true
-$null = Txt $s 654 428 240 62 "3 étapes ; carte « Retour prévu » facultative. Matériel sans stock : grisé « Plus en stock » (Inventaire). Annuler pendant 10 s." 12 $SOFT
+$null = Txt $s 654 428 240 62 "3 étapes ; carte « Retour prévu » facultative. Prolonger un prêt, pastille « Déjà 1 ordinateur » (doublon). Matériel sans stock : grisé. Annuler pendant 10 s." 12 $SOFT
 
 # ================= Nouvel emprunt et quantités =================
 $s = NewSlide 'Onglet 2' 'Nouvel emprunt et emprunt par quantité' 'Un collaborateur absent de la liste, des quantités, un PC par exemplaire' "Le bouton + Nouvel emprunt ouvre directement la fiche : nom et prénom obligatoires, fonction, email et téléphone facultatifs. À l'enregistrement, le collaborateur est ajouté à la liste et l'emprunt enregistré ; un nom déjà présent n'est pas dupliqué. Tout le matériel se prête par quantité, dans la limite du stock (20 si aucun achat). Pour un ordinateur portable ou un Mac, un champ de recherche de PC par exemplaire (nom ou numéro de série) ; un PC déjà choisi ou prêté n'est plus proposé."
@@ -307,6 +307,17 @@ $null = ShotAuto $s 'loanhist.png' 440 126 172 1450 @()
 $null = Card $s 632 126 280 366
 $null = Txt $s 650 138 244 22 'À retenir' 17 $NAVY $true
 $null = Bul $s 650 168 246 316 @("Une ligne « Chargeur » et une ligne « Écran »","Un modèle ou une marque par exemplaire, obligatoire","Stock restant affiché dans la liste","Enregistré sous le modèle choisi","Historique (N) : tout le matériel d'une personne, avec ses dates") 13 $INK 6
+
+# ================= Prolonger un prêt et doublons =================
+$s = NewSlide 'Onglets 2 et 3' 'Prolonger un prêt et éviter les doublons' 'Repousser une date sans recréer le prêt, être prévenu d''un doublon' "Prolonger : bouton sur la ligne du matériel (Restituer et fiche d'Emprunter) quand l'emprunt a une date de retour. La fenêtre propose + 1 semaine, + 2 semaines, + 1 mois, + 3 mois ou une date libre, avec un motif facultatif ; si l'échéance est dépassée, le calcul part d'aujourd'hui. L'ancienne et la nouvelle date, l'auteur et le motif sont consignés sur l'emprunt ; Annuler rétablit la date d'origine. Doublons : une pastille orange « Déjà 1 ordinateur » ou « Déjà 3 chargeurs » prévient quand la personne a déjà un ordinateur (PC ou Mac) ou un chargeur ; une confirmation à l'enregistrement laisse décider, sans jamais bloquer."
+$null = ShotAuto $s 'prolong.png' 48 126 300 940 @()
+$null = ShotAuto $s 'dupwarn.png' 362 126 270 750 @()
+$null = Card $s 362 292 270 200
+$null = Txt $s 378 302 240 22 'Doublons' 17 $NAVY $true
+$null = Bul $s 378 330 242 158 @("Pastille orange sur la ligne du catalogue","Ordinateur (PC ou Mac) ou chargeur déjà détenu","Confirmation à l'enregistrement : jamais bloquante","Nom du PC en info-bulle") 13 $INK 5
+$null = Card $s 652 126 260 366
+$null = Txt $s 668 138 228 22 'Prolonger' 17 $NAVY $true
+$null = Bul $s 668 168 230 320 @("Bouton sur chaque matériel qui a une date de retour","+ 1 semaine, + 2 semaines, + 1 mois, + 3 mois ou une date libre","Motif facultatif","Échéance dépassée : calcul à partir d'aujourd'hui","Ancienne et nouvelle date consignées sur l'emprunt","Annuler dans la bulle rétablit la date d'origine") 13 $INK 6
 
 # ================= 11. Restituer : le suivi =================
 $s = NewSlide 'Onglet 3' 'Restituer : suivre les retours' 'Indicateurs, filtres et dernier mouvement de chaque personne' "Chaque ligne affiche le dernier mouvement de la personne : le matériel, la date d'emprunt, puis le retour prévu (en rouge s'il est dépassé) ou la date de rendu. Le bouton Historique ouvre tout le matériel de la personne. Le sélecteur de tri a été retiré."
@@ -326,13 +337,15 @@ Legend $s 452 168 440 @('Compteurs : restitués, à signer, perdus','Étapes : m
 $null = Txt $s 452 376 440 20 'Résultat' 15 $NAVY $true
 $null = Bul $s 452 398 440 92 @("Par email : aperçu du PDF et destinataire, puis signature (Marquer comme signée), puis message prêt à envoyer","Par téléphone : SMS préparé, numéro de test 06 95 17 58 74","Déclaration : sort de chez la personne, visible dans Matériel perdu") 13 $INK 3
 
-# ================= Relance Teams =================
-$s = NewSlide 'Onglet 3' 'Relancer un retard sur Microsoft Teams' 'Un bouton à côté de « Restituer », un message prêt à l''envoi' "Quand la date de retour prévue est dépassée, un bouton Relancer sur Teams apparaît à côté de Restituer sur la ligne de l'équipement. Il ouvre une fenêtre avec le message préparé et modifiable, qui liste tout le matériel en retard de la personne (avec le nom des PC). Ouvrir dans Teams lance la discussion avec le texte déjà saisi : il suffit d'appuyer sur Entrée. Copier le message sert de repli. Rien n'est envoyé sans ce geste ; la relance n'est jamais automatique, et l'application n'en garde pas la trace."
-$null = ShotAuto $s 'teamsbtn.png' 48 126 330 1500 @()
-$null = ShotAuto $s 'teams.png' 392 126 220 1200 @()
-$null = Card $s 632 126 280 366
-$null = Txt $s 650 138 244 22 'Comment ça marche' 17 $NAVY $true
-$null = Bul $s 650 168 246 316 @("Visible seulement si la date de retour est dépassée","Message modifiable : matériel, dates, jours de retard","Ouvrir dans Teams : discussion avec la personne","Copier le message : repli si Teams est bloqué","Jamais envoyé automatiquement") 13 $INK 6
+# ================= Relances Teams par paliers =================
+$s = NewSlide 'Onglet 3' 'Rappels et relances Teams par paliers' 'Trois jours avant, le jour même, une semaine, plus de quinze jours' "L'application prépare chaque relance selon l'échéance : rappel aimable à J-3, message neutre le jour du retour, message plus ferme après une semaine, puis au-delà de 15 jours avec le responsable en copie. Un bandeau dans Restituer annonce les relances à envoyer ; le bouton Préparer les relances ouvre la file (Préparer, Ignorer). Le message s'ouvre dans Teams, déjà écrit : il suffit de relire et d'appuyer sur Entrée. Une relance ouverte dans Teams est consignée sur l'emprunt et n'est plus reproposée tant que la date de retour ne change pas. Rien n'est envoyé automatiquement."
+$null = ShotAuto $s 'relbandeau.png' 48 126 440 1870 @()
+$null = ShotAuto $s 'relfile.png' 48 326 200 1090 @()
+$null = ShotAuto $s 'teams.png' 262 326 212 1800 @()
+$null = Card $s 540 126 372 366
+$null = Txt $s 558 138 336 22 'Quatre paliers' 17 $NAVY $true
+$null = MakeTable $s 554 168 344 @(128,216) @(@('Palier','Quand'),@('Avant l''échéance','3 jours avant'),@('Échéance','Jour du retour, jusqu''à J+6'),@('Retard d''une semaine','De 7 à 15 jours'),@('Plus de 15 jours','Responsable en copie')) 12 26
+$null = Bul $s 558 312 336 178 @("Bandeau « relances Teams à envoyer » dans Restituer","File : Préparer ou Ignorer, par personne","Message modifiable, jamais envoyé automatiquement","Relance consignée : « Relancé le … », plus reproposée") 13 $INK 6
 
 # ================= Retour prévu et alertes de retard =================
 $s = NewSlide 'Onglets 2 et 3' 'Date de retour prévue et alertes de retard' 'Facultative à l''emprunt, surveillée ensuite : fenêtre, carte, pastilles, filtre' "La date de retour prévue est facultative. Dépassée, elle déclenche une fenêtre d'alerte à l'ouverture (au plus une fois par jour, ou si le nombre augmente), la carte rouge Retours en retard, les pastilles du menu et le filtre En retard de retour. Aucune notification n'est envoyée à l'extérieur : l'alerte n'apparaît que lorsque quelqu'un ouvre GPIEXALT."
@@ -427,7 +440,7 @@ Legend $s 686 168 210 @('Indicateurs : unités, déclarations, type le plus touc
 $null = Txt $s 686 424 210 62 "Au-delà de six pastilles : « + N autres »." 12 $SOFT
 
 # ================= Inventaire : le stock =================
-$s = NewSlide 'Onglet 5' 'Inventaire : la vue d''ensemble en anneaux' 'Un anneau par type de matériel : le stock au centre, la répartition autour' "Stock = acheté − chez les personnes − restitutions en attente de signature − perdu ; jamais négatif (affiché à 0). Seuls les achats se saisissent : prêts, retours signés et pertes sont lus dans les fiches. À commander = matériel encore à remettre au-delà du stock. Les types sans achat enregistré affichent un tiret. Chargeur et Écran sont des familles : un seul anneau additionne leurs modèles. Survoler une pastille de la légende (À commander, En stock, Chez les personnes, À signer, Perdu) change le chiffre au centre de chaque anneau ; un clic épingle la couleur. Le volet Achats et la liste détaillée par type ont été retirés."
+$s = NewSlide 'Onglet 5' 'Inventaire : la vue d''ensemble en anneaux' 'Un anneau par type de matériel : le stock au centre, la répartition autour' "Stock = acheté − chez les personnes − restitutions en attente de signature − perdu ; jamais négatif (affiché à 0). Seuls les achats se saisissent : prêts, retours signés et pertes sont lus dans les fiches. À commander = stock à 0 (un type sans stock ne peut plus être prêté). Le filtre Type de matériel limite aussi la vue d'ensemble à ce type. Les types sans achat enregistré affichent un tiret. Chargeur et Écran sont des familles : un seul anneau additionne leurs modèles. Survoler une pastille de la légende (À commander, En stock, Chez les personnes, À signer, Perdu) change le chiffre au centre de chaque anneau ; un clic épingle la couleur. Le volet Achats et la liste détaillée par type ont été retirés."
 $null = ShotAuto $s 'inv_stock.png' 48 126 450 1440 @(@(1,310,173),@(2,670,173),@(3,1296,173),@(4,541,360),@(5,936,251),@(6,554,251),@(7,541,454))
 $null = Card $s 520 126 392 366
 $null = Txt $s 538 138 356 22 'Repères' 17 $NAVY $true
@@ -454,18 +467,18 @@ $null = Txt $s 488 392 406 96 "Entrées à compléter (achats sans prix) · cont
 # ================= Inventaire : achats, marque, machines, factures =================
 $s = NewSlide 'Onglet 5' 'Inventaire : enregistrer un achat' 'Importer la facture (remplissage automatique) ou saisir à la main' "À l'achat, le type de matériel se choisit dans la liste ; pour Chargeur (USB-C, HP, Asus, Mac, Acer, Dell) et Écran (Dell, MiniFire, Samsung), la liste Modèle ou Marque est obligatoire. Pour un ordinateur portable, la liste Marque (Acer, HP, Asus, Lenovo, Dell) est obligatoire. On saisit ensuite le nom du PC et le numéro de série de chaque exemplaire (60 au plus) : ils sont proposés à l'emprunt (Ordinateur portable 1, 2, …), affichés dans Restituer et sur l'attestation. En haut de la fenêtre, Importer la facture : un PDF glissé ou choisi remplit le formulaire (type, marque ou modèle, quantité, date, prix TTC TVA comprise, fournisseur, numéros de série) ; chaque champ rempli est contouré et reste modifiable, et ce qui n'est pas trouvé est signalé. Seuls les PDF contenant du texte sont lus. En dessous, Ou saisir à la main. Le bouton Factures permet de relire, télécharger et rechercher les factures."
 $null = ShotAuto $s 'buyfam.png' 48 126 276 1200 @()
-$null = ShotAuto $s 'invimp.png' 336 126 276 1100 @()
+$null = ShotAuto $s 'invimp.png' 336 126 250 1100 @()
 $null = Card $s 632 126 280 366
 $null = Txt $s 650 138 244 22 'À retenir' 17 $NAVY $true
-$null = Bul $s 650 168 246 316 @("Chargeur et Écran : modèle ou marque obligatoire","Ordinateur portable : marque obligatoire (Acer, HP, Asus, Lenovo, Dell)","Nom du PC et n° de série par exemplaire (facultatif)","1 · Importer la facture : le PDF remplit le formulaire","2 · Ou saisir à la main : tout reste modifiable","Prix total TTC (TVA comprise) lu ou calculé : à vérifier","Image ou PDF scanné : joint, mais à saisir à la main","Bouton Factures : lire, télécharger, rechercher") 12 $INK 6
+$null = Bul $s 650 168 246 316 @("Chargeur et Écran : modèle ou marque obligatoire","Ordinateur portable : marque obligatoire (Acer, HP, Asus, Lenovo, Dell)","Nom du PC et n° de série par exemplaire (facultatif)","1 · Saisir à la main : tout reste modifiable","2 · Ou importer la facture (en bas) : le PDF remplit le formulaire","Prix total TTC (TVA comprise) lu ou calculé : à vérifier","Image ou PDF scanné : joint, mais à saisir à la main","Bouton Factures : lire, télécharger, rechercher") 12 $INK 6
 
 # ================= Inventaire : acheter puis prêter =================
-$s = NewSlide 'Onglet 5' 'Acheter, puis prêter : le stock suit' 'Un matériel sans stock est grisé dans Emprunter' "Enregistrer un achat : type, nature (achat ou retrait), quantité, date, prix total facultatif (le prix unitaire se calcule), note. Un retrait supérieur au stock est refusé. Dans Emprunter, un type dont le stock est à 0 est grisé avec la pastille « Plus en stock » ; « Sélectionner tout » l'ignore et l'enregistrement est refusé s'il dépasse le stock. Un type sans achat enregistré n'est pas limité."
+$s = NewSlide 'Onglet 5' 'Acheter, puis prêter : le stock suit' 'Un matériel sans stock est grisé dans Emprunter' "Enregistrer un achat : type, nature (achat ou retrait), quantité, date, prix facultatif : par unité ou au total, TTC ou HT, taux de TVA au choix (liste, autre taux ou TTC seul) ; les quatre prix se calculent entre eux, note. Un retrait supérieur au stock est refusé. Dans Emprunter, un type dont le stock est à 0 est grisé avec la pastille « Plus en stock » ; « Sélectionner tout » l'ignore et l'enregistrement est refusé s'il dépasse le stock. Un type sans achat enregistré n'est pas limité."
 $null = ShotAuto $s 'inv_modal.png' 48 126 200 540 @()
 $null = ShotAuto $s 'nostock.png' 264 126 330 880 @()
 $null = Card $s 614 126 298 366
 $null = Txt $s 632 138 262 22 'Comment ça marche' 17 $NAVY $true
-$null = Bul $s 632 168 266 320 @("Enregistrer un achat : quantité, date, prix total (facultatif)","Le prix unitaire se calcule tout seul","Retrait refusé s'il dépasse le stock","Emprunter : « Plus en stock », ligne grisée et non cochable","Retour signé : le matériel revient en stock","Perte : le matériel sort du stock") 13 $INK 6
+$null = Bul $s 632 168 266 320 @("Enregistrer un achat : quantité, date, prix (facultatif)","Prix par unité ou total, TTC ou HT, taux de TVA : liés par la quantité","Retrait refusé s'il dépasse le stock","Emprunter : « Plus en stock », ligne grisée et non cochable","Retour signé : le matériel revient en stock","Perte : le matériel sort du stock") 13 $INK 6
 # ================= 19. Activités =================
 $s = NewSlide 'Onglet 8' 'Activités récentes : le journal' 'Tout ce qui a été enregistré, du plus récent au plus ancien' "Les quatre indicateurs servent aussi de filtres ; un second clic retire le filtre. 50 événements affichés à la fois. La mention de signature figure sous l'événement « attestation signée »."
 $null = ShotAuto $s 'activity.png' 48 126 570 1440 @(@(1,284,238),@(2,504,433),@(3,926,433),@(4,360,477),@(5,432,521))
@@ -556,6 +569,17 @@ $null = ShotAuto $s 'cmdkglobal.png' 48 126 400 1200 @()
 $null = Card $s 470 126 442 366
 $null = Txt $s 488 138 406 22 'Ce que la barre trouve' 17 $NAVY $true
 $null = Bul $s 488 168 410 316 @("Inventaire : un type de matériel, son stock, acheté, prêté, perdu","Achats et factures : les cinq plus récents qui correspondent","PC / Mac : par nom de machine, numéro de série ou marque","Personnes : Entrée ouvre l'action la plus utile","Dans les pages : nombre de résultats par page, un clic pour l'ouvrir déjà filtrée","Actions : boutons de l'Inventaire, rapport, thème, visite guidée") 13 $INK 6
+
+# ================= Guide et démonstrations =================
+$s = NewSlide 'Transversal' 'Guide et démonstrations dans chaque page' 'Un bouton « Guide » : mode d''emploi détaillé et démonstration sur l''écran réel' "Le bouton Guide figure tout à gauche des boutons d'en-tête de chaque page. Il ouvre un guide en rubriques (par exemple Emprunter : Faire un emprunt, Cas particuliers, Historique et corrections), un encadré À retenir et une rubrique Partout commune à toutes les pages. Le bouton orange lance une démonstration : le vrai écran est mis en surbrillance étape par étape, avec une carte explicative (Précédent, Suivant, Passer ou la croix). La démonstration ouvre une fiche, coche une ligne et affiche les vraies fenêtres, mais n'enregistre rien : tout est refermé à la fin ou avec Échap. Démonstrations : Emprunter, Restituer sans attestation, Restituer avec attestation par email (aperçu, destinataire, signature, message), Enregistrer un achat, Prix et dépenses, tour de l'Accueil."
+$null = ShotAuto $s 'guide.png' 48 126 232 930 @()
+$null = ShotAuto $s 'demo.png' 292 126 330 2250 @()
+$null = Card $s 292 368 330 124
+$null = Txt $s 308 376 300 22 'Une démonstration' 17 $NAVY $true
+$null = Bul $s 308 402 304 88 @("Le vrai écran est entouré, étape par étape","Précédent, Suivant, Passer ou la croix ✕","N'enregistre rien : tout est refermé à la fin") 13 $INK 5
+$null = Card $s 642 126 270 366
+$null = Txt $s 658 138 238 22 'Dans chaque guide' 17 $NAVY $true
+$null = Bul $s 658 168 240 320 @("Rubriques en onglets, étapes numérotées","« À retenir » : un à trois points importants","Rubrique « Partout » : recherche, raccourcis, période, rapport…","Six démonstrations : emprunt, restitution (avec et sans attestation), achat, prix, Accueil","Dix pages couvertes") 13 $INK 6
 
 # ================= Rapports PDF et Excel =================
 $s = NewSlide 'Transversal' 'Rapports PDF et Excel' 'Un état à partager, en un clic, propre à la page où l''on se trouve' "Les rapports sont créés dans le navigateur (jsPDF et autotable pour le PDF, ExcelJS pour Excel, chargées à la demande). Ils sont réservés aux rôles Administrateur full, Super utilisateur et Lecteur."
@@ -656,15 +680,18 @@ $null = Card $s 644 392 268 98 $TW
 $null = Txt $s 660 400 238 20 'Annulé par mégarde ?' 15 $WARN $true
 $null = Txt $s 660 424 238 64 "Le bouton Enregistrer de la carte relance l'enregistrement, sans régénérer le fichier." 12 $INK
 # ================= 18. Téléphone et tablette =================
-$s = NewSlide 'Compatibilité' 'Téléphone et tablette' 'La même application, adaptée à chaque écran' "Barre d'onglets en bas sur téléphone et tablette en portrait ; menu latéral sur PC et tablette en paysage."
+$s = NewSlide 'Compatibilité' 'Tous les appareils, tous les écrans' 'Téléphone, tablette et PC : une seule application, rapide pour 1 800 collaborateurs' "Mise en page vérifiée de 320 à plus de 2 000 px dans des fenêtres simulées (pas encore sur de vrais iPhone, Android ou iPad : cas CR-74). Barre d'onglets en bas sur téléphone et tablette en portrait, menu latéral sur PC et tablette en paysage. Écrans tactiles : zones de 36 à 40 px, champs à 16 px (pas de zoom automatique sur iPhone), hauteur réelle de l'écran (barre d'adresse de iOS Safari et de Chrome Android). Un bandeau prévient d'un navigateur trop ancien. Rapidité mesurée sur 1 800 personnes fictives avec un historique chacune : Restituer environ 120 ms (790 ms avant optimisation), fiche environ 110 ms, Accueil environ 240 ms, Inventaire 220 à 270 ms ; calculs mis en cache et recherche rapide avec délai de frappe de 0,1 s."
 $ph = Box $s 90 120 214 384 '14183A' 5 $null 0.12; Shadow $ph 20 6 0.7
 $null = $s.Shapes.AddPicture((Join-Path $imgDoc 'mobile.png'), 0, -1, 109, 132, 176, 360)
-$null = Card $s 340 126 572 172
-$null = Txt $s 360 138 520 22 'Téléphone' 18 $NAVY $true
-$null = Bul $s 360 168 530 126 @("Barre d'onglets fixée en bas, à portée du pouce, avec les compteurs","Boutons de 42 px minimum ; champs à 16 px (pas de zoom automatique sur iPhone)","Les boutons email et SMS ouvrent les applications de l'appareil") 14 $INK 5
-$null = Card $s 340 314 572 178
-$null = Txt $s 360 326 520 22 'Tablette et PC' 18 $NAVY $true
-$null = Bul $s 360 356 530 130 @("Tablette en paysage et PC : menu latéral, repliable en icônes","Tablette en portrait : barre d'onglets en bas","PC : raccourcis 1 à 8, Ctrl K pour rechercher") 14 $INK 5
+$null = Card $s 340 126 572 112
+$null = Txt $s 360 134 520 22 'Téléphone et tablette' 17 $NAVY $true
+$null = Bul $s 360 160 530 78 @("Barre d'onglets en bas, avec les compteurs ; boutons d'action fixés en bas des fenêtres","Zones à toucher de 36 à 40 px ; champs à 16 px (pas de zoom automatique sur iPhone)","Hauteur réelle de l'écran : barre d'adresse de iOS Safari et de Chrome Android") 12 $INK 3
+$null = Card $s 340 248 572 104
+$null = Txt $s 360 256 520 22 'PC et grands écrans' 17 $NAVY $true
+$null = Bul $s 360 282 530 70 @("Menu latéral repliable ; boutons d'en-tête qui passent à la ligne quand la place manque","Raccourcis 1 à 8 et Ctrl K ; mise en page vérifiée de 320 à plus de 2 000 px") 12 $INK 3
+$null = Card $s 340 362 572 130
+$null = Txt $s 360 370 520 22 'Navigateurs et rapidité' 17 $NAVY $true
+$null = Bul $s 360 396 530 94 @("Chrome et Edge 111, Safari 16.4, Firefox 121 ou plus ; bandeau d'information sur un navigateur plus ancien","1 800 personnes (test) : Restituer ≈ 120 ms, fiche ≈ 110 ms, Accueil ≈ 240 ms, Inventaire ≈ 220 à 270 ms","Calculs mis en cache ; recherche rapide avec délai de frappe ; listes de 50 lignes") 12 $INK 3
 
 # ================= 19. Divider 03 =================
 $null = Divider '03' 'Gouvernance' 'Rôles, responsabilités et règles de gestion'
@@ -679,7 +706,7 @@ $null = MakeTable $s 48 126 864 @(414,112,112,114,112) @(
 $null = Txt $s 48 448 864 40 "R = réalise  ·  A = approuve  ·  C = consulté  ·  I = informé.   Cinq rôles dans l'application ; le partage de la page reste la limite réelle." 13 $SOFT
 
 # ================= 21. Règles de gestion =================
-$s = NewSlide 'Gouvernance' 'Règles de gestion appliquées' 'Trente-neuf règles dans le dossier PDF ; les six essentielles ici' "RG-01 à RG-39 : chapitre 5 du dossier PDF."
+$s = NewSlide 'Gouvernance' 'Règles de gestion appliquées' 'Quarante-six règles dans le dossier PDF ; les six essentielles ici' "RG-01 à RG-46 : chapitre 5 du dossier PDF."
 $rg = @(@('RG-01 · Disponibilité',"Un équipement ne peut être emprunté que s'il est disponible : jamais emprunté, ou redevenu libre.",$BLUE),
   @('RG-03 · Signature',"Une attestation ne passe à « Signée » que par l'action « Marquer comme signée ».",$GOOD),
   @('RG-34 et 35 · Stock',"Stock = acheté − chez les personnes − en attente − perdu, jamais négatif. Sans stock, un matériel ne peut plus être prêté.",$TEAL),
@@ -770,7 +797,7 @@ $null = Bul $s 512 324 382 160 @("Exports CSV : attestations, matériel perdu","
 $null = Divider '06' 'Qualité' 'Plan de recette et registre des risques'
 
 # ================= 29. Recette =================
-$s = NewSlide 'Qualité' 'Plan de recette : état au 16/10/2026' '69 cas : 57 réalisés ou simulés en local, 13 prioritaires en production' "CR-01 à CR-69 dans le dossier PDF, chapitre 10."
+$s = NewSlide 'Qualité' 'Plan de recette : état au 30/10/2026' '75 cas : 62 réalisés ou simulés en local ; CR-70 à CR-75 à valider en production' "CR-01 à CR-75 dans le dossier PDF, chapitre 10."
 $kp = @(@('57','cas réalisés ou simulés',$GOOD),@('9','cas à réaliser en local',$WARN),@('13','cas prioritaires en production',$BAD))
 for($i=0;$i -lt 3;$i++){
   $x = 48 + $i*297
@@ -796,7 +823,7 @@ $null = MakeTable $s 48 238 864 @(70,125,399,270) @(@('Réf.','Fonction','Scéna
 $null = Txt $s 48 486 864 24 "Les 66 cas couvrent toutes les fonctions, dont l'Inventaire : détail au chapitre 10 du dossier PDF." 12 $SOFT
 
 # ================= 30. Risques =================
-$s = NewSlide 'Qualité' 'Principaux risques' 'Vingt-cinq risques suivis ; le plus élevé : parc réel non connecté' "Registre complet : chapitre 11 du dossier PDF."
+$s = NewSlide 'Qualité' 'Principaux risques' 'Trente risques suivis ; le plus élevé : parc réel non connecté' "Registre complet : chapitre 11 du dossier PDF."
 $null = MakeTable $s 48 122 864 @(70,330,94,370) @(@('Réf.','Risque','Niveau','Mesure / état'),
   @('R-06','Parc réel non connecté : kit standard de 13 équipements par personne','Élevé','Choisir la source du parc (Intune, SharePoint, Excel) avant 1 500 collaborateurs'),
   @('R-01','Données non conservées si la base est injoignable','Moyen','Pastille « Mode local », export CSV régulier'),
@@ -818,7 +845,7 @@ $null = Card $s 492 126 420 262 $TI
 $null = Txt $s 512 140 380 26 'La documentation' 20 $BLUE $true
 $null = Bul $s 512 176 382 206 @("Elle ne se met pas à jour automatiquement","Après une évolution : « mets à jour la documentation »","Les sections concernées sont ajustées, la version du document est incrémentée","PDF et PowerPoint sont régénérés") 14 $INK 6
 $jv = Box $s 48 408 864 80 $NAVY
-SetText $jv "Journal : Doc 1.0 (05/10/2026) première édition  ·  Doc 2.0 / App 81 (05/10/2026) édition entreprise  ·  Doc 3.0 / App 106 (06/10/2026) accueil, période, QR, signature, thèmes  ·  Doc 4.0 / App 128 (07/10/2026) rôles, rapports, recherche  ·  Doc 5.0 / App 147 (08/10/2026) annuaire Entra ID, envoi signé  ·  Doc 6.0 / App 161 (09/10/2026) GPIEXALT, retards, rapport par email  ·  Doc 7.0 / App 167 (12/10/2026) rapport par page  ·  Doc 7.1 / App 180 (12/10/2026) finition premium, Mon matériel PDF, retrait du scanner  ·  Doc 7.2 / App 192 (12/10/2026) rapport par personne, catalogue complété  ·  Doc 7.3 / App 206 (13/10/2026) parcours Par email, menu collaborateur, habillage  ·  Doc 7.4 / App 242 (14/10/2026) Inventaire, prix et dépenses, stock, calendrier, rapport de l'Inventaire  ·  Doc 7.5 / App 299 (16/10/2026) Nouvel emprunt, quantités, machines, achats, factures  ·  Doc 7.6 / App 409 (27/10/2026) relance Teams, recherche globale, anneaux de l'Inventaire, familles Chargeur et Écran  ·  Doc 7.7 / App 417 (28/10/2026) import de facture, À commander" 10 'FFFFFF' $false 1 3
+SetText $jv "Journal : Doc 1.0 (05/10/2026) première édition  ·  Doc 2.0 / App 81 (05/10/2026) édition entreprise  ·  Doc 3.0 / App 106 (06/10/2026) accueil, période, QR, signature, thèmes  ·  Doc 4.0 / App 128 (07/10/2026) rôles, rapports, recherche  ·  Doc 5.0 / App 147 (08/10/2026) annuaire Entra ID, envoi signé  ·  Doc 6.0 / App 161 (09/10/2026) GPIEXALT, retards, rapport par email  ·  Doc 7.0 / App 167 (12/10/2026) rapport par page  ·  Doc 7.1 / App 180 (12/10/2026) finition premium, Mon matériel PDF, retrait du scanner  ·  Doc 7.2 / App 192 (12/10/2026) rapport par personne, catalogue complété  ·  Doc 7.3 / App 206 (13/10/2026) parcours Par email, menu collaborateur, habillage  ·  Doc 7.4 / App 242 (14/10/2026) Inventaire, prix et dépenses, stock, calendrier, rapport de l'Inventaire  ·  Doc 7.5 / App 299 (16/10/2026) Nouvel emprunt, quantités, machines, achats, factures  ·  Doc 7.6 / App 409 (27/10/2026) relance Teams, recherche globale, anneaux de l'Inventaire, familles Chargeur et Écran  ·  Doc 7.7 / App 417 (28/10/2026) import de facture, À commander  ·  Doc 7.8 / App 452 (30/10/2026) prolonger un prêt, relances Teams par paliers, Guide et démonstrations, prix HT et TVA, compatibilité et 1 800 personnes" 10 'FFFFFF' $false 1 3
 $jv.TextFrame.MarginLeft = 20
 
 # ================= 33. Limites =================
@@ -847,7 +874,7 @@ $null = MakeTable $s 48 126 864 @(46,470,200,148) @(@('N°','Action','Responsabl
   @('5','Réaliser l''essai réel du brouillon et des envois Outlook (CR-12, CR-37, CR-47, CR-48) et les cas prioritaires','Administrateur de l''application','À définir'),
   @('6','Choisir la source du parc (Intune, SharePoint, Excel), valider l''annuaire avec le DPO','DSI','À définir')) 14 46
 $q = Box $s 48 458 864 38 $TI 5 $BLUE
-SetText $q "Après décision, la documentation est mise à jour (version 7.7) : demande « mets à jour la documentation »." 14 $INK $false 1 3
+SetText $q "Après décision, la documentation est mise à jour (version 7.8) : demande « mets à jour la documentation »." 14 $INK $false 1 3
 $q.TextFrame.MarginLeft = 18
 
 
